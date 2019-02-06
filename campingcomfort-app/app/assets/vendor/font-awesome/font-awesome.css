@@ -2,6 +2,11 @@
   content: "\f095"; }
 .fa-calendar-alt:before {
   content: "\f073"; }
+.fa-campground:before {
+  content: "\f6bb"; }
+.fa-map-marker-alt:before {
+  content: "\f3c5"; }
+
 /*
 .fa-500px:before {
   content: "\f26e"; }
@@ -503,9 +508,6 @@
 
 .fa-camera-retro:before {
   content: "\f083"; }
-
-.fa-campground:before {
-  content: "\f6bb"; }
 
 .fa-canadian-maple-leaf:before {
   content: "\f785"; }
@@ -2246,9 +2248,6 @@
 
 .fa-map-marker:before {
   content: "\f041"; }
-
-.fa-map-marker-alt:before {
-  content: "\f3c5"; }
 
 .fa-map-pin:before {
   content: "\f276"; }

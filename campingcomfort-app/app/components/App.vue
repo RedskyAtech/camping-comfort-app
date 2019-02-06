@@ -1,5 +1,5 @@
 <template>
-    <Page>
+    <Page :class="pageClass">
         <GridLayout rows="auto,auto,*" class="background">
             <GridLayout row="0" rows="auto,1" columns="*,auto">
                 <StackLayout row="0" col="0" class="contact-btn-container">
@@ -46,13 +46,45 @@
                 </StackLayout>
             </StackLayout>
             <CardView row="2" class="cardStyle" radius="10">
-                <GridLayout rows="*,100">
-                    <GridLayout row="0" rows="*" cols="*">
-                        <Image row="0" col="0" class="logo" src="~/assets/images/camping-logo.png"></Image>
+                <GridLayout rows="*,125">
+                    <GridLayout row="0">
+                        <Image row="0" class="logo" src="~/assets/images/camping-logo.png"></Image>
                     </GridLayout>
-                    <StackLayout row="1" style="background-color: green;">
-
-                    </StackLayout>
+                    <GridLayout row="1">
+                        <AbsoluteLayout class="nav-absolute-2">
+                            <GridLayout columns="*,*,*" top="0" left="0" width="100%" class="nav-grid">
+                                <FlexboxLayout flexDirection="column" col="0">
+                                    <StackLayout>
+                                        <GridLayout class="nav-icon-container">
+                                            <Label class="nav-icon fas">{{ 'fa-campground' | fonticon }}</Label>
+                                        </GridLayout>
+                                    </StackLayout>
+                                    <Label textWrap="true" text="Campsite" class="nav-link"></Label>
+                                </FlexboxLayout>
+                                <FlexboxLayout flexDirection="column" col="1">
+                                    <StackLayout>
+                                        <GridLayout class="nav-icon-container">
+                                            <Label class="nav-icon fas">{{ 'fa-map-marker-alt' | fonticon }}</Label>
+                                        </GridLayout>
+                                    </StackLayout>
+                                    <Label textWrap="true" text="Nearby" class="nav-link"></Label>
+                                </FlexboxLayout>
+                                <FlexboxLayout flexDirection="column" col="2">
+                                    <StackLayout>
+                                        <GridLayout class="nav-icon-container">
+                                            <Label class="nav-icon fa">{{ 'fa-calendar-alt' | fonticon }}</Label>
+                                        </GridLayout>
+                                    </StackLayout>
+                                    <Label textWrap="true" text="Events" class="nav-link"></Label>
+                                </FlexboxLayout>
+                            </GridLayout>
+                        </AbsoluteLayout>
+                        <AbsoluteLayout class="nav-absolute-1">
+                            <StackLayout class="nav-hr-container">
+                                <StackLayout class="hr nav-hr"></StackLayout>
+                            </StackLayout>
+                        </AbsoluteLayout>
+                    </GridLayout>
                 </GridLayout>
             </CardView>
         </GridLayout>
@@ -60,11 +92,20 @@
 </template>
 
 <script>
+    var platform = require("platform");
+
     export default {
         data() {
             return {
                 weatherIconsLoaded: [],
                 showWeatherIcons: false
+            }
+        },
+        computed: {
+            pageClass: function(){
+                if(platform.screen.mainScreen.widthDIPs >= 768){
+                    return 'tablet';
+                }
             }
         },
         methods: {
@@ -104,6 +145,9 @@
         padding: 10 12;
         font-size: 20;
     }
+    .tablet .quick-link {
+        padding: 10 17;
+    }
     .badge {
         background: red;
         border-radius: 100%;
@@ -114,9 +158,15 @@
         top: 52;
         left: 18;
     }
+    .tablet .badge-calendar {
+        left: 22;
+    }
     .badge-inbox {
         top: 52;
         left: 62;
+    }
+    .tablet .badge-inbox {
+        left: 76;
     }
 
     /* HR */
@@ -182,5 +232,46 @@
     /* Logo */
     .logo {
         margin: 50;
+    }
+    .tablet .logo {
+        margin: 150;
+    }
+
+    /* Navigation */
+    .nav-absolute-2 {
+        z-index: 2;
+    }
+    .nav-grid {
+        padding: 0 18;
+    }
+    .nav-icon-container {
+        width: 60;
+        height: 60;
+        border-radius: 100%;
+        border-width: 1;
+        border-color: #454f63;
+        background: #fff;
+    }
+    .nav-icon {
+        text-align: center;
+    }
+    .nav-link {
+        padding-top: 5;
+        text-align: center;
+        font-size: 16;
+    }
+    .nav-absolute-1 {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+    }
+    .nav-hr-container {
+        top: 30;
+        left: 0;
+        width: 100%;
+    }
+    .hr.nav-hr {
+        margin: 0 12.5;
+        background: #454f63;
     }
 </style>
