@@ -1,5 +1,5 @@
 import Vue from 'nativescript-vue'
-import App from './components/App'
+import Home from './components/pages/Home'
 
 // Font Icons
 import {TNSFontIcon, fonticon} from 'nativescript-fonticon';
@@ -17,5 +17,5 @@ Vue.registerElement('CardView', () => require('nativescript-cardview').CardView)
 Vue.config.silent = (TNS_ENV === 'production')
 
 new Vue({
-  render: h => h('frame', [h(App)])
+  render: h => h('frame', [h(Home)])
 }).$start()

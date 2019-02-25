@@ -6,6 +6,14 @@
   content: "\f6bb"; }
 .fa-map-marker-alt:before {
   content: "\f3c5"; }
+.fa-wifi:before {
+  content: "\f1eb"; }
+.fa-comment:before {
+  content: "\f075"; }
+.fa-arrow-left:before {
+  content: "\f060"; }
+.fa-clock:before {
+  content: "\f017"; }
 
 /*
 .fa-500px:before {
@@ -178,9 +186,6 @@
 
 .fa-arrow-down:before {
   content: "\f063"; }
-
-.fa-arrow-left:before {
-  content: "\f060"; }
 
 .fa-arrow-right:before {
   content: "\f061"; }
@@ -731,9 +736,6 @@
 .fa-clipboard-list:before {
   content: "\f46d"; }
 
-.fa-clock:before {
-  content: "\f017"; }
-
 .fa-clone:before {
   content: "\f24d"; }
 
@@ -808,9 +810,6 @@
 
 .fa-columns:before {
   content: "\f0db"; }
-
-.fa-comment:before {
-  content: "\f075"; }
 
 .fa-comment-alt:before {
   content: "\f27a"; }
@@ -3931,9 +3930,6 @@
 
 .fa-whmcs:before {
   content: "\f40d"; }
-
-.fa-wifi:before {
-  content: "\f1eb"; }
 
 .fa-wikipedia-w:before {
   content: "\f266"; }
