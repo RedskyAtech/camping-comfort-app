@@ -1,108 +1,75 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true">
-        <GridLayout rows="auto,auto,*" class="background">
-            <GridLayout row="0" rows="75,1" columns="*,auto">
-                <StackLayout row="0" col="0" class="btn-container">
-                    <StackLayout class="button contact-btn">
-                        <Label class="button-icon fas">{{ 'fa-phone' | fonticon }}</Label>
-                        <Label text="Contact" class="button-text"></Label>
-                    </StackLayout>
-                    <StackLayout class="button wifi-btn">
-                        <Label class="button-icon fas">{{ 'fa-wifi' | fonticon }}</Label>
-                        <Label text="WiFi" class="button-text"></Label>
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout row="0" col="1" class="quick-links-container">
-                    <Label class="quick-link fa">{{ 'fa-comment' | fonticon }}</Label>
-                    <Label class="quick-link fas">{{ 'fa-cog' | fonticon }}</Label>
-                </StackLayout>
-                <StackLayout row="0" col="1">
-                    <AbsoluteLayout>
-                        <Label class="badge badge-calendar"></Label>
-                    </AbsoluteLayout>
-                </StackLayout>
-                <StackLayout row="1" col="0" colSpan="2" class="hr"></StackLayout>
-            </GridLayout>
-            <StackLayout row="1" class="weather-forecasts">
-                <StackLayout class="weather left">
-                    <Label class="day" text="Vandaag"></Label>
-                    <StackLayout class="weather-inner">
-                        <StackLayout class="weather-icon-wrapper">
-                            <WebView @loadFinished="weatherIconLoaded" class="weather-icon" :class="{'visible': showWeatherIcons}" src="<!DOCTYPE html><html><head><title></title><meta charset='utf-8' /><style>html,body {margin: 0;padding: 0;overflow: hidden;background: #f5f5f8;}img {border: 0;}</style></head><body><img src='https://www.campingcomfort.app/img/app/weather/rainy-1.svg' width='50' height='50'/></body></html>" />
+        <GridLayout rows="*" columns="*">
+            <GridLayout row="0" col="0" rows="auto,auto,*" class="background">
+                <GridLayout row="0" rows="75,1" columns="*,auto">
+                    <StackLayout row="0" col="0" class="btn-container">
+                        <StackLayout class="button contact-btn">
+                            <Label class="button-icon fas">{{ 'fa-phone' | fonticon }}</Label>
+                            <Label text="Contact" class="button-text"></Label>
                         </StackLayout>
-                        <StackLayout>
-                            <Label class="temp" text="27°C"></Label>
+                        <StackLayout class="button wifi-btn">
+                            <Label class="button-icon fas">{{ 'fa-wifi' | fonticon }}</Label>
+                            <Label text="WiFi" class="button-text"></Label>
                         </StackLayout>
                     </StackLayout>
-                </StackLayout>
-                <StackLayout class="weather right">
-                    <Label class="day" text="Morgen"></Label>
-                    <StackLayout class="weather-inner">
-                        <StackLayout class="weather-icon-wrapper">
-                            <WebView @loadFinished="weatherIconLoaded" class="weather-icon" :class="{'visible': showWeatherIcons}" src="<!DOCTYPE html><html><head><title></title><meta charset='utf-8' /><style>html,body {margin: 0;padding: 0;overflow: hidden;background: #f5f5f8;}img {border: 0;}</style></head><body><img src='https://www.campingcomfort.app/img/app/weather/day.svg' width='50' height='50'/></body></html>" />
-                        </StackLayout>
-                        <StackLayout>
-                            <Label class="temp" text="25°C"></Label>
-                        </StackLayout>
+                    <StackLayout row="0" col="1" class="quick-links-container">
+                        <Label class="quick-link fa">{{ 'fa-comment' | fonticon }}</Label>
+                        <Label class="quick-link fas">{{ 'fa-cog' | fonticon }}</Label>
                     </StackLayout>
-                </StackLayout>
-            </StackLayout>
-            <CardView row="2" class="cardStyle" radius="10">
-                <GridLayout rows="*,125">
-                    <GridLayout row="0">
-                        <Image row="0" class="logo" src="~/assets/images/camping-logo.png"></Image>
-                    </GridLayout>
-                    <GridLayout row="1">
-                        <AbsoluteLayout class="nav-absolute-2">
-                            <GridLayout columns="*,*,*" width="100%" class="nav-grid">
-                                <FlexboxLayout flexDirection="column" col="0">
-                                    <StackLayout>
-                                        <GridLayout class="nav-icon-container">
-                                            <Label class="nav-icon fas">{{ 'fa-campground' | fonticon }}</Label>
-                                        </GridLayout>
-                                    </StackLayout>
-                                    <Label textWrap="true" text="Op de camping" class="nav-link"></Label>
-                                </FlexboxLayout>
-                                <FlexboxLayout flexDirection="column" col="1">
-                                    <StackLayout>
-                                        <GridLayout class="nav-icon-container">
-                                            <Label class="nav-icon fas">{{ 'fa-map-marker-alt' | fonticon }}</Label>
-                                        </GridLayout>
-                                    </StackLayout>
-                                    <Label textWrap="true" text="In de buurt" class="nav-link"></Label>
-                                </FlexboxLayout>
-                                <FlexboxLayout flexDirection="column" col="2">
-                                    <StackLayout>
-                                        <GridLayout class="nav-icon-container" @tap="$navigateTo(Events)">
-                                            <Label class="nav-icon fa">{{ 'fa-calendar-alt' | fonticon }}</Label>
-                                        </GridLayout>
-                                    </StackLayout>
-                                    <Label textWrap="true" text="Evenementen" class="nav-link"></Label>
-                                </FlexboxLayout>
-                            </GridLayout>
+                    <StackLayout row="0" col="1">
+                        <AbsoluteLayout>
+                            <Label class="badge badge-calendar"></Label>
                         </AbsoluteLayout>
-                        <AbsoluteLayout class="nav-absolute-1" isUserInteractionEnabled="false">
-                            <StackLayout class="nav-hr-container">
-                                <StackLayout class="hr nav-hr"></StackLayout>
-                            </StackLayout>
-                        </AbsoluteLayout>
-                    </GridLayout>
+                    </StackLayout>
+                    <StackLayout row="1" col="0" colSpan="2" class="hr"></StackLayout>
                 </GridLayout>
-            </CardView>
+                <StackLayout row="1" class="weather-forecasts">
+                    <StackLayout class="weather left">
+                        <Label class="day" text="Vandaag"></Label>
+                        <StackLayout class="weather-inner">
+                            <StackLayout class="weather-icon-wrapper">
+                                <WebView @loadFinished="weatherIconLoaded" class="weather-icon" :class="{'visible': showWeatherIcons}" src="<!DOCTYPE html><html><head><title></title><meta charset='utf-8' /><style>html,body {margin: 0;padding: 0;overflow: hidden;background: #f5f5f8;}img {border: 0;}</style></head><body><img src='https://www.campingcomfort.app/img/app/weather/rainy-1.svg' width='50' height='50'/></body></html>" />
+                            </StackLayout>
+                            <StackLayout>
+                                <Label class="temp" text="27°C"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout class="weather right">
+                        <Label class="day" text="Morgen"></Label>
+                        <StackLayout class="weather-inner">
+                            <StackLayout class="weather-icon-wrapper">
+                                <WebView @loadFinished="weatherIconLoaded" class="weather-icon" :class="{'visible': showWeatherIcons}" src="<!DOCTYPE html><html><head><title></title><meta charset='utf-8' /><style>html,body {margin: 0;padding: 0;overflow: hidden;background: #f5f5f8;}img {border: 0;}</style></head><body><img src='https://www.campingcomfort.app/img/app/weather/day.svg' width='50' height='50'/></body></html>" />
+                            </StackLayout>
+                            <StackLayout>
+                                <Label class="temp" text="25°C"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <CardView row="2" class="cardStyle" radius="10">
+                    <GridLayout rows="*,125">
+                        <GridLayout row="0">
+                            <Image row="0" class="logo" src="~/assets/images/camping-logo.png"></Image>
+                        </GridLayout>
+                    </GridLayout>
+                </CardView>
+            </GridLayout>
+            <menu row="0" col="0"></menu>
+            <hamburger row="0" col="0"></hamburger>
         </GridLayout>
     </Page>
 </template>
 
 <script>
     import Responsive from '../mixins/Responsive'
-    import Events from './Events'
 
     export default {
         data() {
             return {
                 weatherIconsLoaded: [],
-                showWeatherIcons: false,
-                Events: Events
+                showWeatherIcons: false
             }
         },
         mixins: [
@@ -132,7 +99,6 @@
 
     /* Buttons */
     .btn-container {
-        horizontal-align: left;
         padding: 15 0 15 25;
         orientation: horizontal;
     }
@@ -235,56 +201,5 @@
     }
     .tablet .logo {
         margin: 150;
-    }
-
-    /* Navigation */
-    .nav-absolute-2 {
-        z-index: 2;
-        width: 100%;
-        height: 125;
-    }
-    .nav-grid {
-        top: 0;
-        left: 0;
-        padding: 0 18;
-    }
-    Page.small-phone .nav-grid {
-        top: 27;
-    }
-    .nav-icon-container {
-        width: 60;
-        height: 60;
-        border-radius: 100%;
-        border-width: 1;
-        border-color: #454f63;
-        background: #fff;
-    }
-    .nav-icon {
-        text-align: center;
-    }
-    .nav-link {
-        padding-top: 5;
-        text-align: center;
-        font-size: 14;
-    }
-    Page.small-phone .nav-link {
-        visibility: collapsed;
-    }
-    .nav-absolute-1 {
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-    }
-    .nav-hr-container {
-        top: 30;
-        left: 0;
-        width: 100%;
-    }
-    Page.small-phone .nav-hr-container {
-        top: 57;
-    }
-    .hr.nav-hr {
-        margin: 0 12.5;
-        background: #454f63;
     }
 </style>

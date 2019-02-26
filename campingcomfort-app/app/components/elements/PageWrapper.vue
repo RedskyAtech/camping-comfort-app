@@ -1,20 +1,24 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true">
-        <GridLayout rows="auto,*" class="background">
-            <GridLayout row="0" rows="75,1" columns="*,auto,*">
-                <StackLayout row="0" col="0" class="btn-container">
-                    <StackLayout class="button back-btn" @tap="$navigateBack">
-                        <Label class="button-icon fas">{{ 'fa-arrow-left' | fonticon }}</Label>
+        <GridLayout rows="*" columns="*">
+            <GridLayout row="0" col="0" rows="auto,*" class="background">
+                <GridLayout row="0" rows="75,1" columns="*,auto,*">
+                    <StackLayout row="0" col="0" class="btn-container">
+                        <StackLayout class="button back-btn" @tap="$navigateBack">
+                            <Label class="button-icon fas">{{ 'fa-arrow-left' | fonticon }}</Label>
+                        </StackLayout>
                     </StackLayout>
+                    <Label :text="pageTitle" row="0" col="1" class="page-title"></Label>
+                    <StackLayout row="1" col="0" colSpan="3" class="hr"></StackLayout>
+                </GridLayout>
+                <StackLayout row="1">
+                    <ScrollView>
+                        <slot name="content"></slot>
+                    </ScrollView>
                 </StackLayout>
-                <Label :text="pageTitle" row="0" col="1" class="page-title"></Label>
-                <StackLayout row="1" col="0" colSpan="3" class="hr"></StackLayout>
             </GridLayout>
-            <StackLayout row="1">
-                <ScrollView>
-                    <slot name="content"></slot>
-                </ScrollView>
-            </StackLayout>
+            <menu row="0" col="0"></menu>
+            <hamburger row="0" col="0"></hamburger>
         </GridLayout>
     </Page>
 </template>

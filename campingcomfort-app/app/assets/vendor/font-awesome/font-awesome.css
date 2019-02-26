@@ -14,6 +14,10 @@
   content: "\f060"; }
 .fa-clock:before {
   content: "\f017"; }
+.fa-bars:before {
+  content: "\f0c9"; }
+.fa-times:before {
+  content: "\f00d"; }
 
 /*
 .fa-500px:before {
@@ -276,9 +280,6 @@
 
 .fa-barcode:before {
   content: "\f02a"; }
-
-.fa-bars:before {
-  content: "\f0c9"; }
 
 .fa-baseball-ball:before {
   content: "\f433"; }
@@ -3531,9 +3532,6 @@
 
 .fa-ticket-alt:before {
   content: "\f3ff"; }
-
-.fa-times:before {
-  content: "\f00d"; }
 
 .fa-times-circle:before {
   content: "\f057"; }

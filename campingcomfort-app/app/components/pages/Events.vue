@@ -1,46 +1,47 @@
 <template>
     <page-wrapper pageTitle="Week 13">
-        <GridLayout rows="auto,*" columns="*" slot="content" class="events-container">
-            <GridLayout row="0" rows="auto,auto" columns="*,*,*,*,*,*,*" class="week">
-                <StackLayout row="0" col="0"><Label class="day active" text="Do"></Label></StackLayout>
-                <StackLayout row="1" col="0"><Label class="date" text="10"></Label></StackLayout>
-                <StackLayout row="0" col="1"><Label class="day" text="Vr"></Label></StackLayout>
-                <StackLayout row="1" col="1"><Label class="date" text="11"></Label></StackLayout>
-                <StackLayout row="0" col="2"><Label class="day" text="Za"></Label></StackLayout>
-                <StackLayout row="1" col="2"><Label class="date" text="12"></Label></StackLayout>
-                <StackLayout row="0" col="3"><Label class="day" text="Zo"></Label></StackLayout>
-                <StackLayout row="1" col="3"><Label class="date" text="13"></Label></StackLayout>
-                <StackLayout row="0" col="4"><Label class="day" text="Ma"></Label></StackLayout>
-                <StackLayout row="1" col="4"><Label class="date" text="14"></Label></StackLayout>
-                <StackLayout row="0" col="5"><Label class="day" text="Di"></Label></StackLayout>
-                <StackLayout row="1" col="5"><Label class="date" text="15"></Label></StackLayout>
-                <StackLayout row="0" col="6"><Label class="day" text="Wo"></Label></StackLayout>
-                <StackLayout row="1" col="6"><Label class="date" text="16"></Label></StackLayout>
-            </GridLayout>
-            <ListView row="1" for="item in listItems" class="events" @itemLoading="onItemLoading">
-                <v-template>
-                    <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10">
-                        <GridLayout rows="125" columns="125,*">
-                            <Image col="0" :src="item.image"></Image>
-                            <StackLayout col="1" orientation="horizontal">
-                                <StackLayout class="event-label" verticalAlignment="center">
-                                    <StackLayout class="event-time" orientation="horizontal">
-                                        <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
-                                        <Label :text="item.startTime+' - '+item.endTime"></Label>
+        <StackLayout slot="content" class="page-container">
+            <GridLayout rows="auto,*" columns="*" class="events-container">
+                <GridLayout row="0" rows="auto,auto" columns="*,*,*,*,*,*,*" class="week">
+                    <StackLayout row="0" col="0"><Label class="day active" text="Do"></Label></StackLayout>
+                    <StackLayout row="1" col="0"><Label class="date" text="10"></Label></StackLayout>
+                    <StackLayout row="0" col="1"><Label class="day" text="Vr"></Label></StackLayout>
+                    <StackLayout row="1" col="1"><Label class="date" text="11"></Label></StackLayout>
+                    <StackLayout row="0" col="2"><Label class="day" text="Za"></Label></StackLayout>
+                    <StackLayout row="1" col="2"><Label class="date" text="12"></Label></StackLayout>
+                    <StackLayout row="0" col="3"><Label class="day" text="Zo"></Label></StackLayout>
+                    <StackLayout row="1" col="3"><Label class="date" text="13"></Label></StackLayout>
+                    <StackLayout row="0" col="4"><Label class="day" text="Ma"></Label></StackLayout>
+                    <StackLayout row="1" col="4"><Label class="date" text="14"></Label></StackLayout>
+                    <StackLayout row="0" col="5"><Label class="day" text="Di"></Label></StackLayout>
+                    <StackLayout row="1" col="5"><Label class="date" text="15"></Label></StackLayout>
+                    <StackLayout row="0" col="6"><Label class="day" text="Wo"></Label></StackLayout>
+                    <StackLayout row="1" col="6"><Label class="date" text="16"></Label></StackLayout>
+                </GridLayout>
+                <ListView row="1" for="item in listItems" class="events" @itemLoading="onItemLoading">
+                    <v-template>
+                        <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10">
+                            <GridLayout rows="125" columns="125,*">
+                                <Image col="0" :src="item.image"></Image>
+                                <StackLayout col="1" orientation="horizontal">
+                                    <StackLayout class="event-label" verticalAlignment="center">
+                                        <StackLayout class="event-time" orientation="horizontal">
+                                            <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
+                                            <Label :text="item.startTime+' - '+item.endTime"></Label>
+                                        </StackLayout>
+                                        <Label class="event-title" :text="item.title"></Label>
                                     </StackLayout>
-                                    <Label class="event-title" :text="item.title"></Label>
                                 </StackLayout>
-                            </StackLayout>
-                        </GridLayout>
-                    </CardView>
-                </v-template>
-            </ListView>
-        </GridLayout>
+                            </GridLayout>
+                        </CardView>
+                    </v-template>
+                </ListView>
+            </GridLayout>
+        </StackLayout>
     </page-wrapper>
 </template>
 
 <script>
-    import Events from './Events'
     import PageWrapper from '../elements/PageWrapper'
 
     export default {
@@ -79,10 +80,7 @@
                         endTime: '17:00',
                         title: 'Pool party'
                     }
-                ],
-
-                // Pages
-                Events: Events
+                ]
             }
         },
         components: {
@@ -112,6 +110,10 @@
 </script>
 
 <style scoped>
+    .page-container {
+        width: 100%;
+        height: 100%;
+    }
     .events-container {
         height: 100%;
     }
