@@ -1,5 +1,5 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="*" columns="*">
             <GridLayout row="0" col="0" rows="auto,*" class="background">
                 <GridLayout row="0" rows="75,1" columns="*,auto,*">

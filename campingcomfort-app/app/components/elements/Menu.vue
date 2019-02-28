@@ -19,17 +19,15 @@
                 Events: Events
             }
         },
-        created: function(){
-            console.log('created');
-            this.menuVisible = null;
-        },
         mounted: function(){
-            console.log('mounted');
-            this.menuVisible = null;
             let self = this;
             EventBus.$on('toggle_menu', function(){
                 self.toggleMenu();
             });
+            this.$on('navigatedBack', function(){
+                console.log('navigated back');
+                self.toggleMenu();
+            })
         },
         methods: {
             toggleMenu: function(){

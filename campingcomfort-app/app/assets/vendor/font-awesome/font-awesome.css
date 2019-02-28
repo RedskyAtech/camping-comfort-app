@@ -18,6 +18,8 @@
   content: "\f0c9"; }
 .fa-times:before {
   content: "\f00d"; }
+.fa-info:before {
+  content: "\f129"; }
 
 /*
 .fa-500px:before {
@@ -1975,9 +1977,6 @@
 
 .fa-infinity:before {
   content: "\f534"; }
-
-.fa-info:before {
-  content: "\f129"; }
 
 .fa-info-circle:before {
   content: "\f05a"; }
