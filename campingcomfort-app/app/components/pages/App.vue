@@ -4,6 +4,8 @@
             <StackLayout row="0">
                 <Home class="page" :class="[{'active': activeTab === 1}]"></Home>
                 <Camping class="page" :class="[{'active': activeTab === 2}]"></Camping>
+                <Nearby class="page" :class="[{'active': activeTab === 3}]"></Nearby>
+                <Events class="page" :class="[{'active': activeTab === 4}]"></Events>
             </StackLayout>
             <StackLayout row="1" class="tabbar">
                 <GridLayout rows="*" columns="*,*,*,*">
@@ -33,6 +35,8 @@
     import Responsive from '../mixins/Responsive'
     import Home from '../pages/Home'
     import Camping from '../pages/Camping'
+    import Nearby from '../pages/Nearby'
+    import Events from '../pages/Events'
 
     export default {
         data() {
@@ -45,10 +49,9 @@
         ],
         components: {
             'Home': Home,
-            'Camping': Camping
-        },
-        mounted: function(){
-            this.activateTab(1);
+            'Camping': Camping,
+            'Nearby': Nearby,
+            'Events': Events
         },
         methods: {
             activateTab: function(tab){
@@ -62,6 +65,7 @@
 
     /* Background */
     Page {
+        background-color: #f8f8f8;
     }
 
     /* Tabbar */
@@ -70,7 +74,7 @@
         border-top-width: 1;
         border-color: #e5e5e5;
         color: #8e8e8e;
-        padding: 10;
+        padding: 10 12.5;
     }
     .tab {
         text-align: center;

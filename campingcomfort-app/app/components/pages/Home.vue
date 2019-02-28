@@ -30,26 +30,59 @@
                 </GridLayout>
             </StackLayout>
         </GridLayout>
+        <StackLayout row="1" col="0">
+            <GridLayout rows="auto,*">
+                <GridLayout row="0" columns="*">
+                    <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>
+                    <StackLayout col="0" class="tabs-container" orientation="horizontal">
+                        <StackLayout class="tab" @tap="activateTab(1)" :class="[{'active': activeTab === 1}]">
+                            <Label class="tab-label" text="Binnenkort"></Label>
+                        </StackLayout>
+                        <StackLayout class="tab" @tap="activateTab(2)" :class="[{'active': activeTab === 2}]">
+                            <Label class="tab-label" text="Mijn vakantie"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </GridLayout>
+                <ScrollView row="1">
+                    <GridLayout rows="*" columns="*" height="100%">
+                        <EventList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]"></EventList>
+                        <StackLayout row="0" col="0" class="tab-content" :class="[{'active': activeTab === 2}]">
+                            <Label text="Tab 2"></Label>
+                        </StackLayout>
+                    </GridLayout>
+                </ScrollView>
+            </GridLayout>
+        </StackLayout>
     </GridLayout>
 </template>
 
 <script>
     import Responsive from '../mixins/Responsive'
+    import EventList from '../elements/EventList'
 
     export default {
         data() {
             return {
+                activeTab: 1
             }
         },
         mixins: [
             Responsive
         ],
+        components: {
+            'EventList': EventList
+        },
         methods: {
+            activateTab: function(tab){
+                this.activeTab = tab;
+            }
         }
     }
 </script>
 
 <style scoped>
+
+    /* Hero */
     .hero-image {
         stretch: aspectFill;
         margin-top: -40;
@@ -60,7 +93,7 @@
     }
     .hero-title-container {
         text-align: center;
-        padding: 0 25;
+        padding: 0 12.5;
     }
     .hero-title {
         color: #fff;
@@ -70,7 +103,7 @@
 
     /* Buttons */
     .btn-container {
-        padding: 12.5 0 0 25;
+        padding: 12.5 0 0 12.5;
         orientation: horizontal;
     }
     .btn {
@@ -114,5 +147,29 @@
         border-radius: 10;
         margin-top: -25;
         margin-right: -25;
+    }
+
+    /* Tabs */
+    .tabs-container {
+        font-size: 14;
+    }
+    .tabs-bottom-line {
+        border-bottom-width: 1;
+        border-color: #e5e5e5;
+    }
+    .tab {
+        padding: 10 12.5;
+        color: #8e8e8e;
+    }
+    .tab.active {
+        color: #0a7cf7;
+        border-bottom-width: 2;
+        border-color: #0a7cf7;
+    }
+    .tab-content {
+        visibility: collapsed;
+    }
+    .tab-content.active {
+        visibility: visible;
     }
 </style>
