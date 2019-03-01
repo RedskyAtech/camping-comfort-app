@@ -1,14 +1,17 @@
 <template>
-    <GridLayout rows="auto,*" columns="*">
-        <StackLayout row="0" class="title-container">
-            <Label text="Op de camping"></Label>
-        </StackLayout>
-        <CampingList row="1"></CampingList>
-        <Fab row="1"></Fab>
-    </GridLayout>
+    <Page :class="pageClass" actionBarHidden="true">
+        <GridLayout rows="auto,*" columns="*">
+            <StackLayout row="0" class="title-container">
+                <Label text="Op de camping"></Label>
+            </StackLayout>
+            <CampingList row="1"></CampingList>
+            <Fab row="1"></Fab>
+        </GridLayout>
+    </Page>
 </template>
 
 <script>
+    import Responsive from '../mixins/Responsive'
     import CampingList from '../elements/CampingList'
     import Fab from '../elements/Fab'
 
@@ -17,6 +20,9 @@
             return {
             }
         },
+        mixins: [
+            Responsive
+        ],
         components: {
             'CampingList': CampingList,
             'Fab': Fab

@@ -1,59 +1,61 @@
 <template>
-    <GridLayout rows="*,*" columns="*">
-        <Image row="0" col="0" src="~/assets/images/demo/campground.jpg" class="hero-image"></Image>
-        <StackLayout row="0" col="0" class="hero-overlay"></StackLayout>
-        <GridLayout row="0" col="0" rows="auto,*" columns="*,auto">
-            <StackLayout row="0" col="0">
-                <StackLayout class="btn-container">
-                    <StackLayout class="btn wifi-btn">
-                        <Label class="btn-icon fas">{{ 'fa-wifi' | fonticon }}</Label>
-                        <Label class="btn-text" text="WiFi"></Label>
+    <Page :class="pageClass" actionBarHidden="true">
+        <GridLayout rows="*,*" columns="*">
+            <Image row="0" col="0" src="~/assets/images/demo/campground.jpg" class="hero-image"></Image>
+            <StackLayout row="0" col="0" class="hero-overlay"></StackLayout>
+            <GridLayout row="0" col="0" rows="auto,*" columns="*,auto">
+                <StackLayout row="0" col="0">
+                    <StackLayout class="btn-container">
+                        <StackLayout class="btn wifi-btn">
+                            <Label class="btn-icon fas">{{ 'fa-wifi' | fonticon }}</Label>
+                            <Label class="btn-text" text="WiFi"></Label>
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
-            </StackLayout>
-            <StackLayout row="0" col="1">
-                <StackLayout class="quick-links-container">
-                    <GridLayout columns="auto,auto">
-                        <Label class="quick-link fa" col="0">{{ 'fa-comment' | fonticon }}</Label>
-                        <Label class="badge-inbox" text="1" col="0"></Label>
-                        <Label class="quick-link fas" col="1">{{ 'fa-cog' | fonticon }}</Label>
+                <StackLayout row="0" col="1">
+                    <StackLayout class="quick-links-container">
+                        <GridLayout columns="auto,auto">
+                            <Label class="quick-link fa" col="0">{{ 'fa-comment' | fonticon }}</Label>
+                            <Label class="badge-inbox" text="1" col="0"></Label>
+                            <Label class="quick-link fas" col="1">{{ 'fa-cog' | fonticon }}</Label>
+                        </GridLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout row="1" col="0" colSpan="2" class="hero-title-container" horizontalAlignment="center" verticalAlignment="center">
+                    <Label text="Camping International" class="hero-title" textWrap="true"></Label>
+                    <GridLayout columns="auto" rows="auto" horizontalAlignment="center">
+                        <StackLayout col="0" row="0" class="btn contact-btn">
+                            <Label class="btn-icon fas">{{ 'fa-info' | fonticon }}</Label>
+                            <Label class="btn-text" text="Receptie"></Label>
+                        </StackLayout>
                     </GridLayout>
                 </StackLayout>
-            </StackLayout>
-            <StackLayout row="1" col="0" colSpan="2" class="hero-title-container" horizontalAlignment="center" verticalAlignment="center">
-                <Label text="Camping International" class="hero-title" textWrap="true"></Label>
-                <GridLayout columns="auto" rows="auto" horizontalAlignment="center">
-                    <StackLayout col="0" row="0" class="btn contact-btn">
-                        <Label class="btn-icon fas">{{ 'fa-info' | fonticon }}</Label>
-                        <Label class="btn-text" text="Receptie"></Label>
-                    </StackLayout>
+            </GridLayout>
+            <StackLayout row="1" col="0">
+                <GridLayout rows="auto,*">
+                    <GridLayout row="0" columns="*">
+                        <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>
+                        <StackLayout col="0" class="tabs-container" orientation="horizontal">
+                            <StackLayout class="tab" @tap="activateTab(1)" :class="[{'active': activeTab === 1}]">
+                                <Label class="tab-label" text="Binnenkort"></Label>
+                            </StackLayout>
+                            <StackLayout class="tab" @tap="activateTab(2)" :class="[{'active': activeTab === 2}]">
+                                <Label class="tab-label" text="Mijn vakantie"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <ScrollView row="1">
+                        <GridLayout rows="*" columns="*" height="100%">
+                            <EventList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]"></EventList>
+                            <StackLayout row="0" col="0" class="tab-content" :class="[{'active': activeTab === 2}]">
+                                <Label text="Tab 2"></Label>
+                            </StackLayout>
+                        </GridLayout>
+                    </ScrollView>
                 </GridLayout>
             </StackLayout>
         </GridLayout>
-        <StackLayout row="1" col="0">
-            <GridLayout rows="auto,*">
-                <GridLayout row="0" columns="*">
-                    <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>
-                    <StackLayout col="0" class="tabs-container" orientation="horizontal">
-                        <StackLayout class="tab" @tap="activateTab(1)" :class="[{'active': activeTab === 1}]">
-                            <Label class="tab-label" text="Binnenkort"></Label>
-                        </StackLayout>
-                        <StackLayout class="tab" @tap="activateTab(2)" :class="[{'active': activeTab === 2}]">
-                            <Label class="tab-label" text="Mijn vakantie"></Label>
-                        </StackLayout>
-                    </StackLayout>
-                </GridLayout>
-                <ScrollView row="1">
-                    <GridLayout rows="*" columns="*" height="100%">
-                        <EventList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]"></EventList>
-                        <StackLayout row="0" col="0" class="tab-content" :class="[{'active': activeTab === 2}]">
-                            <Label text="Tab 2"></Label>
-                        </StackLayout>
-                    </GridLayout>
-                </ScrollView>
-            </GridLayout>
-        </StackLayout>
-    </GridLayout>
+    </Page>
 </template>
 
 <script>

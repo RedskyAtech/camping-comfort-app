@@ -1,27 +1,30 @@
 <template>
-    <GridLayout rows="auto,auto,*" columns="*">
-        <StackLayout row="0" class="title-container">
-            <Label text="In de omgeving"></Label>
-        </StackLayout>
-        <GridLayout row="1" columns="*">
-            <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>
-            <StackLayout col="0" class="tabs-container" orientation="horizontal">
-                <StackLayout class="tab" @tap="activateTab(1)" :class="[{'active': activeTab === 1}]">
-                    <Label class="tab-label" text="Te doen"></Label>
+    <Page :class="pageClass" actionBarHidden="true">
+        <GridLayout rows="auto,auto,*" columns="*">
+            <StackLayout row="0" class="title-container">
+                <Label text="In de omgeving"></Label>
+            </StackLayout>
+            <GridLayout row="1" columns="*">
+                <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>
+                <StackLayout col="0" class="tabs-container" orientation="horizontal">
+                    <StackLayout class="tab" @tap="activateTab(1)" :class="[{'active': activeTab === 1}]">
+                        <Label class="tab-label" text="Te doen"></Label>
+                    </StackLayout>
+                    <StackLayout class="tab" @tap="activateTab(2)" :class="[{'active': activeTab === 2}]">
+                        <Label class="tab-label" text="Eten & Drinken"></Label>
+                    </StackLayout>
                 </StackLayout>
-                <StackLayout class="tab" @tap="activateTab(2)" :class="[{'active': activeTab === 2}]">
-                    <Label class="tab-label" text="Eten & Drinken"></Label>
-                </StackLayout>
+            </GridLayout>
+            <NearbyList row="2" class="tab-content" :class="[{'active': activeTab === 1}]"></NearbyList>
+            <StackLayout row="2" class="tab-content" :class="[{'active': activeTab === 2}]">
+                <Label text="Eten & Drinken"></Label>
             </StackLayout>
         </GridLayout>
-        <NearbyList row="2" class="tab-content" :class="[{'active': activeTab === 1}]"></NearbyList>
-        <StackLayout row="2" class="tab-content" :class="[{'active': activeTab === 2}]">
-            <Label text="Eten & Drinken"></Label>
-        </StackLayout>
-    </GridLayout>
+    </Page>
 </template>
 
 <script>
+    import Responsive from '../mixins/Responsive'
     import NearbyList from '../elements/NearbyList'
 
     export default {
@@ -30,6 +33,9 @@
                 activeTab: 1
             }
         },
+        mixins: [
+            Responsive
+        ],
         components: {
             'NearbyList': NearbyList
         },
