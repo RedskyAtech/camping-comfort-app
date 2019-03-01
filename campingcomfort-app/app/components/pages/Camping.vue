@@ -5,7 +5,7 @@
                 <Label text="Op de camping"></Label>
             </StackLayout>
             <CampingList row="1"></CampingList>
-            <Fab row="1"></Fab>
+            <Fab row="1"><Label row="0" col="0" class="btn-icon fa">{{ 'fa-map' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
 </template>

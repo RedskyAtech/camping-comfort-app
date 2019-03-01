@@ -1,7 +1,7 @@
 <template>
     <ListView for="item in listItems" @itemLoading="onItemLoading">
         <v-template>
-            <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10">
+            <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="navigate">
                 <GridLayout rows="75" columns="75,*">
                     <Image col="0" :src="item.image"></Image>
                     <StackLayout col="1" orientation="horizontal">
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+    import EventBus from '../helpers/EventBus'
+
     export default {
         data() {
             return {
@@ -65,6 +67,12 @@
                 if (cell) {
                     cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
                 }
+            },
+            navigate: function(){
+                EventBus.$emit('navigate', {
+                    tab: 4,
+                    page: 'detail'
+                });
             }
         }
     }

@@ -1,7 +1,7 @@
 <template>
     <CardView horizontalAlignment="right" verticalAlignment="bottom" class="cardStyle fab" radius="30">
         <GridLayout rows="*" columns="*">
-            <Label row="0" col="0" class="btn-icon fa">{{ 'fa-map' | fonticon }}</Label>
+            <slot></slot>
         </GridLayout>
     </CardView>
 </template>

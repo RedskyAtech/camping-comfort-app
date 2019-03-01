@@ -53,7 +53,12 @@
 
             // Listen to navigation requests
             EventBus.$on('navigate', function(data){
-                self.navigate(data.tab, data.page)
+                self.navigate(data.tab, data.page);
+            });
+
+            // Listen to go back navigation requests
+            EventBus.$on('back', function(){
+                self.back();
             });
         },
         components: {
@@ -100,6 +105,11 @@
                         frame: 'mainContent'
                     });
                 }
+            },
+            back: function(){
+                this.$navigateBack({
+                    frame: 'mainContent'
+                });
             }
         }
     }
@@ -112,7 +122,7 @@
         background-color: #f8f8f8;
         border-top-width: 1;
         border-color: #e5e5e5;
-        color: #8e8e8e;
+        color: #8f99ac;
         padding: 10 12.5;
     }
     .tab {
@@ -127,13 +137,5 @@
     .tab-label {
         font-size: 12;
         padding-top: 3;
-    }
-
-    /* Pages */
-    .page {
-        visibility: collapsed;
-    }
-    .page.active {
-        visibility: visible;
     }
 </style>

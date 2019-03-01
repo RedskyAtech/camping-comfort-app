@@ -22,6 +22,8 @@
   content: "\f129"; }
 .fa-map:before {
   content: "\f279"; }
+.fa-heart:before {
+  content: "\f004"; }
 
 /*
 .fa-500px:before {
