@@ -106,25 +106,14 @@
         padding: 12.5 0 0 12.5;
         orientation: horizontal;
     }
-    .btn {
-        orientation: horizontal;
-        background-color: transparent;
-        border-width: 1;
-        border-radius: 100%;
-        border-color: #fff;
-        padding: 10 20;
-        font-weight: 500;
+    .wifi-btn {
         color: #fff;
-        font-size: 14;
-    }
-    .btn-icon {
-        fonts-size: 16;
-    }
-    .btn-text {
-        padding-left: 10;
+        border-color: #fff;
     }
     .contact-btn {
         margin-top: 10;
+        color: #fff;
+        border-color: #fff;
     }
 
     /* Quick links */

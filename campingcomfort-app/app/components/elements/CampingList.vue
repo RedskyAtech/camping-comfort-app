@@ -6,10 +6,6 @@
                     <Image col="0" :src="item.image"></Image>
                     <StackLayout col="1" orientation="horizontal">
                         <StackLayout class="event-label" verticalAlignment="center">
-                            <StackLayout class="event-time" orientation="horizontal">
-                                <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
-                                <Label :text="item.startTime+' - '+item.endTime"></Label>
-                            </StackLayout>
                             <Label class="event-title" :text="item.title"></Label>
                         </StackLayout>
                     </StackLayout>
@@ -25,34 +21,24 @@
             return {
                 listItems: [
                     {
-                        image: '~/assets/images/demo/football.jpg',
-                        startTime: '10:00',
-                        endTime: '11:00',
-                        title: 'Voetbalwedstrijd'
+                        image: '~/assets/images/demo/pool-2.jpg',
+                        title: 'Zwembad'
                     },
                     {
-                        image: '~/assets/images/demo/aqua-zumba.jpg',
-                        startTime: '11:15',
-                        endTime: '11:30',
-                        title: 'Aqua Zumba'
+                        image: '~/assets/images/demo/beachclub.jpg',
+                        title: 'Strandterras'
                     },
                     {
-                        image: '~/assets/images/demo/dance.jpg',
-                        startTime: '12:30',
-                        endTime: '13:00',
-                        title: 'Dansvoorstelling'
+                        image: '~/assets/images/demo/restaurant.jpg',
+                        title: 'Restaurant'
                     },
                     {
-                        image: '~/assets/images/demo/scavenger-hunt.jpg',
-                        startTime: '14:00',
-                        endTime: '15:00',
-                        title: 'Spoorzoeker'
+                        image: '~/assets/images/demo/bakery.jpg',
+                        title: 'Bakkerij'
                     },
                     {
-                        image: '~/assets/images/demo/pool.jpg',
-                        startTime: '16:00',
-                        endTime: '17:00',
-                        title: 'Zwembadspelen'
+                        image: '~/assets/images/demo/sanitary.jpg',
+                        title: 'Sanitaire voorzieningen'
                     }
                 ]
             }
@@ -95,16 +81,5 @@
     /* Label */
     .event-label {
         padding: 0 12.5;
-    }
-    .event-time {
-        font-size: 12;
-        opacity: 0.6;
-    }
-    .clock {
-        padding-right: 5;
-        font-size: 16;
-    }
-    .event-title {
-        padding-top: 5;
     }
 </style>

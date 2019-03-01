@@ -5,12 +5,9 @@
                 <GridLayout rows="75" columns="75,*">
                     <Image col="0" :src="item.image"></Image>
                     <StackLayout col="1" orientation="horizontal">
-                        <StackLayout class="event-label" verticalAlignment="center">
-                            <StackLayout class="event-time" orientation="horizontal">
-                                <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
-                                <Label :text="item.startTime+' - '+item.endTime"></Label>
-                            </StackLayout>
-                            <Label class="event-title" :text="item.title"></Label>
+                        <StackLayout class="item-label" verticalAlignment="center">
+                            <Label class="item-title" :text="item.title"></Label>
+                            <Label class="item-subtitle" :text="item.subtitle"></Label>
                         </StackLayout>
                     </StackLayout>
                 </GridLayout>
@@ -25,34 +22,29 @@
             return {
                 listItems: [
                     {
-                        image: '~/assets/images/demo/football.jpg',
-                        startTime: '10:00',
-                        endTime: '11:00',
-                        title: 'Voetbalwedstrijd'
+                        image: '~/assets/images/demo/kids-playground.png',
+                        title: 'De Spelerij',
+                        subtitle: 'Oegstgeest, 2km'
                     },
                     {
-                        image: '~/assets/images/demo/aqua-zumba.jpg',
-                        startTime: '11:15',
-                        endTime: '11:30',
-                        title: 'Aqua Zumba'
+                        image: '~/assets/images/demo/aqua-land.png',
+                        title: 'Aqua Land',
+                        subtitle: 'Leiden, 4km'
                     },
                     {
-                        image: '~/assets/images/demo/dance.jpg',
-                        startTime: '12:30',
-                        endTime: '13:00',
-                        title: 'Dansvoorstelling'
+                        image: '~/assets/images/demo/zoo.png',
+                        title: 'Dierentuin de Nijl',
+                        subtitle: 'Den Haag, 12km'
                     },
                     {
-                        image: '~/assets/images/demo/scavenger-hunt.jpg',
-                        startTime: '14:00',
-                        endTime: '15:00',
-                        title: 'Spoorzoeker'
+                        image: '~/assets/images/demo/beach.png',
+                        title: 'Strand',
+                        subtitle: 'Katwijk, 13km'
                     },
                     {
-                        image: '~/assets/images/demo/pool.jpg',
-                        startTime: '16:00',
-                        endTime: '17:00',
-                        title: 'Zwembadspelen'
+                        image: '~/assets/images/demo/museum.png',
+                        title: 'Dinoland',
+                        subtitle: 'Zoetermeer, 16km'
                     }
                 ]
             }
@@ -93,18 +85,11 @@
     }
 
     /* Label */
-    .event-label {
+    .item-label {
         padding: 0 12.5;
     }
-    .event-time {
+    .item-subtitle {
         font-size: 12;
         opacity: 0.6;
-    }
-    .clock {
-        padding-right: 5;
-        font-size: 16;
-    }
-    .event-title {
-        padding-top: 5;
     }
 </style>

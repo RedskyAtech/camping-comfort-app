@@ -1,4 +1,4 @@
-// Font Awesome
+/* Font Awesome */
 .fa {
     font-family: "Font Awesome 5 Free";
 }
@@ -15,10 +15,29 @@
     font-weight: 900;
 }
 
-// Page
+/* Page */
 Page {
     font-family: 'Avenir';
     font-weight: 500;
     color: #454f63;
     font-size: 15;
+}
+
+/* Buttons */
+.btn {
+    orientation: horizontal;
+    background-color: transparent;
+    border-width: 1;
+    border-radius: 100%;
+    border-color: #454f63;
+    padding: 10 20;
+    font-weight: 500;
+    color: #454f63;
+    font-size: 14;
+}
+.btn-icon {
+    font-size: 16;
+}
+.btn-text {
+    padding-left: 10;
 }

@@ -20,6 +20,8 @@
   content: "\f00d"; }
 .fa-info:before {
   content: "\f129"; }
+.fa-map:before {
+  content: "\f279"; }
 
 /*
 .fa-500px:before {
@@ -2235,9 +2237,6 @@
 
 .fa-mandalorian:before {
   content: "\f50f"; }
-
-.fa-map:before {
-  content: "\f279"; }
 
 .fa-map-marked:before {
   content: "\f59f"; }
