@@ -4,11 +4,31 @@
     export default {
         computed: {
             pageClass: function () {
-                if (platform.screen.mainScreen.widthDIPs >= 768) {
-                    return 'tablet';
+                let w = platform.screen.mainScreen.widthDIPs;
+
+                // iPhone SE
+                if (w < 375) {
+                    return 'xs';
                 }
-                if (platform.screen.mainScreen.widthDIPs < 375) {
-                    return 'small-phone';
+
+                // iPhone 6
+                if (w >= 375 && w < 414) {
+                    return 'sm';
+                }
+
+                // iPhone 7/8
+                if (w >= 414 && w < 480) {
+                    return 'md';
+                }
+
+                // Tablet
+                if (w >= 480 && w < 768) {
+                    return 'lg';
+                }
+
+                // Large tablet
+                if (w >= 768) {
+                    return 'xl';
                 }
             }
         }
