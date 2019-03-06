@@ -1,5 +1,4 @@
 import Vue from 'nativescript-vue'
-import RadAutoCompletePlugin from 'nativescript-ui-autocomplete/vue'
 import * as appSettings from 'tns-core-modules/application-settings';
 import Splash from './components/pages/Splash'
 import App from './components/pages/App'
@@ -17,6 +16,7 @@ Vue.filter('fonticon', fonticon);
 Vue.registerElement('CardView', () => require('nativescript-cardview').CardView);
 
 // Autocomplete
+import RadAutoCompletePlugin from 'nativescript-ui-autocomplete/vue'
 Vue.use(RadAutoCompletePlugin);
 
 // Prints Vue logs when --env.production is *NOT* set while building

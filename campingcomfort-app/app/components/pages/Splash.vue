@@ -1,20 +1,11 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true">
-        <Label text="Select country"></Label>
-        <RadAutoCompleteTextView ref="autocomplete"
-                                 hint="Mijn camping"
-                                 suggestMode="Suggest"
-                                 displayMode="Plain"
-                                 :items="campings"
-                                 @didAutoComplete="onSelect">
-            <SuggestionView ~suggestionView suggestionViewHeight="300">
-                <StackLayout v-suggestionItemTemplate orientation="vertical" padding="10">
-                    <v-template scope="item">
-                        <Label :text="item.text" />
-                    </v-template>
-                </StackLayout>
-            </SuggestionView>
-        </RadAutoCompleteTextView>
+        <GridLayout rows="*,auto" class="form-container">
+            <GridLayout row="0">
+                <Label horizontalAlignment="center" text="Tap to continue" @tap="onSelect"/>
+            </GridLayout>
+            <Label row="1" horizontalAlignment="center" class="copyright" text="© 2019 CampingComfort"></Label>
+        </GridLayout>
     </Page>
 </template>
 
@@ -24,8 +15,7 @@
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
     import App from './App'
-    import { ObservableArray } from 'data/observable-array';
-    import { TokenModel } from 'nativescript-ui-autocomplete';
+    import {exit} from 'nativescript-exit';
 
     export default {
         mixins: [
@@ -33,42 +23,34 @@
             Connection,
             LocalStorage
         ],
-        data() {
-            return {
-                campings: new ObservableArray(),
-            }
-        },
         components: {
             App: App
         },
         mounted() {
+            if(this.hasInternetConnection()) {
 
-            const jsonUrl = 'https://www.campingcomfort.app/api/campings';
-
-            this.$refs.autocomplete.setLoadSuggestionsAsync((text) => {
-                const promise = new Promise((resolve, reject) => {
-                    http.getJSON(jsonUrl).then((r) => {
-                        const collection = r.campings;
-                        const items = new Array();
-                        for (let i = 0; i < collection.length; i++) {
-                            items.push(new TokenModel(collection[i].name+' ('+collection[i].locality+', '+collection[i].country+')', null));
-                        }
-                        resolve(items);
-                    }).catch((err) => {
-                        const message = `Error fetching remote data from ${jsonUrl}: ${err.message}`;
-                        console.log(message);
-                        alert(message);
-                        reject();
+            }
+            else {
+                setTimeout(function(){
+                    alert({
+                        title: "The internet connection appears to be offline",
+                        message: "An internet connection is required to display the latest content. Please activate your internet connection.",
+                        okButtonText: "OK"
+                    }).then(() => {
+                        exit();
                     });
-                });
-
-                return promise;
-            });
+                }, 1500);
+            }
         },
         methods: {
-            onSelect({ text }) {
-                this.storeNumber('campingId', 9665);
-                this.$navigateTo(App);
+            onSelect() {
+//                this.storeNumber('campingId', 9665);
+                this.$navigateTo(App, {
+                    clearHistory: true,
+                    transition: {
+                        name: 'fade',
+                    }
+                });
             }
         }
     }
@@ -77,5 +59,15 @@
 <style scoped>
     Page {
         background: #454f63;
+    }
+    .form-container {
+        padding: 12.5;
+    }
+    Label {
+        color: #fff;
+    }
+    .copyright {
+        opacity: 0.5;
+        font-size: 12;
     }
 </style>
