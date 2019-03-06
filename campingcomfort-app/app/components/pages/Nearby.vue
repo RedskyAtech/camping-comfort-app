@@ -17,7 +17,9 @@
             </GridLayout>
             <NearbyList row="2" class="tab-content" :class="[{'active': activeTab === 1}]"></NearbyList>
             <StackLayout row="2" class="tab-content" :class="[{'active': activeTab === 2}]">
-                <Label text="Eten & Drinken"></Label>
+                <StackLayout class="temp-tab-content">
+                    <Label text="Binnenkort..."></Label>
+                </StackLayout>
             </StackLayout>
         </GridLayout>
     </Page>
@@ -80,5 +82,8 @@
     }
     .tab-content.active {
         visibility: visible;
+    }
+    .temp-tab-content {
+        padding: 12.5;
     }
 </style>

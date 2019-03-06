@@ -10,21 +10,19 @@
                             <GridLayout row="0" rows="auto,*" columns="*,auto">
                                 <StackLayout row="0" col="0">
                                     <StackLayout class="btn-container">
-                                        <StackLayout class="btn wifi-btn" v-if="connectionType !== 'wifi'">
+                                        <StackLayout class="btn wifi-btn" v-if="connectionType !== 'wifi'" @tap="toWifi">
                                             <Label class="btn-icon fas">{{ 'fa-wifi' | fonticon }}</Label>
                                         </StackLayout>
-                                        <StackLayout class="btn contact-btn">
-                                            <Label class="btn-icon fas">{{ 'fa-info' | fonticon }}</Label>
-                                            <Label class="btn-text" text="Receptie"></Label>
+                                        <StackLayout class="btn contact-btn" @tap="toMap">
+                                            <Label class="btn-icon fa">{{ 'fa-map' | fonticon }}</Label>
+                                            <Label class="btn-text" text="Plattegrond"></Label>
                                         </StackLayout>
                                     </StackLayout>
                                 </StackLayout>
                                 <StackLayout row="0" col="1">
                                     <StackLayout class="quick-links-container">
                                         <GridLayout columns="auto,auto">
-                                            <Label class="quick-link fa" col="0">{{ 'fa-comment' | fonticon }}</Label>
-                                            <Label class="badge-inbox" text="1" col="0"></Label>
-                                            <Label class="quick-link fas" col="1">{{ 'fa-cog' | fonticon }}</Label>
+                                            <Label class="quick-link fas" col="1" @tap="toSettings">{{ 'fa-cog' | fonticon }}</Label>
                                         </GridLayout>
                                     </StackLayout>
                                 </StackLayout>
@@ -39,10 +37,10 @@
                                     <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>
                                     <StackLayout col="0" class="tabs-container" orientation="horizontal">
                                         <StackLayout class="tab" @tap="activateTab(1)" :class="[{'active': activeTab === 1}]">
-                                            <Label class="tab-label" text="Binnenkort"></Label>
+                                            <Label class="tab-label" text="Mijn vakantie"></Label>
                                         </StackLayout>
                                         <StackLayout class="tab" @tap="activateTab(2)" :class="[{'active': activeTab === 2}]">
-                                            <Label class="tab-label" text="Mijn vakantie"></Label>
+                                            <Label class="tab-label" text="Gebruikerstips"></Label>
                                         </StackLayout>
                                     </StackLayout>
                                 </GridLayout>
@@ -50,7 +48,9 @@
                                     <GridLayout rows="*" columns="*" height="100%">
                                         <EventList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]"></EventList>
                                         <StackLayout row="0" col="0" class="tab-content" :class="[{'active': activeTab === 2}]">
-                                            <Label text="Tab 2"></Label>
+                                            <StackLayout class="temp-tab-content">
+                                                <Label text="Binnenkort..."></Label>
+                                            </StackLayout>
                                         </StackLayout>
                                     </GridLayout>
                                 </ScrollView>
@@ -65,6 +65,7 @@
 
 <script>
     import * as http from 'http'
+    import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
@@ -109,6 +110,42 @@
         methods: {
             activateTab: function(tab){
                 this.activeTab = tab;
+            },
+            navigate: function(){
+                EventBus.$emit('navigate', {
+                    tab: 1,
+                    page: 'coming-soon'
+                });
+            },
+            toWifi: function(){
+                EventBus.$emit('navigate', {
+                    tab: 1,
+                    page: 'coming-soon',
+                    props: {
+                        title: 'WiFi',
+                        showBackBtn: true
+                    }
+                });
+            },
+            toMap: function(){
+                EventBus.$emit('navigate', {
+                    tab: 1,
+                    page: 'coming-soon',
+                    props: {
+                        title: 'Plattegrond',
+                        showBackBtn: true
+                    }
+                });
+            },
+            toSettings: function(){
+                EventBus.$emit('navigate', {
+                    tab: 1,
+                    page: 'coming-soon',
+                    props: {
+                        title: 'Instellingen',
+                        showBackBtn: true
+                    }
+                });
             }
         }
     }
@@ -175,17 +212,6 @@
         padding: 10 12.5 10 12.5;
         font-size: 20;
     }
-    .badge-inbox {
-        background-color: red;
-        width: 20;
-        height: 20;
-        font-size: 12;
-        text-align: center;
-        font-weight: 700;
-        border-radius: 10;
-        margin-top: -25;
-        margin-right: -25;
-    }
 
     /* Tabs */
     .tabs-container {
@@ -209,5 +235,8 @@
     }
     .tab-content.active {
         visibility: visible;
+    }
+    .temp-tab-content {
+        padding: 12.5;
     }
 </style>

@@ -1,7 +1,18 @@
 <template>
     <ListView for="item in listItems" @itemLoading="onItemLoading">
-        <v-template>
-            <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="navigate">
+        <v-template if="$index === 0">
+            <StackLayout row="0" class="btn-container">
+                <StackLayout class="btn wifi-btn" v-if="connectionType !== 'wifi'" @tap="toWifi">
+                    <Label class="btn-icon fas">{{ 'fa-wifi' | fonticon }}</Label>
+                </StackLayout>
+                <StackLayout class="btn contact-btn" @tap="toMap">
+                    <Label class="btn-icon fa">{{ 'fa-map' | fonticon }}</Label>
+                    <Label class="btn-text" text="Plattegrond"></Label>
+                </StackLayout>
+            </StackLayout>
+        </v-template>
+        <v-template else>
+            <CardView class="cardStyle" radius="10" @tap="navigate">
                 <GridLayout rows="75" columns="75,*">
                     <Image col="0" :src="item.image"></Image>
                     <StackLayout col="1" orientation="horizontal">
@@ -59,20 +70,46 @@
                     tab: 2,
                     page: 'detail'
                 });
-            }
+            },
+            toWifi: function(){
+                EventBus.$emit('navigate', {
+                    tab: 2,
+                    page: 'coming-soon',
+                    props: {
+                        title: 'WiFi',
+                        showBackBtn: true
+                    }
+                });
+            },
+            toMap: function(){
+                EventBus.$emit('navigate', {
+                    tab: 2,
+                    page: 'coming-soon',
+                    props: {
+                        title: 'Plattegrond',
+                        showBackBtn: true
+                    }
+                });
+            },
         }
     }
 </script>
 
 <style scoped>
 
+    /* Buttons */
+    .btn-container {
+        orientation: horizontal;
+        margin: 12.5;
+    }
+    .contact-btn {
+        margin-left: 5;
+    }
+
     /* List view */
     .cardStyle {
         background-color: #fff;
         margin: 0 12.5 12.5 12.5;
-    }
-    .cardStyle.first {
-        margin-top: 12.5;
     }
     ListView {
         background-color: #f5f5f8;

@@ -1,5 +1,6 @@
 <script>
     import * as appSettings from 'tns-core-modules/application-settings';
+    import {exit} from 'nativescript-exit';
 
     export default {
         methods: {
@@ -151,11 +152,11 @@
                     else {
                         setTimeout(function(){
                             alert({
-                                title: "No internet connection detected",
+                                title: "The internet connection appears to be offline",
                                 message: "An internet connection is required to display the latest content. Please activate your internet connection.",
                                 okButtonText: "OK"
                             }).then(() => {
-
+                                exit();
                             });
                         }, 1500);
 

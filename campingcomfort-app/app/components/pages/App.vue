@@ -7,22 +7,26 @@
                 </Frame>
             </StackLayout>
             <StackLayout row="1" col="0" class="tabbar">
-                <GridLayout rows="*" columns="*,*,*,*">
-                    <StackLayout verticalAlignment="middle" row="0" col="0" class="tab" :class="[{'active': activeTab === 1}]" @tap="navigate(1, 'home', true)">
+                <GridLayout rows="*" columns="*,*,*,*,*">
+                    <StackLayout verticalAlignment="middle" row="0" col="0" class="tab" :class="[{'active': activeTab === 1}]" @tap="toHome">
                         <Label class="tab-icon fas">{{ 'fa-home' | fonticon }}</Label>
-                        <Label class="tab-label" text="Voorpagina"></Label>
+                        <Label class="tab-label" text="Home"></Label>
                     </StackLayout>
-                    <StackLayout verticalAlignment="middle" row="0" col="1" class="tab" :class="[{'active': activeTab === 2}]" @tap="navigate(2, 'camping', true)">
+                    <StackLayout verticalAlignment="middle" row="0" col="1" class="tab" :class="[{'active': activeTab === 2}]" @tap="toCamping">
                         <Label class="tab-icon fas">{{ 'fa-campground' | fonticon }}</Label>
                         <Label class="tab-label" text="Camping"></Label>
                     </StackLayout>
-                    <StackLayout verticalAlignment="middle" row="0" col="2" class="tab" :class="[{'active': activeTab === 3}]" @tap="navigate(3, 'nearby', true)">
+                    <StackLayout verticalAlignment="middle" row="0" col="2" class="tab" :class="[{'active': activeTab === 3}]" @tap="toNearby">
                         <Label class="tab-icon fas">{{ 'fa-map-marker-alt' | fonticon }}</Label>
                         <Label class="tab-label" text="Omgeving"></Label>
                     </StackLayout>
-                    <StackLayout verticalAlignment="middle" row="0" col="3" class="tab" :class="[{'active': activeTab === 4}]" @tap="navigate(4, 'events', true)">
+                    <StackLayout verticalAlignment="middle" row="0" col="3" class="tab" :class="[{'active': activeTab === 4}]" @tap="toEvents">
                         <Label class="tab-icon fas">{{ 'fa-calendar-alt' | fonticon }}</Label>
-                        <Label class="tab-label" text="Agenda"></Label>
+                        <Label class="tab-label" text="Activiteiten"></Label>
+                    </StackLayout>
+                    <StackLayout verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="toReception">
+                        <Label class="tab-icon fa">{{ 'fa-comment' | fonticon }}</Label>
+                        <Label class="tab-label" text="Receptie"></Label>
                     </StackLayout>
                 </GridLayout>
             </StackLayout>
@@ -38,6 +42,7 @@
     import Nearby from '../pages/Nearby'
     import Events from '../pages/Events'
     import Detail from '../pages/Detail'
+    import ComingSoon from '../pages/ComingSoon'
 
     export default {
         data() {
@@ -53,7 +58,7 @@
 
             // Listen to navigation requests
             EventBus.$on('navigate', function(data){
-                self.navigate(data.tab, data.page);
+                self.navigate(data.tab, data.page, data.switchTab, data.props);
             });
 
             // Listen to go back navigation requests
@@ -68,10 +73,11 @@
             Camping: Camping,
             Nearby: Nearby,
             Events: Events,
-            Detail: Detail
+            Detail: Detail,
+            ComingSoon: ComingSoon
         },
         methods: {
-            navigate: function(tab, page, switchTab=false){
+            navigate: function(tab, page, switchTab=false, props={}){
 
                 // Set the right tab
                 this.activeTab = tab;
@@ -93,22 +99,68 @@
                 if(page === 'detail'){
                     Component = Detail;
                 }
+                if(page === 'reception'){
+                    Component = ComingSoon;
+                }
+                if(page === 'coming-soon'){
+                    Component = ComingSoon;
+                }
                 if(switchTab === true){
                     this.$navigateTo(Component, {
                         frame: 'mainContent',
                         clearHistory: true,
-                        animated: false
+                        animated: false,
+                        props: props
                     });
                 }
                 else {
                     this.$navigateTo(Component, {
-                        frame: 'mainContent'
+                        frame: 'mainContent',
+                        props: props
                     });
                 }
             },
             back: function(){
                 this.$navigateBack({
                     frame: 'mainContent'
+                });
+            },
+            toHome: function(){
+                EventBus.$emit('navigate', {
+                    tab: 1,
+                    page: 'home',
+                    switchTab: true
+                });
+            },
+            toCamping: function(){
+                EventBus.$emit('navigate', {
+                    tab: 2,
+                    page: 'camping',
+                    switchTab: true
+                });
+            },
+            toNearby: function(){
+                EventBus.$emit('navigate', {
+                    tab: 3,
+                    page: 'nearby',
+                    switchTab: true
+                });
+            },
+            toEvents: function(){
+                EventBus.$emit('navigate', {
+                    tab: 4,
+                    page: 'events',
+                    switchTab: true
+                });
+            },
+            toReception: function(){
+                EventBus.$emit('navigate', {
+                    tab: 5,
+                    page: 'reception',
+                    switchTab: true,
+                    props: {
+                        title: 'Receptie'
+                    }
                 });
             }
         }
@@ -133,6 +185,9 @@
     }
     .tab-icon {
         font-size: 16;
+    }
+    Page.xs .tab-label {
+        visibility: collapsed;
     }
     .tab-label {
         font-size: 12;

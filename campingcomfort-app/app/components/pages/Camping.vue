@@ -5,7 +5,6 @@
                 <Label text="Op de camping"></Label>
             </StackLayout>
             <CampingList row="1"></CampingList>
-            <Fab row="1"><Label row="0" col="0" class="btn-icon fa">{{ 'fa-map' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
 </template>
@@ -13,7 +12,6 @@
 <script>
     import Responsive from '../mixins/Responsive'
     import CampingList from '../elements/CampingList'
-    import Fab from '../elements/Fab'
 
     export default {
         data() {
@@ -24,8 +22,7 @@
             Responsive
         ],
         components: {
-            'CampingList': CampingList,
-            'Fab': Fab
+            'CampingList': CampingList
         }
     }
 </script>
