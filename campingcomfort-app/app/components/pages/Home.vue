@@ -70,6 +70,7 @@
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
     import EventList from '../elements/EventList'
+    import Settings from './Settings'
 
     export default {
         data() {
@@ -85,29 +86,31 @@
             LocalStorage
         ],
         components: {
-            'EventList': EventList
+            'EventList': EventList,
+            'Settings': Settings
         },
         mounted: function(){
-            this.loadData(
-                [
-                    {
-                        vueKey: 'heroImage',
-                        storageKey: 'home_heroImage',
-                        type: 'string',
-                        required: true,
-                        image: true
-                    },
-                    {
-                        vueKey: 'heroTitle',
-                        storageKey: 'home_heroTitle',
-                        type: 'string',
-                        required: true,
-                        image: false
-                    }
-                ]
-            );
+            let self = this;
+            self.init();
+            EventBus.$on('changedSettings', function(){
+                self.init();
+            });
         },
         methods: {
+            init: function(){
+                this.heroTitle = this.getStringFromStore('campingName');
+                this.loadData(
+                    [
+                        {
+                            vueKey: 'heroImage',
+                            storageKey: 'home_heroImage',
+                            type: 'string',
+                            required: true,
+                            image: true
+                        }
+                    ]
+                );
+            },
             activateTab: function(tab){
                 this.activeTab = tab;
             },
@@ -138,13 +141,8 @@
                 });
             },
             toSettings: function(){
-                EventBus.$emit('navigate', {
-                    tab: 1,
-                    page: 'coming-soon',
-                    props: {
-                        title: 'Instellingen',
-                        showBackBtn: true
-                    }
+                this.$showModal(Settings, {
+                    fullscreen: true
                 });
             }
         }

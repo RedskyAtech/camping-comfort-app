@@ -11,6 +11,7 @@
             },
 
             // Get a boolean value, optionally provide a default value
+            // Returns undefined if the value does not exist
             getBooleanFromStore: function(key, defaultValue){
                 let value;
                 if(defaultValue !== undefined){
@@ -28,6 +29,7 @@
             },
 
             // Get a string value, optionally provide a default value
+            // Returns undefined if the value does not exist
             getStringFromStore: function(key, defaultValue){
                 let value;
                 if(defaultValue !== undefined) {
@@ -45,6 +47,7 @@
             },
 
             // Get a number value, optionally provide a default value
+            // Returns undefined if the value does not exist
             getNumberFromStore: function(key, defaultValue){
                 let value;
                 if(defaultValue !== undefined) {
@@ -152,7 +155,7 @@
                     else {
                         setTimeout(function(){
                             alert({
-                                title: "The internet connection appears to be offline",
+                                title: "No internet connection detected",
                                 message: "An internet connection is required to display the latest content. Please activate your internet connection.",
                                 okButtonText: "OK"
                             }).then(() => {

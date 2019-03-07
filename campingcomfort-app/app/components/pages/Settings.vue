@@ -5,7 +5,7 @@
                 <GridLayout rows="auto,auto,auto,auto">
 
                     <StackLayout row="0" class="intro">
-                        <Label class="intro-title" textWrap="true" text="Je bent bijna klaar!"></Label>
+                        <Label class="intro-title" textWrap="true" text="Instellingen"></Label>
                         <Label class="intro-text" textWrap="true" text="Selecteer jouw camping om door te gaan."></Label>
                     </StackLayout>
 
@@ -18,7 +18,7 @@
                     <StackLayout row="3" v-if="campingName">
                         <GridLayout columns="auto" horizontalAlignment="center">
                             <StackLayout col="0" class="btn" @tap="select">
-                                <Label class="btn-text" text="Let's get started" verticalAlignment="center"></Label>
+                                <Label class="btn-text" text="Doorgaan" verticalAlignment="center"></Label>
                                 <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-right' | fonticon }}</Label>
                             </StackLayout>
                         </GridLayout>
@@ -106,12 +106,8 @@
                 });
             },
             select() {
-                this.$navigateTo(App, {
-                    clearHistory: true,
-                    transition: {
-                        name: 'fade',
-                    }
-                });
+                EventBus.$emit('changedSettings');
+                this.$modal.close();
             }
         }
     }

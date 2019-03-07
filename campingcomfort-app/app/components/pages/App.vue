@@ -37,6 +37,7 @@
 <script>
     import Responsive from '../mixins/Responsive'
     import EventBus from '../helpers/EventBus'
+    import Splash from '../pages/Splash'
     import Home from '../pages/Home'
     import Camping from '../pages/Camping'
     import Nearby from '../pages/Nearby'
@@ -69,6 +70,7 @@
         components: {
 
             // Pages
+            Splash: Splash,
             Home: Home,
             Camping: Camping,
             Nearby: Nearby,
@@ -84,6 +86,9 @@
 
                 // Navigate to the page
                 let Component;
+                if(page === 'splash'){
+                    Component = Splash;
+                }
                 if(page === 'home'){
                     Component = Home;
                 }

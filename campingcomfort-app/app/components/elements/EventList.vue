@@ -7,7 +7,7 @@
                     <StackLayout col="1" orientation="horizontal">
                         <StackLayout class="event-label" verticalAlignment="center">
                             <StackLayout class="event-time" orientation="horizontal">
-                                <Label class="clock far">{{ 'fa-clock' | fonticon }}</Label>
+                                <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
                                 <Label :text="item.startTime+' - '+item.endTime"></Label>
                             </StackLayout>
                             <Label class="event-title" :text="item.title"></Label>
