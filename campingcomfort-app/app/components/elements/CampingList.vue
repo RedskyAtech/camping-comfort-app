@@ -3,11 +3,11 @@
         <v-template if="$index === 0">
             <StackLayout row="0" class="btn-container">
                 <StackLayout class="btn wifi-btn" v-if="connectionType !== 'wifi'" @tap="toWifi">
-                    <Label class="btn-icon fas">{{ 'fa-wifi' | fonticon }}</Label>
+                    <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
                 </StackLayout>
                 <StackLayout class="btn contact-btn" @tap="toMap">
-                    <Label class="btn-icon fa">{{ 'fa-map' | fonticon }}</Label>
-                    <Label class="btn-text" text="Plattegrond"></Label>
+                    <Label class="btn-icon fa" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
+                    <Label class="btn-text" text="Plattegrond" verticalAlignment="center"></Label>
                 </StackLayout>
             </StackLayout>
         </v-template>
@@ -100,7 +100,7 @@
     /* Buttons */
     .btn-container {
         orientation: horizontal;
-        margin: 12.5;
+        padding: 12.5;
     }
     .contact-btn {
         margin-left: 5;

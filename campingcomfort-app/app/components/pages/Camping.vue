@@ -34,7 +34,6 @@
         background-color: #f8f8f8;
         text-align: center;
         font-weight: 700;
-        font-size: 16;
         padding: 12.5;
         border-bottom-width: 1;
         border-color: #e5e5e5;

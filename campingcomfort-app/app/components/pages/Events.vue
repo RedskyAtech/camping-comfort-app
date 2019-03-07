@@ -5,20 +5,20 @@
                 <Label text="Week 13"></Label>
             </StackLayout>
             <GridLayout row="1" rows="auto,auto" columns="*,*,*,*,*,*,*" class="week">
-                <StackLayout row="0" col="0" @tap="activateDay(1)"><Label class="day" :class="[{'active': activeDay === 1}]" text="Do"></Label></StackLayout>
-                <StackLayout row="1" col="0" @tap="activateDay(1)"><Label class="date" :class="[{'active': activeDay === 1}]" text="7"></Label></StackLayout>
-                <StackLayout row="0" col="1" @tap="activateDay(2)"><Label class="day" :class="[{'active': activeDay === 2}]" text="Vr"></Label></StackLayout>
-                <StackLayout row="1" col="1" @tap="activateDay(2)"><Label class="date" :class="[{'active': activeDay === 2}]" text="8"></Label></StackLayout>
-                <StackLayout row="0" col="2" @tap="activateDay(3)"><Label class="day" :class="[{'active': activeDay === 3}]" text="Za"></Label></StackLayout>
-                <StackLayout row="1" col="2" @tap="activateDay(3)"><Label class="date" :class="[{'active': activeDay === 3}]" text="9"></Label></StackLayout>
-                <StackLayout row="0" col="3" @tap="activateDay(4)"><Label class="day" :class="[{'active': activeDay === 4}]" text="Zo"></Label></StackLayout>
-                <StackLayout row="1" col="3" @tap="activateDay(4)"><Label class="date" :class="[{'active': activeDay === 4}]" text="10"></Label></StackLayout>
-                <StackLayout row="0" col="4" @tap="activateDay(5)"><Label class="day" :class="[{'active': activeDay === 5}]" text="Ma"></Label></StackLayout>
-                <StackLayout row="1" col="4" @tap="activateDay(5)"><Label class="date" :class="[{'active': activeDay === 5}]" text="11"></Label></StackLayout>
-                <StackLayout row="0" col="5" @tap="activateDay(6)"><Label class="day" :class="[{'active': activeDay === 6}]" text="Di"></Label></StackLayout>
-                <StackLayout row="1" col="5" @tap="activateDay(6)"><Label class="date" :class="[{'active': activeDay === 6}]" text="12"></Label></StackLayout>
-                <StackLayout row="0" col="6" @tap="activateDay(7)"><Label class="day" :class="[{'active': activeDay === 7}]" text="Wo"></Label></StackLayout>
-                <StackLayout row="1" col="6" @tap="activateDay(7)"><Label class="date" :class="[{'active': activeDay === 7}]" text="13"></Label></StackLayout>
+                <GridLayout row="0" col="0" rows="30" columns="*" @tap="activateDay(1)" class="day" :class="[{'active': activeDay === 1}]"><Label text="Do" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="0" rows="30" columns="*" @tap="activateDay(1)" class="date" :class="[{'active': activeDay === 1}]"><Label text="7" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="1" rows="30" columns="*" @tap="activateDay(2)" class="day" :class="[{'active': activeDay === 2}]"><Label text="Vr" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="1" rows="30" columns="*" @tap="activateDay(2)" class="date" :class="[{'active': activeDay === 2}]"><Label text="8" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="2" rows="30" columns="*" @tap="activateDay(3)" class="day" :class="[{'active': activeDay === 3}]"><Label text="Za" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="2" rows="30" columns="*" @tap="activateDay(3)" class="date" :class="[{'active': activeDay === 3}]"><Label text="9" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="3" rows="30" columns="*" @tap="activateDay(4)" class="day" :class="[{'active': activeDay === 4}]"><Label text="Zo" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="3" rows="30" columns="*" @tap="activateDay(4)" class="date" :class="[{'active': activeDay === 4}]"><Label text="10" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="4" rows="30" columns="*" @tap="activateDay(5)" class="day" :class="[{'active': activeDay === 5}]"><Label text="Ma" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="4" rows="30" columns="*" @tap="activateDay(5)" class="date" :class="[{'active': activeDay === 5}]"><Label text="11" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="5" rows="30" columns="*" @tap="activateDay(6)" class="day" :class="[{'active': activeDay === 6}]"><Label text="Di" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="5" rows="30" columns="*" @tap="activateDay(6)" class="date" :class="[{'active': activeDay === 6}]"><Label text="12" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="6" rows="30" columns="*" @tap="activateDay(7)" class="day" :class="[{'active': activeDay === 7}]"><Label text="Wo" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="6" rows="30" columns="*" @tap="activateDay(7)" class="date" :class="[{'active': activeDay === 7}]"><Label text="13" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
             </GridLayout>
             <EventList row="2"></EventList>
         </GridLayout>
@@ -57,7 +57,6 @@
         color: #fff;
         text-align: center;
         font-weight: 700;
-        font-size: 16;
         padding: 12.5 12.5 6.75 12.5;
     }
 
@@ -71,14 +70,6 @@
     .day {
         width: 30;
         height: 30;
-        text-align: center;
-    }
-    .date {
-        width: 30;
-        height: 30;
-        text-align: center;
-    }
-    .day {
         font-weight: 700;
     }
     .day.active {
@@ -87,6 +78,14 @@
         border-radius: 100%;
     }
     .date {
+        width: 30;
+        height: 30;
+    }
+    .date {
         opacity: 0.5;
+    }
+    .day Label,
+    .date Label {
+
     }
 </style>

@@ -11,11 +11,11 @@
                                 <StackLayout row="0" col="0">
                                     <StackLayout class="btn-container">
                                         <StackLayout class="btn wifi-btn" v-if="connectionType !== 'wifi'" @tap="toWifi">
-                                            <Label class="btn-icon fas">{{ 'fa-wifi' | fonticon }}</Label>
+                                            <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
                                         </StackLayout>
                                         <StackLayout class="btn contact-btn" @tap="toMap">
-                                            <Label class="btn-icon fa">{{ 'fa-map' | fonticon }}</Label>
-                                            <Label class="btn-text" text="Plattegrond"></Label>
+                                            <Label class="btn-icon fa" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
+                                            <Label class="btn-text" text="Plattegrond" verticalAlignment="center"></Label>
                                         </StackLayout>
                                     </StackLayout>
                                 </StackLayout>

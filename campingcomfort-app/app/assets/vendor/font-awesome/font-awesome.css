@@ -12,6 +12,8 @@
   content: "\f075"; }
 .fa-arrow-left:before {
   content: "\f060"; }
+.fa-arrow-right:before {
+  content: "\f061"; }
 .fa-clock:before {
   content: "\f017"; }
 .fa-bars:before {
@@ -24,6 +26,8 @@
   content: "\f279"; }
 .fa-heart:before {
   content: "\f004"; }
+.fa-caret-down:before {
+  content: "\f0d7"; }
 
 /*
 .fa-500px:before {
@@ -196,9 +200,6 @@
 
 .fa-arrow-down:before {
   content: "\f063"; }
-
-.fa-arrow-right:before {
-  content: "\f061"; }
 
 .fa-arrow-up:before {
   content: "\f062"; }
@@ -547,9 +548,6 @@
 
 .fa-car-side:before {
   content: "\f5e4"; }
-
-.fa-caret-down:before {
-  content: "\f0d7"; }
 
 .fa-caret-left:before {
   content: "\f0d9"; }

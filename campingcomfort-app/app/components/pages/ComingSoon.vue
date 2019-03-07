@@ -5,9 +5,9 @@
                 <Label :text="title"></Label>
             </StackLayout>
             <ScrollView row="1">
-                <Label text="Binnenkort..." horizontalAlignment="center"></Label>
+                <Label text="Binnenkort..." horizontalAlignment="center" verticalAlignment="center"></Label>
             </ScrollView>
-            <Fab v-if="showBackBtn" row="1"><Label @tap="goBack" row="0" col="0" class="btn-icon fas">{{ 'fa-arrow-left' | fonticon }}</Label></Fab>
+            <Fab v-if="showBackBtn" row="1"><Label @tap="goBack" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
 </template>
@@ -52,7 +52,6 @@
         background-color: #f8f8f8;
         text-align: center;
         font-weight: 700;
-        font-size: 16;
         padding: 12.5;
         border-bottom-width: 1;
         border-color: #e5e5e5;

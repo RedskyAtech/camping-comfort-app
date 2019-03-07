@@ -5,13 +5,11 @@
                 <GridLayout rows="auto,auto">
                     <GridLayout row="0" class="hero-grid">
                         <Image row="0" src="~/assets/images/demo/aqua-land.png" class="hero-image"></Image>
-                        <GridLayout row="0" horizontalAlignment="right" verticalAlignment="bottom">
-                            <CardView class="cardStyle like" radius="30">
-                                <GridLayout rows="*" columns="*">
-                                    <Label row="0" col="0" class="like-icon fa">{{ 'fa-heart' | fonticon }}</Label>
-                                </GridLayout>
-                            </CardView>
-                        </GridLayout>
+                        <CardView row="0" horizontalAlignment="right" verticalAlignment="bottom" class="cardStyle like" radius="30">
+                            <GridLayout rows="*" columns="*">
+                                <Label row="0" col="0" class="like-icon fa" verticalAlignment="center">{{ 'fa-heart' | fonticon }}</Label>
+                            </GridLayout>
+                        </CardView>
                     </GridLayout>
                     <StackLayout row="1" class="content">
                         <Label class="title" row="1" text="Aqua Land"></Label>
@@ -20,7 +18,7 @@
                     </StackLayout>
                 </GridLayout>
             </ScrollView>
-            <Fab><Label @tap="goBack" row="0" col="0" class="btn-icon fas">{{ 'fa-arrow-left' | fonticon }}</Label></Fab>
+            <Fab><Label @tap="goBack" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
 </template>
@@ -68,6 +66,9 @@
     Page.xl .hero-grid {
         height: 576;
     }
+    .like {
+        z-index: 10;
+    }
     .hero-image {
         stretch: aspectFill;
         margin-top: -40;
@@ -82,7 +83,6 @@
     }
     .text {
         color: #8f99ac;
-        font-size: 16;
     }
     .like {
         background: #fff;

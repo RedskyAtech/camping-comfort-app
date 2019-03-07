@@ -184,7 +184,6 @@
         color: #0a7cf7
     }
     .tab-icon {
-        font-size: 16;
     }
     Page.xs .tab-label {
         visibility: collapsed;
