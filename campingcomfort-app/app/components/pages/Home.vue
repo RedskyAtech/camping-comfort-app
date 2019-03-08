@@ -70,7 +70,6 @@
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
     import EventList from '../elements/EventList'
-    import Settings from './Settings'
 
     export default {
         data() {
@@ -86,8 +85,7 @@
             LocalStorage
         ],
         components: {
-            'EventList': EventList,
-            'Settings': Settings
+            'EventList': EventList
         },
         mounted: function(){
             let self = this;
@@ -131,18 +129,13 @@
                 });
             },
             toMap: function(){
-                EventBus.$emit('navigate', {
-                    tab: 1,
-                    page: 'coming-soon',
-                    props: {
-                        title: 'Plattegrond',
-                        showBackBtn: true
-                    }
+                EventBus.$emit('openModal', {
+                    page: 'map'
                 });
             },
             toSettings: function(){
-                this.$showModal(Settings, {
-                    fullscreen: true
+                EventBus.$emit('openModal', {
+                    page: 'settings'
                 });
             }
         }

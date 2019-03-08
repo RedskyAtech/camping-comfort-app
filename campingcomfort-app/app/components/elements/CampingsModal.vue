@@ -55,7 +55,7 @@
             },
             search: function(val){
                 let self = this;
-                getJSON("https://www.campingcomfort.app/api/campings/"+val).then((r) => {
+                getJSON("https://www.campingcomfort.app/api/campings/"+encodeURI(val)).then((r) => {
                     self.campings = r.campings;
                 }, (e) => {
                 });

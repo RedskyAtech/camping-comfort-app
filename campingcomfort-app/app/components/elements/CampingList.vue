@@ -82,13 +82,8 @@
                 });
             },
             toMap: function(){
-                EventBus.$emit('navigate', {
-                    tab: 2,
-                    page: 'coming-soon',
-                    props: {
-                        title: 'Plattegrond',
-                        showBackBtn: true
-                    }
+                EventBus.$emit('openModal', {
+                    page: 'map'
                 });
             },
         }

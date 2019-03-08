@@ -44,6 +44,8 @@
     import Events from '../pages/Events'
     import Detail from '../pages/Detail'
     import ComingSoon from '../pages/ComingSoon'
+    import SettingsModal from '../elements/SettingsModal'
+    import MapModal from '../elements/MapModal'
 
     export default {
         data() {
@@ -62,6 +64,11 @@
                 self.navigate(data.tab, data.page, data.switchTab, data.props);
             });
 
+            // Listen to open-modal requests
+            EventBus.$on('openModal', function(data){
+                self.openModal(data.page, data.props);
+            });
+
             // Listen to go back navigation requests
             EventBus.$on('back', function(){
                 self.back();
@@ -76,7 +83,9 @@
             Nearby: Nearby,
             Events: Events,
             Detail: Detail,
-            ComingSoon: ComingSoon
+            ComingSoon: ComingSoon,
+            SettingsModal: SettingsModal,
+            MapModal: MapModal
         },
         methods: {
             navigate: function(tab, page, switchTab=false, props={}){
@@ -124,6 +133,19 @@
                         props: props
                     });
                 }
+            },
+            openModal: function(page, props={}){
+                let Component;
+                if(page === 'settings'){
+                    Component = SettingsModal;
+                }
+                if(page === 'map'){
+                    Component = MapModal;
+                }
+                this.$showModal(Component, {
+                    fullscreen: true,
+                    props: props
+                });
             },
             back: function(){
                 this.$navigateBack({

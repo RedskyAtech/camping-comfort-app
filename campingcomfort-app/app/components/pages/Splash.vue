@@ -38,8 +38,8 @@
     import LocalStorage from '../mixins/LocalStorage'
     import App from './App'
     import {exit} from 'nativescript-exit';
-    import CampingsModal from '../elements/CampingsModal';
-    import LanguagesModal from '../elements/LanguagesModal';
+    import CampingsModal from '../elements/CampingsModal'
+    import LanuagesModal from '../elements/LanguagesModal'
 
     export default {
         mixins: [
@@ -48,9 +48,7 @@
             LocalStorage
         ],
         components: {
-            'App': App,
-            'CampingsModal': CampingsModal,
-            'LanguagesModal': LanguagesModal
+            'App': App
         },
         data: function(){
             return {

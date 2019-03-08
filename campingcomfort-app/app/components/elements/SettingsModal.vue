@@ -32,11 +32,9 @@
 
 <script>
     import EventBus from '../helpers/EventBus'
-    import * as http from 'tns-core-modules/http';
     import Responsive from '../mixins/Responsive'
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
-    import App from './App'
     import {exit} from 'nativescript-exit';
     import CampingsModal from '../elements/CampingsModal';
     import LanguagesModal from '../elements/LanguagesModal';
@@ -48,7 +46,6 @@
             LocalStorage
         ],
         components: {
-            'App': App,
             'CampingsModal': CampingsModal,
             'LanguagesModal': LanguagesModal
         },
