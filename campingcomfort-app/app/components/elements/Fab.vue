@@ -17,6 +17,7 @@
         text-align: center;
     }
     .btn-icon {
-        font-size: 20;
+        width: 60;
+        height: 60;
     }
 </style>

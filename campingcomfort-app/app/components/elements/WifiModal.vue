@@ -1,7 +1,7 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="*" columns="*">
-            <WebView row="0" col="0" src="https://www.campingcomfort.app/img/app/map.png"></WebView>
+            <Label text="Wifi" class="content" horizontalAlignment="center"></Label>
             <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
@@ -29,6 +29,9 @@
 
 <style scoped>
     Page {
-        background: #fff;
+        background: #454f63;
+    }
+    .content {
+        color: #fff;
     }
 </style>

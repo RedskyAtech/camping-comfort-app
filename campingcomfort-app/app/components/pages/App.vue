@@ -46,6 +46,7 @@
     import ComingSoon from '../pages/ComingSoon'
     import SettingsModal from '../elements/SettingsModal'
     import MapModal from '../elements/MapModal'
+    import WifiModal from '../elements/WifiModal'
 
     export default {
         data() {
@@ -85,7 +86,8 @@
             Detail: Detail,
             ComingSoon: ComingSoon,
             SettingsModal: SettingsModal,
-            MapModal: MapModal
+            MapModal: MapModal,
+            WifiModal: WifiModal
         },
         methods: {
             navigate: function(tab, page, switchTab=false, props={}){
@@ -141,6 +143,9 @@
                 }
                 if(page === 'map'){
                     Component = MapModal;
+                }
+                if(page === 'wifi'){
+                    Component = WifiModal;
                 }
                 this.$showModal(Component, {
                     fullscreen: true,

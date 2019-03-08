@@ -72,13 +72,8 @@
                 });
             },
             toWifi: function(){
-                EventBus.$emit('navigate', {
-                    tab: 2,
-                    page: 'coming-soon',
-                    props: {
-                        title: 'WiFi',
-                        showBackBtn: true
-                    }
+                EventBus.$emit('openModal', {
+                    page: 'wifi'
                 });
             },
             toMap: function(){
