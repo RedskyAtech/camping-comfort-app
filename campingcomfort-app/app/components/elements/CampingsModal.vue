@@ -49,6 +49,9 @@
                 }, delay);
             }
         },
+        mounted: function(){
+            this.search('a');
+        },
         methods: {
             textFieldLoaded(){
                 this.$refs.textField.nativeView.focus();

@@ -1,7 +1,7 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="*" columns="*">
-            <WebView row="0" col="0" src="~/assets/map.html?"></WebView>
+            <WebView row="0" col="0" src="https://www.campingcomfort.app/app/map"></WebView>
             <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
