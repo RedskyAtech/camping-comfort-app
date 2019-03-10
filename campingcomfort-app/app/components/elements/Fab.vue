@@ -11,7 +11,7 @@
         width: 60;
         height: 60;
         background: #fff;
-        color: #454f63;
+        color: #103029;
         margin-right: 18.75;
         margin-bottom: 18.75;
         text-align: center;

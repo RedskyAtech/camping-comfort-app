@@ -66,7 +66,7 @@
 
     /* Title */
     .title-container {
-        background-color: #454f63;
+        background-color: #103029;
         padding: 25;
         font-weight: 500;
     }

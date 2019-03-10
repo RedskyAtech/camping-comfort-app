@@ -53,7 +53,7 @@
 
     /* Title */
     .title-container {
-        background-color: #454f63;
+        background-color: #103029;
         color: #fff;
         text-align: center;
         font-weight: 700;
@@ -62,7 +62,7 @@
 
     /* Weekday selector */
     .week {
-        background-color: #454f63;
+        background-color: #103029;
         color: #fff;
         padding: 0 12.5 6.75 12.5;
         font-size: 14;
@@ -74,7 +74,7 @@
     }
     .day.active {
         background-color: #fff;
-        color: #454f63;
+        color: #103029;
         border-radius: 100%;
     }
     .date {

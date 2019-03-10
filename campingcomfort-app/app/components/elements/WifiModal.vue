@@ -29,7 +29,7 @@
 
 <style scoped>
     Page {
-        background: #454f63;
+        background: #103029;
     }
     .content {
         color: #fff;
