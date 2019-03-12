@@ -18,7 +18,7 @@
                     <StackLayout row="3" v-if="campingName">
                         <GridLayout columns="auto" horizontalAlignment="center">
                             <StackLayout col="0" class="btn" @tap="select">
-                                <Label class="btn-text" text="Doorgaan" verticalAlignment="center"></Label>
+                                <Label class="btn-text" text="Opslaan" verticalAlignment="center"></Label>
                                 <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-right' | fonticon }}</Label>
                             </StackLayout>
                         </GridLayout>
@@ -26,6 +26,7 @@
                 </GridLayout>
             </StackLayout>
             <Label row="1" col="0" horizontalAlignment="center" class="copyright" text="© 2019 CampingComfort"></Label>
+            <Fab row="1" col="0" bg="transparent"><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-down' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
 </template>
@@ -38,6 +39,7 @@
     import {exit} from 'nativescript-exit';
     import CampingsModal from '../elements/CampingsModal';
     import LanguagesModal from '../elements/LanguagesModal';
+    import Fab from '../elements/Fab'
 
     export default {
         mixins: [
@@ -46,8 +48,9 @@
             LocalStorage
         ],
         components: {
-            'CampingsModal': CampingsModal,
-            'LanguagesModal': LanguagesModal
+            CampingsModal: CampingsModal,
+            LanguagesModal: LanguagesModal,
+            Fab: Fab
         },
         data: function(){
             return {
@@ -104,6 +107,9 @@
             },
             select() {
                 EventBus.$emit('changedSettings');
+                this.$modal.close();
+            },
+            closeModal: function(){
                 this.$modal.close();
             }
         }

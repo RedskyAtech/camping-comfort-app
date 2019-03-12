@@ -2,7 +2,7 @@
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="*" columns="*">
             <WebView row="0" col="0" src="https://www.campingcomfort.app/img/app/map.png"></WebView>
-            <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></Fab>
+            <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-down' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
 </template>

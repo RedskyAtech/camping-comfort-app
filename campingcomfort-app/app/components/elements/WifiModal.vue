@@ -2,7 +2,7 @@
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="*" columns="*">
             <Label text="Wifi" class="content" horizontalAlignment="center"></Label>
-            <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></Fab>
+            <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-down' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
 </template>
