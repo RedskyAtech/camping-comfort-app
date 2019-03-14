@@ -47,6 +47,7 @@
     import SettingsModal from '../elements/SettingsModal'
     import MapModal from '../elements/MapModal'
     import WifiModal from '../elements/WifiModal'
+    import RouteModal from '../elements/RouteModal'
 
     export default {
         data() {
@@ -87,7 +88,8 @@
             ComingSoon: ComingSoon,
             SettingsModal: SettingsModal,
             MapModal: MapModal,
-            WifiModal: WifiModal
+            WifiModal: WifiModal,
+            RouteModal: RouteModal
         },
         methods: {
             navigate: function(tab, page, switchTab=false, props={}){
@@ -146,6 +148,9 @@
                 }
                 if(page === 'wifi'){
                     Component = WifiModal;
+                }
+                if(page === 'route'){
+                    Component = RouteModal;
                 }
                 this.$showModal(Component, {
                     fullscreen: true,
@@ -213,7 +218,7 @@
         text-align: center;
     }
     .tab.active {
-        color: #0a7cf7
+        color: #0070da;
     }
     .tab-icon {
     }

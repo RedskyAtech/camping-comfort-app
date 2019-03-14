@@ -1,7 +1,7 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="*" columns="*">
-            <Label text="Wifi" class="content" horizontalAlignment="center"></Label>
+            <WebView row="0" col="0" src="https://maps.google.com"></WebView>
             <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
@@ -29,9 +29,6 @@
 
 <style scoped>
     Page {
-        background: #103029;
-    }
-    .content {
-        color: #fff;
+        background: #fff;
     }
 </style>

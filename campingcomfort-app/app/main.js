@@ -2,6 +2,7 @@ import Vue from 'nativescript-vue'
 import * as appSettings from 'tns-core-modules/application-settings';
 import Splash from './components/pages/Splash'
 import App from './components/pages/App'
+// import App from './components/pages/Detail'
 
 // Font Icons
 import {TNSFontIcon, fonticon} from 'nativescript-fonticon';
@@ -14,6 +15,9 @@ Vue.filter('fonticon', fonticon);
 
 // Cards
 Vue.registerElement('CardView', () => require('nativescript-cardview').CardView);
+
+// Gradient
+Vue.registerElement('gradient', () => require('nativescript-gradient').Gradient)
 
 // Autocomplete
 import RadAutoCompletePlugin from 'nativescript-ui-autocomplete/vue'

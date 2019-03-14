@@ -26,7 +26,7 @@
                 </GridLayout>
             </StackLayout>
             <Label row="1" col="0" horizontalAlignment="center" class="copyright" text="© 2019 CampingComfort"></Label>
-            <Fab row="1" col="0" bg="transparent"><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-down' | fonticon }}</Label></Fab>
+            <Fab row="1" col="0" bg="transparent"><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
 </template>

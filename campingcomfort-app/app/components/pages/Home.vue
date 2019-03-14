@@ -212,9 +212,9 @@
         color: #8e8e8e;
     }
     .tab.active {
-        color: #0a7cf7;
+        color: #0070da;
         border-bottom-width: 2;
-        border-color: #0a7cf7;
+        border-color: #0070da;
     }
     .tab-content {
         visibility: collapsed;
