@@ -49,10 +49,10 @@
             },
             toDetail: function(id){
                 EventBus.$emit('navigate', {
-                    tab: 4,
+                    tab: 3,
                     page: 'detail',
                     props: {
-                        detailType: 'nearby_activity',
+                        type: 'nearby_activity',
                         id: id
                     }
                 });

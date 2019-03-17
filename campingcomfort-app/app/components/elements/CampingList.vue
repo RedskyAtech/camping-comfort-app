@@ -11,7 +11,7 @@
                         <Label class="btn-text" text="Plattegrond" verticalAlignment="center"></Label>
                     </StackLayout>
                 </StackLayout>
-                <CardView class="cardStyle" radius="10" @tap="navigate">
+                <CardView class="cardStyle" radius="10" @tap="toDetail(item.id)">
                     <GridLayout rows="75" columns="75,*">
                         <Image col="0" :src="item.image"></Image>
                         <StackLayout col="1" orientation="horizontal">
@@ -24,7 +24,7 @@
             </StackLayout>
         </v-template>
         <v-template else>
-            <CardView class="cardStyle" radius="10" @tap="navigate">
+            <CardView class="cardStyle" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="75" columns="75,*">
                     <Image col="0" :src="item.image"></Image>
                     <StackLayout col="1" orientation="horizontal">
@@ -74,12 +74,6 @@
                     cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
                 }
             },
-            navigate: function(){
-                EventBus.$emit('navigate', {
-                    tab: 2,
-                    page: 'detail'
-                });
-            },
             toWifi: function(){
                 EventBus.$emit('openModal', {
                     page: 'wifi'
@@ -90,6 +84,16 @@
                     page: 'map'
                 });
             },
+            toDetail: function(id){
+                EventBus.$emit('navigate', {
+                    tab: 2,
+                    page: 'detail',
+                    props: {
+                        type: 'camping_facility',
+                        id: id
+                    }
+                });
+            }
         }
     }
 </script>

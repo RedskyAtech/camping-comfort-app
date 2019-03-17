@@ -9,9 +9,9 @@
                             <StackLayout class="event-time" orientation="horizontal">
                                 <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
                                 <StackLayout orientation="horizontal">
-                                    <Label :text="'2000-01-01 '+item.start_time | moment('h:mm')"></Label>
+                                    <Label :text="'2000-01-01 '+item.start_time | moment('HH:mm')"></Label>
                                     <Label text=" - "></Label>
-                                    <Label :text="'2000-01-01 '+item.end_time | moment('h:mm')"></Label>
+                                    <Label :text="'2000-01-01 '+item.end_time | moment('HH:mm')"></Label>
                                 </StackLayout>
                             </StackLayout>
                             <Label class="event-title" :text="item.title"></Label>
@@ -59,7 +59,7 @@
                     tab: 4,
                     page: 'detail',
                     props: {
-                        detailType: 'camping_activity',
+                        type: 'camping_activity',
                         id: id
                     }
                 });

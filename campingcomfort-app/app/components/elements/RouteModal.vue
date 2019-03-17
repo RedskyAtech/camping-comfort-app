@@ -1,7 +1,7 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="*" columns="*">
-            <WebView row="0" col="0" src="https://maps.google.com"></WebView>
+            <WebView row="0" col="0" :src="url"></WebView>
             <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
@@ -18,6 +18,9 @@
         ],
         components: {
             Fab: Fab
+        },
+        props: {
+            url: ''
         },
         methods: {
             closeModal: function(){

@@ -4,45 +4,49 @@
             <ScrollView row="0" col="0">
                 <GridLayout rows="auto,auto,auto">
                     <GridLayout row="0" class="hero-grid">
-                        <Image row="0" src="~/assets/images/demo/aqua-land.png" class="hero-image"></Image>
-                        <CardView row="0" horizontalAlignment="right" verticalAlignment="bottom" class="cardStyle like" radius="30">
+                        <Image row="0" :src="item.image" class="hero-image"></Image>
+                        <CardView row="0" horizontalAlignment="right" verticalAlignment="bottom" class="cardStyle like" radius="30" v-if="likable">
                             <GridLayout rows="*" columns="*">
                                 <Label row="0" col="0" class="like-icon fa" verticalAlignment="center">{{ 'fa-heart' | fonticon }}</Label>
                             </GridLayout>
                         </CardView>
                     </GridLayout>
-                    <StackLayout row="1" class="timeframe" orientation="horizontal">
+                    <StackLayout row="1" class="timeframe" orientation="horizontal" v-if="item.start_time !== undefined">
                         <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
-                        <Label text="Vandaag 10:00 - 12:00"></Label>
+                        <StackLayout orientation="horizontal">
+                            <Label text="Vandaag "></Label>
+                            <Label :text="'2000-01-01 '+item.start_time | moment('HH:mm')"></Label>
+                            <Label text=" - "></Label>
+                            <Label :text="'2000-01-01 '+item.end_time | moment('HH:mm')"></Label>
+                        </StackLayout>
                     </StackLayout>
                     <StackLayout row="2" class="content">
-                        <Label class="title" text="Aqua Land"></Label>
+                        <Label class="title" :text="item.title"></Label>
                         <GridLayout columns="*" :rows="textHeight">
                             <Stacklayout col="0" row="0">
-                                <Label class="text" textWrap="true" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."></Label>
-                                <Label class="text" textWrap="true" text="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"></Label>
+                                <Label class="text" textWrap="true" :text="item.text"></Label>
                             </Stacklayout>
                             <StackLayout v-if="collapsed" col="0" row="0" class="gradient"></StackLayout>
                             <StackLayout v-if="collapsed" col="0" row="1">
                                 <Label class="read-more-link" text="+ Lees meer" @tap="readMore"></Label>
                             </StackLayout>
                         </GridLayout>
-                        <StackLayout class="info-block">
+                        <StackLayout class="info-block" v-if="item.location !== undefined">
                             <GridLayout rows="auto,auto,auto" columns="auto,auto">
                                 <Label row="0" col="0" class="left" text="Locatie:"></Label>
-                                <Label row="0" col="1" text="Receptie"></Label>
+                                <Label row="0" col="1" :text="item.location"></Label>
                                 <Label row="1" col="0" class="left" text="Leeftijd:"></Label>
-                                <Label row="1" col="1" text="Vanaf 12 jaar"></Label>
+                                <Label row="1" col="1" :text="item.age"></Label>
                                 <Label row="2" col="0" class="left" text="Kosten:"></Label>
-                                <Label row="2" col="1" text="Gratis"></Label>
+                                <Label row="2" col="1" :text="item.price"></Label>
                             </GridLayout>
                         </StackLayout>
-                        <StackLayout class="address-block">
+                        <StackLayout class="address-block" v-if="item.place !== undefined">
                             <Label class="address-title" text="Voor meer informatie"></Label>
-                            <Label class="address-text" text="Smidsweg 7"></Label>
-                            <Label class="address-text" text="7411 SC Schalkhaar"></Label>
+                            <Label class="address-text" :text="item.street+' '+item.house_number"></Label>
+                            <Label class="address-text" :text="item.postal_code+' '+item.place"></Label>
                         </StackLayout>
-                        <GridLayout columns="auto,*">
+                        <GridLayout columns="auto,*" v-if="item.place !== undefined">
                             <StackLayout class="btn" col="0" @tap="toRoute">
                                 <Label text="Route" verticalAlignment="center"></Label>
                             </StackLayout>
@@ -56,6 +60,7 @@
 </template>
 
 <script>
+    import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import Fab from '../elements/Fab'
@@ -68,7 +73,8 @@
         data() {
             return {
                 collapsed: true,
-                item: {}
+                item: {},
+                isLikable: false
             }
         },
         computed: {
@@ -90,18 +96,27 @@
         created: function(){
             this.loadData();
         },
-        mounted: function(){
-
-        },
         methods: {
 
             // Get the data
             loadData: function(){
                 let self = this;
-                getJSON("https://www.campingcomfort.app/api/9665/camping-activities/nl/"+self.id).then((r) => {
-
-                }, (e) => {
-                });
+                if(this.type === 'camping_facility'){
+                    getJSON("https://www.campingcomfort.app/api/9665/camping-facilities/nl/"+self.id).then((r) => {
+                        self.item = r.campingFacility;
+                    }, (e) => {});
+                }
+                if(this.type === 'camping_activity'){
+                    getJSON("https://www.campingcomfort.app/api/9665/camping-activities/nl/"+self.id).then((r) => {
+                        self.item = r.campingActivity;
+                        self.likable = true;
+                    }, (e) => {});
+                }
+                if(this.type === 'nearby_activity'){
+                    getJSON("https://www.campingcomfort.app/api/9665/nearby-activities/nl/"+self.id).then((r) => {
+                        self.item = r.nearbyActivity;
+                    }, (e) => {});
+                }
             },
             like: function(){
 
@@ -110,8 +125,12 @@
                 this.collapsed = false;
             },
             toRoute: function(){
+                let self = this;
                 EventBus.$emit('openModal', {
-                    page: 'route'
+                    page: 'route',
+                    props: {
+                        url: 'https://www.google.com/maps/dir//'+encodeURI(self.item.street)+'+'+encodeURI(self.item.house_number)+','+encodeURI(self.item.postal_code)+'+'+encodeURI(self.item.place)
+                    }
                 });
             },
             goBack: function(){
