@@ -1,7 +1,7 @@
 <template>
     <ListView for="item in listItems" @itemLoading="onItemLoading">
         <v-template>
-            <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="navigate">
+            <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="75" columns="75,*">
                     <Image col="0" :src="item.image"></Image>
                     <StackLayout col="1" orientation="horizontal">
@@ -17,41 +17,28 @@
 </template>
 
 <script>
+    import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
 
     export default {
         data() {
             return {
-                listItems: [
-                    {
-                        image: '~/assets/images/demo/kids-playground.png',
-                        title: 'De Spelerij',
-                        subtitle: 'Oegstgeest, 2km'
-                    },
-                    {
-                        image: '~/assets/images/demo/aqua-land.png',
-                        title: 'Aqua Land',
-                        subtitle: 'Leiden, 4km'
-                    },
-                    {
-                        image: '~/assets/images/demo/zoo.png',
-                        title: 'Dierentuin de Nijl',
-                        subtitle: 'Den Haag, 12km'
-                    },
-                    {
-                        image: '~/assets/images/demo/beach.png',
-                        title: 'Strand',
-                        subtitle: 'Katwijk, 13km'
-                    },
-                    {
-                        image: '~/assets/images/demo/museum.png',
-                        title: 'Dinoland',
-                        subtitle: 'Zoetermeer, 16km'
-                    }
-                ]
+                listItems: []
             }
         },
+        created: function(){
+            this.loadData();
+        },
         methods: {
+
+            // Get the data
+            loadData: function(){
+                let self = this;
+                getJSON("https://www.campingcomfort.app/api/9665/nearby-activities/nl").then((r) => {
+                    self.listItems = r.nearbyActivities;
+                }, (e) => {
+                });
+            },
 
             // Remove the grey highlight on tapping a ListView item
             onItemLoading: function(args) {
@@ -60,10 +47,14 @@
                     cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
                 }
             },
-            navigate: function(){
+            toDetail: function(id){
                 EventBus.$emit('navigate', {
-                    tab: 3,
-                    page: 'detail'
+                    tab: 4,
+                    page: 'detail',
+                    props: {
+                        detailType: 'nearby_activity',
+                        id: id
+                    }
                 });
             }
         }

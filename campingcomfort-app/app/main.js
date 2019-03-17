@@ -19,6 +19,9 @@ Vue.registerElement('CardView', () => require('nativescript-cardview').CardView)
 // Gradient
 Vue.registerElement('gradient', () => require('nativescript-gradient').Gradient)
 
+// Moment
+Vue.use(require('vue-moment'));
+
 // Autocomplete
 import RadAutoCompletePlugin from 'nativescript-ui-autocomplete/vue'
 Vue.use(RadAutoCompletePlugin);

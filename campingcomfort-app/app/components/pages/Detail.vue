@@ -27,7 +27,7 @@
                                 <Label class="read-more-link" text="+ Lees meer" @tap="readMore"></Label>
                             </StackLayout>
                         </GridLayout>
-                        <!--<StackLayout class="info-block">
+                        <StackLayout class="info-block">
                             <GridLayout rows="auto,auto,auto" columns="auto,auto">
                                 <Label row="0" col="0" class="left" text="Locatie:"></Label>
                                 <Label row="0" col="1" text="Receptie"></Label>
@@ -36,7 +36,7 @@
                                 <Label row="2" col="0" class="left" text="Kosten:"></Label>
                                 <Label row="2" col="1" text="Gratis"></Label>
                             </GridLayout>
-                        </StackLayout>-->
+                        </StackLayout>
                         <StackLayout class="address-block">
                             <Label class="address-title" text="Voor meer informatie"></Label>
                             <Label class="address-text" text="Smidsweg 7"></Label>
@@ -61,15 +61,20 @@
     import Fab from '../elements/Fab'
 
     export default {
+        props: {
+            id: 0,
+            type: ''
+        },
         data() {
             return {
-                collapsed: true
+                collapsed: true,
+                item: {}
             }
         },
         computed: {
             textHeight: function(){
                 if(this.collapsed){
-                    return '89,auto';
+                    return '83,auto';
                 }
                 else {
                     return 'auto';
@@ -82,7 +87,22 @@
         components: {
             Fab: Fab
         },
+        created: function(){
+            this.loadData();
+        },
+        mounted: function(){
+
+        },
         methods: {
+
+            // Get the data
+            loadData: function(){
+                let self = this;
+                getJSON("https://www.campingcomfort.app/api/9665/camping-activities/nl/"+self.id).then((r) => {
+
+                }, (e) => {
+                });
+            },
             like: function(){
 
             },
@@ -165,7 +185,6 @@
         background: linear-gradient(to bottom, rgba(248,248,248,0), rgba(248,248,248,0.1), #f8f8f8);
     }
     .read-more-link {
-        padding-top: 12.5;
         color: #0070da;
     }
 

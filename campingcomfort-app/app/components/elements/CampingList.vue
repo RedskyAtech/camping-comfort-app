@@ -1,14 +1,26 @@
 <template>
     <ListView for="item in listItems" @itemLoading="onItemLoading">
         <v-template if="$index === 0">
-            <StackLayout row="0" class="btn-container">
-                <StackLayout class="btn wifi-btn" v-if="connectionType !== 'wifi'" @tap="toWifi">
-                    <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
+            <StackLayout>
+                <StackLayout class="btn-container">
+                    <StackLayout class="btn wifi-btn" v-if="connectionType !== 'wifi'" @tap="toWifi">
+                        <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
+                    </StackLayout>
+                    <StackLayout class="btn contact-btn" @tap="toMap">
+                        <Label class="btn-icon fa" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
+                        <Label class="btn-text" text="Plattegrond" verticalAlignment="center"></Label>
+                    </StackLayout>
                 </StackLayout>
-                <StackLayout class="btn contact-btn" @tap="toMap">
-                    <Label class="btn-icon fa" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
-                    <Label class="btn-text" text="Plattegrond" verticalAlignment="center"></Label>
-                </StackLayout>
+                <CardView class="cardStyle" radius="10" @tap="navigate">
+                    <GridLayout rows="75" columns="75,*">
+                        <Image col="0" :src="item.image"></Image>
+                        <StackLayout col="1" orientation="horizontal">
+                            <StackLayout class="event-label" verticalAlignment="center">
+                                <Label class="event-title" :text="item.title"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                </CardView>
             </StackLayout>
         </v-template>
         <v-template else>
@@ -27,36 +39,33 @@
 </template>
 
 <script>
+    import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
+    import Connection from '../mixins/Connection'
 
     export default {
         data() {
             return {
-                listItems: [
-                    {
-                        image: '~/assets/images/demo/pool-2.jpg',
-                        title: 'Zwembad'
-                    },
-                    {
-                        image: '~/assets/images/demo/beachclub.jpg',
-                        title: 'Strandterras'
-                    },
-                    {
-                        image: '~/assets/images/demo/restaurant.jpg',
-                        title: 'Restaurant'
-                    },
-                    {
-                        image: '~/assets/images/demo/bakery.jpg',
-                        title: 'Bakkerij'
-                    },
-                    {
-                        image: '~/assets/images/demo/sanitary.jpg',
-                        title: 'Sanitaire voorzieningen'
-                    }
-                ]
+                listItems: []
             }
         },
+        mixins: [
+            Connection
+        ],
+        created: function(){
+            this.loadData();
+        },
         methods: {
+
+            // Get the data
+            loadData: function(){
+                let self = this;
+                getJSON("https://www.campingcomfort.app/api/9665/camping-facilities/nl").then((r) => {
+                    self.listItems = r.campingFacilities;
+
+                }, (e) => {
+                });
+            },
 
             // Remove the grey highlight on tapping a ListView item
             onItemLoading: function(args) {

@@ -1,14 +1,18 @@
 <template>
     <ListView for="item in listItems" @itemLoading="onItemLoading">
         <v-template>
-            <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="navigate">
+            <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="75" columns="75,*">
                     <Image col="0" :src="item.image"></Image>
                     <StackLayout col="1" orientation="horizontal">
                         <StackLayout class="event-label" verticalAlignment="center">
                             <StackLayout class="event-time" orientation="horizontal">
                                 <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
-                                <Label :text="item.startTime+' - '+item.endTime"></Label>
+                                <StackLayout orientation="horizontal">
+                                    <Label :text="'2000-01-01 '+item.start_time | moment('h:mm')"></Label>
+                                    <Label text=" - "></Label>
+                                    <Label :text="'2000-01-01 '+item.end_time | moment('h:mm')"></Label>
+                                </StackLayout>
                             </StackLayout>
                             <Label class="event-title" :text="item.title"></Label>
                         </StackLayout>
@@ -20,46 +24,28 @@
 </template>
 
 <script>
+    import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
 
     export default {
         data() {
             return {
-                listItems: [
-                    {
-                        image: '~/assets/images/demo/football.jpg',
-                        startTime: '10:00',
-                        endTime: '11:00',
-                        title: 'Voetbalwedstrijd'
-                    },
-                    {
-                        image: '~/assets/images/demo/aqua-zumba.jpg',
-                        startTime: '11:15',
-                        endTime: '11:30',
-                        title: 'Aqua Zumba'
-                    },
-                    {
-                        image: '~/assets/images/demo/dance.jpg',
-                        startTime: '12:30',
-                        endTime: '13:00',
-                        title: 'Dansvoorstelling'
-                    },
-                    {
-                        image: '~/assets/images/demo/scavenger-hunt.jpg',
-                        startTime: '14:00',
-                        endTime: '15:00',
-                        title: 'Spoorzoeker'
-                    },
-                    {
-                        image: '~/assets/images/demo/pool.jpg',
-                        startTime: '16:00',
-                        endTime: '17:00',
-                        title: 'Zwembadspelen'
-                    }
-                ]
+                listItems: []
             }
         },
+        created: function(){
+            this.loadData();
+        },
         methods: {
+
+            // Get the data
+            loadData: function(){
+                let self = this;
+                getJSON("https://www.campingcomfort.app/api/9665/camping-activities/nl").then((r) => {
+                    self.listItems = r.campingActivities;
+                }, (e) => {
+                });
+            },
 
             // Remove the grey highlight on tapping a ListView item
             onItemLoading: function(args) {
@@ -68,10 +54,14 @@
                     cell.selectionStyle = UITableViewCellSelectionStyle.UITableViewCellSelectionStyleNone;
                 }
             },
-            navigate: function(){
+            toDetail: function(id){
                 EventBus.$emit('navigate', {
                     tab: 4,
-                    page: 'detail'
+                    page: 'detail',
+                    props: {
+                        detailType: 'camping_activity',
+                        id: id
+                    }
                 });
             }
         }
