@@ -27,25 +27,36 @@
         data: function(){
             return {
                 timeout: '',
-                term: '',
-                languages: [
+                term: ''
+            }
+        },
+        computed: {
+            languages: function(){
+                let l = [
                     {
                         'code': 'nl',
-                        'name': 'Nederlands'
+                        'name': this.$t('languages.nl')
                     },
                     {
                         'code': 'en',
-                        'name': 'English'
+                        'name': this.$t('languages.en')
                     },
                     {
                         'code': 'de',
-                        'name': 'Deutsch'
+                        'name': this.$t('languages.de')
                     },
                     {
                         'code': 'fr',
-                        'name': 'Français'
+                        'name': this.$t('languages.fr')
                     }
-                ]
+                ];
+
+                // Sort by name
+                return l.sort(function(a, b){
+                    if(a.name < b.name) return -1;
+                    if(a.name > b.name) return 1;
+                    return 0;
+                });
             }
         },
         mixins: [
@@ -54,8 +65,13 @@
         ],
         methods: {
             select: function(code){
-                this.storeString('language', code);
-                EventBus.$emit('languageSelected');
+
+                // Emit a language selected event
+                EventBus.$emit('languageSelected', {
+                    code: code
+                });
+
+                // Close the modal
                 this.$modal.close();
             }
         }

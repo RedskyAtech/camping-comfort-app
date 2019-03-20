@@ -64,9 +64,10 @@
                 });
             },
             select: function(id, name){
-                this.storeNumber('campingId', id);
-                this.storeString('campingName', name);
-                EventBus.$emit('campingSelected');
+                EventBus.$emit('campingSelected', {
+                    'id': id,
+                    'name': name
+                });
                 this.$modal.close();
             }
         }

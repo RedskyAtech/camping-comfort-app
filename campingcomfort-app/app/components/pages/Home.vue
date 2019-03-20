@@ -15,7 +15,7 @@
                                         </StackLayout>
                                         <StackLayout class="btn contact-btn" @tap="toMap">
                                             <Label class="btn-icon fa" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
-                                            <Label class="btn-text" text="Plattegrond" verticalAlignment="center"></Label>
+                                            <Label class="btn-text" :text="$t('home.map')" verticalAlignment="center"></Label>
                                         </StackLayout>
                                     </StackLayout>
                                 </StackLayout>
@@ -37,10 +37,10 @@
                                     <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>
                                     <StackLayout col="0" class="tabs-container" orientation="horizontal">
                                         <StackLayout class="tab" @tap="activateTab(1)" :class="[{'active': activeTab === 1}]">
-                                            <Label class="tab-label" text="Mijn vakantie"></Label>
+                                            <Label class="tab-label" :text="$t('home.myVacation')"></Label>
                                         </StackLayout>
                                         <StackLayout class="tab" @tap="activateTab(2)" :class="[{'active': activeTab === 2}]">
-                                            <Label class="tab-label" text="Gebruikerstips"></Label>
+                                            <Label class="tab-label" :text="$t('home.news')"></Label>
                                         </StackLayout>
                                     </StackLayout>
                                 </GridLayout>
@@ -90,24 +90,42 @@
         mounted: function(){
             let self = this;
             self.init();
-            EventBus.$on('changedSettings', function(){
+
+            // Listen to a clear storage event
+            EventBus.$on('clearStorage', function(){
                 self.init();
             });
         },
         methods: {
             init: function(){
+                let self = this;
+
+                // The camping name is stored when a camping is selected
                 this.heroTitle = this.getStringFromStore('campingName');
-                this.loadData(
-                    [
-                        {
-                            vueKey: 'heroImage',
-                            storageKey: 'home_heroImage',
-                            type: 'string',
-                            required: true,
-                            image: true
+
+                // Get the data from the api (internet) or local storage (offline)
+                let campingId = this.getStringFromStore('campingId');
+                let lang = this.getStringFromStore('language');
+                if(this.hasInternetConnection()){
+                    http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
+
+                        // Assign the data
+                        if(result.appContent.home_image){
+                            self.heroImage = result.appContent.home_image;
                         }
-                    ]
-                );
+                        else {
+                            self.heroImage = '~/assets/images/placeholder.jpg';
+                        }
+
+                        // Store the data
+                        self.storeString('home_heroImage', self.heroImage);
+                    }, error => {
+                        console.log(error);
+                    });
+                }
+                else {
+                    self.heroImage = self.getStringFromStore('home_heroImage', '~/assets/images/placeholder.jpg');
+                }
             },
             activateTab: function(tab){
                 this.activeTab = tab;
@@ -138,7 +156,6 @@
 </script>
 
 <style scoped>
-
     /* Hero */
     Page.xs .hero-grid {
         height: 210;
