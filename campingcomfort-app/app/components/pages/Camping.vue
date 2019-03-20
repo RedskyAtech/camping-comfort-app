@@ -2,7 +2,7 @@
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="auto,*" columns="*">
             <StackLayout row="0" class="title-container">
-                <Label text="Op de camping"></Label>
+                <Label :text="$t('camping.title')"></Label>
             </StackLayout>
             <CampingList row="1"></CampingList>
         </GridLayout>

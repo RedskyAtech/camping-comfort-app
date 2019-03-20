@@ -43,6 +43,18 @@ export function translations() {
                 age: 'Age',
                 price: 'Price',
                 route: 'Route'
+            },
+            comingSoon: {
+                comingSoon: 'Coming soon'
+            },
+            camping: {
+                title: 'On the camping'
+            },
+            nearby: {
+                title: 'Nearby activities'
+            },
+            reception: {
+                title: 'Reception'
             }
         },
         nl: {

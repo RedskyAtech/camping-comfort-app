@@ -5,7 +5,7 @@
                 <Label :text="title"></Label>
             </StackLayout>
             <ScrollView row="1">
-                <Label text="Binnenkort..." horizontalAlignment="center" verticalAlignment="center"></Label>
+                <Label :text="$t('comingSoon.comingSoon')" horizontalAlignment="center" verticalAlignment="center"></Label>
             </ScrollView>
             <Fab v-if="showBackBtn" row="1"><Label @tap="goBack" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></Fab>
         </GridLayout>

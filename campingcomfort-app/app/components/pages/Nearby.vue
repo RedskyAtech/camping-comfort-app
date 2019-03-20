@@ -2,7 +2,7 @@
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="auto,auto,*" columns="*">
             <StackLayout row="0" class="title-container">
-                <Label text="In de omgeving"></Label>
+                <Label :text="$t('nearby.title')"></Label>
             </StackLayout>
             <GridLayout row="1" columns="*">
                 <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>

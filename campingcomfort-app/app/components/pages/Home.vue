@@ -49,7 +49,7 @@
                                         <EventList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]"></EventList>
                                         <StackLayout row="0" col="0" class="tab-content" :class="[{'active': activeTab === 2}]">
                                             <StackLayout class="temp-tab-content">
-                                                <Label text="Binnenkort..."></Label>
+                                                <Label :text="$t('comingSoon.comingSoon')"></Label>
                                             </StackLayout>
                                         </StackLayout>
                                     </GridLayout>

@@ -196,7 +196,7 @@
                     page: 'reception',
                     switchTab: true,
                     props: {
-                        title: 'Receptie'
+                        title:  this.$t('reception.title')
                     }
                 });
             }
