@@ -15,9 +15,9 @@
                         <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
                         <StackLayout orientation="horizontal">
                             <Label :text="$t('detail.today')"></Label>
-                            <Label :text="'2000-01-01 '+item.start_time | moment('HH:mm')"></Label>
+                            <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
                             <Label text=" - "></Label>
-                            <Label :text="'2000-01-01 '+item.end_time | moment('HH:mm')"></Label>
+                            <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
                         </StackLayout>
                     </StackLayout>
                     <StackLayout row="2" class="content">

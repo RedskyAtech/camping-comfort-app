@@ -9,9 +9,9 @@
                             <StackLayout class="event-time" orientation="horizontal">
                                 <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
                                 <StackLayout orientation="horizontal">
-                                    <Label :text="'2000-01-01 '+item.start_time | moment('HH:mm')"></Label>
+                                    <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
                                     <Label text=" - "></Label>
-                                    <Label :text="'2000-01-01 '+item.end_time | moment('HH:mm')"></Label>
+                                    <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
                                 </StackLayout>
                             </StackLayout>
                             <Label class="event-title" :text="item.title"></Label>

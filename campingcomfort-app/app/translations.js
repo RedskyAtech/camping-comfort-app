@@ -1,6 +1,9 @@
 export function translations() {
     return {
         en: {
+            formatting: {
+                time: 'h.mm a'
+            },
             languages: {
                 en: 'English',
                 de: 'German',
@@ -43,6 +46,9 @@ export function translations() {
             }
         },
         nl: {
+            formatting: {
+                time: 'HH:mm'
+            },
             languages: {
                 en: 'Engels',
                 de: 'Duits',
