@@ -7,16 +7,18 @@ export function translations() {
                 fr: 'French',
                 nl: 'Nederlands'
             },
+            errors: {
+                offline: {
+                    title: 'No internet connection',
+                    message: 'Please activate your internet connection to continue.',
+                    buttonText: 'OK'
+                }
+            },
             settings: {
                 title: 'Settings',
                 subtitle: 'Select your camping to continue.',
                 campingPlaceholder: 'Select your camping',
                 buttonText: 'Save'
-            },
-            home: {
-                map: 'Map',
-                myVacation: 'My vacation',
-                news: 'Latest news'
             },
             tabs: {
                 home: 'Home',
@@ -24,7 +26,12 @@ export function translations() {
                 nearby: 'Nearby',
                 activities: 'Activities',
                 reception: 'Reception',
-            }
+            },
+            home: {
+                map: 'Map',
+                myVacation: 'My vacation',
+                news: 'Latest news'
+            },
         },
         nl: {
             languages: {
@@ -33,16 +40,18 @@ export function translations() {
                 fr: 'Frans',
                 nl: 'Nederlands'
             },
+            errors: {
+                offline: {
+                    title: 'Geen internetverbinding',
+                    message: 'Maak verbinding met het internet om door te gaan.',
+                    buttonText: 'OK'
+                }
+            },
             settings: {
                 title: 'Instellingen',
                 subtitle: 'Selecteer jow camping om door te gaan.',
                 campingPlaceholder: 'Selecteer jouw camping',
                 buttonText: 'Doorgaan'
-            },
-            home: {
-                map: 'Plattegrond',
-                myVacation: 'Mijn vakantie',
-                news: 'Laatste nieuws'
             },
             tabs: {
                 home: 'Home',
@@ -50,7 +59,12 @@ export function translations() {
                 nearby: 'Omgeving',
                 activities: 'Activiteiten',
                 reception: 'Receptie'
-            }
+            },
+            home: {
+                map: 'Plattegrond',
+                myVacation: 'Mijn vakantie',
+                news: 'Laatste nieuws'
+            },
         }
     }
 }

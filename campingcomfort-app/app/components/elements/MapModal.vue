@@ -68,9 +68,9 @@
                     else {
                         setTimeout(function(){
                             alert({
-                                title: "The internet connection appears to be offline",
-                                message: "An internet connection is required to display the latest content. Please activate your internet connection.",
-                                okButtonText: "OK"
+                                title: self.$t('errors.offline.title'),
+                                message: self.$t('errors.offline.message'),
+                                okButtonText: self.$t('errors.offline.buttonText')
                             }).then(() => {
                                 exit();
                             });
