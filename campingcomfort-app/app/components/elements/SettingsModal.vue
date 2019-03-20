@@ -22,7 +22,7 @@
         },
         methods: {
             afterSave() {
-                EventBus.$emit('clearStorage');
+                EventBus.$emit('reInit');
                 this.closeModal();
             },
             closeModal: function(){

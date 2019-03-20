@@ -10,23 +10,23 @@
                 <GridLayout rows="*" columns="*,*,*,*,*">
                     <StackLayout verticalAlignment="middle" row="0" col="0" class="tab" :class="[{'active': activeTab === 1}]" @tap="toHome">
                         <Label class="tab-icon fas">{{ 'fa-home' | fonticon }}</Label>
-                        <Label class="tab-label" text="Home"></Label>
+                        <Label class="tab-label" :text="$t('tabs.home')"></Label>
                     </StackLayout>
                     <StackLayout verticalAlignment="middle" row="0" col="1" class="tab" :class="[{'active': activeTab === 2}]" @tap="toCamping">
                         <Label class="tab-icon fas">{{ 'fa-campground' | fonticon }}</Label>
-                        <Label class="tab-label" text="Camping"></Label>
+                        <Label class="tab-label" :text="$t('tabs.camping')"></Label>
                     </StackLayout>
                     <StackLayout verticalAlignment="middle" row="0" col="2" class="tab" :class="[{'active': activeTab === 3}]" @tap="toNearby">
                         <Label class="tab-icon fas">{{ 'fa-map-marker-alt' | fonticon }}</Label>
-                        <Label class="tab-label" text="Omgeving"></Label>
+                        <Label class="tab-label" :text="$t('tabs.nearby')"></Label>
                     </StackLayout>
                     <StackLayout verticalAlignment="middle" row="0" col="3" class="tab" :class="[{'active': activeTab === 4}]" @tap="toEvents">
                         <Label class="tab-icon fas">{{ 'fa-calendar-alt' | fonticon }}</Label>
-                        <Label class="tab-label" text="Activiteiten"></Label>
+                        <Label class="tab-label" :text="$t('tabs.activities')"></Label>
                     </StackLayout>
                     <StackLayout verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="toReception">
                         <Label class="tab-icon fa">{{ 'fa-comment' | fonticon }}</Label>
-                        <Label class="tab-label" text="Receptie"></Label>
+                        <Label class="tab-label" :text="$t('tabs.reception')"></Label>
                     </StackLayout>
                 </GridLayout>
             </StackLayout>

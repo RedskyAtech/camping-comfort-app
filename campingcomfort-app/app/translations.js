@@ -17,6 +17,13 @@ export function translations() {
                 map: 'Map',
                 myVacation: 'My vacation',
                 news: 'Latest news'
+            },
+            tabs: {
+                home: 'Home',
+                camping: 'Camping',
+                nearby: 'Nearby',
+                activities: 'Activities',
+                reception: 'Reception',
             }
         },
         nl: {
@@ -36,6 +43,13 @@ export function translations() {
                 map: 'Plattegrond',
                 myVacation: 'Mijn vakantie',
                 news: 'Laatste nieuws'
+            },
+            tabs: {
+                home: 'Home',
+                camping: 'Camping',
+                nearby: 'Omgeving',
+                activities: 'Activiteiten',
+                reception: 'Receptie'
             }
         }
     }

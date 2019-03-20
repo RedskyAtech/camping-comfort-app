@@ -1,7 +1,7 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="*" columns="*">
-            <WebView row="0" col="0" src="https://www.campingcomfort.app/img/app/map.png"></WebView>
+            <WebView row="0" col="0" :src="plan"></WebView>
             <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
@@ -23,40 +23,48 @@
         },
         data: function(){
             return {
-                map: ''
+                plan: ''
             }
+        },
+        mounted: function(){
+            this.init();
         },
         methods: {
             init: function(){
                 let self = this;
 
-                // The camping name is stored when a camping is selected
-                this.map = this.getStringFromStore('map');
-
                 // Get the data from the api (internet) or local storage (offline)
+                let campingId = this.getNumberFromStore('campingId');
+                let lang = this.getStringFromStore('language');
                 if(this.hasInternetConnection()){
-                    http.getJSON("https://www.campingcomfort.app/api/9665/content/nl").then(result => {
+                    http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign the data
-                        if(result.appContent.map){
-                            self.map = result.appContent.map;
-                        }
-                        else {
-                            self.map = '~/assets/images/placeholder.jpg';
+                        if(result.appContent.plan){
+                            self.plan = result.appContent.plan;
+
+                            // Store the data
+                            self.storeString('plan', self.plan);
                         }
 
-                        // Store the data
-                        self.storeString('map', self.map);
+                        // No data found, remove from storage
+                        else {
+                            self.plan = '';
+                            self.removeKeyFromStore('plan');
+                        }
+
                     }, error => {
                         console.log(error);
                     });
                 }
                 else {
-                    if(self.keyExistsInStore('map')){
-                        self.map = self.getStringFromStore('map');
+
+                    // Get the map from storage
+                    if(self.keyExistsInStore('plan')){
+                        self.plan = self.getStringFromStore('plan');
                     }
 
-                    // Offline with no cached data
+                    // Offline with no storage data
                     else {
                         setTimeout(function(){
                             alert({

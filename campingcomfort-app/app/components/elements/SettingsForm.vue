@@ -105,6 +105,9 @@
             },
             save(){
 
+                // Empty all storage data
+                this.removeAllKeysFromStore();
+
                 // Store the selected camping
                 this.storeNumber('campingId', parseInt(this.campingId));
                 this.storeString('campingName', this.campingName);

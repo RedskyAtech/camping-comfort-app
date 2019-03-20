@@ -13,7 +13,7 @@
                                         <StackLayout class="btn wifi-btn" v-if="connectionType !== 'wifi'" @tap="toWifi">
                                             <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
                                         </StackLayout>
-                                        <StackLayout class="btn contact-btn" @tap="toMap">
+                                        <StackLayout class="btn contact-btn" @tap="toMap" v-if="plan">
                                             <Label class="btn-icon fa" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
                                             <Label class="btn-text" :text="$t('home.map')" verticalAlignment="center"></Label>
                                         </StackLayout>
@@ -76,7 +76,8 @@
             return {
                 activeTab: 1,
                 heroImage: '',
-                heroTitle: ''
+                heroTitle: '',
+                plan: ''
             }
         },
         mixins: [
@@ -92,7 +93,7 @@
             self.init();
 
             // Listen to a clear storage event
-            EventBus.$on('clearStorage', function(){
+            EventBus.$on('reInit', function(){
                 self.init();
             });
         },
@@ -104,27 +105,36 @@
                 this.heroTitle = this.getStringFromStore('campingName');
 
                 // Get the data from the api (internet) or local storage (offline)
-                let campingId = this.getStringFromStore('campingId');
+                let campingId = this.getNumberFromStore('campingId');
                 let lang = this.getStringFromStore('language');
                 if(this.hasInternetConnection()){
                     http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
-                        // Assign the data
+                        // Assign and store the hero image
                         if(result.appContent.home_image){
                             self.heroImage = result.appContent.home_image;
                         }
                         else {
                             self.heroImage = '~/assets/images/placeholder.jpg';
                         }
-
-                        // Store the data
                         self.storeString('home_heroImage', self.heroImage);
+
+                        // Assign and store the map
+                        if(result.appContent.plan){
+                            self.plan = result.appContent.plan;
+                            self.storeString('plan', self.plan);
+                        }
+                        else {
+                            self.plan = '';
+                            self.removeKeyFromStore('plan');
+                        }
                     }, error => {
                         console.log(error);
                     });
                 }
                 else {
                     self.heroImage = self.getStringFromStore('home_heroImage', '~/assets/images/placeholder.jpg');
+                    self.plan = self.getStringFromStore('plan');
                 }
             },
             activateTab: function(tab){
