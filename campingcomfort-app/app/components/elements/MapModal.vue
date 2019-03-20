@@ -8,15 +8,19 @@
 </template>
 
 <script>
+    import * as http from 'http'
+    import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import Connection from '../mixins/Connection'
     import Fab from '../elements/Fab'
+    import LocalStorage from '../mixins/LocalStorage'
 
     export default {
         mixins: [
             Responsive,
-            Connection
+            Connection,
+            LocalStorage
         ],
         components: {
             Fab: Fab

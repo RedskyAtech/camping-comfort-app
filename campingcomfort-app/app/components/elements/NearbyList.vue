@@ -19,8 +19,12 @@
 <script>
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
+    import LocalStorage from '../mixins/LocalStorage'
 
     export default {
+        mixins: [
+            LocalStorage
+        ],
         data() {
             return {
                 listItems: []
@@ -34,7 +38,9 @@
             // Get the data
             loadData: function(){
                 let self = this;
-                getJSON("https://www.campingcomfort.app/api/9665/nearby-activities/nl").then((r) => {
+                let campingId = this.getNumberFromStore('campingId');
+                let lang = this.getStringFromStore('language');
+                getJSON("https://www.campingcomfort.app/api/"+campingId+"/nearby-activities/"+lang).then((r) => {
                     self.listItems = r.nearbyActivities;
                 }, (e) => {
                 });

@@ -14,7 +14,7 @@
                     <StackLayout row="1" class="timeframe" orientation="horizontal" v-if="item.start_time !== undefined">
                         <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
                         <StackLayout orientation="horizontal">
-                            <Label text="Vandaag "></Label>
+                            <Label :text="$t('detail.today')"></Label>
                             <Label :text="'2000-01-01 '+item.start_time | moment('HH:mm')"></Label>
                             <Label text=" - "></Label>
                             <Label :text="'2000-01-01 '+item.end_time | moment('HH:mm')"></Label>
@@ -28,27 +28,27 @@
                             </Stacklayout>
                             <StackLayout v-if="collapsed" col="0" row="0" class="gradient"></StackLayout>
                             <StackLayout v-if="collapsed" col="0" row="1">
-                                <Label class="read-more-link" text="+ Lees meer" @tap="readMore"></Label>
+                                <Label class="read-more-link" :text="'+ '+$t('detail.readMore')" @tap="readMore"></Label>
                             </StackLayout>
                         </GridLayout>
                         <StackLayout class="info-block" v-if="item.location !== undefined">
                             <GridLayout rows="auto,auto,auto" columns="auto,auto">
-                                <Label row="0" col="0" class="left" text="Locatie:"></Label>
+                                <Label row="0" col="0" class="left" :text="$t('detail.location')+':'"></Label>
                                 <Label row="0" col="1" :text="item.location"></Label>
-                                <Label row="1" col="0" class="left" text="Leeftijd:"></Label>
+                                <Label row="1" col="0" class="left" :text="$t('detail.age')+':'"></Label>
                                 <Label row="1" col="1" :text="item.age"></Label>
-                                <Label row="2" col="0" class="left" text="Kosten:"></Label>
+                                <Label row="2" col="0" class="left" :text="$t('detail.price')+':'"></Label>
                                 <Label row="2" col="1" :text="item.price"></Label>
                             </GridLayout>
                         </StackLayout>
                         <StackLayout class="address-block" v-if="item.place !== undefined">
-                            <Label class="address-title" text="Voor meer informatie"></Label>
+                            <Label class="address-title" :text="$t('detail.forMoreInformation')"></Label>
                             <Label class="address-text" :text="item.street+' '+item.house_number"></Label>
                             <Label class="address-text" :text="item.postal_code+' '+item.place"></Label>
                         </StackLayout>
                         <GridLayout columns="auto,*" v-if="item.place !== undefined">
                             <StackLayout class="btn" col="0" @tap="toRoute">
-                                <Label text="Route" verticalAlignment="center"></Label>
+                                <Label :text="$t('detail.route')" verticalAlignment="center"></Label>
                             </StackLayout>
                         </GridLayout>
                     </StackLayout>
@@ -64,6 +64,7 @@
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import Fab from '../elements/Fab'
+    import LocalStorage from '../mixins/LocalStorage'
 
     export default {
         props: {
@@ -88,7 +89,8 @@
             }
         },
         mixins: [
-            Responsive
+            Responsive,
+            LocalStorage
         ],
         components: {
             Fab: Fab
@@ -101,19 +103,21 @@
             // Get the data
             loadData: function(){
                 let self = this;
+                let campingId = this.getNumberFromStore('campingId');
+                let lang = this.getStringFromStore('language');
                 if(this.type === 'camping_facility'){
-                    getJSON("https://www.campingcomfort.app/api/9665/camping-facilities/nl/"+self.id).then((r) => {
+                    getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-facilities/"+lang+"/"+self.id).then((r) => {
                         self.item = r.campingFacility;
                     }, (e) => {});
                 }
                 if(this.type === 'camping_activity'){
-                    getJSON("https://www.campingcomfort.app/api/9665/camping-activities/nl/"+self.id).then((r) => {
+                    getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-activities/"+lang+"/"+self.id).then((r) => {
                         self.item = r.campingActivity;
                         self.likable = true;
                     }, (e) => {});
                 }
                 if(this.type === 'nearby_activity'){
-                    getJSON("https://www.campingcomfort.app/api/9665/nearby-activities/nl/"+self.id).then((r) => {
+                    getJSON("https://www.campingcomfort.app/api/"+campingId+"/nearby-activities/"+lang+"/"+self.id).then((r) => {
                         self.item = r.nearbyActivity;
                     }, (e) => {});
                 }

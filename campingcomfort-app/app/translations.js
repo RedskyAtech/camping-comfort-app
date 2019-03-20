@@ -32,6 +32,15 @@ export function translations() {
                 myVacation: 'My vacation',
                 news: 'Latest news'
             },
+            detail: {
+                readMore: 'Read more',
+                forMoreInformation: 'For more information',
+                today: 'Vandaag',
+                location: 'Location',
+                age: 'Age',
+                price: 'Price',
+                route: 'Route'
+            }
         },
         nl: {
             languages: {
@@ -65,6 +74,15 @@ export function translations() {
                 myVacation: 'Mijn vakantie',
                 news: 'Laatste nieuws'
             },
+            detail: {
+                readMore: 'Lees meer',
+                forMoreInformation: 'Voor meer informatie',
+                today: 'Vandaag',
+                location: 'Locatie',
+                age: 'Leeftijd',
+                price: 'Kosten',
+                route: 'Route'
+            }
         }
     }
 }
