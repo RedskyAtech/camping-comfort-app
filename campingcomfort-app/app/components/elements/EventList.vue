@@ -41,7 +41,9 @@
             // Get the data
             loadData: function(){
                 let self = this;
-                getJSON("https://www.campingcomfort.app/api/9665/camping-activities/nl").then((r) => {
+                let campingId = this.getNumberFromStore('campingId');
+                let lang = this.getStringFromStore('language');
+                getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-activities/"+lang).then((r) => {
                     self.listItems = r.campingActivities;
                 }, (e) => {
                 });
