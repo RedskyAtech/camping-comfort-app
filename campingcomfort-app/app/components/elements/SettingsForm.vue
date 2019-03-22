@@ -94,7 +94,6 @@
                         message: this.$t('errors.offline.message'),
                         okButtonText: this.$t('errors.offline.buttonText')
                     }).then(() => {
-
                     });
                 }
             },

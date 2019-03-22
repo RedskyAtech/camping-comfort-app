@@ -38,7 +38,7 @@ export function translations() {
             detail: {
                 readMore: 'Read more',
                 forMoreInformation: 'For more information',
-                today: 'Vandaag',
+                today: 'Today',
                 location: 'Location',
                 age: 'Age',
                 price: 'Price',

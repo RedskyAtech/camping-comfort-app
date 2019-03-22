@@ -5,7 +5,7 @@
                 <GridLayout rows="auto,auto,auto">
                     <GridLayout row="0" class="hero-grid">
                         <Image row="0" :src="item.image" class="hero-image"></Image>
-                        <CardView row="0" horizontalAlignment="right" verticalAlignment="bottom" class="cardStyle like" radius="30" v-if="likable">
+                        <CardView row="0" horizontalAlignment="right" verticalAlignment="bottom" class="cardStyle like" radius="30" v-if="isLikable">
                             <GridLayout rows="*" columns="*">
                                 <Label row="0" col="0" class="like-icon fa" verticalAlignment="center">{{ 'fa-heart' | fonticon }}</Label>
                             </GridLayout>
@@ -64,6 +64,7 @@
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import Fab from '../elements/Fab'
+    import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
 
     export default {
@@ -90,7 +91,8 @@
         },
         mixins: [
             Responsive,
-            LocalStorage
+            LocalStorage,
+            Connection
         ],
         components: {
             Fab: Fab
@@ -105,21 +107,103 @@
                 let self = this;
                 let campingId = this.getNumberFromStore('campingId');
                 let lang = this.getStringFromStore('language');
-                if(this.type === 'camping_facility'){
-                    getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-facilities/"+lang+"/"+self.id).then((r) => {
-                        self.item = r.campingFacility;
-                    }, (e) => {});
+                if(this.type === 'camping_facility') {
+                    if(self.hasInternetConnection()) {
+                        getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-facilities/"+lang+"/"+self.id).then((r) => {
+                            if(r.campingFacility) {
+                                self.item = r.campingFacility;
+                                self.storeObject('campingFacility_'+self.id, self.item);
+                            }
+                            else {
+                                self.item = {};
+                                self.removeKeyFromStore('campingFacility_'+self.id);
+                            }
+                        }, (e) => {});
+                    }
+                    else {
+                        if(self.keyExistsInStore('campingFacility_'+self.id)){
+                            self.item = self.getObjectFromStore('campingFacility_'+self.id);
+                        }
+                        else {
+                            self.item = {};
+
+                            setTimeout(function(){
+                                alert({
+                                    title: self.$t('errors.offline.title'),
+                                    message: self.$t('errors.offline.message'),
+                                    okButtonText: self.$t('errors.offline.buttonText')
+                                }).then(() => {
+                                });
+                            }, 500);
+                        }
+                    }
                 }
-                if(this.type === 'camping_activity'){
-                    getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-activities/"+lang+"/"+self.id).then((r) => {
-                        self.item = r.campingActivity;
-                        self.likable = true;
-                    }, (e) => {});
+                if(this.type === 'camping_activity') {
+                    if(self.hasInternetConnection()) {
+                        getJSON("https://www.campingcomfort.app/api/" + campingId + "/camping-activities/" + lang + "/" + self.id).then((r) => {
+                            if(r.campingActivity) {
+                                self.item = r.campingActivity;
+                                self.isLikable = true;
+                                self.storeObject('campingActivity_'+self.id, self.item);
+                                self.storeBoolean('isLikable_'+self.id, true);
+                            }
+                            else {
+                                self.item = {};
+                                self.removeKeyFromStore('campingActivity_'+self.id);
+                                self.removeKeyFromStore('isLikable_'+self.id);
+                            }
+                        }, (e) => {
+                        });
+                    }
+                    else {
+                        if(self.keyExistsInStore('campingActivity_'+self.id)){
+                            self.item = self.getObjectFromStore('campingActivity_'+self.id);
+                        }
+                        else {
+                            self.item = {};
+
+                            setTimeout(function(){
+                                alert({
+                                    title: self.$t('errors.offline.title'),
+                                    message: self.$t('errors.offline.message'),
+                                    okButtonText: self.$t('errors.offline.buttonText')
+                                }).then(() => {
+                                });
+                            }, 500);
+                        }
+                    }
                 }
-                if(this.type === 'nearby_activity'){
-                    getJSON("https://www.campingcomfort.app/api/"+campingId+"/nearby-activities/"+lang+"/"+self.id).then((r) => {
-                        self.item = r.nearbyActivity;
-                    }, (e) => {});
+                if(this.type === 'nearby_activity') {
+                    if(self.hasInternetConnection()) {
+                        getJSON("https://www.campingcomfort.app/api/" + campingId + "/nearby-activities/" + lang + "/" + self.id).then((r) => {
+                            if(r.nearbyActivity) {
+                                self.item = r.nearbyActivity;
+                                self.storeObject('nearbyActivity_'+self.id, self.item);
+                            }
+                            else {
+                                self.item = {};
+                                self.removeKeyFromStore('nearbyActivity_'+self.id);
+                            }
+                        }, (e) => {
+                        });
+                    }
+                    else {
+                        if(self.keyExistsInStore('nearbyActivity_'+self.id)){
+                            self.item = self.getObjectFromStore('nearbyActivity_'+self.id);
+                        }
+                        else {
+                            self.item = {};
+
+                            setTimeout(function(){
+                                alert({
+                                    title: self.$t('errors.offline.title'),
+                                    message: self.$t('errors.offline.message'),
+                                    okButtonText: self.$t('errors.offline.buttonText')
+                                }).then(() => {
+                                });
+                            }, 500);
+                        }
+                    }
                 }
             },
             like: function(){

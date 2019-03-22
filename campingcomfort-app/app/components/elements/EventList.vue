@@ -80,9 +80,8 @@
                                 message: self.$t('errors.offline.message'),
                                 okButtonText: self.$t('errors.offline.buttonText')
                             }).then(() => {
-                                exit();
                             });
-                        }, 1500);
+                        }, 500);
                     }
                 }
             },
