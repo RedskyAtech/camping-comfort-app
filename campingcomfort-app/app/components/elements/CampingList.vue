@@ -160,14 +160,41 @@
                 });
             },
             toDetail: function(id){
-                EventBus.$emit('navigate', {
-                    tab: 2,
-                    page: 'detail',
-                    props: {
-                        type: 'camping_facility',
-                        id: id
+                let self = this;
+                if(self.hasInternetConnection()){
+                    navigate(id);
+                }
+                else {
+                    if(self.keyExistsInStore('campingFacility_'+id)){
+                        navigate(id);
                     }
-                });
+                    else {
+                        setTimeout(function(){
+                            alert({
+                                title: self.$t('errors.offline.title'),
+                                message: self.$t('errors.offline.message'),
+                                okButtonText: self.$t('errors.offline.buttonText')
+                            }).then(() => {
+                            });
+                        }, 500);
+                    }
+                }
+
+                /**
+                 * Emit a navigate event
+                 *
+                 * @param id
+                 */
+                function navigate(id){
+                    EventBus.$emit('navigate', {
+                        tab: 4,
+                        page: 'detail',
+                        props: {
+                            type: 'camping_facility',
+                            id: id
+                        }
+                    });
+                }
             }
         }
     }
