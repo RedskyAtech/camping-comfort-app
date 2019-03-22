@@ -7,7 +7,7 @@
                 connectionType: ''
             }
         },
-        mounted: function(){
+        created: function(){
 
             // Get the connection type
             const myConnectionType = getConnectionType();

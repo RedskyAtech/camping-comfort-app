@@ -19,10 +19,12 @@
 <script>
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
+    import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
 
     export default {
         mixins: [
+            Connection,
             LocalStorage
         ],
         data() {
@@ -40,10 +42,38 @@
                 let self = this;
                 let campingId = this.getNumberFromStore('campingId');
                 let lang = this.getStringFromStore('language');
-                getJSON("https://www.campingcomfort.app/api/"+campingId+"/nearby-activities/"+lang).then((r) => {
-                    self.listItems = r.nearbyActivities;
-                }, (e) => {
-                });
+
+                if(self.hasInternetConnection()) {
+                    getJSON("https://www.campingcomfort.app/api/" + campingId + "/nearby-activities/" + lang).then((r) => {
+                        if(r.nearbyActivities){
+                            self.listItems = r.nearbyActivities;
+                            self.storeObject('nearbyActivities', self.listItems);
+                        }
+                        else {
+                            self.listItems = [];
+                            self.removeKeyFromStore('nearbyActivities');
+                        }
+                    }, (e) => {
+                    });
+                }
+                else {
+                    if(self.keyExistsInStore('nearbyActivities')){
+                        self.listItems = self.getObjectFromStore('nearbyActivities');
+                    }
+                    else {
+                        self.listItems = [];
+
+                        setTimeout(function(){
+                            alert({
+                                title: self.$t('errors.offline.title'),
+                                message: self.$t('errors.offline.message'),
+                                okButtonText: self.$t('errors.offline.buttonText')
+                            }).then(() => {
+                                exit();
+                            });
+                        }, 1500);
+                    }
+                }
             },
 
             // Remove the grey highlight on tapping a ListView item

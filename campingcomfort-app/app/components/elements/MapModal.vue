@@ -46,8 +46,6 @@
                         // Assign the data
                         if(result.appContent.plan){
                             self.plan = result.appContent.plan;
-
-                            // Store the data
                             self.storeString('plan', self.plan);
                         }
 

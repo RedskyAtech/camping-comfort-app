@@ -70,7 +70,7 @@
                 let campingId = this.getNumberFromStore('campingId');
                 let lang = this.getStringFromStore('language');
                 if(this.hasInternetConnection()){
-                    http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
+                    getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign and store the map
                         if(result.appContent.plan){
@@ -86,7 +86,22 @@
                     });
                 }
                 else {
-                    self.plan = self.getStringFromStore('plan');
+                    if(self.keyExistsInStore('plan')){
+                        self.plan = self.getStringFromStore('plan');
+                    }
+                    else {
+                        self.plan = '';
+
+                        setTimeout(function(){
+                            alert({
+                                title: self.$t('errors.offline.title'),
+                                message: self.$t('errors.offline.message'),
+                                okButtonText: self.$t('errors.offline.buttonText')
+                            }).then(() => {
+                                exit();
+                            });
+                        }, 1500);
+                    }
                 }
             },
 
@@ -95,10 +110,38 @@
                 let self = this;
                 let campingId = this.getNumberFromStore('campingId');
                 let lang = this.getStringFromStore('language');
-                getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-facilities/"+lang).then((r) => {
-                    self.listItems = r.campingFacilities;
-                }, (e) => {
-                });
+
+                if(this.hasInternetConnection()) {
+                    getJSON("https://www.campingcomfort.app/api/" + campingId + "/camping-facilities/" + lang).then((r) => {
+                        if(r.campingFacilities){
+                            self.listItems = r.campingFacilities;
+                            self.storeObject('campingFacilities', self.listItems);
+                        }
+                        else {
+                            self.listItems = [];
+                            self.removeKeyFromStore('campingFacilities');
+                        }
+                    }, (e) => {
+                    });
+                }
+                else {
+                    if(self.keyExistsInStore('campingFacilities')){
+                        self.listItems = self.getObjectFromStore('campingFacilities');
+                    }
+                    else {
+                        self.listItems = [];
+
+                        setTimeout(function(){
+                            alert({
+                                title: self.$t('errors.offline.title'),
+                                message: self.$t('errors.offline.message'),
+                                okButtonText: self.$t('errors.offline.buttonText')
+                            }).then(() => {
+                                exit();
+                            });
+                        }, 1500);
+                    }
+                }
             },
 
             // Remove the grey highlight on tapping a ListView item

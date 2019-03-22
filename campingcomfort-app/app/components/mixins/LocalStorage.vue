@@ -23,7 +23,26 @@
                 return value;
             },
 
-            // Get a string value
+            // Store an object or array
+            storeObject: function(key, value){
+                appSettings.setString(key, JSON.stringify(value));
+            },
+
+            // Get an object, optionally provide a default value
+            // Returns undefined if the object does not exist
+            // Make sure the default value is JSON.stringify()d!
+            getObjectFromStore: function(key, defaultValue){
+                let value;
+                if(defaultValue !== undefined) {
+                    value = JSON.parse(appSettings.getString(key, defaultValue));
+                }
+                else {
+                    value = JSON.parse(appSettings.getString(key));
+                }
+                return value;
+            },
+
+            // Store a string value
             storeString: function(key, value){
                 appSettings.setString(key, value);
             },

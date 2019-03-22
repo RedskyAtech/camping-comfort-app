@@ -26,6 +26,8 @@
 <script>
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
+    import Connection from '../mixins/Connection'
+    import LocalStorage from '../mixins/LocalStorage'
 
     export default {
         data() {
@@ -33,8 +35,16 @@
                 listItems: []
             }
         },
+        mixins: [
+            Connection,
+            LocalStorage
+        ],
         created: function(){
-            this.loadData();
+            let self = this;
+            self.loadData();
+            EventBus.$on('reInit', function(){
+                self.loadData();
+            });
         },
         methods: {
 
@@ -43,10 +53,38 @@
                 let self = this;
                 let campingId = this.getNumberFromStore('campingId');
                 let lang = this.getStringFromStore('language');
-                getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-activities/"+lang).then((r) => {
-                    self.listItems = r.campingActivities;
-                }, (e) => {
-                });
+
+                if(self.hasInternetConnection()){
+                    getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-activities/"+lang).then((r) => {
+                        if(r.campingActivities){
+                            self.listItems = r.campingActivities;
+                            self.storeObject('campingActivities', self.listItems);
+                        }
+                        else {
+                            self.listItems = [];
+                            self.removeKeyFromStore('campingActivities');
+                        }
+                    }, (e) => {
+                    });
+                }
+                else {
+                    if(self.keyExistsInStore('campingActivities')){
+                        self.listItems = self.getObjectFromStore('campingActivities');
+                    }
+                    else {
+                        self.listItems = [];
+
+                        setTimeout(function(){
+                            alert({
+                                title: self.$t('errors.offline.title'),
+                                message: self.$t('errors.offline.message'),
+                                okButtonText: self.$t('errors.offline.buttonText')
+                            }).then(() => {
+                                exit();
+                            });
+                        }, 1500);
+                    }
+                }
             },
 
             // Remove the grey highlight on tapping a ListView item
