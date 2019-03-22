@@ -51,7 +51,9 @@ export function translations() {
                 title: 'On the camping'
             },
             nearby: {
-                title: 'Nearby activities'
+                title: 'Nearby activities',
+                toDo: 'To do',
+                dinnerAndDrinks: 'Dinner & Drinks',
             },
             reception: {
                 title: 'Reception'
@@ -100,6 +102,20 @@ export function translations() {
                 age: 'Leeftijd',
                 price: 'Kosten',
                 route: 'Route'
+            },
+            comingSoon: {
+                comingSoon: 'Binnenkort'
+            },
+            camping: {
+                title: 'Op de camping'
+            },
+            nearby: {
+                title: 'In de buurt',
+                toDo: 'Te doen',
+                dinnerAndDrinks: 'Eten & Drinken',
+            },
+            reception: {
+                title: 'Receptie'
             }
         }
     }

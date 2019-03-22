@@ -8,10 +8,10 @@
                 <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>
                 <StackLayout col="0" class="tabs-container" orientation="horizontal">
                     <StackLayout class="tab" @tap="activateTab(1)" :class="[{'active': activeTab === 1}]">
-                        <Label class="tab-label" text="Te doen"></Label>
+                        <Label class="tab-label" :text="$t('nearby.toDo')"></Label>
                     </StackLayout>
                     <StackLayout class="tab" @tap="activateTab(2)" :class="[{'active': activeTab === 2}]">
-                        <Label class="tab-label" text="Eten & Drinken"></Label>
+                        <Label class="tab-label" :text="$t('nearby.dinnerAndDrinks')"></Label>
                     </StackLayout>
                 </StackLayout>
             </GridLayout>
