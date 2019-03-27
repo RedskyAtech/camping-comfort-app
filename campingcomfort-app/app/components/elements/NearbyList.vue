@@ -4,8 +4,8 @@
             <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="75" columns="75,*">
                     <WebImage col="0" :src="item.image"></WebImage>
-                    <StackLayout col="1" orientation="horizontal">
-                        <StackLayout class="item-label" verticalAlignment="center">
+                    <StackLayout col="1" orientation="horizontal" class="item-label">
+                        <StackLayout verticalAlignment="center">
                             <Label class="item-title" :text="item.title"></Label>
                             <Label class="item-subtitle" :text="item.subtitle"></Label>
                         </StackLayout>

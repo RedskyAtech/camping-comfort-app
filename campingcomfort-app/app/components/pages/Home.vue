@@ -47,11 +47,7 @@
                                 <ScrollView row="1">
                                     <GridLayout rows="*" columns="*" height="100%">
                                         <EventList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]"></EventList>
-                                        <StackLayout row="0" col="0" class="tab-content" :class="[{'active': activeTab === 2}]">
-                                            <StackLayout class="temp-tab-content">
-                                                <Label :text="$t('comingSoon.comingSoon')"></Label>
-                                            </StackLayout>
-                                        </StackLayout>
+                                        <NewsItemList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 2}]"></NewsItemList>
                                     </GridLayout>
                                 </ScrollView>
                             </GridLayout>
@@ -70,6 +66,7 @@
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
     import EventList from '../elements/EventList'
+    import NewsItemList from '../elements/NewsItemList'
 
     export default {
         data() {
@@ -86,7 +83,8 @@
             LocalStorage
         ],
         components: {
-            'EventList': EventList
+            'EventList': EventList,
+            'NewsItemList': NewsItemList
         },
         mounted: function(){
             let self = this;

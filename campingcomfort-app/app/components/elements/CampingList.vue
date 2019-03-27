@@ -14,8 +14,8 @@
                 <CardView class="cardStyle" radius="10" @tap="toDetail(item.id)">
                     <GridLayout rows="75" columns="75,*">
                         <WebImage col="0" :src="item.image"></WebImage>
-                        <StackLayout col="1" orientation="horizontal">
-                            <StackLayout class="event-label" verticalAlignment="center">
+                        <StackLayout col="1" orientation="horizontal" class="event-label">
+                            <StackLayout verticalAlignment="center">
                                 <Label class="event-title" :text="item.title"></Label>
                             </StackLayout>
                         </StackLayout>
@@ -27,8 +27,8 @@
             <CardView class="cardStyle" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="75" columns="75,*">
                     <WebImage col="0" :src="item.image" stretch="aspectFill"></WebImage>
-                    <StackLayout col="1" orientation="horizontal">
-                        <StackLayout class="event-label" verticalAlignment="center">
+                    <StackLayout col="1" orientation="horizontal" class="event-label">
+                        <StackLayout verticalAlignment="center">
                             <Label class="event-title" :text="item.title"></Label>
                         </StackLayout>
                     </StackLayout>

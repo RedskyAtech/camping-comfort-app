@@ -2,7 +2,8 @@ export function translations() {
     return {
         en: {
             formatting: {
-                time: 'h.mm a'
+                time: 'h.mm a',
+                date: 'YYYY-MM-DD'
             },
             languages: {
                 en: 'English',
@@ -61,7 +62,8 @@ export function translations() {
         },
         nl: {
             formatting: {
-                time: 'HH:mm'
+                time: 'HH:mm',
+                date: 'DD-MM-YYYY'
             },
             languages: {
                 en: 'Engels',

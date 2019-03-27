@@ -20,8 +20,12 @@
                             <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
                         </StackLayout>
                     </StackLayout>
+                    <StackLayout row="1" class="timeframe" orientation="horizontal" v-if="item.date !== undefined">
+                        <Label class="clock fa">{{ 'fa-calendar-alt' | fonticon }}</Label>
+                        <Label :text="item.date+' 00:00:00' | moment($t('formatting.date'))"></Label>
+                    </StackLayout>
                     <StackLayout row="2" class="content">
-                        <Label class="title" :text="item.title"></Label>
+                        <Label class="title" :text="item.title" textWrap="true"></Label>
                         <GridLayout columns="*" :rows="textHeight">
                             <Stacklayout col="0" row="0">
                                 <Label class="text" textWrap="true" :text="item.text"></Label>
@@ -98,6 +102,9 @@
             Fab: Fab
         },
         created: function(){
+            if(this.type === 'camping_facility' || this.type === 'news_item'){
+                this.collapsed = false;
+            }
             this.loadData();
         },
         methods: {
@@ -107,6 +114,47 @@
                 let self = this;
                 let campingId = this.getNumberFromStore('campingId');
                 let lang = this.getStringFromStore('language');
+                if(this.type === 'news_item') {
+                    if(self.hasInternetConnection()) {
+
+                        // Show the cached version first to prevent flickering
+                        if(self.keyExistsInStore('newsItem_'+self.id)) {
+                            self.item = self.getObjectFromStore('newsItem_'+self.id);
+                        }
+
+                        // Get the live data
+                        getJSON("https://www.campingcomfort.app/api/"+campingId+"/news-items/"+lang+"/"+self.id).then((r) => {
+                            if(r.newsItem) {
+                                self.item = r.newsItem;
+                                self.storeObject('newsItem_'+self.id, self.item);
+                            }
+                            else {
+                                self.item = {};
+                                self.removeKeyFromStore('newsItem_'+self.id);
+                            }
+                        }, (e) => {
+                            self.item = {};
+                            self.removeKeyFromStore('newsItem_'+self.id);
+                        });
+                    }
+                    else {
+                        if(self.keyExistsInStore('newsItem_'+self.id)){
+                            self.item = self.getObjectFromStore('newsItem_'+self.id);
+                        }
+                        else {
+                            self.item = {};
+
+                            setTimeout(function(){
+                                alert({
+                                    title: self.$t('errors.offline.title'),
+                                    message: self.$t('errors.offline.message'),
+                                    okButtonText: self.$t('errors.offline.buttonText')
+                                }).then(() => {
+                                });
+                            }, 500);
+                        }
+                    }
+                }
                 if(this.type === 'camping_facility') {
                     if(self.hasInternetConnection()) {
 

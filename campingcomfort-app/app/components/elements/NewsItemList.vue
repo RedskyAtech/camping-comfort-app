@@ -1,20 +1,18 @@
 <template>
-    <ListView for="item in listItems" @itemLoading="onItemLoading" rowHeight="75">
+    <ListView for="item in listItems" @itemLoading="onItemLoading" rowHeight="100">
         <v-template>
             <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
-                <GridLayout rows="75" columns="75,*">
+                <GridLayout rows="auto" columns="75,*">
                     <WebImage col="0" :src="item.image"></WebImage>
                     <StackLayout col="1" orientation="horizontal" class="event-label">
                         <StackLayout verticalAlignment="center">
+                            <Label class="event-title" :text="item.title" textWrap="true"></Label>
                             <StackLayout class="event-time" orientation="horizontal">
-                                <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
+                                <Label class="clock fa">{{ 'fa-calendar-alt' | fonticon }}</Label>
                                 <StackLayout orientation="horizontal">
-                                    <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
-                                    <Label text=" - "></Label>
-                                    <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
+                                    <Label :text="item.date+' 00:00:00' | moment($t('formatting.date'))"></Label>
                                 </StackLayout>
                             </StackLayout>
-                            <Label class="event-title" :text="item.title"></Label>
                         </StackLayout>
                     </StackLayout>
                 </GridLayout>
@@ -57,28 +55,28 @@
                 if(self.hasInternetConnection()){
 
                     // Show the cached version first to prevent flickering
-                    if(self.keyExistsInStore('campingActivities')) {
-                        self.listItems = self.getObjectFromStore('campingActivities');
+                    if(self.keyExistsInStore('newsItems')) {
+                        self.listItems = self.getObjectFromStore('newsItems');
                     }
 
                     // Get the live data
-                    getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-activities/"+lang).then((r) => {
-                        if(r.campingActivities){
-                            self.listItems = r.campingActivities;
-                            self.storeObject('campingActivities', self.listItems);
+                    getJSON("https://www.campingcomfort.app/api/"+campingId+"/news-items/"+lang).then((r) => {
+                        if(r.newsItems){
+                            self.listItems = r.newsItems;
+                            self.storeObject('newsItems', self.listItems);
                         }
                         else {
                             self.listItems = [];
-                            self.removeKeyFromStore('campingActivities');
+                            self.removeKeyFromStore('newsItems');
                         }
                     }, (e) => {
                         self.listItems = [];
-                        self.removeKeyFromStore('campingActivities');
+                        self.removeKeyFromStore('newsItems');
                     });
                 }
                 else {
-                    if(self.keyExistsInStore('campingActivities')){
-                        self.listItems = self.getObjectFromStore('campingActivities');
+                    if(self.keyExistsInStore('newsItems')){
+                        self.listItems = self.getObjectFromStore('newsItems');
                     }
                     else {
                         self.listItems = [];
@@ -108,7 +106,7 @@
                     navigate(id);
                 }
                 else {
-                    if(self.keyExistsInStore('campingActivity_'+id)){
+                    if(self.keyExistsInStore('newsItem_'+id)){
                         navigate(id);
                     }
                     else {
@@ -130,10 +128,10 @@
                  */
                 function navigate(id){
                     EventBus.$emit('navigate', {
-                        tab: 4,
+                        tab: 1,
                         page: 'detail',
                         props: {
-                            type: 'camping_activity',
+                            type: 'news_item',
                             id: id
                         }
                     });
@@ -167,7 +165,7 @@
 
     /* Label */
     .event-label {
-        padding: 0 12.5;
+        padding: 15 12.5;
     }
     .event-time {
         font-size: 12;
@@ -177,6 +175,6 @@
         padding-right: 5;
     }
     .event-title {
-        padding-top: 5;
+        padding-bottom: 5;
     }
 </style>
