@@ -13,7 +13,7 @@ TNSFontIcon.paths = {
 TNSFontIcon.loadCss();
 Vue.filter('fonticon', fonticon);
 
-// Image Zoom
+// Image Swipe
 Vue.registerElement('ImageSwipe', () => require('nativescript-image-swipe').ImageSwipe);
 
 // Card View
