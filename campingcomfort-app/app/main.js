@@ -13,11 +13,14 @@ TNSFontIcon.paths = {
 TNSFontIcon.loadCss();
 Vue.filter('fonticon', fonticon);
 
+// Image Zoom
+Vue.registerElement('ImageZoom', () => require('nativescript-image-zoom').ImageZoom);
+
 // Card View
 Vue.registerElement('CardView', () => require('nativescript-cardview').CardView);
 
 // Gradient
-Vue.registerElement('gradient', () => require('nativescript-gradient').Gradient)
+Vue.registerElement('gradient', () => require('nativescript-gradient').Gradient);
 
 // Moment
 Vue.use(require('vue-moment'));

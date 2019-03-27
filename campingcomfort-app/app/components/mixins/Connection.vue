@@ -49,6 +49,7 @@
                         break;
                 }
             });
+            startMonitoring();
 
             // Explicitly stop the monitoring
 //            stopMonitoring();

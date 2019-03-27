@@ -4,7 +4,7 @@
             <ScrollView row="0" col="0">
                 <GridLayout rows="auto,auto,auto">
                     <GridLayout row="0" class="hero-grid">
-                        <Image row="0" :src="item.image" class="hero-image"></Image>
+                        <Image row="0" :src="item.image" class="hero-image" loadMode="async" :useCache="true"></Image>
                         <CardView row="0" horizontalAlignment="right" verticalAlignment="bottom" class="cardStyle like" radius="30" v-if="isLikable">
                             <GridLayout rows="*" columns="*">
                                 <Label row="0" col="0" class="like-icon fa" verticalAlignment="center">{{ 'fa-heart' | fonticon }}</Label>
@@ -109,6 +109,13 @@
                 let lang = this.getStringFromStore('language');
                 if(this.type === 'camping_facility') {
                     if(self.hasInternetConnection()) {
+
+                        // Show the cached version first to prevent flickering
+                        if(self.keyExistsInStore('campingFacility_'+self.id)) {
+                            self.item = self.getObjectFromStore('campingFacility_'+self.id);
+                        }
+
+                        // Get the live data
                         getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-facilities/"+lang+"/"+self.id).then((r) => {
                             if(r.campingFacility) {
                                 self.item = r.campingFacility;
@@ -118,7 +125,10 @@
                                 self.item = {};
                                 self.removeKeyFromStore('campingFacility_'+self.id);
                             }
-                        }, (e) => {});
+                        }, (e) => {
+                            self.item = {};
+                            self.removeKeyFromStore('campingFacility_'+self.id);
+                        });
                     }
                     else {
                         if(self.keyExistsInStore('campingFacility_'+self.id)){
@@ -140,6 +150,13 @@
                 }
                 if(this.type === 'camping_activity') {
                     if(self.hasInternetConnection()) {
+
+                        // Show the cached version first to prevent flickering
+                        if(self.keyExistsInStore('campingActivity_'+self.id)) {
+                            self.item = self.getObjectFromStore('campingActivity_'+self.id);
+                        }
+
+                        // Get the live data
                         getJSON("https://www.campingcomfort.app/api/" + campingId + "/camping-activities/" + lang + "/" + self.id).then((r) => {
                             if(r.campingActivity) {
                                 self.item = r.campingActivity;
@@ -153,6 +170,9 @@
                                 self.removeKeyFromStore('isLikable_'+self.id);
                             }
                         }, (e) => {
+                            self.item = {};
+                            self.removeKeyFromStore('campingActivity_'+self.id);
+                            self.removeKeyFromStore('isLikable_'+self.id);
                         });
                     }
                     else {
@@ -175,6 +195,13 @@
                 }
                 if(this.type === 'nearby_activity') {
                     if(self.hasInternetConnection()) {
+
+                        // Show the cached version first to prevent flickering
+                        if(self.keyExistsInStore('nearbyActivity_'+self.id)) {
+                            self.item = self.getObjectFromStore('nearbyActivity_'+self.id);
+                        }
+
+                        // Get the live data
                         getJSON("https://www.campingcomfort.app/api/" + campingId + "/nearby-activities/" + lang + "/" + self.id).then((r) => {
                             if(r.nearbyActivity) {
                                 self.item = r.nearbyActivity;
@@ -185,6 +212,8 @@
                                 self.removeKeyFromStore('nearbyActivity_'+self.id);
                             }
                         }, (e) => {
+                            self.item = {};
+                            self.removeKeyFromStore('nearbyActivity_'+self.id);
                         });
                     }
                     else {
@@ -214,12 +243,24 @@
             },
             toRoute: function(){
                 let self = this;
-                EventBus.$emit('openModal', {
-                    page: 'route',
-                    props: {
-                        url: 'https://www.google.com/maps/dir//'+encodeURI(self.item.street)+'+'+encodeURI(self.item.house_number)+','+encodeURI(self.item.postal_code)+'+'+encodeURI(self.item.place)
-                    }
-                });
+                if(self.hasInternetConnection()) {
+                    EventBus.$emit('openModal', {
+                        page: 'route',
+                        props: {
+                            url: 'https://www.google.com/maps/dir//' + encodeURI(self.item.street) + '+' + encodeURI(self.item.house_number) + ',' + encodeURI(self.item.postal_code) + '+' + encodeURI(self.item.place)
+                        }
+                    });
+                }
+                else {
+                    setTimeout(function(){
+                        alert({
+                            title: self.$t('errors.offline.title'),
+                            message: self.$t('errors.offline.message'),
+                            okButtonText: self.$t('errors.offline.buttonText')
+                        }).then(() => {
+                        });
+                    }, 500);
+                }
             },
             goBack: function(){
                 EventBus.$emit('back');

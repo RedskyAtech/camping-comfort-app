@@ -1,7 +1,9 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="*" columns="*">
-            <WebView row="0" col="0" :src="plan"></WebView>
+            <ScrollView row="0" col="0">
+                <ImageZoom :src="plan" maxZoom="5" minZoom="1" width="100%" height="100%" strech="AspectFill"></ImageZoom>
+            </ScrollView>
             <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></Fab>
         </GridLayout>
     </Page>
@@ -41,6 +43,13 @@
                 let campingId = this.getNumberFromStore('campingId');
                 let lang = this.getStringFromStore('language');
                 if(this.hasInternetConnection()){
+
+                    // Show the cached version first to prevent flickering
+                    if(self.keyExistsInStore('plan')) {
+                        self.plan = self.getStringFromStore('plan');
+                    }
+
+                    // Get the live data
                     http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign the data
@@ -56,7 +65,8 @@
                         }
 
                     }, error => {
-                        console.log(error);
+                        self.plan = '';
+                        self.removeKeyFromStore('plan');
                     });
                 }
                 else {

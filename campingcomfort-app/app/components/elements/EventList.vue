@@ -1,9 +1,9 @@
 <template>
-    <ListView for="item in listItems" @itemLoading="onItemLoading">
+    <ListView for="item in listItems" @itemLoading="onItemLoading" rowHeight="75">
         <v-template>
             <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="75" columns="75,*">
-                    <Image col="0" :src="item.image"></Image>
+                    <Image col="0" :src="item.image" loadMode="async" :useCache="true"></Image>
                     <StackLayout col="1" orientation="horizontal">
                         <StackLayout class="event-label" verticalAlignment="center">
                             <StackLayout class="event-time" orientation="horizontal">
@@ -55,6 +55,13 @@
                 let lang = this.getStringFromStore('language');
 
                 if(self.hasInternetConnection()){
+
+                    // Show the cached version first to prevent flickering
+                    if(self.keyExistsInStore('campingActivities')) {
+                        self.listItems = self.getObjectFromStore('campingActivities');
+                    }
+
+                    // Get the live data
                     getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-activities/"+lang).then((r) => {
                         if(r.campingActivities){
                             self.listItems = r.campingActivities;
@@ -65,6 +72,8 @@
                             self.removeKeyFromStore('campingActivities');
                         }
                     }, (e) => {
+                        self.listItems = [];
+                        self.removeKeyFromStore('campingActivities');
                     });
                 }
                 else {

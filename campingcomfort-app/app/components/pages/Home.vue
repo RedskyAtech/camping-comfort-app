@@ -5,7 +5,7 @@
                 <StackLayout height="100%">
                     <GridLayout rows="auto,*">
                         <GridLayout rows="*" row="0" class="hero-grid">
-                            <Image row="0" :src="heroImage" class="hero-image"></Image>
+                            <Image row="0" :src="heroImage" class="hero-image" loadMode="async" :useCache="true"></Image>
                             <StackLayout row="0" class="hero-overlay"></StackLayout>
                             <GridLayout row="0" rows="auto,*" columns="*,auto">
                                 <StackLayout row="0" col="0">
@@ -108,16 +108,24 @@
                 let campingId = this.getNumberFromStore('campingId');
                 let lang = this.getStringFromStore('language');
                 if(this.hasInternetConnection()){
+
+                    // Show the cached version first to prevent flickering
+                    if(self.keyExistsInStore('home_heroImage')) {
+                        self.heroImage = self.getStringFromStore('home_heroImage', '~/assets/images/placeholder.jpg');
+                    }
+
+                    // Get the live data
                     http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign and store the hero image
                         if(result.appContent.home_image){
                             self.heroImage = result.appContent.home_image;
+                            self.storeString('home_heroImage', self.heroImage);
                         }
                         else {
                             self.heroImage = '~/assets/images/placeholder.jpg';
+                            self.removeKeyFromStore('home_heroImage');
                         }
-                        self.storeString('home_heroImage', self.heroImage);
 
                         // Assign and store the map
                         if(result.appContent.plan){
@@ -129,7 +137,10 @@
                             self.removeKeyFromStore('plan');
                         }
                     }, error => {
-                        console.log(error);
+                        self.heroImage = '~/assets/images/placeholder.jpg';
+                        self.removeKeyFromStore('home_heroImage');
+                        self.plan = '';
+                        self.removeKeyFromStore('plan');
                     });
                 }
                 else {
@@ -152,9 +163,22 @@
                 });
             },
             toMap: function(){
-                EventBus.$emit('openModal', {
-                    page: 'map'
-                });
+                let self = this;
+                if(self.hasInternetConnection()) {
+                    EventBus.$emit('openModal', {
+                        page: 'map'
+                    });
+                }
+                else {
+                    setTimeout(function(){
+                        alert({
+                            title: self.$t('errors.offline.title'),
+                            message: self.$t('errors.offline.message'),
+                            okButtonText: self.$t('errors.offline.buttonText')
+                        }).then(() => {
+                        });
+                    }, 500);
+                }
             },
             toSettings: function(){
                 EventBus.$emit('openModal', {

@@ -1,5 +1,5 @@
 <template>
-    <ListView for="item in listItems" @itemLoading="onItemLoading">
+    <ListView for="item in listItems" @itemLoading="onItemLoading" rowHeight="75">
         <v-template if="$index === 0">
             <StackLayout>
                 <StackLayout class="btn-container">
@@ -11,10 +11,9 @@
                         <Label class="btn-text" :text="$t('home.map')" verticalAlignment="center"></Label>
                     </StackLayout>
                 </StackLayout>
-
                 <CardView class="cardStyle" radius="10" @tap="toDetail(item.id)">
                     <GridLayout rows="75" columns="75,*">
-                        <Image col="0" :src="item.image"></Image>
+                        <Image col="0" :src="item.image" loadMode="async" :useCache="true"></Image>
                         <StackLayout col="1" orientation="horizontal">
                             <StackLayout class="event-label" verticalAlignment="center">
                                 <Label class="event-title" :text="item.title"></Label>
@@ -27,7 +26,7 @@
         <v-template else>
             <CardView class="cardStyle" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="75" columns="75,*">
-                    <Image col="0" :src="item.image"></Image>
+                    <Image col="0" :src="item.image" loadMode="async" :useCache="true"></Image>
                     <StackLayout col="1" orientation="horizontal">
                         <StackLayout class="event-label" verticalAlignment="center">
                             <Label class="event-title" :text="item.title"></Label>
@@ -70,6 +69,13 @@
                 let campingId = this.getNumberFromStore('campingId');
                 let lang = this.getStringFromStore('language');
                 if(this.hasInternetConnection()){
+
+                    // Show the cached version first to prevent flickering
+                    if(self.keyExistsInStore('plan')) {
+                        self.plan = self.getStringFromStore('plan');
+                    }
+
+                    // Get the live data
                     getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign and store the map
@@ -82,7 +88,8 @@
                             self.removeKeyFromStore('plan');
                         }
                     }, error => {
-                        console.log(error);
+                        self.plan = '';
+                        self.removeKeyFromStore('plan');
                     });
                 }
                 else {
@@ -111,6 +118,13 @@
                 let lang = this.getStringFromStore('language');
 
                 if(this.hasInternetConnection()) {
+
+                    // Show the cached version first to prevent flickering
+                    if(self.keyExistsInStore('campingFacilities')) {
+                        self.listItems = self.getObjectFromStore('campingFacilities');
+                    }
+
+                    // Get the live data
                     getJSON("https://www.campingcomfort.app/api/" + campingId + "/camping-facilities/" + lang).then((r) => {
                         if(r.campingFacilities){
                             self.listItems = r.campingFacilities;
@@ -121,6 +135,8 @@
                             self.removeKeyFromStore('campingFacilities');
                         }
                     }, (e) => {
+                        self.listItems = [];
+                        self.removeKeyFromStore('campingFacilities');
                     });
                 }
                 else {
@@ -155,9 +171,22 @@
                 });
             },
             toMap: function(){
-                EventBus.$emit('openModal', {
-                    page: 'map'
-                });
+                let self = this;
+                if(self.hasInternetConnection()) {
+                    EventBus.$emit('openModal', {
+                        page: 'map'
+                    });
+                }
+                else {
+                    setTimeout(function(){
+                        alert({
+                            title: self.$t('errors.offline.title'),
+                            message: self.$t('errors.offline.message'),
+                            okButtonText: self.$t('errors.offline.buttonText')
+                        }).then(() => {
+                        });
+                    }, 500);
+                }
             },
             toDetail: function(id){
                 let self = this;
@@ -187,7 +216,7 @@
                  */
                 function navigate(id){
                     EventBus.$emit('navigate', {
-                        tab: 4,
+                        tab: 2,
                         page: 'detail',
                         props: {
                             type: 'camping_facility',

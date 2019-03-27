@@ -1,9 +1,9 @@
 <template>
-    <ListView for="item in listItems" @itemLoading="onItemLoading">
+    <ListView for="item in listItems" @itemLoading="onItemLoading" rowHeight="75">
         <v-template>
             <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="75" columns="75,*">
-                    <Image col="0" :src="item.image"></Image>
+                    <Image col="0" :src="item.image" loadMode="async" :useCache="true"></Image>
                     <StackLayout col="1" orientation="horizontal">
                         <StackLayout class="item-label" verticalAlignment="center">
                             <Label class="item-title" :text="item.title"></Label>
@@ -44,6 +44,13 @@
                 let lang = this.getStringFromStore('language');
 
                 if(self.hasInternetConnection()) {
+
+                    // Show the cached version first to prevent flickering
+                    if(self.keyExistsInStore('nearbyActivities')) {
+                        self.listItems = self.getObjectFromStore('nearbyActivities');
+                    }
+
+                    // Get the live data
                     getJSON("https://www.campingcomfort.app/api/" + campingId + "/nearby-activities/" + lang).then((r) => {
                         if(r.nearbyActivities){
                             self.listItems = r.nearbyActivities;
@@ -54,6 +61,8 @@
                             self.removeKeyFromStore('nearbyActivities');
                         }
                     }, (e) => {
+                        self.listItems = [];
+                        self.removeKeyFromStore('nearbyActivities');
                     });
                 }
                 else {
@@ -110,7 +119,7 @@
                  */
                 function navigate(id){
                     EventBus.$emit('navigate', {
-                        tab: 4,
+                        tab: 3,
                         page: 'detail',
                         props: {
                             type: 'nearby_activity',
