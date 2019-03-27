@@ -5,9 +5,10 @@
                 <GridLayout rows="auto,auto,auto">
                     <GridLayout row="0" class="hero-grid">
                         <WebImage row="0" :src="item.image" class="hero-image"></WebImage>
-                        <CardView row="0" horizontalAlignment="right" verticalAlignment="bottom" class="cardStyle like" radius="30" v-if="isLikable">
+                        <CardView row="0" horizontalAlignment="right" verticalAlignment="bottom" class="cardStyle like" radius="30" v-if="isLikable" @tap="toggleLike()">
                             <GridLayout rows="*" columns="*">
-                                <Label row="0" col="0" class="like-icon fa" verticalAlignment="center">{{ 'fa-heart' | fonticon }}</Label>
+                                <Label row="0" col="0" class="like-icon fa" verticalAlignment="center" v-if="!liked">{{ 'fa-heart' | fonticon }}</Label>
+                                <Label row="0" col="0" class="like-icon fas" verticalAlignment="center" v-if="liked">{{ 'fa-heart' | fonticon }}</Label>
                             </GridLayout>
                         </CardView>
                     </GridLayout>
@@ -70,6 +71,7 @@
     import Fab from '../elements/Fab'
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
+    import Likes from '../mixins/Likes'
 
     export default {
         props: {
@@ -80,7 +82,8 @@
             return {
                 collapsed: true,
                 item: {},
-                isLikable: false
+                isLikable: false,
+                liked: false
             }
         },
         computed: {
@@ -96,7 +99,8 @@
         mixins: [
             Responsive,
             LocalStorage,
-            Connection
+            Connection,
+            Likes
         ],
         components: {
             Fab: Fab
@@ -204,6 +208,9 @@
                             self.item = self.getObjectFromStore('campingActivity_'+self.id);
                         }
 
+                        // Set liked from storage
+                        self.liked = self.isLiked();
+
                         // Get the live data
                         getJSON("https://www.campingcomfort.app/api/" + campingId + "/camping-activities/" + lang + "/" + self.id).then((r) => {
                             if(r.campingActivity) {
@@ -282,9 +289,6 @@
                         }
                     }
                 }
-            },
-            like: function(){
-
             },
             readMore: function(){
                 this.collapsed = false;

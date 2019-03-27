@@ -43,7 +43,8 @@ export function translations() {
                 location: 'Location',
                 age: 'Age',
                 price: 'Price',
-                route: 'Route'
+                route: 'Route',
+                liked: 'The event is added to "My vacation"'
             },
             comingSoon: {
                 comingSoon: 'Coming soon'
@@ -103,7 +104,8 @@ export function translations() {
                 location: 'Locatie',
                 age: 'Leeftijd',
                 price: 'Kosten',
-                route: 'Route'
+                route: 'Route',
+                liked: 'De activiteit is toegevoegd aan "Mijn vakantie"'
             },
             comingSoon: {
                 comingSoon: 'Binnenkort'
