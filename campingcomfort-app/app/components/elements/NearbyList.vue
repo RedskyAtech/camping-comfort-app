@@ -3,7 +3,7 @@
         <v-template>
             <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="75" columns="75,*">
-                    <Image col="0" :src="item.image" loadMode="async" :useCache="true"></Image>
+                    <WebImage col="0" :src="item.image"></WebImage>
                     <StackLayout col="1" orientation="horizontal">
                         <StackLayout class="item-label" verticalAlignment="center">
                             <Label class="item-title" :text="item.title"></Label>
@@ -148,7 +148,7 @@
     }
 
     /* Image */
-    .cardStyle Image {
+    .cardStyle WebImage {
         border-top-left-radius: 10;
         border-bottom-left-radius: 10;
         stretch: aspectFill;

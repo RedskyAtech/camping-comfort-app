@@ -4,7 +4,7 @@
             <ScrollView row="0" col="0">
                 <GridLayout rows="auto,auto,auto">
                     <GridLayout row="0" class="hero-grid">
-                        <Image row="0" :src="item.image" class="hero-image" loadMode="async" :useCache="true"></Image>
+                        <WebImage row="0" :src="item.image" class="hero-image"></WebImage>
                         <CardView row="0" horizontalAlignment="right" verticalAlignment="bottom" class="cardStyle like" radius="30" v-if="isLikable">
                             <GridLayout rows="*" columns="*">
                                 <Label row="0" col="0" class="like-icon fa" verticalAlignment="center">{{ 'fa-heart' | fonticon }}</Label>

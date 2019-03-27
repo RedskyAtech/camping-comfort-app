@@ -5,7 +5,7 @@
                 <StackLayout height="100%">
                     <GridLayout rows="auto,*">
                         <GridLayout rows="*" row="0" class="hero-grid">
-                            <Image row="0" :src="heroImage" class="hero-image" loadMode="async" :useCache="true"></Image>
+                            <WebImage row="0" :src="heroImage" class="hero-image"></WebImage>
                             <StackLayout row="0" class="hero-overlay"></StackLayout>
                             <GridLayout row="0" rows="auto,*" columns="*,auto">
                                 <StackLayout row="0" col="0">

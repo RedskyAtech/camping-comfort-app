@@ -13,7 +13,7 @@
                 </StackLayout>
                 <CardView class="cardStyle" radius="10" @tap="toDetail(item.id)">
                     <GridLayout rows="75" columns="75,*">
-                        <Image col="0" :src="item.image" loadMode="async" :useCache="true"></Image>
+                        <WebImage col="0" :src="item.image"></WebImage>
                         <StackLayout col="1" orientation="horizontal">
                             <StackLayout class="event-label" verticalAlignment="center">
                                 <Label class="event-title" :text="item.title"></Label>
@@ -26,7 +26,7 @@
         <v-template else>
             <CardView class="cardStyle" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="75" columns="75,*">
-                    <Image col="0" :src="item.image" loadMode="async" :useCache="true"></Image>
+                    <WebImage col="0" :src="item.image" stretch="aspectFill"></WebImage>
                     <StackLayout col="1" orientation="horizontal">
                         <StackLayout class="event-label" verticalAlignment="center">
                             <Label class="event-title" :text="item.title"></Label>
@@ -254,7 +254,7 @@
     }
 
     /* Image */
-    .cardStyle Image {
+    .cardStyle WebImage {
         border-top-left-radius: 10;
         border-bottom-left-radius: 10;
         stretch: aspectFill;
