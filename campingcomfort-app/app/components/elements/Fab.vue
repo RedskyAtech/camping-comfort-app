@@ -15,7 +15,6 @@
     .fab {
         width: 60;
         height: 60;
-        color: #103029;
         margin-right: 18.75;
         margin-bottom: 18.75;
         text-align: center;

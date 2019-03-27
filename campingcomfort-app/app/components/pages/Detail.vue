@@ -2,15 +2,9 @@
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="*" columns="*">
             <ScrollView row="0" col="0">
-                <GridLayout rows="auto,auto,auto">
+                <GridLayout rows="auto,auto,auto" columns="*">
                     <GridLayout row="0" class="hero-grid">
                         <WebImage row="0" :src="item.image" class="hero-image"></WebImage>
-                        <CardView row="0" horizontalAlignment="right" verticalAlignment="bottom" class="cardStyle like" radius="30" v-if="isLikable" @tap="toggleLike()">
-                            <GridLayout rows="*" columns="*">
-                                <Label row="0" col="0" class="like-icon fa" verticalAlignment="center" v-if="!liked">{{ 'fa-heart' | fonticon }}</Label>
-                                <Label row="0" col="0" class="like-icon fas" verticalAlignment="center" v-if="liked">{{ 'fa-heart' | fonticon }}</Label>
-                            </GridLayout>
-                        </CardView>
                     </GridLayout>
                     <StackLayout row="1" class="timeframe" orientation="horizontal" v-if="item.start_time !== undefined">
                         <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
@@ -57,6 +51,14 @@
                             </StackLayout>
                         </GridLayout>
                     </StackLayout>
+                    <AbsoluteLayout class="like-container" row="0" columns="*" rowSpan="2" horizontalAlignment="right">
+                        <CardView row="0" col="0" horizontalAlignment="right" verticalAlignment="top" class="cardStyle like" radius="30" v-if="isLikable" @tap="toggleLike">
+                            <GridLayout rows="*" columns="*">
+                                <Label row="0" col="0" class="like-icon fa" verticalAlignment="center" v-if="!liked">{{ 'fa-heart' | fonticon }}</Label>
+                                <Label row="0" col="0" class="like-icon fas" verticalAlignment="center" v-if="liked">{{ 'fa-heart' | fonticon }}</Label>
+                            </GridLayout>
+                        </CardView>
+                    </AbsoluteLayout>
                 </GridLayout>
             </ScrollView>
             <Fab><Label @tap="goBack" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></Fab>
@@ -323,6 +325,37 @@
 
 <style scoped>
 
+    /* Like */
+    Page.xs .like-container {
+        padding-top: 180;
+    }
+    Page.sm .like-container {
+        padding-top: 202;
+    }
+    Page.md .like-container {
+        padding-top: 240;
+    }
+    Page.lg .like-container {
+        padding-top: 402;
+    }
+    Page.xl .like-container {
+        padding-top: 546;
+    }
+    .like-container {
+        z-index: 10;
+        padding: 0 18.75 0 0;
+    }
+    .like {
+        background: #fff;
+        width: 60;
+        height: 60;
+    }
+    .like-icon {
+        color: #f010be;
+        text-align: center;
+        font-size: 20;
+    }
+
     /* Hero */
     Page.xs .hero-grid {
         height: 210;
@@ -338,9 +371,6 @@
     }
     Page.xl .hero-grid {
         height: 576;
-    }
-    .like {
-        z-index: 10;
     }
     .hero-image {
         stretch: aspectFill;
@@ -367,17 +397,6 @@
     .text {
         opacity: 0.5;
         line-height: 5;
-    }
-    .like {
-        background: #fff;
-        width: 60;
-        height: 60;
-        margin: 0 18.75 -30 0;
-    }
-    .like-icon {
-        color: #f010be;
-        text-align: center;
-        font-size: 20;
     }
 
     /* Read more */
