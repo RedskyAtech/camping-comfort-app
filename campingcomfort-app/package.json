@@ -19,6 +19,7 @@
     "nativescript-exit": "^1.0.1",
     "nativescript-fonticon": "^2.0.0",
     "nativescript-gradient": "^2.0.1",
+    "nativescript-image-swipe": "^4.0.1",
     "nativescript-image-zoom": "^3.0.3",
     "nativescript-ui-autocomplete": "^3.11.0",
     "nativescript-vue": "^2.2.0",

@@ -14,7 +14,7 @@ TNSFontIcon.loadCss();
 Vue.filter('fonticon', fonticon);
 
 // Image Zoom
-Vue.registerElement('ImageZoom', () => require('nativescript-image-zoom').ImageZoom);
+Vue.registerElement('ImageSwipe', () => require('nativescript-image-swipe').ImageSwipe);
 
 // Card View
 Vue.registerElement('CardView', () => require('nativescript-cardview').CardView);

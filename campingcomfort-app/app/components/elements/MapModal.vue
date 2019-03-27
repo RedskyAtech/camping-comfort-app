@@ -2,7 +2,7 @@
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="*" columns="*">
             <ScrollView row="0" col="0">
-                <ImageZoom :src="plan" maxZoom="5" minZoom="1" width="100%" height="100%" strech="AspectFill"></ImageZoom>
+                <ImageSwipe v-if="items.length > 0" :items="items" imageUrlProperty="url" :pageNumber="page" pageChanged="swiped"></ImageSwipe>
             </ScrollView>
             <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></Fab>
         </GridLayout>
@@ -29,7 +29,15 @@
         },
         data: function(){
             return {
-                plan: ''
+                plan: '',
+                page: 1
+            }
+        },
+        computed: {
+            items: function(){
+                return [{
+                    url: this.plan
+                }]
             }
         },
         mounted: function(){
@@ -91,6 +99,9 @@
             },
             closeModal: function(){
                 this.$modal.close();
+            },
+            swiped: function(){
+
             }
         }
     }
@@ -98,6 +109,9 @@
 
 <style scoped>
     Page {
+        background: #fff;
+    }
+    ImageSwipe {
         background: #fff;
     }
 </style>

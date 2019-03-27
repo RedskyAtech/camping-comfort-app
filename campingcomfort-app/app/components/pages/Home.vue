@@ -170,14 +170,21 @@
                     });
                 }
                 else {
-                    setTimeout(function(){
-                        alert({
-                            title: self.$t('errors.offline.title'),
-                            message: self.$t('errors.offline.message'),
-                            okButtonText: self.$t('errors.offline.buttonText')
-                        }).then(() => {
+                    if(self.keyExistsInStore('plan')){
+                        EventBus.$emit('openModal', {
+                            page: 'map'
                         });
-                    }, 500);
+                    }
+                    else {
+                        setTimeout(function(){
+                            alert({
+                                title: self.$t('errors.offline.title'),
+                                message: self.$t('errors.offline.message'),
+                                okButtonText: self.$t('errors.offline.buttonText')
+                            }).then(() => {
+                            });
+                        }, 500);
+                    }
                 }
             },
             toSettings: function(){

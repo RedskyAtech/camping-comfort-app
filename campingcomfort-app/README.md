@@ -1,4 +1,4 @@
-# CampingComfort App
+# Camping Comfort
 
 > CampingComfort
 
@@ -17,3 +17,11 @@ tns debug <platform> --bundle
 # Build, watch for changes and run the application
 tns run <platform> --bundle
 ```
+
+## Core overrides
+
+To switch the background of the image swiper to white:
+
+Comment the following line in /node_modules/nativescript-image-swipe/image-swipe.ios.js
+
+`view.backgroundColor = utils.ios.getter(UIColor, UIColor.blackColor);`
