@@ -46,7 +46,7 @@
                                 </GridLayout>
                                 <ScrollView row="1">
                                     <GridLayout rows="*" columns="*" height="100%">
-                                        <EventList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]"></EventList>
+                                        <MyVacationList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]"></MyVacationList>
                                         <NewsItemList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 2}]"></NewsItemList>
                                     </GridLayout>
                                 </ScrollView>
@@ -65,7 +65,7 @@
     import Responsive from '../mixins/Responsive'
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
-    import EventList from '../elements/EventList'
+    import MyVacationList from '../elements/MyVacationList'
     import NewsItemList from '../elements/NewsItemList'
 
     export default {
@@ -83,7 +83,7 @@
             LocalStorage
         ],
         components: {
-            'EventList': EventList,
+            'MyVacationList': MyVacationList,
             'NewsItemList': NewsItemList
         },
         mounted: function(){
@@ -110,6 +110,9 @@
                     // Show the cached version first to prevent flickering
                     if(self.keyExistsInStore('home_heroImage')) {
                         self.heroImage = self.getStringFromStore('home_heroImage', '~/assets/images/placeholder.jpg');
+                    }
+                    if(self.keyExistsInStore('plan')) {
+                        self.plan = self.getStringFromStore('plan');
                     }
 
                     // Get the live data

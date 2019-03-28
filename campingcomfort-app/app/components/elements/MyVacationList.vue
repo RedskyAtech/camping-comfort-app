@@ -1,26 +1,35 @@
 <template>
-    <ListView for="item in listItems" @itemLoading="onItemLoading" rowHeight="75">
-        <v-template>
-            <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
-                <GridLayout rows="75" columns="75,*">
-                    <WebImage col="0" :src="item.image"></WebImage>
-                    <StackLayout col="1" orientation="horizontal" class="event-label">
-                        <StackLayout verticalAlignment="center">
-                            <StackLayout class="event-time" orientation="horizontal">
-                                <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
-                                <StackLayout orientation="horizontal">
-                                    <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
-                                    <Label text=" - "></Label>
-                                    <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
+    <GridLayout rows="*">
+        <ListView row="0" for="item in filteredListItems" @itemLoading="onItemLoading" rowHeight="75">
+            <v-template>
+                <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
+                    <GridLayout rows="75" columns="75,*">
+                        <WebImage col="0" :src="item.image"></WebImage>
+                        <StackLayout col="1" orientation="horizontal" class="event-label">
+                            <StackLayout verticalAlignment="center">
+                                <StackLayout class="event-time" orientation="horizontal">
+                                    <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
+                                    <StackLayout orientation="horizontal">
+                                        <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
+                                        <Label text=" - "></Label>
+                                        <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
+                                    </StackLayout>
                                 </StackLayout>
+                                <Label class="event-title" :text="item.title"></Label>
                             </StackLayout>
-                            <Label class="event-title" :text="item.title"></Label>
                         </StackLayout>
-                    </StackLayout>
-                </GridLayout>
-            </CardView>
-        </v-template>
-    </ListView>
+                    </GridLayout>
+                </CardView>
+            </v-template>
+        </ListView>
+        <StackLayout row="0" v-if="filteredListItems.length === 0" horizontalAlignment="center" verticalAlignment="center">
+            <StackLayout class="placeholder">
+                <Label class="icon fa">{{ 'fa-heart' | fonticon }}</Label>
+                <Label class="title" :text="$t('myVacation.emptyTitle')" textWrap="true"></Label>
+                <Label class="text" :text="$t('myVacation.emptyText')" textWrap="true"></Label>
+            </StackLayout>
+        </StackLayout>
+    </GridLayout>
 </template>
 
 <script>
@@ -28,6 +37,7 @@
     import EventBus from '../helpers/EventBus'
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
+    import Likes from '../mixins/Likes'
 
     export default {
         data() {
@@ -35,9 +45,27 @@
                 listItems: []
             }
         },
+        computed: {
+
+            /**
+             * Filter the activities to only the liked activities
+             */
+            filteredListItems: function() {
+                let likes = this.getLikes();
+                let filteredListItems = [];
+                this.listItems.forEach(function (listItem) {
+                    if(likes[listItem.id]){
+                        filteredListItems.push(listItem);
+                    }
+                });
+
+                return filteredListItems;
+            }
+        },
         mixins: [
             Connection,
-            LocalStorage
+            LocalStorage,
+            Likes
         ],
         created: function(){
             let self = this;
@@ -130,7 +158,7 @@
                  */
                 function navigate(id){
                     EventBus.$emit('navigate', {
-                        tab: 4,
+                        tab: 1,
                         page: 'detail',
                         props: {
                             type: 'camping_activity',
@@ -178,5 +206,26 @@
     }
     .event-title {
         padding-top: 5;
+    }
+
+    /* Placeholder */
+    .placeholder {
+        text-align: center;
+        color: #8e8e8e;
+        padding: 0 37.5;
+    }
+    .placeholder .icon {
+        width: 60;
+        height: 60;
+        border-radius: 30;
+        border-width:2;
+        border-color: #8e8e8e;
+        font-size: 20;
+    }
+    .placeholder .title {
+        font-size: 18;
+        font-weight: 700;
+        padding-top: 12.5;
+        padding-bottom: 5;
     }
 </style>

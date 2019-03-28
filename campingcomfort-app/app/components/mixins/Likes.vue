@@ -1,4 +1,5 @@
 <script>
+    import EventBus from '../helpers/EventBus'
     import LocalStorage from '../mixins/LocalStorage'
     import { Toasty } from 'nativescript-toasty'
 
@@ -28,9 +29,9 @@
              * @param id
              * @returns {*}
              */
-            isLiked() {
+            isLiked(id) {
                 let likes = this.getLikes();
-                return likes[this.id];
+                return likes[id];
             },
 
             /**
@@ -38,14 +39,17 @@
              *
              * @param id
              */
-            like() {
+            like(id) {
                 let likes = this.getLikes();
-                if(!likes[this.id]){
-                    likes[this.id] = true;
+                if(!likes[id]){
+                    likes[id] = true;
                     this.storeObject('likes', likes);
 
                     // Set the component data key if available
                     this.liked = true;
+
+                    // Force updating the data in other components
+                    EventBus.$emit('reInit');
 
                     // Show a toast
                     new Toasty(this.$t('detail.liked')).show();
@@ -57,24 +61,32 @@
              *
              * @param id
              */
-            unlike() {
+            unlike(id) {
                 let likes = this.getLikes();
-                if(likes[this.id]){
-                    delete likes[this.id];
+                if(likes[id]){
+                    delete likes[id];
                     this.storeObject('likes', likes);
 
                     // Set the component data key if available
                     this.liked = false;
+
+                    // Force updating the data in other components
+                    EventBus.$emit('reInit');
                 }
             },
 
-            toggleLike() {
+            /**
+             * Toggle a like
+             *
+             * @param id
+             */
+            toggleLike(id) {
                 let likes = this.getLikes();
-                if(likes[this.id]){
-                    this.unlike(this.id);
+                if(likes[id]){
+                    this.unlike(id);
                 }
                 else {
-                    this.like(this.id);
+                    this.like(id);
                 }
             }
         }

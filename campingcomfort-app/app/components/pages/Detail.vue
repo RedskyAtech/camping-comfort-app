@@ -52,7 +52,7 @@
                         </GridLayout>
                     </StackLayout>
                     <AbsoluteLayout class="like-container" row="0" columns="*" rowSpan="2" horizontalAlignment="right">
-                        <CardView row="0" col="0" horizontalAlignment="right" verticalAlignment="top" class="cardStyle like" radius="30" v-if="isLikable" @tap="toggleLike">
+                        <CardView row="0" col="0" horizontalAlignment="right" verticalAlignment="top" class="cardStyle like" radius="30" v-if="isLikable" @tap="toggleLike(id)">
                             <GridLayout rows="*" columns="*">
                                 <Label row="0" col="0" class="like-icon fa" verticalAlignment="center" v-if="!liked">{{ 'fa-heart' | fonticon }}</Label>
                                 <Label row="0" col="0" class="like-icon fas" verticalAlignment="center" v-if="liked">{{ 'fa-heart' | fonticon }}</Label>
@@ -211,7 +211,7 @@
                         }
 
                         // Set liked from storage
-                        self.liked = self.isLiked();
+                        self.liked = self.isLiked(self.id);
 
                         // Get the live data
                         getJSON("https://www.campingcomfort.app/api/" + campingId + "/camping-activities/" + lang + "/" + self.id).then((r) => {

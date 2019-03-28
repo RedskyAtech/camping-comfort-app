@@ -57,6 +57,10 @@ export function translations() {
                 toDo: 'To do',
                 dinnerAndDrinks: 'Dinner & Drinks',
             },
+            myVacation: {
+                emptyTitle: 'No activities today',
+                emptyText: 'Create your own activity calendar by pressing the heart-button near an activity.'
+            },
             reception: {
                 title: 'Reception'
             }
@@ -117,6 +121,10 @@ export function translations() {
                 title: 'In de buurt',
                 toDo: 'Te doen',
                 dinnerAndDrinks: 'Eten & Drinken',
+            },
+            myVacation: {
+                emptyTitle: 'Geen activiteiten vandaag',
+                emptyText: 'Stel jouw eigen activiteitenprogramma samen door op het hartje bij een activiteit te drukken.'
             },
             reception: {
                 title: 'Receptie'
