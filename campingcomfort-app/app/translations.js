@@ -57,6 +57,9 @@ export function translations() {
                 toDo: 'To do',
                 dinnerAndDrinks: 'Dinner & Drinks',
             },
+            activities: {
+                week: 'Week'
+            },
             myVacation: {
                 emptyTitle: 'No activities today',
                 emptyText: 'Create your own activity calendar by pressing the heart-button near an activity.'
@@ -121,6 +124,9 @@ export function translations() {
                 title: 'In de buurt',
                 toDo: 'Te doen',
                 dinnerAndDrinks: 'Eten & Drinken',
+            },
+            activities: {
+                week: 'Week'
             },
             myVacation: {
                 emptyTitle: 'Geen activiteiten vandaag',

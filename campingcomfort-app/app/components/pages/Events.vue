@@ -2,23 +2,23 @@
     <Page :class="pageClass" actionBarHidden="true">
         <GridLayout rows="auto,auto,*" columns="*">
             <StackLayout row="0" class="title-container">
-                <Label text="Week 13"></Label>
+                <Label :text="title"></Label>
             </StackLayout>
             <GridLayout row="1" rows="auto,auto" columns="*,*,*,*,*,*,*" class="week">
-                <GridLayout row="0" col="0" rows="30" columns="*" @tap="activateDay(1)" class="day" :class="[{'active': activeDay === 1}]"><Label text="Do" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="1" col="0" rows="30" columns="*" @tap="activateDay(1)" class="date" :class="[{'active': activeDay === 1}]"><Label text="7" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="0" col="1" rows="30" columns="*" @tap="activateDay(2)" class="day" :class="[{'active': activeDay === 2}]"><Label text="Vr" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="1" col="1" rows="30" columns="*" @tap="activateDay(2)" class="date" :class="[{'active': activeDay === 2}]"><Label text="8" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="0" col="2" rows="30" columns="*" @tap="activateDay(3)" class="day" :class="[{'active': activeDay === 3}]"><Label text="Za" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="1" col="2" rows="30" columns="*" @tap="activateDay(3)" class="date" :class="[{'active': activeDay === 3}]"><Label text="9" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="0" col="3" rows="30" columns="*" @tap="activateDay(4)" class="day" :class="[{'active': activeDay === 4}]"><Label text="Zo" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="1" col="3" rows="30" columns="*" @tap="activateDay(4)" class="date" :class="[{'active': activeDay === 4}]"><Label text="10" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="0" col="4" rows="30" columns="*" @tap="activateDay(5)" class="day" :class="[{'active': activeDay === 5}]"><Label text="Ma" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="1" col="4" rows="30" columns="*" @tap="activateDay(5)" class="date" :class="[{'active': activeDay === 5}]"><Label text="11" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="0" col="5" rows="30" columns="*" @tap="activateDay(6)" class="day" :class="[{'active': activeDay === 6}]"><Label text="Di" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="1" col="5" rows="30" columns="*" @tap="activateDay(6)" class="date" :class="[{'active': activeDay === 6}]"><Label text="12" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="0" col="6" rows="30" columns="*" @tap="activateDay(7)" class="day" :class="[{'active': activeDay === 7}]"><Label text="Wo" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
-                <GridLayout row="1" col="6" rows="30" columns="*" @tap="activateDay(7)" class="date" :class="[{'active': activeDay === 7}]"><Label text="13" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="0" rows="30" columns="*" @tap="activateDay(1)" class="day" :class="[{'active': activeDay === 1}]"><Label :text="startDate.format('dd')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="0" rows="30" columns="*" @tap="activateDay(1)" class="date" :class="[{'active': activeDay === 1}]"><Label :text="startDate.format('D')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="1" rows="30" columns="*" @tap="activateDay(2)" class="day" :class="[{'active': activeDay === 2}]"><Label :text="day2.format('dd')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="1" rows="30" columns="*" @tap="activateDay(2)" class="date" :class="[{'active': activeDay === 2}]"><Label :text="day2.format('D')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="2" rows="30" columns="*" @tap="activateDay(3)" class="day" :class="[{'active': activeDay === 3}]"><Label :text="day3.format('dd')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="2" rows="30" columns="*" @tap="activateDay(3)" class="date" :class="[{'active': activeDay === 3}]"><Label :text="day3.format('D')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="3" rows="30" columns="*" @tap="activateDay(4)" class="day" :class="[{'active': activeDay === 4}]"><Label :text="day4.format('dd')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="3" rows="30" columns="*" @tap="activateDay(4)" class="date" :class="[{'active': activeDay === 4}]"><Label :text="day4.format('D')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="4" rows="30" columns="*" @tap="activateDay(5)" class="day" :class="[{'active': activeDay === 5}]"><Label :text="day5.format('dd')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="4" rows="30" columns="*" @tap="activateDay(5)" class="date" :class="[{'active': activeDay === 5}]"><Label :text="day5.format('D')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="5" rows="30" columns="*" @tap="activateDay(6)" class="day" :class="[{'active': activeDay === 6}]"><Label :text="day6.format('dd')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="5" rows="30" columns="*" @tap="activateDay(6)" class="date" :class="[{'active': activeDay === 6}]"><Label :text="day6.format('D')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="0" col="6" rows="30" columns="*" @tap="activateDay(7)" class="day" :class="[{'active': activeDay === 7}]"><Label :text="day7.format('dd')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
+                <GridLayout row="1" col="6" rows="30" columns="*" @tap="activateDay(7)" class="date" :class="[{'active': activeDay === 7}]"><Label :text="day7.format('D')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
             </GridLayout>
             <EventList row="2"></EventList>
         </GridLayout>
@@ -28,22 +28,53 @@
 <script>
     import Responsive from '../mixins/Responsive'
     import EventList from '../elements/EventList'
+    import LocalStorage from '../mixins/LocalStorage'
+
 
     export default {
         data() {
             return {
                 activeDay: 1,
-                startDate: ''
+                startDate: '',
+                day2: '',
+                day3: '',
+                day4: '',
+                day5: '',
+                day6: '',
+                day7: ''
+            }
+        },
+        computed: {
+            title: function() {
+                return this.$t('activities.week')+' '+this.startDate.isoWeek()
             }
         },
         mixins: [
-            Responsive
+            Responsive,
+            LocalStorage
         ],
         components: {
             'EventList': EventList
         },
         created: function() {
             this.startDate = this.$moment();
+            this.day2 = this.$moment().add(1, 'days');
+            this.day3 = this.$moment().add(2, 'days');
+            this.day4 = this.$moment().add(3, 'days');
+            this.day5 = this.$moment().add(4, 'days');
+            this.day6 = this.$moment().add(5, 'days');
+            this.day7 = this.$moment().add(6, 'days');
+
+            // Set the locale
+            let lang = this.getStringFromStore('language');
+            this.startDate.locale(lang);
+            this.day2.locale(lang);
+            this.day3.locale(lang);
+            this.day4.locale(lang);
+            this.day5.locale(lang);
+            this.day6.locale(lang);
+            this.day7.locale(lang);
+            console.log(this.day7.locale());
         },
         methods: {
             activateDay(day){

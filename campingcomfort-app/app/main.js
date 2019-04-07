@@ -23,7 +23,14 @@ Vue.registerElement('CardView', () => require('nativescript-cardview').CardView)
 Vue.registerElement('gradient', () => require('nativescript-gradient').Gradient);
 
 // Moment
-Vue.use(require('vue-moment'));
+const moment = require('moment')
+require('moment/locale/en-gb');
+require('moment/locale/nl');
+require('moment/locale/fr');
+require('moment/locale/de');
+Vue.use(require('vue-moment'), {
+    moment
+});
 
 // Web Image Cache
 Vue.registerElement('WebImage', () => require('nativescript-web-image-cache').WebImage);
