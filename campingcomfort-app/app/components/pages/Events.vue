@@ -32,7 +32,8 @@
     export default {
         data() {
             return {
-                activeDay: 3
+                activeDay: 1,
+                startDate: ''
             }
         },
         mixins: [
@@ -40,6 +41,9 @@
         ],
         components: {
             'EventList': EventList
+        },
+        created: function() {
+            this.startDate = this.$moment();
         },
         methods: {
             activateDay(day){
