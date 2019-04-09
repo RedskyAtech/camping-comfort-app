@@ -22,13 +22,7 @@
                 </CardView>
             </v-template>
         </ListView>
-        <StackLayout row="0" v-if="filteredListItems.length === 0" horizontalAlignment="center" verticalAlignment="center">
-            <StackLayout class="placeholder">
-                <Label class="icon fa">{{ 'fa-heart' | fonticon }}</Label>
-                <Label class="title" :text="$t('myVacation.emptyTitle')" textWrap="true"></Label>
-                <Label class="text" :text="$t('myVacation.emptyText')" textWrap="true"></Label>
-            </StackLayout>
-        </StackLayout>
+        <ResultPlaceHolder row="0" v-if="filteredListItems.length === 0" iconLabelClass="fa" iconClass="fa-heart" :title="$t('myVacation.emptyTitle')" :text="$t('myVacation.emptyText')"></ResultPlaceHolder>
     </GridLayout>
 </template>
 
@@ -38,8 +32,12 @@
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
     import Likes from '../mixins/Likes'
+    import ResultPlaceHolder from '../elements/ResultPlaceHolder'
 
     export default {
+        components: {
+            ResultPlaceHolder
+        },
         data() {
             return {
                 listItems: []
@@ -206,26 +204,5 @@
     }
     .event-title {
         padding-top: 5;
-    }
-
-    /* Placeholder */
-    .placeholder {
-        text-align: center;
-        color: #8e8e8e;
-        padding: 0 37.5;
-    }
-    .placeholder .icon {
-        width: 60;
-        height: 60;
-        border-radius: 30;
-        border-width:2;
-        border-color: #8e8e8e;
-        font-size: 20;
-    }
-    .placeholder .title {
-        font-size: 18;
-        font-weight: 700;
-        padding-top: 12.5;
-        padding-bottom: 5;
     }
 </style>

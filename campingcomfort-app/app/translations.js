@@ -58,7 +58,9 @@ export function translations() {
                 dinnerAndDrinks: 'Dinner & Drinks',
             },
             activities: {
-                week: 'Week'
+                week: 'Week',
+                emptyTitle: 'No activities',
+                emptyText: ''
             },
             myVacation: {
                 emptyTitle: 'No activities today',
@@ -126,7 +128,9 @@ export function translations() {
                 dinnerAndDrinks: 'Eten & Drinken',
             },
             activities: {
-                week: 'Week'
+                week: 'Week',
+                emptyTitle: 'Geen activiteiten',
+                emptyText: ''
             },
             myVacation: {
                 emptyTitle: 'Geen activiteiten vandaag',
