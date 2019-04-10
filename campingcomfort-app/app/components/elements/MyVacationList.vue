@@ -88,7 +88,8 @@
                     }
 
                     // Get the live data
-                    getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-activities/"+lang).then((r) => {
+                    let url = "https://www.campingcomfort.app/api/"+campingId+"/camping-activities/1111-11-11/"+lang;
+                    getJSON(url).then((r) => {
                         if(r.campingActivities){
                             self.listItems = r.campingActivities;
                             self.storeObject('campingActivities', self.listItems);
