@@ -65,9 +65,6 @@
             Responsive,
             StatusBar
         ],
-        created: function() {
-            this.statusBar('hide');
-        },
         methods: {
             select: function(code){
 

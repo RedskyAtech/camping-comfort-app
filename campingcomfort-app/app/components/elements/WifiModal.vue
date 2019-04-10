@@ -2,7 +2,7 @@
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="*" columns="*">
             <Label text="Wifi" class="content" horizontalAlignment="center"></Label>
-            <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></Fab>
+            <Fab><GridLayout rows="*" columns="*" @tap="closeModal"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></GridLayout></Fab>
         </GridLayout>
     </Page>
 </template>
@@ -20,9 +20,6 @@
         ],
         components: {
             Fab: Fab
-        },
-        created: function() {
-            this.statusBar('hide');
         },
         methods: {
             closeModal: function(){

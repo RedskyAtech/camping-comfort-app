@@ -39,9 +39,6 @@
         components: {
             Fab: Fab
         },
-        created: function() {
-            this.statusBar('hide');
-        },
         methods: {
             goBack: function(){
                 EventBus.$emit('back');

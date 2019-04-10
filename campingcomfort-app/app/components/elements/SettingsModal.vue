@@ -22,9 +22,6 @@
             Fab: Fab,
             SettingsForm: SettingsForm
         },
-        created: function() {
-            this.statusBar('hide');
-        },
         methods: {
             afterSave() {
                 EventBus.$emit('reInit');

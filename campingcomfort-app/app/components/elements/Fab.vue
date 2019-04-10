@@ -1,13 +1,9 @@
 <template>
     <StackLayout v-if="bg === 'transparent'" horizontalAlignment="right" verticalAlignment="bottom" class="fab transparent">
-        <GridLayout rows="*" columns="*">
-            <slot></slot>
-        </GridLayout>
+        <slot></slot>
     </StackLayout>
     <CardView v-else horizontalAlignment="right" verticalAlignment="bottom" class="fab cardStyle" radius="30">
-        <GridLayout rows="*" columns="*">
-            <slot></slot>
-        </GridLayout>
+        <slot></slot>
     </CardView>
 </template>
 

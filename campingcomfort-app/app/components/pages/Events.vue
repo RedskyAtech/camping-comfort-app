@@ -64,10 +64,6 @@
             'EventList': EventList
         },
         created: function() {
-
-            // Hide the status bar
-            this.statusBar('hide');
-
             this.day1 = this.$moment();
             this.day2 = this.$moment().add(1, 'days');
             this.day3 = this.$moment().add(2, 'days');

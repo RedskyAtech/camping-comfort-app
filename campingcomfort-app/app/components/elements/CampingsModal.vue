@@ -54,9 +54,6 @@
                 }, delay);
             }
         },
-        created: function() {
-            this.statusBar('hide');
-        },
         mounted: function(){
             this.search('a');
             console.log('search');

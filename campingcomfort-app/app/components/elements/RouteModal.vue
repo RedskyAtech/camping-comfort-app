@@ -2,7 +2,7 @@
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="*" columns="*">
             <WebView row="0" col="0" :src="url"></WebView>
-            <Fab><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></Fab>
+            <Fab><GridLayout rows="*" columns="*" @tap="closeModal"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></GridLayout></Fab>
         </GridLayout>
     </Page>
 </template>
@@ -23,9 +23,6 @@
         },
         props: {
             url: ''
-        },
-        created: function() {
-            this.statusBar('hide');
         },
         methods: {
             closeModal: function(){

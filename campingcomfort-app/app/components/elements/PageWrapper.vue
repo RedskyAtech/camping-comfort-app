@@ -34,9 +34,6 @@
         ],
         props: {
             pageTitle: ''
-        },
-        created: function() {
-            this.statusBar('hide');
         }
     }
 </script>

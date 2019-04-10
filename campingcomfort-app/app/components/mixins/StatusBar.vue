@@ -12,6 +12,12 @@
                     win.clearFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 }
             }
+        },
+        created: function() {
+            this.statusBar('hide');
+        },
+        mounted: function() {
+            this.statusBar('hide');
         }
     }
 </script>

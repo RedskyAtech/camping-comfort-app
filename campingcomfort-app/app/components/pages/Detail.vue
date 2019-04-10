@@ -61,7 +61,7 @@
                     </AbsoluteLayout>
                 </GridLayout>
             </ScrollView>
-            <Fab><Label @tap="goBack" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></Fab>
+            <Fab><GridLayout rows="*" columns="*" @tap="goBack"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></GridLayout></Fab>
         </GridLayout>
     </Page>
 </template>
@@ -110,10 +110,6 @@
             Fab: Fab
         },
         created: function(){
-
-            // Hide the status bar
-            this.statusBar('hide');
-
             if(this.type === 'camping_facility' || this.type === 'news_item'){
                 this.collapsed = false;
             }

@@ -88,9 +88,6 @@
             'MyVacationList': MyVacationList,
             'NewsItemList': NewsItemList
         },
-        created: function() {
-            this.statusBar('hide');
-        },
         mounted: function(){
             let self = this;
             self.init();

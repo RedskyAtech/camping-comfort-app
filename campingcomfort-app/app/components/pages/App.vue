@@ -75,9 +75,6 @@
             WifiModal: WifiModal,
             RouteModal: RouteModal
         },
-        created: function() {
-            this.statusBar('hide');
-        },
         mounted: function(){
             let self = this;
 

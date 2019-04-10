@@ -43,9 +43,6 @@
         components: {
             'NearbyList': NearbyList
         },
-        created: function() {
-            this.statusBar('hide');
-        },
         methods: {
             activateTab: function(tab){
                 this.activeTab = tab;

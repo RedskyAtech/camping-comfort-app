@@ -20,9 +20,6 @@
             SettingsForm: SettingsForm,
             App: App
         },
-        created: function() {
-            this.statusBar('hide');
-        },
         methods: {
             afterSave() {
                 this.$navigateTo(App, {

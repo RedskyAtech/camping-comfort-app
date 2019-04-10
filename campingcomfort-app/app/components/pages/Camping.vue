@@ -25,9 +25,6 @@
         ],
         components: {
             'CampingList': CampingList
-        },
-        created: function() {
-            this.statusBar('hide');
         }
     }
 </script>
