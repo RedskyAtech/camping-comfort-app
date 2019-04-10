@@ -29,8 +29,6 @@
         border-width: 1;
     }
     .btn-icon {
-        width: 60;
-        height: 60;
     }
 </style>
 

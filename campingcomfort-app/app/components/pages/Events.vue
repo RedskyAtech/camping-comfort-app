@@ -1,5 +1,5 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="auto,auto,*" columns="*">
             <StackLayout row="0" class="title-container">
                 <Label :text="title"></Label>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
     import EventList from '../elements/EventList'
     import LocalStorage from '../mixins/LocalStorage'
@@ -56,12 +57,17 @@
         },
         mixins: [
             Responsive,
-            LocalStorage
+            LocalStorage,
+            StatusBar
         ],
         components: {
             'EventList': EventList
         },
         created: function() {
+
+            // Hide the status bar
+            this.statusBar('hide');
+
             this.day1 = this.$moment();
             this.day2 = this.$moment().add(1, 'days');
             this.day3 = this.$moment().add(2, 'days');

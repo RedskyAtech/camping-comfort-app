@@ -1,5 +1,5 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="auto,*" columns="*">
             <StackLayout row="0" class="title-container">
                 <Label :text="title"></Label>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import Fab from '../elements/Fab'
@@ -32,10 +33,14 @@
             }
         },
         mixins: [
-            Responsive
+            Responsive,
+            StatusBar
         ],
         components: {
             Fab: Fab
+        },
+        created: function() {
+            this.statusBar('hide');
         },
         methods: {
             goBack: function(){

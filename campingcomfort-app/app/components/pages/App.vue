@@ -1,5 +1,5 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="*, auto" columns="*">
             <StackLayout row="0" col="0">
                 <Frame id="mainContent">
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
     import EventBus from '../helpers/EventBus'
     import Splash from '../pages/Splash'
@@ -56,8 +57,27 @@
             }
         },
         mixins: [
-            Responsive
+            Responsive,
+            StatusBar
         ],
+        components: {
+
+            // Pages
+            Splash: Splash,
+            Home: Home,
+            Camping: Camping,
+            Nearby: Nearby,
+            Events: Events,
+            Detail: Detail,
+            ComingSoon: ComingSoon,
+            SettingsModal: SettingsModal,
+            MapModal: MapModal,
+            WifiModal: WifiModal,
+            RouteModal: RouteModal
+        },
+        created: function() {
+            this.statusBar('hide');
+        },
         mounted: function(){
             let self = this;
 
@@ -75,21 +95,6 @@
             EventBus.$on('back', function(){
                 self.back();
             });
-        },
-        components: {
-
-            // Pages
-            Splash: Splash,
-            Home: Home,
-            Camping: Camping,
-            Nearby: Nearby,
-            Events: Events,
-            Detail: Detail,
-            ComingSoon: ComingSoon,
-            SettingsModal: SettingsModal,
-            MapModal: MapModal,
-            WifiModal: WifiModal,
-            RouteModal: RouteModal
         },
         methods: {
             navigate: function(tab, page, switchTab=false, props={}){

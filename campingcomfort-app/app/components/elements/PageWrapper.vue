@@ -24,14 +24,19 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
 
     export default {
         mixins: [
-            Responsive
+            Responsive,
+            StatusBar
         ],
         props: {
             pageTitle: ''
+        },
+        created: function() {
+            this.statusBar('hide');
         }
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="auto,*" columns="*">
             <StackLayout row="0" class="title-container">
                 <GridLayout>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import LocalStorage from '../mixins/LocalStorage'
@@ -61,8 +62,12 @@
         },
         mixins: [
             LocalStorage,
-            Responsive
+            Responsive,
+            StatusBar
         ],
+        created: function() {
+            this.statusBar('hide');
+        },
         methods: {
             select: function(code){
 

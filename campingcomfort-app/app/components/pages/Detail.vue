@@ -1,5 +1,5 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="*" columns="*">
             <ScrollView row="0" col="0">
                 <GridLayout rows="auto,auto,auto" columns="*">
@@ -67,6 +67,7 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
@@ -102,12 +103,17 @@
             Responsive,
             LocalStorage,
             Connection,
-            Likes
+            Likes,
+            StatusBar
         ],
         components: {
             Fab: Fab
         },
         created: function(){
+
+            // Hide the status bar
+            this.statusBar('hide');
+
             if(this.type === 'camping_facility' || this.type === 'news_item'){
                 this.collapsed = false;
             }

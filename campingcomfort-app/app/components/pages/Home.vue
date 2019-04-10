@@ -5,7 +5,7 @@
                 <StackLayout height="100%">
                     <GridLayout rows="auto,*">
                         <GridLayout rows="*" row="0" class="hero-grid">
-                            <WebImage row="0" :src="heroImage" class="hero-image"></WebImage>
+                            <Image row="0" :src="heroImage" class="hero-image"></Image>
                             <StackLayout row="0" class="hero-overlay"></StackLayout>
                             <GridLayout row="0" rows="auto,*" columns="*,auto">
                                 <StackLayout row="0" col="0">
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import * as http from 'http'
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
@@ -80,11 +81,15 @@
         mixins: [
             Responsive,
             Connection,
-            LocalStorage
+            LocalStorage,
+            StatusBar
         ],
         components: {
             'MyVacationList': MyVacationList,
             'NewsItemList': NewsItemList
+        },
+        created: function() {
+            this.statusBar('hide');
         },
         mounted: function(){
             let self = this;
@@ -216,7 +221,6 @@
     }
     .hero-image {
         stretch: aspectFill;
-        margin-top: -40;
     }
     .hero-overlay {
         background-color: #000;

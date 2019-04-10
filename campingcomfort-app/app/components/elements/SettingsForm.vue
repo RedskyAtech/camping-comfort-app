@@ -54,7 +54,7 @@
         },
         computed: {
             languageString: function(){
-                return this.$t('languages.'+this.language);
+                return this.language ? this.$t('languages.'+this.language) : '';
             }
         },
         mounted() {
@@ -138,6 +138,7 @@
     .intro {
         color: #fff;
         text-align: center;
+        padding-top: 25;
         padding-bottom: 25;
     }
     .intro-title {

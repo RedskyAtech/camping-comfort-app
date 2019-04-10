@@ -1,5 +1,5 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="auto,auto,*" columns="*">
             <StackLayout row="0" class="title-container">
                 <Label :text="$t('nearby.title')"></Label>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
     import NearbyList from '../elements/NearbyList'
 
@@ -36,10 +37,14 @@
             }
         },
         mixins: [
-            Responsive
+            Responsive,
+            StatusBar
         ],
         components: {
             'NearbyList': NearbyList
+        },
+        created: function() {
+            this.statusBar('hide');
         },
         methods: {
             activateTab: function(tab){

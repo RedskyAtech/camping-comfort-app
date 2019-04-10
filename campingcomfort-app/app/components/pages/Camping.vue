@@ -1,5 +1,5 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="auto,*" columns="*">
             <StackLayout row="0" class="title-container">
                 <Label :text="$t('camping.title')"></Label>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
     import CampingList from '../elements/CampingList'
 
@@ -19,10 +20,14 @@
             }
         },
         mixins: [
-            Responsive
+            Responsive,
+            StatusBar
         ],
         components: {
             'CampingList': CampingList
+        },
+        created: function() {
+            this.statusBar('hide');
         }
     }
 </script>

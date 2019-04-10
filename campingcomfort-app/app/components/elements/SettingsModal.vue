@@ -1,5 +1,5 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <SettingsForm v-on:saved="afterSave">
             <Fab slot="fav" row="1" col="0" bg="transparent"><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></Fab>
         </SettingsForm>
@@ -7,6 +7,7 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import EventBus from '../helpers/EventBus';
     import Responsive from '../mixins/Responsive';
     import Fab from './Fab';
@@ -14,11 +15,15 @@
 
     export default {
         mixins: [
-            Responsive
+            Responsive,
+            StatusBar
         ],
         components: {
             Fab: Fab,
             SettingsForm: SettingsForm
+        },
+        created: function() {
+            this.statusBar('hide');
         },
         methods: {
             afterSave() {

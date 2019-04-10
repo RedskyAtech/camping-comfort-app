@@ -3,6 +3,18 @@ import Splash from './components/pages/Splash'
 import App from './components/pages/App'
 import * as appSettings from 'tns-core-modules/application-settings';
 import { isAndroid, isIOS, device } from "tns-core-modules/platform";
+var application = require("application");
+
+/* Fresco initializing */
+var fresco = require("nativescript-fresco");
+if (application.android) {
+    application.on("launch", function () {
+        fresco.initialize();
+    });
+}
+
+// Use platform specific CSS
+require( "nativescript-platform-css" );
 
 // Font Icons
 import {TNSFontIcon, fonticon} from 'nativescript-fonticon';
@@ -33,7 +45,7 @@ Vue.use(require('vue-moment'), {
 });
 
 // Web Image Cache
-Vue.registerElement('WebImage', () => require('nativescript-web-image-cache').WebImage);
+Vue.registerElement('WebImage', () => require("nativescript-web-image-cache").WebImage);
 
 // Localize
 import VueI18n from 'vue-i18n'

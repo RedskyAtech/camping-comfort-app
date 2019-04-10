@@ -1,10 +1,12 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="auto,*" columns="*">
             <StackLayout row="0" class="title-container">
                 <GridLayout>
                     <TextField row="0" col="0" ref="textField" @loaded="textFieldLoaded" v-model="term" hint="Naam van jouw camping"></TextField>
-                    <Label row="0" col="0" class="back-btn fas" horizontalAlignment="left" @tap="$modal.close()">{{ 'fa-arrow-left' | fonticon }}</Label>
+                    <GridLayout row="0" col="0" rows="*" verticalAlignment="center">
+                        <Label row="0" class="back-btn fas" horizontalAlignment="left" verticalAlignment="center" @tap="$modal.close()">{{ 'fa-arrow-left' | fonticon }}</Label>
+                    </GridLayout>
                 </GridLayout>
             </StackLayout>
             <ListView row="1" for="camping in campings">
@@ -20,9 +22,11 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import LocalStorage from '../mixins/LocalStorage'
+    import * as http from 'http'
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
 
     // Minimal delay between search requests
@@ -38,7 +42,8 @@
         },
         mixins: [
             LocalStorage,
-            Responsive
+            Responsive,
+            StatusBar
         ],
         watch: {
             term: function(val){
@@ -49,8 +54,12 @@
                 }, delay);
             }
         },
+        created: function() {
+            this.statusBar('hide');
+        },
         mounted: function(){
             this.search('a');
+            console.log('search');
         },
         methods: {
             textFieldLoaded(){
@@ -58,9 +67,11 @@
             },
             search: function(val){
                 let self = this;
-                getJSON("https://www.campingcomfort.app/api/campings/"+encodeURI(val)).then((r) => {
+
+                http.getJSON("https://www.campingcomfort.app/api/campings/"+encodeURI(val)).then((r) => {
                     self.campings = r.campings;
                 }, (e) => {
+                    console.log(e);
                 });
             },
             select: function(id, name){

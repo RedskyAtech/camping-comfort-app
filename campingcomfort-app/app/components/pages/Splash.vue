@@ -1,10 +1,11 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <SettingsForm v-on:saved="afterSave"></SettingsForm>
     </Page>
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import EventBus from '../helpers/EventBus';
     import Responsive from '../mixins/Responsive';
     import SettingsForm from '../elements/SettingsForm';
@@ -12,11 +13,15 @@
 
     export default {
         mixins: [
-            Responsive
+            Responsive,
+            StatusBar
         ],
         components: {
             SettingsForm: SettingsForm,
             App: App
+        },
+        created: function() {
+            this.statusBar('hide');
         },
         methods: {
             afterSave() {

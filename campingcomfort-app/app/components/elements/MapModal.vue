@@ -1,5 +1,5 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
+    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="*" columns="*">
             <ScrollView row="0" col="0">
                 <ImageSwipe v-if="items.length > 0" :items="items" imageUrlProperty="url" :pageNumber="page" pageChanged="swiped"></ImageSwipe>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+    import StatusBar from '../mixins/StatusBar'
     import * as http from 'http'
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
@@ -22,7 +23,8 @@
         mixins: [
             Responsive,
             Connection,
-            LocalStorage
+            LocalStorage,
+            StatusBar
         ],
         components: {
             Fab: Fab
@@ -32,6 +34,9 @@
                 plan: '',
                 page: 1
             }
+        },
+        created: function() {
+            this.statusBar('hide');
         },
         computed: {
             items: function(){

@@ -1,7 +1,9 @@
 <template>
     <StackLayout horizontalAlignment="center" verticalAlignment="center">
         <StackLayout class="placeholder">
-            <Label :class="'icon '+iconLabelClass">{{ iconClass | fonticon }}</Label>
+            <GridLayout rows="60" columns="60" horizontalAlignment="center" class="icon">
+                <Label row="0" col="0" :class="iconLabelClass" verticalAlignment="center">{{ iconClass | fonticon }}</Label>
+            </GridLayout>
             <Label class="title" :text="title" textWrap="true"></Label>
             <Label class="text" :text="text" textWrap="true"></Label>
         </StackLayout>
@@ -26,12 +28,13 @@
         padding: 0 37.5;
     }
     .placeholder .icon {
-        width: 60;
-        height: 60;
-        border-radius: 30;
+        border-radius: 100%;
         border-width:2;
         border-color: #8e8e8e;
         font-size: 20;
+    }
+    .placeholder .icon Label {
+
     }
     .placeholder .title {
         font-size: 18;
