@@ -24,7 +24,7 @@
                 </StackLayout>
             </GridLayout>
         </StackLayout>
-        <Label row="1" col="0" horizontalAlignment="center" class="copyright" text="© 2019 CampingComfort"></Label>
+        <Label row="1" col="0" horizontalAlignment="center" verticalAlignment="center" class="copyright" text="© 2019 CampingComfort"></Label>
         <slot name="fav"></slot>
     </GridLayout>
 </template>

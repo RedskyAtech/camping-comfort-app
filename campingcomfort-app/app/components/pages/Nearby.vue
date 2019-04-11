@@ -1,10 +1,10 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <GridLayout rows="auto,auto,*" columns="*">
+        <GridLayout rows="auto,*" columns="*">
             <StackLayout row="0" class="title-container">
                 <Label :text="$t('nearby.title')"></Label>
             </StackLayout>
-            <GridLayout row="1" columns="*">
+            <!--<GridLayout row="1" columns="*">
                 <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>
                 <StackLayout col="0" class="tabs-container" orientation="horizontal">
                     <StackLayout class="tab" @tap="activateTab(1)" :class="[{'active': activeTab === 1}]">
@@ -14,13 +14,13 @@
                         <Label class="tab-label" :text="$t('nearby.dinnerAndDrinks')"></Label>
                     </StackLayout>
                 </StackLayout>
-            </GridLayout>
-            <NearbyList row="2" class="tab-content" :class="[{'active': activeTab === 1}]"></NearbyList>
-            <StackLayout row="2" class="tab-content" :class="[{'active': activeTab === 2}]">
+            </GridLayout>-->
+            <NearbyList row="1" class="tab-content" :class="[{'active': activeTab === 1}]"></NearbyList>
+            <!--<StackLayout row="2" class="tab-content" :class="[{'active': activeTab === 2}]">
                 <StackLayout class="temp-tab-content">
                     <Label text="Binnenkort..."></Label>
                 </StackLayout>
-            </StackLayout>
+            </StackLayout>-->
         </GridLayout>
     </Page>
 </template>
@@ -57,6 +57,10 @@
         text-align: center;
         font-weight: 700;
         padding: 12.5;
+
+        /* Remove these if tabs are placed */
+        border-bottom-width: 1;
+        border-color: #e5e5e5;
     }
 
     /* Tabs */

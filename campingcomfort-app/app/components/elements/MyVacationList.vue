@@ -8,7 +8,7 @@
                         <StackLayout col="1" orientation="horizontal" class="event-label">
                             <StackLayout verticalAlignment="center">
                                 <StackLayout class="event-time" orientation="horizontal">
-                                    <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
+                                    <Label class="clock far">{{ 'fa-clock' | fonticon }}</Label>
                                     <StackLayout orientation="horizontal">
                                         <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
                                         <Label text=" - "></Label>
@@ -22,7 +22,7 @@
                 </CardView>
             </v-template>
         </ListView>
-        <ResultPlaceHolder row="0" v-if="filteredListItems.length === 0" iconLabelClass="fa" iconClass="fa-heart" :title="$t('myVacation.emptyTitle')" :text="$t('myVacation.emptyText')"></ResultPlaceHolder>
+        <ResultPlaceHolder row="0" v-if="filteredListItems.length === 0" iconLabelClass="far" iconClass="fa-heart" :title="$t('myVacation.emptyTitle')" :text="$t('myVacation.emptyText')"></ResultPlaceHolder>
     </GridLayout>
 </template>
 

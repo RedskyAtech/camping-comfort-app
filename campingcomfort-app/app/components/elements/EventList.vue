@@ -8,7 +8,7 @@
                         <StackLayout col="1" orientation="horizontal" class="event-label">
                             <StackLayout verticalAlignment="center">
                                 <StackLayout class="event-time" orientation="horizontal">
-                                    <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
+                                    <Label class="clock far">{{ 'fa-clock' | fonticon }}</Label>
                                     <StackLayout orientation="horizontal">
                                         <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
                                         <Label text=" - "></Label>

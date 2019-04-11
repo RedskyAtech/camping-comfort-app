@@ -7,7 +7,7 @@
                         <WebImage row="0" :src="item.image" class="hero-image"></WebImage>
                     </GridLayout>
                     <StackLayout row="1" class="timeframe" orientation="horizontal" v-if="item.start_time !== undefined">
-                        <Label class="clock fa">{{ 'fa-clock' | fonticon }}</Label>
+                        <Label class="clock far">{{ 'fa-clock' | fonticon }}</Label>
                         <StackLayout orientation="horizontal">
                             <Label :text="$t('detail.today')"></Label>
                             <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
@@ -16,7 +16,7 @@
                         </StackLayout>
                     </StackLayout>
                     <StackLayout row="1" class="timeframe" orientation="horizontal" v-if="item.date !== undefined">
-                        <Label class="clock fa">{{ 'fa-calendar-alt' | fonticon }}</Label>
+                        <Label class="clock far">{{ 'fa-calendar-alt' | fonticon }}</Label>
                         <Label :text="item.date+' 00:00:00' | moment($t('formatting.date'))"></Label>
                     </StackLayout>
                     <StackLayout row="2" class="content">
@@ -54,7 +54,7 @@
                     <AbsoluteLayout class="like-container" row="0" columns="*" rowSpan="2" horizontalAlignment="right">
                         <CardView row="0" col="0" horizontalAlignment="right" verticalAlignment="top" class="cardStyle like" radius="30" v-if="isLikable" @tap="toggleLike(id)">
                             <GridLayout rows="*" columns="*">
-                                <Label row="0" col="0" class="like-icon fa" verticalAlignment="center" v-if="!liked">{{ 'fa-heart' | fonticon }}</Label>
+                                <Label row="0" col="0" class="like-icon far" verticalAlignment="center" v-if="!liked">{{ 'fa-heart' | fonticon }}</Label>
                                 <Label row="0" col="0" class="like-icon fas" verticalAlignment="center" v-if="liked">{{ 'fa-heart' | fonticon }}</Label>
                             </GridLayout>
                         </CardView>

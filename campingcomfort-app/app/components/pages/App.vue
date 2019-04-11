@@ -25,7 +25,7 @@
                         <Label class="tab-label" :text="$t('tabs.activities')"></Label>
                     </StackLayout>
                     <StackLayout verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="toReception">
-                        <Label class="tab-icon fa">{{ 'fa-comment' | fonticon }}</Label>
+                        <Label class="tab-icon far">{{ 'fa-comment' | fonticon }}</Label>
                         <Label class="tab-label" :text="$t('tabs.reception')"></Label>
                     </StackLayout>
                 </GridLayout>
