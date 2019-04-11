@@ -10,7 +10,6 @@
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
     import CampingList from '../elements/CampingList'
 
@@ -20,8 +19,7 @@
             }
         },
         mixins: [
-            Responsive,
-            StatusBar
+            Responsive
         ],
         components: {
             'CampingList': CampingList

@@ -62,7 +62,7 @@
 
             // Set the initial values
             if(this.keyExistsInStore('campingId')){
-                this.campingId = this.getStringFromStore('campingId');
+                this.campingId = this.getNumberFromStore('campingId');
                 this.campingName = this.getStringFromStore('campingName');
             }
             if(this.keyExistsInStore('language')){

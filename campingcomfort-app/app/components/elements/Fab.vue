@@ -1,8 +1,8 @@
 <template>
-    <StackLayout v-if="bg === 'transparent'" horizontalAlignment="right" verticalAlignment="bottom" class="fab transparent">
+    <StackLayout v-if="bg === 'transparent'" horizontalAlignment="right" verticalAlignment="center" class="fab transparent">
         <slot></slot>
     </StackLayout>
-    <CardView v-else horizontalAlignment="right" verticalAlignment="bottom" class="fab cardStyle" radius="30">
+    <CardView v-else horizontalAlignment="right" verticalAlignment="center" class="fab cardStyle" radius="30">
         <slot></slot>
     </CardView>
 </template>
@@ -20,7 +20,7 @@
     }
     .fab.transparent {
         color: #fff;
-        border-radius: 30;
+        border-radius: 100%;
         border-color: #fff;
         border-width: 1;
     }

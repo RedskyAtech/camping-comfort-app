@@ -61,13 +61,12 @@
                     </AbsoluteLayout>
                 </GridLayout>
             </ScrollView>
-            <Fab><GridLayout rows="*" columns="*" @tap="goBack"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></GridLayout></Fab>
+            <Fab verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="goBack"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></GridLayout></Fab>
         </GridLayout>
     </Page>
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
@@ -103,8 +102,7 @@
             Responsive,
             LocalStorage,
             Connection,
-            Likes,
-            StatusBar
+            Likes
         ],
         components: {
             Fab: Fab

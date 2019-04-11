@@ -5,7 +5,6 @@
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import EventBus from '../helpers/EventBus';
     import Responsive from '../mixins/Responsive';
     import SettingsForm from '../elements/SettingsForm';
@@ -13,8 +12,7 @@
 
     export default {
         mixins: [
-            Responsive,
-            StatusBar
+            Responsive
         ],
         components: {
             SettingsForm: SettingsForm,

@@ -1,13 +1,14 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <SettingsForm v-on:saved="afterSave">
-            <Fab slot="fav" row="1" col="0" bg="transparent"><Label @tap="closeModal" row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></Fab>
-        </SettingsForm>
+        <GridLayout cols="*" rows="*" class="page">
+            <SettingsForm v-on:saved="afterSave">
+                <Fab slot="fav" row="1" col="0" bg="transparent"><GridLayout row="0" col="0" rows="*" columns="*" @tap="closeModal"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></GridLayout></Fab>
+            </SettingsForm>
+        </GridLayout>
     </Page>
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import EventBus from '../helpers/EventBus';
     import Responsive from '../mixins/Responsive';
     import Fab from './Fab';
@@ -15,8 +16,7 @@
 
     export default {
         mixins: [
-            Responsive,
-            StatusBar
+            Responsive
         ],
         components: {
             Fab: Fab,
@@ -35,7 +35,7 @@
 </script>
 
 <style scoped>
-    Page {
+    Page, .page {
         background: #103029;
     }
 </style>

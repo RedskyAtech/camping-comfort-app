@@ -24,13 +24,11 @@
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
 
     export default {
         mixins: [
-            Responsive,
-            StatusBar
+            Responsive
         ],
         props: {
             pageTitle: ''

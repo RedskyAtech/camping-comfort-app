@@ -18,7 +18,6 @@
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import LocalStorage from '../mixins/LocalStorage'
@@ -62,8 +61,7 @@
         },
         mixins: [
             LocalStorage,
-            Responsive,
-            StatusBar
+            Responsive
         ],
         methods: {
             select: function(code){

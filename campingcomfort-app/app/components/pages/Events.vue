@@ -26,7 +26,6 @@
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
     import EventList from '../elements/EventList'
     import LocalStorage from '../mixins/LocalStorage'
@@ -57,8 +56,7 @@
         },
         mixins: [
             Responsive,
-            LocalStorage,
-            StatusBar
+            LocalStorage
         ],
         components: {
             'EventList': EventList

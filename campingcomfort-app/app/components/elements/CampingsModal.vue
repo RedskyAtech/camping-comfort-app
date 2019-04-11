@@ -22,7 +22,6 @@
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import LocalStorage from '../mixins/LocalStorage'
@@ -42,8 +41,7 @@
         },
         mixins: [
             LocalStorage,
-            Responsive,
-            StatusBar
+            Responsive
         ],
         watch: {
             term: function(val){
@@ -56,7 +54,6 @@
         },
         mounted: function(){
             this.search('a');
-            console.log('search');
         },
         methods: {
             textFieldLoaded(){

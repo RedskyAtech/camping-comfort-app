@@ -1,5 +1,5 @@
 <template>
-    <ListView for="item in listItems" @itemLoading="onItemLoading" rowHeight="100">
+    <ListView for="item in listItems" @itemLoading="onItemLoading">
         <v-template>
             <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="auto" columns="75,*">

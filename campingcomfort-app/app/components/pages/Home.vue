@@ -5,7 +5,7 @@
                 <StackLayout height="100%">
                     <GridLayout rows="auto,*">
                         <GridLayout rows="*" row="0" class="hero-grid">
-                            <Image row="0" :src="heroImage" class="hero-image"></Image>
+                            <WebImage row="0" :src="heroImage" class="hero-image"></WebImage>
                             <StackLayout row="0" class="hero-overlay"></StackLayout>
                             <GridLayout row="0" rows="auto,*" columns="*,auto">
                                 <StackLayout row="0" col="0">
@@ -60,7 +60,6 @@
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import * as http from 'http'
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
@@ -73,7 +72,7 @@
         data() {
             return {
                 activeTab: 1,
-                heroImage: '',
+                heroImage: '~/assets/images/placeholder.jpg',
                 heroTitle: '',
                 plan: ''
             }
@@ -81,15 +80,19 @@
         mixins: [
             Responsive,
             Connection,
-            LocalStorage,
-            StatusBar
+            LocalStorage
         ],
         components: {
             'MyVacationList': MyVacationList,
             'NewsItemList': NewsItemList
         },
-        mounted: function(){
+        created: function(){
             let self = this;
+
+            // Hide the status bar
+            EventBus.$emit('hideStatusBar');
+
+            // Initialize
             self.init();
 
             // Listen to a clear storage event

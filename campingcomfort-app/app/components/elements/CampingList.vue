@@ -1,5 +1,5 @@
 <template>
-    <ListView for="item in listItems" @itemLoading="onItemLoading" rowHeight="75">
+    <ListView for="item in listItems" @itemLoading="onItemLoading">
         <v-template if="$index === 0">
             <StackLayout>
                 <StackLayout class="btn-container">

@@ -13,7 +13,6 @@
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import Fab from '../elements/Fab'
@@ -33,8 +32,7 @@
             }
         },
         mixins: [
-            Responsive,
-            StatusBar
+            Responsive
         ],
         components: {
             Fab: Fab

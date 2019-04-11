@@ -1,6 +1,6 @@
 <template>
     <GridLayout rows="*">
-        <ListView row="0" for="item in filteredListItems" @itemLoading="onItemLoading" rowHeight="75">
+        <ListView row="0" for="item in filteredListItems" @itemLoading="onItemLoading">
             <v-template>
                 <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
                     <GridLayout rows="75" columns="75,*">

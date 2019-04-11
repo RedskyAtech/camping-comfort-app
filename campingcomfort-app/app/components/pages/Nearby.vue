@@ -26,7 +26,6 @@
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
     import NearbyList from '../elements/NearbyList'
 
@@ -37,8 +36,7 @@
             }
         },
         mixins: [
-            Responsive,
-            StatusBar
+            Responsive
         ],
         components: {
             'NearbyList': NearbyList

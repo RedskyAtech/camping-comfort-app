@@ -4,13 +4,12 @@
             <ScrollView row="0" col="0">
                 <ImageSwipe v-if="items.length > 0" :items="items" imageUrlProperty="url" :pageNumber="page" pageChanged="swiped"></ImageSwipe>
             </ScrollView>
-            <Fab><GridLayout rows="*" columns="*" @tap="closeModal"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></GridLayout></Fab>
+            <Fab verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="closeModal"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></GridLayout></Fab>
         </GridLayout>
     </Page>
 </template>
 
 <script>
-    import StatusBar from '../mixins/StatusBar'
     import * as http from 'http'
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import EventBus from '../helpers/EventBus'
@@ -23,8 +22,7 @@
         mixins: [
             Responsive,
             Connection,
-            LocalStorage,
-            StatusBar
+            LocalStorage
         ],
         components: {
             Fab: Fab
