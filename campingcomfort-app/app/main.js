@@ -3,7 +3,7 @@ import Splash from './components/pages/Splash'
 import App from './components/pages/App'
 import * as appSettings from 'tns-core-modules/application-settings';
 import { isAndroid, isIOS, device } from "tns-core-modules/platform";
-var application = require("application");
+var application = require("tns-core-modules/application");
 
 /* Fresco initializing */
 var fresco = require("nativescript-fresco");
@@ -20,7 +20,7 @@ require( "nativescript-platform-css" );
 import {TNSFontIcon, fonticon} from 'nativescript-fonticon';
 TNSFontIcon.debug = true;
 TNSFontIcon.paths = {
-    'fa': './assets/vendor/font-awesome/font-awesome.css'
+    'fa': './assets/css/all.css'
 };
 TNSFontIcon.loadCss();
 Vue.filter('fonticon', fonticon);
