@@ -9,7 +9,7 @@
                     <StackLayout row="1" class="timeframe" orientation="horizontal" v-if="item.start_time !== undefined">
                         <Label class="clock far">{{ 'fa-clock' | fonticon }}</Label>
                         <StackLayout orientation="horizontal">
-                            <Label :text="$t('detail.today')"></Label>
+                            <Label :text="day+' '"></Label>
                             <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
                             <Label text=" - "></Label>
                             <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
@@ -95,6 +95,26 @@
                 }
                 else {
                     return 'auto';
+                }
+            },
+            day: function(){
+                if(Object.keys(this.item).length > 0) {
+                    let today = this.$moment();
+                    today.hour(0);
+                    today.minute(0);
+                    today.second(0);
+                    today.millisecond(0);
+                    let startDate = this.$moment(this.item.start_date);
+                    let diffDays = startDate.diff(today, 'days');
+                    if(diffDays === 0){
+                        return this.$t('detail.today');
+                    }
+                    if(diffDays === 1){
+                        return this.$t('detail.tomorrow');
+                    }
+                    if(diffDays > 1){
+                        return startDate.format(this.$t('formatting.date'));
+                    }
                 }
             }
         },
