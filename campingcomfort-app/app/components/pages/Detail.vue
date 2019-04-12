@@ -3,8 +3,8 @@
         <GridLayout rows="*" columns="*">
             <ScrollView row="0" col="0">
                 <GridLayout rows="auto,auto,auto" columns="*">
-                    <GridLayout row="0" class="hero-grid">
-                        <WebImage row="0" :src="item.image" class="hero-image"></WebImage>
+                    <GridLayout row="0" rows="*" class="hero-grid" verticalAlignment="top">
+                        <WebImage v-if="item.image" row="0" :src="item.image" class="hero-image"></WebImage>
                     </GridLayout>
                     <StackLayout row="1" class="timeframe" orientation="horizontal" v-if="item.start_time !== undefined">
                         <Label class="clock far">{{ 'fa-clock' | fonticon }}</Label>
@@ -52,7 +52,7 @@
                         </GridLayout>
                     </StackLayout>
                     <AbsoluteLayout class="like-container" row="0" columns="*" rowSpan="2" horizontalAlignment="right">
-                        <CardView row="0" col="0" horizontalAlignment="right" verticalAlignment="top" class="cardStyle like" radius="30" v-if="isLikable" @tap="toggleLike(id)">
+                        <CardView row="0" col="0" horizontalAlignment="right" verticalAlignment="top" class="cardStyle like" radius="90" v-if="isLikable" @tap="toggleLike(id)">
                             <GridLayout rows="*" columns="*">
                                 <Label row="0" col="0" class="like-icon far" verticalAlignment="center" v-if="!liked">{{ 'fa-heart' | fonticon }}</Label>
                                 <Label row="0" col="0" class="like-icon fas" verticalAlignment="center" v-if="liked">{{ 'fa-heart' | fonticon }}</Label>
@@ -301,7 +301,7 @@
                     EventBus.$emit('openModal', {
                         page: 'route',
                         props: {
-                            url: 'https://www.google.com/maps/dir//' + encodeURI(self.item.street) + '+' + encodeURI(self.item.house_number) + ',' + encodeURI(self.item.postal_code) + '+' + encodeURI(self.item.place)
+                            url: 'https://www.google.com/maps/dir//' + encodeURI(self.item.street) + '+' + encodeURI(self.item.house_number) + ',+' + encodeURI(self.item.postal_code) + '+' + encodeURI(self.item.place)
                         }
                     });
                 }
@@ -326,6 +326,9 @@
 <style scoped>
 
     /* Like */
+    Page.xxs .like-container {
+        padding-top: 155;
+    }
     Page.xs .like-container {
         padding-top: 180;
     }
@@ -357,6 +360,9 @@
     }
 
     /* Hero */
+    Page.xxs .hero-grid {
+        height: 185;
+    }
     Page.xs .hero-grid {
         height: 210;
     }
@@ -374,6 +380,8 @@
     }
     .hero-image {
         stretch: aspectFill;
+    }
+    .ios .hero-image {
         margin-top: -40;
     }
     .timeframe {

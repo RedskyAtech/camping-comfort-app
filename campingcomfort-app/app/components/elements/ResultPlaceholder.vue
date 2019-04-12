@@ -36,10 +36,16 @@
     .placeholder .icon Label {
 
     }
+    Page.xxs .placeholder .icon {
+        visibility: collapsed;
+    }
     .placeholder .title {
         font-size: 18;
         font-weight: 700;
         padding-top: 12.5;
         padding-bottom: 5;
+    }
+    Page.xxs .placeholder .title {
+        padding-top: 5;
     }
 </style>

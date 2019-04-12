@@ -5,9 +5,14 @@
         computed: {
             pageClass: function () {
                 let w = platform.screen.mainScreen.widthDIPs;
+console.log(w);
+                // Very small Android phone
+                if (w < 321) {
+                    return 'xxs';
+                }
 
                 // iPhone SE
-                if (w < 375) {
+                if (w >= 321 && w < 375) {
                     return 'xs';
                 }
 

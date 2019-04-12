@@ -204,6 +204,9 @@
 
 <style scoped>
     /* Hero */
+    Page.xxs .hero-grid {
+        height: 185;
+    }
     Page.xs .hero-grid {
         height: 210;
     }

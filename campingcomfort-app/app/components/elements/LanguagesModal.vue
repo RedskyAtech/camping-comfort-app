@@ -86,7 +86,8 @@
         padding: 25;
         font-weight: 500;
     }
-    Page.xs .title-container {
+    Page.xxs .title-container,
+    Page.xs .title-container{
         padding: 25 12.5;
     }
     .back-btn {

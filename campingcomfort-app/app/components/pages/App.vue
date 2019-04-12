@@ -90,7 +90,7 @@
 
             // Listen to open-modal requests
             EventBus.$on('hideStatusBar', function(data){
-                self.statusBar('hide');
+//                self.statusBar('hide');
             });
 
             // Listen to go back navigation requests
@@ -229,6 +229,7 @@
     }
     .tab-icon {
     }
+    Page.xxs .tab-label,
     Page.xs .tab-label {
         visibility: collapsed;
     }

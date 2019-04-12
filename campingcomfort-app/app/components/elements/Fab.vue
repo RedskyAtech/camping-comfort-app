@@ -2,7 +2,7 @@
     <StackLayout v-if="bg === 'transparent'" horizontalAlignment="right" verticalAlignment="center" class="fab transparent">
         <slot></slot>
     </StackLayout>
-    <CardView v-else horizontalAlignment="right" verticalAlignment="center" class="fab cardStyle" radius="30">
+    <CardView v-else horizontalAlignment="right" verticalAlignment="center" class="fab cardStyle" radius="90">
         <slot></slot>
     </CardView>
 </template>

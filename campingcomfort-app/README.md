@@ -25,3 +25,8 @@ To switch the background of the image swiper to white:
 Comment the following line in /node_modules/nativescript-image-swipe/image-swipe.ios.js
 
 `view.backgroundColor = utils.ios.getter(UIColor, UIColor.blackColor);`
+
+## Build an Android release
+```
+tns build android --bundle --key-store-path ./campingcomfort.keystore --key-store-password Iloum2007$ --key-store-alias=CampingComfort --key-store-alias-password Iloum2007$ --release
+```

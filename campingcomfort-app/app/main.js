@@ -5,7 +5,7 @@ import * as appSettings from 'tns-core-modules/application-settings';
 import { isAndroid, isIOS, device } from "tns-core-modules/platform";
 var application = require("tns-core-modules/application");
 
-/* Fresco initializing */
+/* Fresco initializing (used by WebImage) */
 var fresco = require("nativescript-fresco");
 if (application.android) {
     application.on("launch", function () {

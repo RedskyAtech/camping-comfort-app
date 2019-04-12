@@ -17,7 +17,7 @@
             }
         },
         mounted: function() {
-            this.statusBar('hide');
+//            this.statusBar('hide');
         }
     }
 </script>

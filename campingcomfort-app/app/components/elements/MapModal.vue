@@ -1,9 +1,7 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="*" columns="*">
-            <ScrollView row="0" col="0">
-                <ImageSwipe v-if="items.length > 0" :items="items" imageUrlProperty="url" :pageNumber="page" pageChanged="swiped"></ImageSwipe>
-            </ScrollView>
+            <ImageSwipe row="0" col="0" :items="items" imageUrlProperty="url" pageNumber="1"></ImageSwipe>
             <Fab verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="closeModal"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></GridLayout></Fab>
         </GridLayout>
     </Page>
@@ -29,15 +27,7 @@
         },
         data: function(){
             return {
-                plan: '',
-                page: 1
-            }
-        },
-        computed: {
-            items: function(){
-                return [{
-                    url: this.plan
-                }]
+                items: []
             }
         },
         mounted: function(){
@@ -54,7 +44,7 @@
 
                     // Show the cached version first to prevent flickering
                     if(self.keyExistsInStore('plan')) {
-                        self.plan = self.getStringFromStore('plan');
+                        self.items = [{url: self.getStringFromStore('plan')}];
                     }
 
                     // Get the live data
@@ -62,26 +52,26 @@
 
                         // Assign the data
                         if(result.appContent.plan){
-                            self.plan = result.appContent.plan;
+                            self.items = [{url: result.appContent.plan}];
                             self.storeString('plan', self.plan);
                         }
 
                         // No data found, remove from storage
                         else {
-                            self.plan = '';
+                            self.items = [];
                             self.removeKeyFromStore('plan');
                         }
 
                     }, error => {
-                        self.plan = '';
-                        self.removeKeyFromStore('plan');
+                        self.items = [];
+                            self.removeKeyFromStore('plan');
                     });
                 }
                 else {
 
                     // Get the map from storage
                     if(self.keyExistsInStore('plan')){
-                        self.plan = self.getStringFromStore('plan');
+                        self.items = [{url: self.getStringFromStore('plan')}];
                     }
 
                     // Offline with no storage data
@@ -99,9 +89,6 @@
             },
             closeModal: function(){
                 this.$modal.close();
-            },
-            swiped: function(){
-
             }
         }
     }

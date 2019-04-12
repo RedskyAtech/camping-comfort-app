@@ -87,6 +87,7 @@
         padding: 25;
         font-weight: 500;
     }
+    Page.xxs .title-container,
     Page.xs .title-container {
         padding: 25 12.5;
     }

@@ -151,6 +151,7 @@
         padding: 25;
         font-weight: 500;
     }
+    Page.xxs .fields-container,
     Page.xs .fields-container {
         padding: 12.5;
     }
