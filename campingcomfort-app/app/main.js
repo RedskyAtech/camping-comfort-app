@@ -15,6 +15,8 @@ if (application.android) {
 
 // Use platform specific CSS
 require( "nativescript-platform-css" );
+Vue.prototype.$isAndroid = isAndroid;
+Vue.prototype.$isIOS = isIOS;
 
 // Font Icons
 import {TNSFontIcon, fonticon} from 'nativescript-fonticon';

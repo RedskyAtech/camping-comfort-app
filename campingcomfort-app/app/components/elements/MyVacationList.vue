@@ -8,9 +8,10 @@
                         <StackLayout col="1" orientation="horizontal" class="event-label">
                             <StackLayout verticalAlignment="center">
                                 <StackLayout class="event-time" orientation="horizontal">
-                                    <Label class="clock far">{{ 'fa-clock' | fonticon }}</Label>
+                                    <Label class="clock far" v-if="$moment(item.start_date).format('YYYY-MM-DD') === $moment().format('YYYY-MM-DD')">{{ 'fa-clock' | fonticon }}</Label>
+                                    <Label class="clock far" v-else>{{ 'fa-calendar-alt' | fonticon }}</Label>
                                     <StackLayout orientation="horizontal">
-                                        <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
+                                        <Label :text="startDateTime(item.start_date, item.start_time)"></Label>
                                         <Label text=" - "></Label>
                                         <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
                                     </StackLayout>
@@ -32,6 +33,7 @@
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
     import Likes from '../mixins/Likes'
+    import Dates from '../mixins/Dates'
     import ResultPlaceHolder from '../elements/ResultPlaceHolder'
 
     export default {
@@ -63,7 +65,8 @@
         mixins: [
             Connection,
             LocalStorage,
-            Likes
+            Likes,
+            Dates
         ],
         created: function(){
             let self = this;
@@ -73,6 +76,10 @@
             });
         },
         methods: {
+
+            startDateTime: function(startDate, startTime) {
+                return this.humanizeDate(startDate, 'dddd')+' '+this.$moment('2000-01-01 '+startTime).format(this.$t('formatting.time'));
+            },
 
             // Get the data
             loadData: function(){

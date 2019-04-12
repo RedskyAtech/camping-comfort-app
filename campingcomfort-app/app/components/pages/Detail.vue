@@ -6,19 +6,19 @@
                     <GridLayout row="0" rows="*" class="hero-grid" verticalAlignment="top">
                         <WebImage v-if="item.image" row="0" :src="item.image" class="hero-image"></WebImage>
                     </GridLayout>
-                    <StackLayout row="1" class="timeframe" orientation="horizontal" v-if="item.start_time !== undefined">
-                        <Label class="clock far">{{ 'fa-clock' | fonticon }}</Label>
-                        <StackLayout orientation="horizontal">
-                            <Label :text="day+' '"></Label>
+                    <GridLayout row="1" rows="auto" columns="auto,auto" class="timeframe" v-if="item.start_time !== undefined">
+                        <Label col="0" class="clock far" verticalAlignment="center">{{ 'fa-clock' | fonticon }}</Label>
+                        <StackLayout col="1" orientation="horizontal" verticalAlignment="center">
+                            <Label :text="humanizeDate(item.start_date, 'dddd')+' '" class="day"></Label>
                             <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
                             <Label text=" - "></Label>
                             <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
                         </StackLayout>
-                    </StackLayout>
-                    <StackLayout row="1" class="timeframe" orientation="horizontal" v-if="item.date !== undefined">
-                        <Label class="clock far">{{ 'fa-calendar-alt' | fonticon }}</Label>
-                        <Label :text="item.date+' 00:00:00' | moment($t('formatting.date'))"></Label>
-                    </StackLayout>
+                    </GridLayout>
+                    <GridLayout row="1" rows="auto" columns="auto,auto" class="timeframe" v-if="item.date !== undefined">
+                        <Label col="0" class="clock far" verticalAlignment="center">{{ 'fa-calendar-alt' | fonticon }}</Label>
+                        <Label col="1" :text="humanizeDate(item.date, $t('formatting.date'))" verticalAlignment="center"></Label>
+                    </GridLayout>
                     <StackLayout row="2" class="content">
                         <Label class="title" :text="item.title" textWrap="true"></Label>
                         <GridLayout columns="*" :rows="textHeight">
@@ -52,7 +52,7 @@
                         </GridLayout>
                     </StackLayout>
                     <AbsoluteLayout class="like-container" row="0" columns="*" rowSpan="2" horizontalAlignment="right">
-                        <CardView row="0" col="0" horizontalAlignment="right" verticalAlignment="top" class="cardStyle like" radius="90" v-if="isLikable" @tap="toggleLike(id)">
+                        <CardView row="0" col="0" horizontalAlignment="right" verticalAlignment="top" class="cardStyle like" :radius="fabRadius" v-if="isLikable" @tap="toggleLike(id)">
                             <GridLayout rows="*" columns="*">
                                 <Label row="0" col="0" class="like-icon far" verticalAlignment="center" v-if="!liked">{{ 'fa-heart' | fonticon }}</Label>
                                 <Label row="0" col="0" class="like-icon fas" verticalAlignment="center" v-if="liked">{{ 'fa-heart' | fonticon }}</Label>
@@ -74,6 +74,7 @@
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
     import Likes from '../mixins/Likes'
+    import Dates from '../mixins/Dates'
 
     export default {
         props: {
@@ -97,24 +98,12 @@
                     return 'auto';
                 }
             },
-            day: function(){
-                if(Object.keys(this.item).length > 0) {
-                    let today = this.$moment();
-                    today.hour(0);
-                    today.minute(0);
-                    today.second(0);
-                    today.millisecond(0);
-                    let startDate = this.$moment(this.item.start_date);
-                    let diffDays = startDate.diff(today, 'days');
-                    if(diffDays === 0){
-                        return this.$t('detail.today');
-                    }
-                    if(diffDays === 1){
-                        return this.$t('detail.tomorrow');
-                    }
-                    if(diffDays > 1){
-                        return startDate.format(this.$t('formatting.date'));
-                    }
+            fabRadius: function() {
+                if(this.$isAndroid) {
+                    return 90;
+                }
+                else {
+                    return 30;
                 }
             }
         },
@@ -122,7 +111,8 @@
             Responsive,
             LocalStorage,
             Connection,
-            Likes
+            Likes,
+            Dates
         ],
         components: {
             Fab: Fab
@@ -416,6 +406,9 @@
     }
     .content {
         padding: 25;
+    }
+    .day {
+        text-transform: capitalize;
     }
     .title {
         font-size: 18;

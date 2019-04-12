@@ -10,7 +10,7 @@
                             <StackLayout class="event-time" orientation="horizontal">
                                 <Label class="clock far">{{ 'fa-calendar-alt' | fonticon }}</Label>
                                 <StackLayout orientation="horizontal">
-                                    <Label :text="item.date+' 00:00:00' | moment($t('formatting.date'))"></Label>
+                                    <Label :text="humanizeDate(item.date, $t('formatting.date'))"></Label>
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
@@ -26,6 +26,7 @@
     import EventBus from '../helpers/EventBus'
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
+    import Dates from '../mixins/Dates'
 
     export default {
         data() {
@@ -35,7 +36,8 @@
         },
         mixins: [
             Connection,
-            LocalStorage
+            LocalStorage,
+            Dates
         ],
         created: function(){
             let self = this;

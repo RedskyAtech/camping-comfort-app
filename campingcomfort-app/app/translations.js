@@ -41,6 +41,7 @@ export function translations() {
                 forMoreInformation: 'For more information',
                 today: 'Today',
                 tomorrow: 'Tomorrow',
+                yesterday: 'Yesterday',
                 location: 'Location',
                 age: 'Age',
                 price: 'Price',
@@ -64,7 +65,7 @@ export function translations() {
                 emptyText: ''
             },
             myVacation: {
-                emptyTitle: 'No activities today',
+                emptyTitle: 'No upcoming activities',
                 emptyText: 'Create your own activity calendar by pressing the heart-button near an activity.'
             },
             reception: {
@@ -112,6 +113,7 @@ export function translations() {
                 forMoreInformation: 'Voor meer informatie',
                 today: 'Vandaag',
                 tomorrow: 'Morgen',
+                yesterday: 'Gisteren',
                 location: 'Locatie',
                 age: 'Leeftijd',
                 price: 'Kosten',
@@ -135,7 +137,7 @@ export function translations() {
                 emptyText: ''
             },
             myVacation: {
-                emptyTitle: 'Geen activiteiten vandaag',
+                emptyTitle: 'Geen aankomende activiteiten',
                 emptyText: 'Stel jouw eigen activiteitenprogramma samen door op het hartje bij een activiteit te drukken.'
             },
             reception: {

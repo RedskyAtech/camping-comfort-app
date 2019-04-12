@@ -2,7 +2,7 @@
     <StackLayout v-if="bg === 'transparent'" horizontalAlignment="right" verticalAlignment="center" class="fab transparent">
         <slot></slot>
     </StackLayout>
-    <CardView v-else horizontalAlignment="right" verticalAlignment="center" class="fab cardStyle" radius="90">
+    <CardView v-else horizontalAlignment="right" verticalAlignment="center" class="fab cardStyle" :radius="fabRadius">
         <slot></slot>
     </CardView>
 </template>
@@ -24,8 +24,6 @@
         border-color: #fff;
         border-width: 1;
     }
-    .btn-icon {
-    }
 </style>
 
 <script>
@@ -34,6 +32,16 @@
             bg: {
                 type: String,
                 default: 'default'
+            }
+        },
+        computed: {
+            fabRadius: function() {
+                if(this.$isAndroid) {
+                    return 90;
+                }
+                else {
+                    return 30;
+                }
             }
         }
     }
