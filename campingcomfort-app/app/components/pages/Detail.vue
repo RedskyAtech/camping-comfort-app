@@ -8,11 +8,15 @@
                     </GridLayout>
                     <GridLayout row="1" rows="auto" columns="auto,auto" class="timeframe" v-if="item.start_time !== undefined">
                         <Label col="0" class="clock far" verticalAlignment="center">{{ 'fa-clock' | fonticon }}</Label>
-                        <StackLayout col="1" orientation="horizontal" verticalAlignment="center">
+                        <StackLayout col="1" orientation="horizontal" verticalAlignment="center" v-if="item.is_all_day === false">
                             <Label :text="humanizeDate(item.start_date, 'dddd')+' '" class="day"></Label>
                             <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
                             <Label text=" - "></Label>
                             <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
+                        </StackLayout>
+                        <StackLayout col="1" orientation="horizontal" verticalAlignment="center" v-else>
+                            <Label :text="humanizeDate(item.start_date, 'dddd')+' '" class="day"></Label>
+                            <Label :text="'- '+$t('general.allDay')"></Label>
                         </StackLayout>
                     </GridLayout>
                     <GridLayout row="1" rows="auto" columns="auto,auto" class="timeframe" v-if="item.date !== undefined">
@@ -218,6 +222,7 @@
                         // Show the cached version first to prevent flickering
                         if(self.keyExistsInStore('campingActivity_'+self.id)) {
                             self.item = self.getObjectFromStore('campingActivity_'+self.id);
+                            self.isLikable = true;
                         }
 
                         // Set liked from storage
@@ -245,6 +250,10 @@
                     else {
                         if(self.keyExistsInStore('campingActivity_'+self.id)){
                             self.item = self.getObjectFromStore('campingActivity_'+self.id);
+                            self.isLikable = true;
+
+                            // Set liked from storage
+                            self.liked = self.isLiked(self.id);
                         }
                         else {
                             self.item = {};

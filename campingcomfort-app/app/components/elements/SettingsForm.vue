@@ -98,9 +98,19 @@
                 }
             },
             openLanguagesModal(){
-                this.$showModal(LanguagesModal, {
-                    fullscreen: true
-                });
+                if(this.hasInternetConnection()) {
+                    this.$showModal(LanguagesModal, {
+                        fullscreen: true
+                    });
+                }
+                else {
+                    alert({
+                        title: this.$t('errors.offline.title'),
+                        message: this.$t('errors.offline.message'),
+                        okButtonText: this.$t('errors.offline.buttonText')
+                    }).then(() => {
+                    });
+                }
             },
             save(){
 
@@ -116,6 +126,12 @@
 
                 // Change the vue.js locale
                 this.$i18n.locale = this.language;
+
+                // Update the My Vacation list
+                EventBus.$emit('updateMyVacation');
+
+                // Update the News list
+                EventBus.$emit('updateNews');
 
                 this.$emit('saved');
             },

@@ -48,9 +48,6 @@
                     // Set the component data key if available
                     this.liked = true;
 
-                    // Force updating the data in other components
-                    EventBus.$emit('reInit');
-
                     // Show a toast
                     new Toasty(this.$t('detail.liked')).show();
                 }
@@ -69,9 +66,6 @@
 
                     // Set the component data key if available
                     this.liked = false;
-
-                    // Force updating the data in other components
-                    EventBus.$emit('reInit');
                 }
             },
 
@@ -88,6 +82,9 @@
                 else {
                     this.like(id);
                 }
+
+                // Update the My Vacation list
+                EventBus.$emit('updateMyVacation');
             }
         }
     }

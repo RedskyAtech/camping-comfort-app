@@ -9,10 +9,13 @@
                             <StackLayout verticalAlignment="center">
                                 <StackLayout class="event-time" orientation="horizontal">
                                     <Label class="clock far">{{ 'fa-clock' | fonticon }}</Label>
-                                    <StackLayout orientation="horizontal">
+                                    <StackLayout orientation="horizontal" v-if="item.is_all_day === false">
                                         <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
                                         <Label text=" - "></Label>
                                         <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
+                                    </StackLayout>
+                                    <StackLayout v-else>
+                                        <Label :text="$t('general.allDay')"></Label>
                                     </StackLayout>
                                 </StackLayout>
                                 <Label class="event-title" :text="item.title"></Label>
@@ -52,9 +55,6 @@
         created: function(){
             let self = this;
             self.loadData(this.date);
-            EventBus.$on('reInit', function(){
-                self.loadData(self.date);
-            });
         },
         watch: {
             date: function(val) {

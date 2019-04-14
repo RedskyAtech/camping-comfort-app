@@ -1,24 +1,27 @@
 <template>
-    <ListView for="item in listItems" @itemLoading="onItemLoading">
-        <v-template>
-            <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
-                <GridLayout rows="auto" columns="75,*">
-                    <WebImage col="0" :src="item.image"></WebImage>
-                    <StackLayout col="1" orientation="horizontal" class="event-label">
-                        <StackLayout verticalAlignment="center">
-                            <Label class="event-title" :text="item.title" textWrap="true"></Label>
-                            <StackLayout class="event-time" orientation="horizontal">
-                                <Label class="clock far">{{ 'fa-calendar-alt' | fonticon }}</Label>
-                                <StackLayout orientation="horizontal">
-                                    <Label :text="humanizeDate(item.date, $t('formatting.date'))"></Label>
+    <GridLayout rows="*">
+        <ListView row="0" for="item in listItems" @itemLoading="onItemLoading">
+            <v-template>
+                <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
+                    <GridLayout rows="auto" columns="75,*">
+                        <WebImage col="0" :src="item.image"></WebImage>
+                        <StackLayout col="1" orientation="horizontal" class="event-label">
+                            <StackLayout verticalAlignment="center">
+                                <Label class="event-title" :text="item.title" textWrap="true"></Label>
+                                <StackLayout class="event-time" orientation="horizontal">
+                                    <Label class="clock far">{{ 'fa-calendar-alt' | fonticon }}</Label>
+                                    <StackLayout orientation="horizontal">
+                                        <Label :text="humanizeDate(item.date, $t('formatting.date'))"></Label>
+                                    </StackLayout>
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
-                    </StackLayout>
-                </GridLayout>
-            </CardView>
-        </v-template>
-    </ListView>
+                    </GridLayout>
+                </CardView>
+            </v-template>
+        </ListView>
+        <ResultPlaceHolder row="0" v-if="listItems.length === 0" iconLabelClass="far" iconClass="fa-newspaper" :title="$t('news.emptyTitle')"></ResultPlaceHolder>
+    </GridLayout>
 </template>
 
 <script>
@@ -27,8 +30,12 @@
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
     import Dates from '../mixins/Dates'
+    import ResultPlaceHolder from '../elements/ResultPlaceHolder'
 
     export default {
+        components: {
+            ResultPlaceHolder
+        },
         data() {
             return {
                 listItems: []
@@ -42,7 +49,9 @@
         created: function(){
             let self = this;
             self.loadData();
-            EventBus.$on('reInit', function(){
+
+            // Update the News list
+            EventBus.$on('updateNews', function() {
                 self.loadData();
             });
         },

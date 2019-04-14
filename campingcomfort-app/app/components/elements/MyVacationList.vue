@@ -10,10 +10,13 @@
                                 <StackLayout class="event-time" orientation="horizontal">
                                     <Label class="clock far" v-if="$moment(item.start_date).format('YYYY-MM-DD') === $moment().format('YYYY-MM-DD')">{{ 'fa-clock' | fonticon }}</Label>
                                     <Label class="clock far" v-else>{{ 'fa-calendar-alt' | fonticon }}</Label>
-                                    <StackLayout orientation="horizontal">
+                                    <StackLayout orientation="horizontal" v-if="item.is_all_day === false">
                                         <Label :text="startDateTime(item.start_date, item.start_time)"></Label>
                                         <Label text=" - "></Label>
                                         <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
+                                    </StackLayout>
+                                    <StackLayout v-else>
+                                        <Label :text="allDayEventDay(item)"></Label>
                                     </StackLayout>
                                 </StackLayout>
                                 <Label class="event-title" :text="item.title"></Label>
@@ -71,12 +74,52 @@
         created: function(){
             let self = this;
             self.loadData();
-            EventBus.$on('reInit', function(){
+
+            // Update the My Vacation list
+            EventBus.$on('updateMyVacation', function() {
                 self.loadData();
             });
         },
         methods: {
 
+            /**
+             * Humanize the day string of an all day event
+             *
+             * @param item
+             * @returns {string}
+             */
+            allDayEventDay(item) {
+                let startDate = this.$moment(item.start_date);
+                startDate.set('hour', 0);
+                startDate.set('minute', 0);
+                startDate.set('second', 0);
+                startDate.set('millisecond', 0);
+
+                let today = this.$moment();
+                today.set('hour', 0);
+                today.set('minute', 0);
+                today.set('second', 0);
+                today.set('millisecond', 0);
+
+                let str = '';
+                if(startDate <= today) {
+                    str += this.humanizeDate(today.format('YYYY-MM-DD'), this.$t('formatting.date'));
+                }
+                else {
+                    str += this.humanizeDate(startDate.format('YYYY-MM-DD'), this.$t('formatting.date'));
+                }
+                str += ' - '+this.$t('general.allDay');
+
+                return str;
+            },
+
+            /**
+             * Humanize the starting date
+             *
+             * @param startDate
+             * @param startTime
+             * @returns {string}
+             */
             startDateTime: function(startDate, startTime) {
                 return this.humanizeDate(startDate, 'dddd')+' '+this.$moment('2000-01-01 '+startTime).format(this.$t('formatting.time'));
             },

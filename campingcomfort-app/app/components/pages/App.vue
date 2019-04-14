@@ -49,6 +49,7 @@
     import MapModal from '../elements/MapModal'
     import WifiModal from '../elements/WifiModal'
     import RouteModal from '../elements/RouteModal'
+    import LocalStorage from '../mixins/LocalStorage'
 
     export default {
         data() {
@@ -58,7 +59,8 @@
         },
         mixins: [
             Responsive,
-            StatusBar
+            StatusBar,
+            LocalStorage
         ],
         components: {
 
@@ -86,11 +88,6 @@
             // Listen to open-modal requests
             EventBus.$on('openModal', function(data){
                 self.openModal(data.page, data.props);
-            });
-
-            // Listen to open-modal requests
-            EventBus.$on('hideStatusBar', function(data){
-//                self.statusBar('hide');
             });
 
             // Listen to go back navigation requests

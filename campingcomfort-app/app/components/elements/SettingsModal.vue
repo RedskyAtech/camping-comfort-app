@@ -24,7 +24,7 @@
         },
         methods: {
             afterSave() {
-                EventBus.$emit('reInit');
+                EventBus.$emit('reInitHome');
                 this.closeModal();
             },
             closeModal: function(){

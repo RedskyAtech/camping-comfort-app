@@ -10,7 +10,7 @@
                             <GridLayout row="0" rows="auto,*" columns="*,auto">
                                 <StackLayout row="0" col="0">
                                     <StackLayout class="btn-container">
-                                        <StackLayout class="btn wifi-btn" v-if="connectionType !== 'wifi'" @tap="toWifi">
+                                        <StackLayout class="btn wifi-btn" @tap="toWifi">
                                             <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
                                         </StackLayout>
                                         <StackLayout class="btn contact-btn" @tap="toMap" v-if="plan">
@@ -89,14 +89,11 @@
         created: function(){
             let self = this;
 
-            // Hide the status bar
-            EventBus.$emit('hideStatusBar');
-
             // Initialize
             self.init();
 
             // Listen to a clear storage event
-            EventBus.$on('reInit', function(){
+            EventBus.$on('reInitHome', function(){
                 self.init();
             });
         },

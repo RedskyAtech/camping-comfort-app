@@ -1,6 +1,9 @@
 export function translations() {
     return {
         en: {
+            general: {
+                allDay: 'All day'
+            },
             formatting: {
                 time: 'h.mm a',
                 date: 'YYYY-MM-DD'
@@ -68,11 +71,17 @@ export function translations() {
                 emptyTitle: 'No upcoming activities',
                 emptyText: 'Create your own activity calendar by pressing the heart-button near an activity.'
             },
+            news: {
+                emptyTitle: 'No news items'
+            },
             reception: {
                 title: 'Reception'
             }
         },
         nl: {
+            general: {
+                allDay: 'Hele dag'
+            },
             formatting: {
                 time: 'HH:mm',
                 date: 'DD-MM-YYYY'
@@ -139,6 +148,9 @@ export function translations() {
             myVacation: {
                 emptyTitle: 'Geen aankomende activiteiten',
                 emptyText: 'Stel jouw eigen activiteitenprogramma samen door op het hartje bij een activiteit te drukken.'
+            },
+            news: {
+                emptyTitle: 'Geen nieuwsberichten'
             },
             reception: {
                 title: 'Receptie'
