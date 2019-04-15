@@ -89,7 +89,7 @@ export function translations() {
                 emptyTitle: 'No news items'
             },
             reception: {
-                title: 'Reception'
+                title: 'Contact with reception'
             }
         },
         nl: {
@@ -181,7 +181,7 @@ export function translations() {
                 emptyTitle: 'Geen nieuwsberichten'
             },
             reception: {
-                title: 'Receptie'
+                title: 'Contact met de receptie'
             }
         }
     }

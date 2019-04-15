@@ -44,7 +44,7 @@
     import Nearby from '../pages/Nearby'
     import Events from '../pages/Events'
     import Detail from '../pages/Detail'
-    import ComingSoon from '../pages/ComingSoon'
+    import Reception from '../pages/Reception'
     import SettingsModal from '../elements/SettingsModal'
     import MapModal from '../elements/MapModal'
     import WifiModal from '../elements/WifiModal'
@@ -71,7 +71,7 @@
             Nearby: Nearby,
             Events: Events,
             Detail: Detail,
-            ComingSoon: ComingSoon,
+            Reception: Reception,
             SettingsModal: SettingsModal,
             MapModal: MapModal,
             WifiModal: WifiModal,
@@ -122,10 +122,7 @@
                     Component = Detail;
                 }
                 if(page === 'reception'){
-                    Component = ComingSoon;
-                }
-                if(page === 'coming-soon'){
-                    Component = ComingSoon;
+                    Component = Reception;
                 }
                 if(switchTab === true){
                     this.$navigateTo(Component, {
@@ -198,10 +195,7 @@
                 EventBus.$emit('navigate', {
                     tab: 5,
                     page: 'reception',
-                    switchTab: true,
-                    props: {
-                        title:  this.$t('reception.title')
-                    }
+                    switchTab: true
                 });
             }
         }

@@ -1,19 +1,39 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <GridLayout rows="*" columns="*" class="page">
-            <ScrollView row="0" col="0">
-                <StackLayout class="content" verticalAlignment="top">
-                    <Label class="title" :text="$t('wifi.title')"></Label>
-                    <Label class="text" :text="item.wifi_text" textWrap="true"></Label>
-                    <StackLayout class="btn-container" v-if="item.wifi_code">
-                        <StackLayout class="btn copy-btn" @tap="copyToClipboard">
-                            <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-clipboard' | fonticon }}</Label>
-                            <Label class="btn-text" :text="$t('wifi.copy')" verticalAlignment="center"></Label>
+        <GridLayout rows="auto,*" columns="*">
+            <StackLayout row="0" class="title-container">
+                <Label :text="$t('reception.title')"></Label>
+            </StackLayout>
+            <ScrollView row="1" verticalAlignment="top">
+                <StackLayout>
+                    <StackLayout class="content">
+                        <Label class="text" :text="item.reception_text" textWrap="true"></Label>
+                        <StackLayout class="form">
+                            <StackLayout class="input-field">
+                                <Label text="Name" returnKeyType="next" class="label font-weight-bold m-b-5" />
+                                <TextField class="input"></TextField>
+                                <StackLayout class="hr-light"></StackLayout>
+                            </StackLayout>
+                            <StackLayout keyboardType="number" class="input-field">
+                                <Label text="Pitch #" returnKeyType="next" class="label font-weight-bold m-b-5" />
+                                <TextField class="input"></TextField>
+                                <StackLayout class="hr-light"></StackLayout>
+                            </StackLayout>
+                            <StackLayout class="input-field">
+                                <Label text="Phone number" returnKeyType="next" keyboardType="phone" class="label font-weight-bold m-b-5" />
+                                <TextField class="input"></TextField>
+                                <StackLayout class="hr-light"></StackLayout>
+                            </StackLayout>
+                            <StackLayout class="input-field">
+                                <Label text="Message" returnKeyType="done" class="label font-weight-bold m-b-5" />
+                                <TextView class="input"></TextView>
+                                <StackLayout class="hr-light"></StackLayout>
+                            </StackLayout>
+                            <Button text="Send message" class="btn btn-primary"></Button>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
-            <Fab verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="closeModal"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></GridLayout></Fab>
         </GridLayout>
     </Page>
 </template>
@@ -24,25 +44,26 @@
     import EventBus from '../helpers/EventBus'
     import Connection from '../mixins/Connection'
     import Responsive from '../mixins/Responsive'
-    import Fab from '../elements/Fab'
     import LocalStorage from '../mixins/LocalStorage'
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
 
     export default {
+        data() {
+            return {
+                item: {},
+                form: {
+                    name: '',
+                    location: '',
+                    message: ''
+                }
+            }
+        },
         mixins: [
             Responsive,
             Connection,
             LocalStorage
         ],
-        components: {
-            Fab: Fab
-        },
-        data: function() {
-            return {
-                item: {},
-            }
-        },
-        mounted: function(){
+        mounted: function() {
             this.init();
         },
         methods: {
@@ -97,51 +118,38 @@
                         }, 500);
                     }
                 }
-            },
-            copyToClipboard: function() {
-                let self = this;
-                let clipboard = require("nativescript-clipboard");
-                clipboard.setText(this.item.wifi_code).then(function() {
-                    TNSFancyAlert.showSuccess(
-                        self.$t('wifi.alert.title'),
-                        self.$t('wifi.alert.message'),
-                        self.$t('wifi.alert.buttonText')
-                    );
-                })
-            },
-            closeModal: function(){
-                this.$modal.close();
             }
         }
     }
 </script>
 
 <style scoped>
-    Page, .page {
-        background: #103029;
+
+    /* Title */
+    .title-container {
+        background-color: #f8f8f8;
+        text-align: center;
+        font-weight: 700;
+        padding: 12.5;
+        border-bottom-width: 1;
+        border-color: #e5e5e5;
     }
     .content {
-        color: #fff;
-        padding: 25 12.5;
-    }
-    .title {
-        font-size: 18;
-        font-weight: 700;
-        padding-bottom: 10;
+        padding: 25;
     }
     .text {
-        opacity: 0.75;
+        opacity: 0.5;
         line-height: 5;
     }
-    .btn-container {
-        padding-top: 20;
-        orientation: horizontal;
+    .form {
+        margin-top: 20;
     }
-    .copy-btn {
-        border-color: #fff;
+    .input-field {
+        margin-left: 0;
+        margin-right: 0;
     }
-    .copy-btn .btn-icon,
-    .copy-btn .btn-text {
-        color: #fff;
+    .btn {
+        margin-left: 0;
+        margin-right: 0;
     }
 </style>

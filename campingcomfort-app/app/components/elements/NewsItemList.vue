@@ -93,13 +93,13 @@
                     else {
                         self.listItems = [];
 
-                        setTimeout(function(){
+                        /*setTimeout(function(){
                             TNSFancyAlert.showError(
                                 self.$t('errors.offline.title'),
                                 self.$t('errors.offline.message'),
                                 self.$t('errors.offline.buttonText')
                             );
-                        }, 500);
+                        }, 500);*/
                     }
                 }
             },

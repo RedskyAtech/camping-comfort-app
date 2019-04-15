@@ -5,15 +5,15 @@
                 <StackLayout height="100%">
                     <GridLayout rows="auto,*">
                         <GridLayout rows="*" row="0" class="hero-grid">
-                            <WebImage row="0" :src="heroImage" class="hero-image"></WebImage>
+                            <WebImage row="0" :src="settings.home_image" class="hero-image"></WebImage>
                             <StackLayout row="0" class="hero-overlay"></StackLayout>
                             <GridLayout row="0" rows="auto,*" columns="*,auto">
                                 <StackLayout row="0" col="0">
                                     <StackLayout class="btn-container">
-                                        <StackLayout class="btn wifi-btn" @tap="toWifi">
+                                        <StackLayout class="btn wifi-btn" @tap="toWifi" v-if="settings.wifi_code">
                                             <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
                                         </StackLayout>
-                                        <StackLayout class="btn contact-btn" @tap="toMap" v-if="plan">
+                                        <StackLayout class="btn contact-btn" @tap="toMap" v-if="settings.plan">
                                             <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
                                             <Label class="btn-text" :text="$t('home.map')" verticalAlignment="center"></Label>
                                         </StackLayout>
@@ -68,14 +68,13 @@
     import MyVacationList from '../elements/MyVacationList'
     import NewsItemList from '../elements/NewsItemList'
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
+    import {exit} from 'nativescript-exit';
 
     export default {
         data() {
             return {
                 activeTab: 1,
-                heroImage: '~/assets/images/placeholder.jpg',
-                heroTitle: '',
-                plan: ''
+                settings: {}
             }
         },
         mixins: [
@@ -87,7 +86,7 @@
             'MyVacationList': MyVacationList,
             'NewsItemList': NewsItemList
         },
-        created: function(){
+        mounted: function(){
             let self = this;
 
             // Initialize
@@ -111,45 +110,42 @@
                 if(this.hasInternetConnection()){
 
                     // Show the cached version first to prevent flickering
-                    if(self.keyExistsInStore('home_heroImage')) {
-                        self.heroImage = self.getStringFromStore('home_heroImage', '~/assets/images/placeholder.jpg');
-                    }
-                    if(self.keyExistsInStore('plan')) {
-                        self.plan = self.getStringFromStore('plan');
+                    if(self.keyExistsInStore('settings')) {
+                        self.settings = self.getObjectFromStore('settings');
                     }
 
                     // Get the live data
                     http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign and store the hero image
-                        if(result.appContent.home_image){
-                            self.heroImage = result.appContent.home_image;
-                            self.storeString('home_heroImage', self.heroImage);
+                        if(result.appContent){
+                            self.settings = result.appContent;
+                            self.storeObject('settings', self.settings);
                         }
                         else {
-                            self.heroImage = '~/assets/images/placeholder.jpg';
-                            self.removeKeyFromStore('home_heroImage');
-                        }
-
-                        // Assign and store the map
-                        if(result.appContent.plan){
-                            self.plan = result.appContent.plan;
-                            self.storeString('plan', self.plan);
-                        }
-                        else {
-                            self.plan = '';
-                            self.removeKeyFromStore('plan');
+                            self.settings = {};
+                            self.removeKeyFromStore('settings');
                         }
                     }, error => {
-                        self.heroImage = '~/assets/images/placeholder.jpg';
-                        self.removeKeyFromStore('home_heroImage');
-                        self.plan = '';
-                        self.removeKeyFromStore('plan');
+                        self.settings = {};
+                        self.removeKeyFromStore('settings');
                     });
                 }
                 else {
-                    self.heroImage = self.getStringFromStore('home_heroImage', '~/assets/images/placeholder.jpg');
-                    self.plan = self.getStringFromStore('plan');
+                    if(self.keyExistsInStore('settings')) {
+                        self.settings = self.getObjectFromStore('settings');
+                    }
+                    else {
+                        setTimeout(function() {
+                            TNSFancyAlert.showError(
+                                self.$t('errors.offline.title'),
+                                self.$t('errors.offline.message'),
+                                self.$t('errors.offline.buttonText')
+                            ).then(() => {
+                                // Close the app
+                            });
+                        }, 500);
+                    }
                 }
             },
             activateTab: function(tab){
@@ -161,6 +157,10 @@
                     page: 'coming-soon'
                 });
             },
+
+            /**
+             * Open the WiFi modal
+             */
             toWifi: function(){
                 EventBus.$emit('openModal', {
                     page: 'wifi'
@@ -174,7 +174,7 @@
                     });
                 }
                 else {
-                    if(self.keyExistsInStore('plan')){
+                    if(self.keyExistsInStore('settings')){
                         EventBus.$emit('openModal', {
                             page: 'map'
                         });

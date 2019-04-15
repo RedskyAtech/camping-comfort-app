@@ -90,6 +90,7 @@
                     });
                 }
                 else {
+                    let self = this;
                     TNSFancyAlert.showError(
                         self.$t('errors.offline.title'),
                         self.$t('errors.offline.message'),
@@ -104,6 +105,7 @@
                     });
                 }
                 else {
+                    let self = this;
                     TNSFancyAlert.showError(
                         self.$t('errors.offline.title'),
                         self.$t('errors.offline.message'),
