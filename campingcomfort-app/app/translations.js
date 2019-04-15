@@ -44,6 +44,15 @@ export function translations() {
                 myVacation: 'My vacation',
                 news: 'Latest news'
             },
+            wifi: {
+                title: 'Connecting to WiFi',
+                copy: 'Copy',
+                alert: {
+                    title: 'WiFi password copied',
+                    message: 'You can paste the password when your device asks you to enter it during WiFi setup.',
+                    buttonText: 'OK'
+                }
+            },
             detail: {
                 readMore: 'Read more',
                 forMoreInformation: 'For more information',
@@ -126,6 +135,15 @@ export function translations() {
                 map: 'Plattegrond',
                 myVacation: 'Mijn vakantie',
                 news: 'Laatste nieuws'
+            },
+            wifi: {
+                title: 'Verbinden met WiFi',
+                copy: 'Kopiëren',
+                alert: {
+                    title: 'WiFi wachtwoord gekopieerd',
+                    message: 'Je kunt het wachtwoord "plakken" zodra jouw apparaat vraagt deze in te geven tijdens het instellen.',
+                    buttonText: 'OK'
+                }
             },
             detail: {
                 readMore: 'Lees meer',
