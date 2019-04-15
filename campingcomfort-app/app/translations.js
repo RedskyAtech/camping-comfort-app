@@ -19,6 +19,11 @@ export function translations() {
                     title: 'No internet connection',
                     message: 'Please activate your internet connection to continue.',
                     buttonText: 'OK'
+                },
+                inactiveCamping: {
+                    title: 'Please choose another camping',
+                    message: 'This camping does not yet provide mobile service through Camping Comfort.',
+                    buttonText: 'OK'
                 }
             },
             settings: {
@@ -96,6 +101,11 @@ export function translations() {
                 offline: {
                     title: 'Geen internetverbinding',
                     message: 'Maak verbinding met het internet om door te gaan.',
+                    buttonText: 'OK'
+                },
+                inactiveCamping: {
+                    title: 'Selecteer een andere camping',
+                    message: 'Deze camping levert nog geen mobiele service via Camping Comfort.',
                     buttonText: 'OK'
                 }
             },

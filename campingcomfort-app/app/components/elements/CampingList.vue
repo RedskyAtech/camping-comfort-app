@@ -43,6 +43,7 @@
     import EventBus from '../helpers/EventBus'
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
+    import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
 
     export default {
         data() {
@@ -100,12 +101,11 @@
                         self.plan = '';
 
                         setTimeout(function(){
-                            alert({
-                                title: self.$t('errors.offline.title'),
-                                message: self.$t('errors.offline.message'),
-                                okButtonText: self.$t('errors.offline.buttonText')
-                            }).then(() => {
-                            });
+                            TNSFancyAlert.showError(
+                                self.$t('errors.offline.title'),
+                                self.$t('errors.offline.message'),
+                                self.$t('errors.offline.buttonText')
+                            );
                         }, 500);
                     }
                 }
@@ -147,12 +147,11 @@
                         self.listItems = [];
 
                         setTimeout(function(){
-                            alert({
-                                title: self.$t('errors.offline.title'),
-                                message: self.$t('errors.offline.message'),
-                                okButtonText: self.$t('errors.offline.buttonText')
-                            }).then(() => {
-                            });
+                            TNSFancyAlert.showError(
+                                self.$t('errors.offline.title'),
+                                self.$t('errors.offline.message'),
+                                self.$t('errors.offline.buttonText')
+                            );
                         }, 500);
                     }
                 }
@@ -179,12 +178,11 @@
                 }
                 else {
                     setTimeout(function(){
-                        alert({
-                            title: self.$t('errors.offline.title'),
-                            message: self.$t('errors.offline.message'),
-                            okButtonText: self.$t('errors.offline.buttonText')
-                        }).then(() => {
-                        });
+                        TNSFancyAlert.showError(
+                            self.$t('errors.offline.title'),
+                            self.$t('errors.offline.message'),
+                            self.$t('errors.offline.buttonText')
+                        );
                     }, 500);
                 }
             },
@@ -199,12 +197,11 @@
                     }
                     else {
                         setTimeout(function(){
-                            alert({
-                                title: self.$t('errors.offline.title'),
-                                message: self.$t('errors.offline.message'),
-                                okButtonText: self.$t('errors.offline.buttonText')
-                            }).then(() => {
-                            });
+                            TNSFancyAlert.showError(
+                                self.$t('errors.offline.title'),
+                                self.$t('errors.offline.message'),
+                                self.$t('errors.offline.buttonText')
+                            );
                         }, 500);
                     }
                 }

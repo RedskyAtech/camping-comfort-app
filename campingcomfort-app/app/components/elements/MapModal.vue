@@ -15,6 +15,7 @@
     import Connection from '../mixins/Connection'
     import Fab from '../elements/Fab'
     import LocalStorage from '../mixins/LocalStorage'
+    import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
 
     export default {
         mixins: [
@@ -77,12 +78,11 @@
                     // Offline with no storage data
                     else {
                         setTimeout(function(){
-                            alert({
-                                title: self.$t('errors.offline.title'),
-                                message: self.$t('errors.offline.message'),
-                                okButtonText: self.$t('errors.offline.buttonText')
-                            }).then(() => {
-                            });
+                            TNSFancyAlert.showError(
+                                self.$t('errors.offline.title'),
+                                self.$t('errors.offline.message'),
+                                self.$t('errors.offline.buttonText')
+                            );
                         }, 500);
                     }
                 }

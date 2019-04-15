@@ -67,6 +67,7 @@
     import LocalStorage from '../mixins/LocalStorage'
     import MyVacationList from '../elements/MyVacationList'
     import NewsItemList from '../elements/NewsItemList'
+    import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
 
     export default {
         data() {
@@ -180,12 +181,11 @@
                     }
                     else {
                         setTimeout(function(){
-                            alert({
-                                title: self.$t('errors.offline.title'),
-                                message: self.$t('errors.offline.message'),
-                                okButtonText: self.$t('errors.offline.buttonText')
-                            }).then(() => {
-                            });
+                            TNSFancyAlert.showError(
+                                self.$t('errors.offline.title'),
+                                self.$t('errors.offline.message'),
+                                self.$t('errors.offline.buttonText')
+                            );
                         }, 500);
                     }
                 }

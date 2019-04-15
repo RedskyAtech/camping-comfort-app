@@ -35,6 +35,7 @@
     import LanguagesModal from '../elements/LanguagesModal';
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
+    import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
 
     export default {
         components: {
@@ -89,12 +90,11 @@
                     });
                 }
                 else {
-                    alert({
-                        title: this.$t('errors.offline.title'),
-                        message: this.$t('errors.offline.message'),
-                        okButtonText: this.$t('errors.offline.buttonText')
-                    }).then(() => {
-                    });
+                    TNSFancyAlert.showError(
+                        self.$t('errors.offline.title'),
+                        self.$t('errors.offline.message'),
+                        self.$t('errors.offline.buttonText')
+                    );
                 }
             },
             openLanguagesModal(){
@@ -104,12 +104,11 @@
                     });
                 }
                 else {
-                    alert({
-                        title: this.$t('errors.offline.title'),
-                        message: this.$t('errors.offline.message'),
-                        okButtonText: this.$t('errors.offline.buttonText')
-                    }).then(() => {
-                    });
+                    TNSFancyAlert.showError(
+                        self.$t('errors.offline.title'),
+                        self.$t('errors.offline.message'),
+                        self.$t('errors.offline.buttonText')
+                    );
                 }
             },
             save(){

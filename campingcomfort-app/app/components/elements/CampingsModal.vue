@@ -11,7 +11,7 @@
             </StackLayout>
             <ListView row="1" for="camping in campings">
                 <v-template>
-                    <StackLayout class="result" @tap="select(camping.id, camping.name)" :class="[{'active': camping.active === 1 }]">
+                    <StackLayout class="result" @tap="select(camping)" :class="[{'active': camping.active === 1 }]">
                         <Label :text="camping.name" class="name" />
                         <Label :text="camping.locality + ', ' + camping.country" class="place"></Label>
                     </StackLayout>
@@ -27,6 +27,7 @@
     import LocalStorage from '../mixins/LocalStorage'
     import * as http from 'http'
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
+    import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
 
     // Minimal delay between search requests
     const delay = 500;
@@ -68,12 +69,21 @@
                     console.log(e);
                 });
             },
-            select: function(id, name){
-                EventBus.$emit('campingSelected', {
-                    'id': id,
-                    'name': name
-                });
-                this.$modal.close();
+            select: function(camping){
+                if(camping.active === 1) {
+                    EventBus.$emit('campingSelected', {
+                        'id': camping.id,
+                        'name': camping.name
+                    });
+                    this.$modal.close();
+                }
+                else {
+                    TNSFancyAlert.showError(
+                        this.$t('errors.inactiveCamping.title'),
+                        this.$t('errors.inactiveCamping.message'),
+                        this.$t('errors.inactiveCamping.buttonText')
+                    );
+                }
             }
         }
     }
