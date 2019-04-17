@@ -2,7 +2,7 @@
     <ListView for="item in listItems" @itemLoading="onItemLoading">
         <v-template if="$index === 0">
             <StackLayout>
-                <StackLayout class="btn-container">
+                <StackLayout class="btn-container" horizontalAlignment="center">
                     <StackLayout class="btn wifi-btn" @tap="toWifi">
                         <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
                     </StackLayout>
@@ -231,7 +231,7 @@
     /* Buttons */
     .btn-container {
         orientation: horizontal;
-        padding: 12.5 12.5 0 12.5;
+        padding: 12.5 0 0 0;
     }
     .btn-container .btn {
         margin-bottom: 12.5;

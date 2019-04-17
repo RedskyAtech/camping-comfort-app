@@ -10,26 +10,31 @@
                         <Label class="text" :text="item.reception_text" textWrap="true"></Label>
                         <StackLayout class="form">
                             <StackLayout class="input-field">
-                                <Label :text="$t('reception.name')" returnKeyType="next" class="label font-weight-bold m-b-5" />
-                                <TextField class="input"></TextField>
-                                <StackLayout class="hr-light"></StackLayout>
-                            </StackLayout>
-                            <StackLayout keyboardType="number" class="input-field">
-                                <Label :text="$t('reception.pitch')" returnKeyType="next" class="label font-weight-bold m-b-5" />
-                                <TextField class="input"></TextField>
+                                <Label :text="$t('reception.name')" class="label font-weight-bold m-b-5" />
+                                <TextField returnPress="doneTap" returnKeyType="done" class="input" v-model="form.name"></TextField>
                                 <StackLayout class="hr-light"></StackLayout>
                             </StackLayout>
                             <StackLayout class="input-field">
-                                <Label :text="$t('reception.phone')" returnKeyType="next" keyboardType="phone" class="label font-weight-bold m-b-5" />
-                                <TextField class="input"></TextField>
+                                <Label :text="$t('reception.pitch')" class="label font-weight-bold m-b-5" />
+                                <TextField returnPress="doneTap" returnKeyType="done" keyboardType="number" class="input" v-model="form.pitch"></TextField>
                                 <StackLayout class="hr-light"></StackLayout>
                             </StackLayout>
                             <StackLayout class="input-field">
-                                <Label :text="$t('reception.message')" returnKeyType="done" class="label font-weight-bold m-b-5" />
-                                <TextView class="input"></TextView>
+                                <Label :text="$t('reception.phone')" class="label font-weight-bold m-b-5" />
+                                <TextField returnPress="doneTap" returnKeyType="done" keyboardType="phone" class="input" v-model="form.phone"></TextField>
                                 <StackLayout class="hr-light"></StackLayout>
                             </StackLayout>
-                            <Button :text="$t('reception.sendMessage')" class="btn btn-primary"></Button>
+                            <StackLayout class="input-field">
+                                <Label :text="$t('reception.message')" class="label font-weight-bold m-b-5" />
+                                <TextView returnPress="doneTap" returnKeyType="done" class="input" v-model="form.message"></TextView>
+                                <StackLayout class="hr-light"></StackLayout>
+                            </StackLayout>
+                            <StackLayout class="btn-container" horizontalAlignment="center">
+                                <StackLayout class="btn send-btn" @tap="send">
+                                    <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-paper-plane' | fonticon }}</Label>
+                                    <Label class="btn-text" :text="$t('reception.sendMessage')" verticalAlignment="center"></Label>
+                                </StackLayout>
+                            </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
@@ -53,7 +58,8 @@
                 item: {},
                 form: {
                     name: '',
-                    location: '',
+                    pitch: '',
+                    phone: '',
                     message: ''
                 }
             }
@@ -67,6 +73,10 @@
             this.init();
         },
         methods: {
+            doneTap: function(args) {
+                let myTextField = args.object;
+                myTextField.dismissSoftInput();
+            },
             init: function(){
                 let self = this;
 
@@ -118,6 +128,45 @@
                         }, 500);
                     }
                 }
+            },
+            send: function() {
+
+                // Validation
+                let mandatoryFields = [];
+                if(this.form.name.length === 0) {
+                    mandatoryFields.push(this.$t('reception.name'))
+                }
+                if(this.form.message.length === 0) {
+                    mandatoryFields.push(this.$t('reception.message'))
+                }
+                if(mandatoryFields.length > 0) {
+                    let fieldsMsg = '';
+                    mandatoryFields.forEach(function (field) {
+                        fieldsMsg += '-'+field+'\r\n';
+                    });
+                    TNSFancyAlert.showError(
+                        this.$t('validation.mandatoryMessage'),
+                        fieldsMsg,
+                        this.$t('errors.offline.buttonText')
+                    );
+                }
+
+                // Send
+                else {
+
+                    // Reset the values
+                    this.form.name = '';
+                    this.form.pitch = '';
+                    this.form.phone = '';
+                    this.form.message = '';
+
+                    // Show an alert
+                    TNSFancyAlert.showSuccess(
+                        this.$t('reception.alert.title'),
+                        this.$t('reception.alert.text'),
+                        this.$t('reception.alert.buttonText')
+                    );
+                }
             }
         }
     }
@@ -154,8 +203,8 @@
         font-family: 'Avenir';
         font-weight: 500;
     }
-    .btn {
-        margin-left: 0;
-        margin-right: 0;
+    .btn-container {
+        orientation: horizontal;
+        padding: 12.5 0 0 0;
     }
 </style>

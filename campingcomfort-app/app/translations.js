@@ -95,6 +95,9 @@ export function translations() {
                 pitch: 'Pitch or accommodation #',
                 message: 'Message',
                 sendMessage: 'Send message'
+            },
+            validation: {
+                mandatoryMessage: 'Please enter the following fields:'
             }
         },
         nl: {
@@ -191,7 +194,15 @@ export function translations() {
                 phone: 'Telefoonnummer',
                 pitch: 'Campingplaats of accommodatie #',
                 message: 'Bericht',
-                sendMessage: 'Verstuur bericht'
+                sendMessage: 'Verstuur bericht',
+                alert: {
+                    title: 'Je bericht is verzonden',
+                    text: 'Wij zullen deze zo spoedig mogelijk in behandeling nemen.',
+                    buttonText: 'OK'
+                }
+            },
+            validation: {
+                mandatoryMessage: 'Vul a.u.b. de volgende velden in:'
             }
         }
     }
