@@ -89,7 +89,12 @@ export function translations() {
                 emptyTitle: 'No news items'
             },
             reception: {
-                title: 'Contact with reception'
+                title: 'Contact with reception',
+                name: 'Name',
+                phone: 'Phone number',
+                pitch: 'Pitch or accommodation #',
+                message: 'Message',
+                sendMessage: 'Send message'
             }
         },
         nl: {
@@ -181,7 +186,12 @@ export function translations() {
                 emptyTitle: 'Geen nieuwsberichten'
             },
             reception: {
-                title: 'Contact met de receptie'
+                title: 'Contact met de receptie',
+                name: 'Naam',
+                phone: 'Telefoonnummer',
+                pitch: 'Campingplaats of accommodatie #',
+                message: 'Bericht',
+                sendMessage: 'Verstuur bericht'
             }
         }
     }

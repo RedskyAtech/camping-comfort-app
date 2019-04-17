@@ -10,26 +10,26 @@
                         <Label class="text" :text="item.reception_text" textWrap="true"></Label>
                         <StackLayout class="form">
                             <StackLayout class="input-field">
-                                <Label text="Name" returnKeyType="next" class="label font-weight-bold m-b-5" />
+                                <Label :text="$t('reception.name')" returnKeyType="next" class="label font-weight-bold m-b-5" />
                                 <TextField class="input"></TextField>
                                 <StackLayout class="hr-light"></StackLayout>
                             </StackLayout>
                             <StackLayout keyboardType="number" class="input-field">
-                                <Label text="Pitch #" returnKeyType="next" class="label font-weight-bold m-b-5" />
+                                <Label :text="$t('reception.pitch')" returnKeyType="next" class="label font-weight-bold m-b-5" />
                                 <TextField class="input"></TextField>
                                 <StackLayout class="hr-light"></StackLayout>
                             </StackLayout>
                             <StackLayout class="input-field">
-                                <Label text="Phone number" returnKeyType="next" keyboardType="phone" class="label font-weight-bold m-b-5" />
+                                <Label :text="$t('reception.phone')" returnKeyType="next" keyboardType="phone" class="label font-weight-bold m-b-5" />
                                 <TextField class="input"></TextField>
                                 <StackLayout class="hr-light"></StackLayout>
                             </StackLayout>
                             <StackLayout class="input-field">
-                                <Label text="Message" returnKeyType="done" class="label font-weight-bold m-b-5" />
+                                <Label :text="$t('reception.message')" returnKeyType="done" class="label font-weight-bold m-b-5" />
                                 <TextView class="input"></TextView>
                                 <StackLayout class="hr-light"></StackLayout>
                             </StackLayout>
-                            <Button text="Send message" class="btn btn-primary"></Button>
+                            <Button :text="$t('reception.sendMessage')" class="btn btn-primary"></Button>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
@@ -147,6 +147,12 @@
     .input-field {
         margin-left: 0;
         margin-right: 0;
+    }
+    .input-field .label {
+        color: #191919;
+        opacity: 0.5;
+        font-family: 'Avenir';
+        font-weight: 500;
     }
     .btn {
         margin-left: 0;
