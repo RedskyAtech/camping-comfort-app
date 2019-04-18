@@ -168,8 +168,7 @@
                         headers: { "Content-Type": "application/json" },
                         content: data
                     }).then((response) => {
-//                        console.log(response.content.toString());
-                        result = response.content.toJSON();
+//                        result = response.content.toJSON();
 
                         // Reset the values
                         self.form.name = '';
