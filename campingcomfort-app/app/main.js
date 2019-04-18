@@ -27,6 +27,9 @@ TNSFontIcon.paths = {
 TNSFontIcon.loadCss();
 Vue.filter('fonticon', fonticon);
 
+// Keyboard IOS
+Vue.registerElement("PreviousNextView", () => require("nativescript-iqkeyboardmanager"). PreviousNextView)
+
 // Image Swipe
 Vue.registerElement('ImageSwipe', () => require('nativescript-image-swipe').ImageSwipe);
 

@@ -23,6 +23,7 @@
     "nativescript-fresco": "^5.2.0",
     "nativescript-gradient": "^2.0.1",
     "nativescript-image-swipe": "^4.0.1",
+    "nativescript-iqkeyboardmanager": "^1.4.0",
     "nativescript-platform-css": "^1.6.6",
     "nativescript-status-bar": "^1.1.1",
     "nativescript-theme-core": "^1.0.4",

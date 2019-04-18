@@ -26,7 +26,7 @@
                             </StackLayout>
                             <StackLayout class="input-field">
                                 <Label :text="$t('reception.message')" class="label font-weight-bold m-b-5" />
-                                <TextView returnPress="doneTap" returnKeyType="done" class="input" v-model="form.message"></TextView>
+                                <TextField returnPress="doneTap" returnKeyType="done" class="input" v-model="form.message"></TextField>
                                 <StackLayout class="hr-light"></StackLayout>
                             </StackLayout>
                             <StackLayout class="btn-container" horizontalAlignment="center">
@@ -131,6 +131,8 @@
             },
             send: function() {
 
+                let self = this;
+
                 // Validation
                 let mandatoryFields = [];
                 if(this.form.name.length === 0) {
@@ -147,25 +149,47 @@
                     TNSFancyAlert.showError(
                         this.$t('validation.mandatoryMessage'),
                         fieldsMsg,
-                        this.$t('errors.offline.buttonText')
+                        this.$t('errors.other.buttonText')
                     );
                 }
 
                 // Send
                 else {
+                    let campingId = this.getNumberFromStore('campingId');
+                    let data = JSON.stringify({
+                        name: self.form.name,
+                        pitch: self.form.pitch,
+                        phone: self.form.phone,
+                        message: self.form.message
+                    });
+                    request({
+                        url: "https://www.campingcomfort.app/api/"+campingId+"/reception-email",
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        content: data
+                    }).then((response) => {
+//                        console.log(response.content.toString());
+                        result = response.content.toJSON();
 
-                    // Reset the values
-                    this.form.name = '';
-                    this.form.pitch = '';
-                    this.form.phone = '';
-                    this.form.message = '';
+                        // Reset the values
+                        self.form.name = '';
+                        self.form.pitch = '';
+                        self.form.phone = '';
+                        self.form.message = '';
 
-                    // Show an alert
-                    TNSFancyAlert.showSuccess(
-                        this.$t('reception.alert.title'),
-                        this.$t('reception.alert.text'),
-                        this.$t('reception.alert.buttonText')
-                    );
+                        // Show an alert
+                        TNSFancyAlert.showSuccess(
+                            self.$t('reception.alert.title'),
+                            self.$t('reception.alert.text'),
+                            self.$t('reception.alert.buttonText')
+                        );
+                    }, (e) => {
+                        TNSFancyAlert.showError(
+                            self.$t('errors.other.title'),
+                            self.$t('errors.other.message'),
+                            self.$t('errors.other.buttonText')
+                        );
+                    });
                 }
             }
         }

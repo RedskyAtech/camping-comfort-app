@@ -24,6 +24,11 @@ export function translations() {
                     title: 'Please choose another camping',
                     message: 'This camping does not yet provide mobile service through Camping Comfort.',
                     buttonText: 'OK'
+                },
+                other: {
+                    title: 'Something went wrong',
+                    message: 'Please try again later.',
+                    buttonText: 'OK'
                 }
             },
             settings: {
@@ -94,7 +99,12 @@ export function translations() {
                 phone: 'Phone number',
                 pitch: 'Pitch or accommodation #',
                 message: 'Message',
-                sendMessage: 'Send message'
+                sendMessage: 'Send message',
+                alert: {
+                    title: 'Thank you',
+                    text: 'We will get back to you shortly.',
+                    buttonText: 'OK'
+                }
             },
             validation: {
                 mandatoryMessage: 'Please enter the following fields:'
@@ -123,6 +133,11 @@ export function translations() {
                 inactiveCamping: {
                     title: 'Selecteer een andere camping',
                     message: 'Deze camping levert nog geen mobiele service via Camping Comfort.',
+                    buttonText: 'OK'
+                },
+                other: {
+                    title: 'Er is iets fout gegaan',
+                    message: 'Probeer het later opnieuw.',
                     buttonText: 'OK'
                 }
             },
@@ -196,8 +211,8 @@ export function translations() {
                 message: 'Bericht',
                 sendMessage: 'Verstuur bericht',
                 alert: {
-                    title: 'Je bericht is verzonden',
-                    text: 'Wij zullen deze zo spoedig mogelijk in behandeling nemen.',
+                    title: 'Dank u wel',
+                    text: 'Wij nemen zo spoedig mogelijk contact met u op.',
                     buttonText: 'OK'
                 }
             },
