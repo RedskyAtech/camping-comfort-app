@@ -115,7 +115,8 @@
                     }
 
                     // Get the live data
-                    EventBus.$emit('startLoading');
+                    let loadingId = Date.now();
+                    EventBus.$emit('startLoading', loadingId);
                     http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign and store the hero image
@@ -129,13 +130,13 @@
                         }
 
                         // Hide the loader
-                        EventBus.$emit('stopLoading');
+                        EventBus.$emit('stopLoading', loadingId);
                     }, error => {
                         self.settings = {};
                         self.removeKeyFromStore('settings');
 
                         // Hide the loader
-                        EventBus.$emit('stopLoading');
+                        EventBus.$emit('stopLoading', loadingId);
                     });
                 }
                 else {

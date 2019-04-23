@@ -1,5 +1,5 @@
 <template>
-    <GridLayout row="0" col="0" rows="*" columns="*" class="loader" :class="[{ 'fade-in': loading === true, 'fade-out': loading === false }]">
+    <GridLayout row="0" col="0" rows="*" columns="*" class="loader" :class="[{ 'fade-in': loading.length > 0, 'fade-out': loading.length === 0 }]">
         <StackLayout row="0" col="0" width="30" height="30" verticalAlignment="center">
             <ActivityIndicator busy="true" />
         </StackLayout>
@@ -12,18 +12,22 @@
     export default {
         data: function() {
             return {
-                loading: ''
+                loading: []
             };
         },
         created: function() {
             let self = this;
 
             // Listen to loading states
-            EventBus.$on('startLoading', function(){
-                self.loading = true;
+            EventBus.$on('startLoading', function(loadingId){
+                self.loading.push(loadingId);
             });
-            EventBus.$on('stopLoading', function(){
-                self.loading = false;
+            EventBus.$on('stopLoading', function(loadingId){
+                for( let i = 0; i < self.loading.length; i++){
+                    if ( self.loading[i] === loadingId) {
+                        self.loading.splice(i, 1);
+                    }
+                }
             });
         }
     }

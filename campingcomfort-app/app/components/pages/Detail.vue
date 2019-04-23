@@ -144,6 +144,8 @@
                         }
 
                         // Get the live data
+                        let loadingId = Date.now();
+                        EventBus.$emit('startLoading', loadingId);
                         getJSON("https://www.campingcomfort.app/api/"+campingId+"/news-items/"+lang+"/"+self.id).then((r) => {
                             if(r.newsItem) {
                                 self.item = r.newsItem;
@@ -153,9 +155,11 @@
                                 self.item = {};
                                 self.removeKeyFromStore('newsItem_'+self.id);
                             }
+                            EventBus.$emit('stopLoading', loadingId);
                         }, (e) => {
                             self.item = {};
                             self.removeKeyFromStore('newsItem_'+self.id);
+                            EventBus.$emit('stopLoading', loadingId);
                         });
                     }
                     else {
@@ -184,6 +188,8 @@
                         }
 
                         // Get the live data
+                        let loadingId = Date.now();
+                        EventBus.$emit('startLoading', loadingId);
                         getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-facilities/"+lang+"/"+self.id).then((r) => {
                             if(r.campingFacility) {
                                 self.item = r.campingFacility;
@@ -193,9 +199,11 @@
                                 self.item = {};
                                 self.removeKeyFromStore('campingFacility_'+self.id);
                             }
+                            EventBus.$emit('stopLoading', loadingId);
                         }, (e) => {
                             self.item = {};
                             self.removeKeyFromStore('campingFacility_'+self.id);
+                            EventBus.$emit('stopLoading', loadingId);
                         });
                     }
                     else {
@@ -228,6 +236,8 @@
                         self.liked = self.isLiked(self.id);
 
                         // Get the live data
+                        let loadingId = Date.now();
+                        EventBus.$emit('startLoading', loadingId);
                         getJSON("https://www.campingcomfort.app/api/" + campingId + "/camping-activities/" + lang + "/" + self.id).then((r) => {
                             if(r.campingActivity) {
                                 self.item = r.campingActivity;
@@ -240,10 +250,12 @@
                                 self.removeKeyFromStore('campingActivity_'+self.id);
                                 self.removeKeyFromStore('isLikable_'+self.id);
                             }
+                            EventBus.$emit('stopLoading', loadingId);
                         }, (e) => {
                             self.item = {};
                             self.removeKeyFromStore('campingActivity_'+self.id);
                             self.removeKeyFromStore('isLikable_'+self.id);
+                            EventBus.$emit('stopLoading', loadingId);
                         });
                     }
                     else {
@@ -276,6 +288,8 @@
                         }
 
                         // Get the live data
+                        let loadingId = Date.now();
+                        EventBus.$emit('startLoading', loadingId);
                         getJSON("https://www.campingcomfort.app/api/" + campingId + "/nearby-activities/" + lang + "/" + self.id).then((r) => {
                             if(r.nearbyActivity) {
                                 self.item = r.nearbyActivity;
@@ -285,9 +299,11 @@
                                 self.item = {};
                                 self.removeKeyFromStore('nearbyActivity_'+self.id);
                             }
+                            EventBus.$emit('stopLoading', loadingId);
                         }, (e) => {
                             self.item = {};
                             self.removeKeyFromStore('nearbyActivity_'+self.id);
+                            EventBus.$emit('stopLoading', loadingId);
                         });
                     }
                     else {
