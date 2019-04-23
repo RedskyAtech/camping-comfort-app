@@ -1,6 +1,8 @@
 <template>
     <GridLayout row="0" col="0" rows="*" columns="*" class="loader" :class="[{ 'fade-in': loading === true, 'fade-out': loading === false }]">
-        <ActivityIndicator row="0" col="0" busy="true" />
+        <StackLayout row="0" col="0" width="30" height="30">
+            <ActivityIndicator busy="true" />
+        </StackLayout>
     </GridLayout>
 </template>
 
