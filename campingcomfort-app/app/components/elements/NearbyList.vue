@@ -52,6 +52,7 @@
                     }
 
                     // Get the live data
+                    EventBus.$emit('startLoading');
                     getJSON("https://www.campingcomfort.app/api/" + campingId + "/nearby-activities/" + lang).then((r) => {
                         if(r.nearbyActivities){
                             self.listItems = r.nearbyActivities;
@@ -61,9 +62,13 @@
                             self.listItems = [];
                             self.removeKeyFromStore('nearbyActivities');
                         }
+
+                        EventBus.$emit('stopLoading');
                     }, (e) => {
                         self.listItems = [];
                         self.removeKeyFromStore('nearbyActivities');
+
+                        EventBus.$emit('stopLoading');
                     });
                 }
                 else {

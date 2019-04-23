@@ -115,6 +115,7 @@
                     }
 
                     // Get the live data
+                    EventBus.$emit('startLoading');
                     http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign and store the hero image
@@ -126,9 +127,15 @@
                             self.settings = {};
                             self.removeKeyFromStore('settings');
                         }
+
+                        // Hide the loader
+                        EventBus.$emit('stopLoading');
                     }, error => {
                         self.settings = {};
                         self.removeKeyFromStore('settings');
+
+                        // Hide the loader
+                        EventBus.$emit('stopLoading');
                     });
                 }
                 else {
@@ -200,6 +207,7 @@
 </script>
 
 <style scoped>
+
     /* Hero */
     Page.xxs .hero-grid {
         height: 185;

@@ -125,6 +125,7 @@
                     }
 
                     // Get the live data
+                    EventBus.$emit('startLoading');
                     getJSON("https://www.campingcomfort.app/api/" + campingId + "/camping-facilities/" + lang).then((r) => {
                         if(r.campingFacilities){
                             self.listItems = r.campingFacilities;
@@ -134,9 +135,15 @@
                             self.listItems = [];
                             self.removeKeyFromStore('campingFacilities');
                         }
+
+                        // Hide the loader
+                        EventBus.$emit('stopLoading');
                     }, (e) => {
                         self.listItems = [];
                         self.removeKeyFromStore('campingFacilities');
+
+                        // Hide the loader
+                        EventBus.$emit('stopLoading');
                     });
                 }
                 else {

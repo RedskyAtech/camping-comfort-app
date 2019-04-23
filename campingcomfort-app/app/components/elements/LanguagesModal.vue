@@ -48,6 +48,10 @@
                     {
                         'code': 'fr',
                         'name': this.$t('languages.fr')
+                    },
+                    {
+                        'code': 'it',
+                        'name': this.$t('languages.it')
                     }
                 ];
 

@@ -162,6 +162,7 @@
                         phone: self.form.phone,
                         message: self.form.message
                     });
+                    EventBus.$emit('startLoading');
                     request({
                         url: "https://www.campingcomfort.app/api/"+campingId+"/reception-email",
                         method: "POST",
@@ -169,6 +170,7 @@
                         content: data
                     }).then((response) => {
 //                        result = response.content.toJSON();
+                        EventBus.$emit('stopLoading');
 
                         // Reset the values
                         self.form.name = '';
@@ -183,6 +185,8 @@
                             self.$t('reception.alert.buttonText')
                         );
                     }, (e) => {
+                        EventBus.$emit('stopLoading');
+
                         TNSFancyAlert.showError(
                             self.$t('errors.other.title'),
                             self.$t('errors.other.message'),

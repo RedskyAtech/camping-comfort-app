@@ -73,7 +73,6 @@
                             self.item = {};
                             self.removeKeyFromStore('settings');
                         }
-
                     }, error => {
                         self.item = {};
                         self.removeKeyFromStore('settings');

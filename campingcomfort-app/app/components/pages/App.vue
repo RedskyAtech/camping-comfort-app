@@ -1,35 +1,38 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <GridLayout rows="*, auto" columns="*">
-            <StackLayout row="0" col="0">
-                <Frame id="mainContent">
-                    <Home/>
-                </Frame>
-            </StackLayout>
-            <StackLayout row="1" col="0" class="tabbar">
-                <GridLayout rows="*" columns="*,*,*,*,*">
-                    <StackLayout verticalAlignment="middle" row="0" col="0" class="tab" :class="[{'active': activeTab === 1}]" @tap="toHome">
-                        <Label class="tab-icon fas">{{ 'fa-home' | fonticon }}</Label>
-                        <Label class="tab-label" :text="$t('tabs.home')"></Label>
-                    </StackLayout>
-                    <StackLayout verticalAlignment="middle" row="0" col="1" class="tab" :class="[{'active': activeTab === 2}]" @tap="toCamping">
-                        <Label class="tab-icon fas">{{ 'fa-campground' | fonticon }}</Label>
-                        <Label class="tab-label" :text="$t('tabs.camping')"></Label>
-                    </StackLayout>
-                    <StackLayout verticalAlignment="middle" row="0" col="2" class="tab" :class="[{'active': activeTab === 3}]" @tap="toNearby">
-                        <Label class="tab-icon fas">{{ 'fa-map-marker-alt' | fonticon }}</Label>
-                        <Label class="tab-label" :text="$t('tabs.nearby')"></Label>
-                    </StackLayout>
-                    <StackLayout verticalAlignment="middle" row="0" col="3" class="tab" :class="[{'active': activeTab === 4}]" @tap="toEvents">
-                        <Label class="tab-icon fas">{{ 'fa-calendar-alt' | fonticon }}</Label>
-                        <Label class="tab-label" :text="$t('tabs.activities')"></Label>
-                    </StackLayout>
-                    <StackLayout verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="toReception">
-                        <Label class="tab-icon far">{{ 'fa-comment' | fonticon }}</Label>
-                        <Label class="tab-label" :text="$t('tabs.reception')"></Label>
-                    </StackLayout>
-                </GridLayout>
-            </StackLayout>
+        <GridLayout rows="*" columns="*">
+            <GridLayout row="0" col="0" rows="*, auto" columns="*">
+                <StackLayout row="0" col="0">
+                    <Frame id="mainContent">
+                        <Home/>
+                    </Frame>
+                </StackLayout>
+                <StackLayout row="1" col="0" class="tabbar">
+                    <GridLayout rows="*" columns="*,*,*,*,*">
+                        <StackLayout verticalAlignment="middle" row="0" col="0" class="tab" :class="[{'active': activeTab === 1}]" @tap="toHome">
+                            <Label class="tab-icon fas">{{ 'fa-home' | fonticon }}</Label>
+                            <Label class="tab-label" :text="$t('tabs.home')"></Label>
+                        </StackLayout>
+                        <StackLayout verticalAlignment="middle" row="0" col="1" class="tab" :class="[{'active': activeTab === 2}]" @tap="toCamping">
+                            <Label class="tab-icon fas">{{ 'fa-campground' | fonticon }}</Label>
+                            <Label class="tab-label" :text="$t('tabs.camping')"></Label>
+                        </StackLayout>
+                        <StackLayout verticalAlignment="middle" row="0" col="2" class="tab" :class="[{'active': activeTab === 3}]" @tap="toNearby">
+                            <Label class="tab-icon fas">{{ 'fa-map-marker-alt' | fonticon }}</Label>
+                            <Label class="tab-label" :text="$t('tabs.nearby')"></Label>
+                        </StackLayout>
+                        <StackLayout verticalAlignment="middle" row="0" col="3" class="tab" :class="[{'active': activeTab === 4}]" @tap="toEvents">
+                            <Label class="tab-icon fas">{{ 'fa-calendar-alt' | fonticon }}</Label>
+                            <Label class="tab-label" :text="$t('tabs.activities')"></Label>
+                        </StackLayout>
+                        <StackLayout verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="toReception">
+                            <Label class="tab-icon far">{{ 'fa-comment' | fonticon }}</Label>
+                            <Label class="tab-label" :text="$t('tabs.reception')"></Label>
+                        </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+            </GridLayout>
+            <Loader :loading="loading"></Loader>
         </GridLayout>
     </Page>
 </template>
@@ -50,6 +53,7 @@
     import WifiModal from '../elements/WifiModal'
     import RouteModal from '../elements/RouteModal'
     import LocalStorage from '../mixins/LocalStorage'
+    import Loader from '../elements/Loader'
 
     export default {
         data() {
@@ -75,9 +79,10 @@
             SettingsModal: SettingsModal,
             MapModal: MapModal,
             WifiModal: WifiModal,
-            RouteModal: RouteModal
+            RouteModal: RouteModal,
+            Loader: Loader
         },
-        mounted: function(){
+        created: function(){
             let self = this;
 
             // Listen to navigation requests

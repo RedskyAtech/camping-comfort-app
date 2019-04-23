@@ -45,6 +45,7 @@ require('moment/locale/en-gb');
 require('moment/locale/nl');
 require('moment/locale/fr');
 require('moment/locale/de');
+require('moment/locale/it');
 Vue.use(require('vue-moment'), {
     moment
 });

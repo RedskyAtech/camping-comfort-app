@@ -79,6 +79,7 @@
                     }
 
                     // Get the live data
+                    EventBus.$emit('startLoading');
                     let url = "https://www.campingcomfort.app/api/"+campingId+"/camping-activities/"+formattedDate+"/"+lang;
                     getJSON(url).then((r) => {
                         if(r.campingActivities){
@@ -89,9 +90,13 @@
                             self.listItems = [];
                             self.removeKeyFromStore('campingActivities_'+formattedDate);
                         }
+
+                        EventBus.$emit('stopLoading');
                     }, (e) => {
                         self.listItems = [];
                         self.removeKeyFromStore('campingActivities_'+formattedDate);
+
+                        EventBus.$emit('stopLoading');
                     });
                 }
                 else {

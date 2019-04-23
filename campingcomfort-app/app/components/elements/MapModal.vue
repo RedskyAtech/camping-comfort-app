@@ -62,10 +62,9 @@
                             self.items = [];
                             self.removeKeyFromStore('plan');
                         }
-
                     }, error => {
                         self.items = [];
-                            self.removeKeyFromStore('plan');
+                        self.removeKeyFromStore('plan');
                     });
                 }
                 else {

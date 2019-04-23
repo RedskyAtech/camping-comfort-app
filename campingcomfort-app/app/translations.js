@@ -9,10 +9,11 @@ export function translations() {
                 date: 'YYYY-MM-DD'
             },
             languages: {
+                nl: 'Dutch',
                 en: 'English',
-                de: 'German',
                 fr: 'French',
-                nl: 'Nederlands'
+                de: 'German',
+                it: 'Italian'
             },
             errors: {
                 offline: {
@@ -119,9 +120,10 @@ export function translations() {
                 date: 'DD-MM-YYYY'
             },
             languages: {
-                en: 'Engels',
                 de: 'Duits',
+                en: 'Engels',
                 fr: 'Frans',
+                it: 'Italiaans',
                 nl: 'Nederlands'
             },
             errors: {
