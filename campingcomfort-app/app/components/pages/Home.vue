@@ -74,7 +74,8 @@
         data() {
             return {
                 activeTab: 1,
-                settings: {}
+                settings: {},
+                heroTitle: ''
             }
         },
         mixins: [

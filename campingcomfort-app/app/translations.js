@@ -69,7 +69,8 @@ export function translations() {
                 age: 'Age',
                 price: 'Price',
                 route: 'Route',
-                liked: 'The event is added to "My vacation"'
+                liked: 'The event is added to "My vacation"',
+                isAutoTranslated: 'All text on this page is automatically translated. Please keep in mind that automatic translations can contain errors.'
             },
             comingSoon: {
                 comingSoon: 'Coming soon'
@@ -180,7 +181,8 @@ export function translations() {
                 age: 'Leeftijd',
                 price: 'Kosten',
                 route: 'Route',
-                liked: 'De activiteit is toegevoegd aan "Mijn vakantie"'
+                liked: 'De activiteit is toegevoegd aan "Mijn vakantie"',
+                isAutoTranslated: 'Alle tekst op deze pagina is automatisch vertaald. Houd er daarom rekening mee dat deze fouten kan bevatten.'
             },
             comingSoon: {
                 comingSoon: 'Binnenkort'
@@ -291,7 +293,8 @@ export function translations() {
                 age: '',
                 price: '',
                 route: '',
-                liked: ''
+                liked: '',
+                isAutoTranslated: ''
             },
             comingSoon: {
                 comingSoon: ''
@@ -402,7 +405,8 @@ export function translations() {
                 age: '',
                 price: '',
                 route: '',
-                liked: ''
+                liked: '',
+                isAutoTranslated: ''
             },
             comingSoon: {
                 comingSoon: ''
@@ -513,7 +517,8 @@ export function translations() {
                 age: '',
                 price: '',
                 route: '',
-                liked: ''
+                liked: '',
+                isAutoTranslated: ''
             },
             comingSoon: {
                 comingSoon: ''

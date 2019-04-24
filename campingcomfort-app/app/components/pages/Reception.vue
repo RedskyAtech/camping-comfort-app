@@ -171,6 +171,13 @@
                         headers: { "Content-Type": "application/json" },
                         content: data
                     }).then((response) => {
+
+                        // Log the submit activity
+                        EventBus.$emit('log', {
+                            type: 'reception_submit',
+                            data: {}
+                        });
+
 //                        result = response.content.toJSON();
                         EventBus.$emit('stopLoading', loadingId);
 

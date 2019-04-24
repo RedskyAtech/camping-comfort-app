@@ -38,6 +38,7 @@
 </template>
 
 <script>
+    import * as platform from "tns-core-modules/platform";
     import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
     import EventBus from '../helpers/EventBus'
@@ -54,6 +55,8 @@
     import RouteModal from '../elements/RouteModal'
     import LocalStorage from '../mixins/LocalStorage'
     import Loader from '../elements/Loader'
+    import Connection from '../mixins/Connection'
+    import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http"
 
     export default {
         data() {
@@ -64,7 +67,8 @@
         mixins: [
             Responsive,
             StatusBar,
-            LocalStorage
+            LocalStorage,
+            Connection
         ],
         components: {
 
@@ -85,13 +89,20 @@
         created: function(){
             let self = this;
 
+            // Log the app activity
+            EventBus.$on('log', function(data) {
+                self.log(data.type, data.data);
+            });
+
             // Listen to navigation requests
             EventBus.$on('navigate', function(data){
+                self.log('navigate', data);
                 self.navigate(data.tab, data.page, data.switchTab, data.props);
             });
 
             // Listen to open-modal requests
             EventBus.$on('openModal', function(data){
+                self.log('navigate', data);
                 self.openModal(data.page, data.props);
             });
 
@@ -101,6 +112,72 @@
             });
         },
         methods: {
+            log: function(type, data) {
+                if(this.hasInternetConnection()) {
+
+                    let campingId = this.getNumberFromStore('campingId');
+                    if (type === 'navigate') {
+
+                        // Set the props to an empty object
+                        if (data.props === undefined) {
+                            data.props = {};
+                        }
+
+                        // Create the data object
+                        let content = JSON.stringify({
+                            uuid: platform.device.uuid,
+                            page: data.page,
+                            type: data.props.type !== undefined ? data.props.type : '',
+                            id: data.props.id !== undefined ? data.props.id : ''
+                        });
+
+                        // Create the request
+                        request({
+                            url: "https://www.campingcomfort.app/api/" + campingId + "/log/navigate",
+                            method: "POST",
+                            headers: {"Content-Type": "application/json"},
+                            content: content
+                        }).then((response) => {
+                        }, (e) => {
+                        });
+                    }
+                    if (type === 'like') {
+
+                        // Create the data object
+                        let content = JSON.stringify({
+                            uuid: platform.device.uuid,
+                            id: data.id
+                        });
+
+                        // Create the request
+                        request({
+                            url: "https://www.campingcomfort.app/api/" + campingId + "/log/like",
+                            method: "POST",
+                            headers: {"Content-Type": "application/json"},
+                            content: content
+                        }).then((response) => {
+                        }, (e) => {
+                        });
+                    }
+                    if (type === 'reception_submit') {
+
+                        // Create the data object
+                        let content = JSON.stringify({
+                            uuid: platform.device.uuid,
+                        });
+
+                        // Create the request
+                        request({
+                            url: "https://www.campingcomfort.app/api/" + campingId + "/log/reception_submit",
+                            method: "POST",
+                            headers: {"Content-Type": "application/json"},
+                            content: content
+                        }).then((response) => {
+                        }, (e) => {
+                        });
+                    }
+                }
+            },
             navigate: function(tab, page, switchTab=false, props={}){
 
                 // Set the right tab

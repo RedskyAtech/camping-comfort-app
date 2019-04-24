@@ -42,6 +42,15 @@
             like(id) {
                 let likes = this.getLikes();
                 if(!likes[id]){
+
+                    // Log the like activity
+                    EventBus.$emit('log', {
+                        type: 'like',
+                        data: {
+                            id: id
+                        }
+                    });
+
                     likes[id] = true;
                     this.storeObject('likes', likes);
 

@@ -54,6 +54,7 @@
                                 <Label :text="$t('detail.route')" verticalAlignment="center"></Label>
                             </StackLayout>
                         </GridLayout>
+                        <Label class="disclaimer" v-if="item.is_auto_translated === 1" textWrap="true" :text="$t('detail.isAutoTranslated')"></Label>
                     </StackLayout>
                     <AbsoluteLayout class="like-container" row="0" rowSpan="2" horizontalAlignment="right">
                         <CardView horizontalAlignment="right" verticalAlignment="top" class="cardStyle like" :radius="fabRadius" v-if="isLikable" @tap="toggleLike(id)">
@@ -437,6 +438,12 @@
         padding-bottom: 10;
     }
     .text {
+        opacity: 0.5;
+        line-height: 5;
+    }
+    .disclaimer {
+        padding-top: 25;
+        font-size: 10;
         opacity: 0.5;
         line-height: 5;
     }
