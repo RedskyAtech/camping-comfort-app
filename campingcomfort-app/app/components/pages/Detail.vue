@@ -55,8 +55,8 @@
                             </StackLayout>
                         </GridLayout>
                     </StackLayout>
-                    <AbsoluteLayout class="like-container" row="0" columns="*" rowSpan="2" horizontalAlignment="right">
-                        <CardView row="0" col="0" horizontalAlignment="right" verticalAlignment="top" class="cardStyle like" :radius="fabRadius" v-if="isLikable" @tap="toggleLike(id)">
+                    <AbsoluteLayout class="like-container" row="0" rowSpan="2" horizontalAlignment="right">
+                        <CardView horizontalAlignment="right" verticalAlignment="top" class="cardStyle like" :radius="fabRadius" v-if="isLikable" @tap="toggleLike(id)">
                             <GridLayout rows="*" columns="*">
                                 <Label row="0" col="0" class="like-icon far" verticalAlignment="center" v-if="!liked">{{ 'fa-heart' | fonticon }}</Label>
                                 <Label row="0" col="0" class="like-icon fas" verticalAlignment="center" v-if="liked">{{ 'fa-heart' | fonticon }}</Label>
@@ -65,7 +65,7 @@
                     </AbsoluteLayout>
                 </GridLayout>
             </ScrollView>
-            <Fab verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="goBack"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></GridLayout></Fab>
+            <Fab verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="goBack"><StackLayout row="0" col="0" verticalAlignment="center"><Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-arrow-left' | fonticon }}</Label></StackLayout></GridLayout></Fab>
         </GridLayout>
     </Page>
 </template>
@@ -105,7 +105,7 @@
             },
             fabRadius: function() {
                 if(this.$isAndroid) {
-                    return 90;
+                    return 30;
                 }
                 else {
                     return 30;

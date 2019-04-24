@@ -32,7 +32,7 @@
                     </GridLayout>
                 </StackLayout>
             </GridLayout>
-            <Loader :loading="loading"></Loader>
+            <Loader></Loader>
         </GridLayout>
     </Page>
 </template>

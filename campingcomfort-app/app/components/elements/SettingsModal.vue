@@ -2,7 +2,7 @@
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout cols="*" rows="*" class="page">
             <SettingsForm v-on:saved="afterSave">
-                <Fab slot="fav" row="1" col="0" bg="transparent"><GridLayout row="0" col="0" rows="*" columns="*" @tap="closeModal"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></GridLayout></Fab>
+                <Fab slot="fav" row="1" col="0" bg="transparent"><GridLayout rows="*" columns="*" @tap="closeModal"><StackLayout row="0" col="0" verticalAlignment="center"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></StackLayout></GridLayout></Fab>
             </SettingsForm>
         </GridLayout>
     </Page>

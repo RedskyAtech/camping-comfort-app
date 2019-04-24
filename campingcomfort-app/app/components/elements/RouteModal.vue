@@ -2,7 +2,7 @@
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="*" columns="*">
             <WebView row="0" col="0" :src="url"></WebView>
-            <Fab verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="closeModal"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></GridLayout></Fab>
+            <Fab verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="closeModal"><StackLayout row="0" col="0" verticalAlignment="center"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></StackLayout></GridLayout></Fab>
         </GridLayout>
     </Page>
 </template>

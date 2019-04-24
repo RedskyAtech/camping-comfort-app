@@ -37,7 +37,7 @@
         computed: {
             fabRadius: function() {
                 if(this.$isAndroid) {
-                    return 90;
+                    return 30;
                 }
                 else {
                     return 30;

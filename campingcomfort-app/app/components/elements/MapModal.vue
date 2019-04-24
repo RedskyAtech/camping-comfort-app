@@ -2,7 +2,7 @@
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="*" columns="*">
             <ImageSwipe row="0" col="0" :items="items" imageUrlProperty="url" pageNumber="1"></ImageSwipe>
-            <Fab verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="closeModal"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></GridLayout></Fab>
+            <Fab verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="closeModal"><StackLayout row="0" col="0" verticalAlignment="center"><Label class="btn-icon fas">{{ 'fa-times' | fonticon }}</Label></StackLayout></GridLayout></Fab>
         </GridLayout>
     </Page>
 </template>
