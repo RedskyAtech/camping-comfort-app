@@ -221,6 +221,339 @@ export function translations() {
             validation: {
                 mandatoryMessage: 'Vul a.u.b. de volgende velden in:'
             }
+        },
+        de: {
+            general: {
+                allDay: ''
+            },
+            formatting: {
+                time: 'HH.mm',
+                date: 'DD.MM.YYYY'
+            },
+            languages: {
+                de: '',
+                en: '',
+                fr: '',
+                it: '',
+                nl: ''
+            },
+            errors: {
+                offline: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                },
+                inactiveCamping: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                },
+                other: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                }
+            },
+            settings: {
+                title: '',
+                subtitle: '',
+                campingPlaceholder: '',
+                buttonText: ''
+            },
+            tabs: {
+                home: '',
+                camping: '',
+                nearby: '',
+                activities: '',
+                reception: ''
+            },
+            home: {
+                map: '',
+                myVacation: '',
+                news: ''
+            },
+            wifi: {
+                title: '',
+                copy: '',
+                alert: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                }
+            },
+            detail: {
+                readMore: '',
+                forMoreInformation: '',
+                today: '',
+                tomorrow: '',
+                yesterday: '',
+                location: '',
+                age: '',
+                price: '',
+                route: '',
+                liked: ''
+            },
+            comingSoon: {
+                comingSoon: ''
+            },
+            camping: {
+                title: ''
+            },
+            nearby: {
+                title: '',
+                toDo: '',
+                dinnerAndDrinks: '',
+            },
+            activities: {
+                week: '',
+                emptyTitle: '',
+                emptyText: ''
+            },
+            myVacation: {
+                emptyTitle: '',
+                emptyText: ''
+            },
+            news: {
+                emptyTitle: ''
+            },
+            reception: {
+                title: '',
+                name: '',
+                phone: '',
+                pitch: '',
+                message: '',
+                sendMessage: '',
+                alert: {
+                    title: '',
+                    text: '',
+                    buttonText: ''
+                }
+            },
+            validation: {
+                mandatoryMessage: ''
+            }
+        },
+        fr: {
+            general: {
+                allDay: ''
+            },
+            formatting: {
+                time: 'HH [h] mm',
+                date: 'DD/MM/YYYY'
+            },
+            languages: {
+                de: '',
+                en: '',
+                fr: '',
+                it: '',
+                nl: ''
+            },
+            errors: {
+                offline: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                },
+                inactiveCamping: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                },
+                other: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                }
+            },
+            settings: {
+                title: '',
+                subtitle: '',
+                campingPlaceholder: '',
+                buttonText: ''
+            },
+            tabs: {
+                home: '',
+                camping: '',
+                nearby: '',
+                activities: '',
+                reception: ''
+            },
+            home: {
+                map: '',
+                myVacation: '',
+                news: ''
+            },
+            wifi: {
+                title: '',
+                copy: '',
+                alert: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                }
+            },
+            detail: {
+                readMore: '',
+                forMoreInformation: '',
+                today: '',
+                tomorrow: '',
+                yesterday: '',
+                location: '',
+                age: '',
+                price: '',
+                route: '',
+                liked: ''
+            },
+            comingSoon: {
+                comingSoon: ''
+            },
+            camping: {
+                title: ''
+            },
+            nearby: {
+                title: '',
+                toDo: '',
+                dinnerAndDrinks: '',
+            },
+            activities: {
+                week: '',
+                emptyTitle: '',
+                emptyText: ''
+            },
+            myVacation: {
+                emptyTitle: '',
+                emptyText: ''
+            },
+            news: {
+                emptyTitle: ''
+            },
+            reception: {
+                title: '',
+                name: '',
+                phone: '',
+                pitch: '',
+                message: '',
+                sendMessage: '',
+                alert: {
+                    title: '',
+                    text: '',
+                    buttonText: ''
+                }
+            },
+            validation: {
+                mandatoryMessage: ''
+            }
+        },
+        it: {
+            general: {
+                allDay: ''
+            },
+            formatting: {
+                time: 'HH.mm',
+                date: 'DD/MM/YYYY'
+            },
+            languages: {
+                de: '',
+                en: '',
+                fr: '',
+                it: '',
+                nl: ''
+            },
+            errors: {
+                offline: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                },
+                inactiveCamping: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                },
+                other: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                }
+            },
+            settings: {
+                title: '',
+                subtitle: '',
+                campingPlaceholder: '',
+                buttonText: ''
+            },
+            tabs: {
+                home: '',
+                camping: '',
+                nearby: '',
+                activities: '',
+                reception: ''
+            },
+            home: {
+                map: '',
+                myVacation: '',
+                news: ''
+            },
+            wifi: {
+                title: '',
+                copy: '',
+                alert: {
+                    title: '',
+                    message: '',
+                    buttonText: ''
+                }
+            },
+            detail: {
+                readMore: '',
+                forMoreInformation: '',
+                today: '',
+                tomorrow: '',
+                yesterday: '',
+                location: '',
+                age: '',
+                price: '',
+                route: '',
+                liked: ''
+            },
+            comingSoon: {
+                comingSoon: ''
+            },
+            camping: {
+                title: ''
+            },
+            nearby: {
+                title: '',
+                toDo: '',
+                dinnerAndDrinks: '',
+            },
+            activities: {
+                week: '',
+                emptyTitle: '',
+                emptyText: ''
+            },
+            myVacation: {
+                emptyTitle: '',
+                emptyText: ''
+            },
+            news: {
+                emptyTitle: ''
+            },
+            reception: {
+                title: '',
+                name: '',
+                phone: '',
+                pitch: '',
+                message: '',
+                sendMessage: '',
+                alert: {
+                    title: '',
+                    text: '',
+                    buttonText: ''
+                }
+            },
+            validation: {
+                mandatoryMessage: ''
+            }
         }
     }
 }
