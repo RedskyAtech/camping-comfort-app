@@ -146,7 +146,7 @@ export function translations() {
             },
             settings: {
                 title: 'Instellingen',
-                subtitle: 'Selecteer jow camping om door te gaan.',
+                subtitle: 'Selecteer jouw camping om door te gaan.',
                 campingPlaceholder: 'Selecteer jouw camping',
                 buttonText: 'Doorgaan'
             },
@@ -226,338 +226,339 @@ export function translations() {
         },
         de: {
             general: {
-                allDay: ''
+                allDay: 'Den ganzen Tag'
             },
             formatting: {
                 time: 'HH.mm',
                 date: 'DD.MM.YYYY'
             },
             languages: {
-                de: '',
-                en: '',
-                fr: '',
-                it: '',
-                nl: ''
+                de: 'Französisch',
+                en: 'Englisch',
+                fr: 'Französisch',
+                it: 'Italienisch',
+                nl: 'Niederländisch'
             },
             errors: {
                 offline: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'Keine Internetverbindung',
+                    message: 'Bitte aktivieren Sie Ihre Internetverbindung um fortzufahren',
+                    buttonText: 'OK'
                 },
                 inactiveCamping: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'Bitte wählen Sie einen anderen Campingplatz aus',
+                    message: 'Dieser Campingplatz bietet noch keinen mobilen Service durch Camping Comfort',
+                    buttonText: 'OK'
                 },
                 other: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'Etwas ist schief gelaufen',
+                    message: 'Bitte versuchen Sie es später noch einmal',
+                    buttonText: 'OK'
                 }
             },
             settings: {
-                title: '',
-                subtitle: '',
-                campingPlaceholder: '',
-                buttonText: ''
+                title: 'Einstellungen',
+                subtitle: 'Wählen Sie Ihren Campingplatz aus, um fortzufahren',
+                campingPlaceholder: 'Wählen Sie Ihren Campingplatz aus',
+                buttonText: 'Speichern'
             },
             tabs: {
-                home: '',
-                camping: '',
-                nearby: '',
-                activities: '',
-                reception: ''
+                home: 'Home',
+                camping: 'Camping',
+                nearby: 'In der Nähe',
+                activities: 'Aktivitäten',
+                reception: 'Empfang'
             },
             home: {
-                map: '',
-                myVacation: '',
-                news: ''
+                map: 'Karte',
+                myVacation: 'Mein Urlaub',
+                news: 'Aktuelle Nachrichten'
             },
             wifi: {
-                title: '',
-                copy: '',
+                title: 'Verbindung mit WiFi',
+                copy: 'Kopieren',
                 alert: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'WiFi-Passwort kopiert',
+                    message: 'Sie können das Passwort einfügen, wenn Ihr Gerät Sie während der WLAN-Einrichtung auffordert, es einzugeben',
+                    buttonText: 'OK'
                 }
             },
             detail: {
-                readMore: '',
-                forMoreInformation: '',
-                today: '',
-                tomorrow: '',
-                yesterday: '',
-                location: '',
-                age: '',
-                price: '',
-                route: '',
-                liked: '',
-                isAutoTranslated: ''
+                readMore: 'Lesen Sie mehr dazu',
+                forMoreInformation: 'Für weitere Informationen',
+                today: 'Heute',
+                tomorrow: 'Morgen',
+                yesterday: 'Gestern',
+                location: 'Ort',
+                age: 'Alter',
+                price: 'Preis',
+                route: 'Route',
+                liked: 'Das Ereignis wird zu "Mein Urlaub" hinzugefügt',
+                isAutoTranslated: 'Alle Texte auf dieser Seite werden automatisch übersetzt. Bitte beachten Sie, dass automatische Übersetzungen Fehler enthalten können'
             },
             comingSoon: {
-                comingSoon: ''
+                comingSoon: 'Demnächst verfügbar'
             },
             camping: {
-                title: ''
+                title: 'Auf Campingplatz'
             },
             nearby: {
-                title: '',
-                toDo: '',
-                dinnerAndDrinks: '',
+                title: 'Aktivitäten in der Nähe',
+                toDo: 'Zu tun',
+                dinnerAndDrinks: 'Abendessen & Getränke',
             },
             activities: {
-                week: '',
-                emptyTitle: '',
+                week: 'Woche',
+                emptyTitle: 'Keine Aktivitäten',
                 emptyText: ''
             },
             myVacation: {
-                emptyTitle: '',
-                emptyText: ''
+                emptyTitle: 'Keine anstehenden Aktivitäten',
+                emptyText: 'Erstellen Sie Ihren eigenen Aktivitätskalender, indem Sie die Herztaste neben einer Aktivität drücken'
             },
             news: {
-                emptyTitle: ''
+                emptyTitle: 'Keine Nachrichten'
             },
             reception: {
-                title: '',
-                name: '',
-                phone: '',
-                pitch: '',
-                message: '',
-                sendMessage: '',
+                title: 'Kontakt mit dem Empfang',
+                name: 'Name',
+                phone: 'Telefonnummer',
+                pitch: 'Stellplatz oder Unterkunft #',
+                message: 'Nachricht',
+                sendMessage: 'Nachricht senden',
                 alert: {
-                    title: '',
-                    text: '',
-                    buttonText: ''
+                    title: 'Danke',
+                    text: 'Wir werden uns in Kürze bei Ihnen melden',
+                    buttonText: 'OK'
                 }
             },
             validation: {
-                mandatoryMessage: ''
+                mandatoryMessage: 'Bitte geben Sie die folgenden Felder ein'
             }
         },
         fr: {
             general: {
-                allDay: ''
+                allDay: 'Toute la journée'
             },
             formatting: {
                 time: 'HH [h] mm',
                 date: 'DD/MM/YYYY'
             },
             languages: {
-                de: '',
-                en: '',
-                fr: '',
-                it: '',
-                nl: ''
+                de: 'Allemand',
+                en: 'Anglais',
+                fr: 'Français',
+                it: 'Italien',
+                nl: 'Néerlandais'
             },
             errors: {
                 offline: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'Pas de connexion Internet',
+                    message: 'Veuillez activer votre connexion Internet pour continuer',
+                    buttonText: 'OK'
                 },
                 inactiveCamping: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'Veuillez choisir un autre camping',
+                    message: 'Ce camping n\'offre pas encore de service mobile par le biais du Camping Comfort',
+                    buttonText: 'OK'
                 },
                 other: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'Quelque chose a mal tourné',
+                    message: 'Veuillez réessayer plus tard',
+                    buttonText: 'OK'
                 }
             },
             settings: {
-                title: '',
-                subtitle: '',
-                campingPlaceholder: '',
-                buttonText: ''
+                title: 'Réglages',
+                subtitle: 'Sélectionnez votre camping pour continuer',
+                campingPlaceholder: 'Sélectionnez votre camping',
+                buttonText: 'Sauvegarder'
             },
             tabs: {
-                home: '',
-                camping: '',
-                nearby: '',
-                activities: '',
-                reception: ''
+                home: 'Home',
+                camping: 'Camping',
+                nearby: 'A proximité',
+                activities: 'Activités',
+                reception: 'Réception'
             },
             home: {
-                map: '',
-                myVacation: '',
-                news: ''
+                map: 'Carte',
+                myVacation: 'Mes vacances',
+                news: 'Dernières nouvelles'
             },
             wifi: {
-                title: '',
-                copy: '',
+                title: 'Connexion au WiFi',
+                copy: 'Copier',
                 alert: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'Mot de passe WiFi copié',
+                    message: 'Vous pouvez coller le mot de passe lorsque votre appareil vous demande de le saisir lors de la configuration WiFi',
+                    buttonText: 'OK'
                 }
             },
             detail: {
-                readMore: '',
-                forMoreInformation: '',
-                today: '',
-                tomorrow: '',
-                yesterday: '',
-                location: '',
-                age: '',
-                price: '',
-                route: '',
-                liked: '',
-                isAutoTranslated: ''
+                readMore: 'En savoir plus',
+                forMoreInformation: 'Pour plus d\'informations',
+                today: 'Aujourd\'hui',
+                tomorrow: 'Demain',
+                yesterday: 'Hier',
+                location: 'Emplacement',
+                age: 'Âge',
+                price: 'Prix',
+                route: 'Itinéraire',
+                liked: 'L\'événement est ajouté à "Mes vacances"',
+                isAutoTranslated: 'Tout le texte de cette page est traduit automatiquement. N\'oubliez pas que les traductions automatiques peuvent contenir des erreurs'
             },
             comingSoon: {
-                comingSoon: ''
+                comingSoon: 'Prochainement à venir'
             },
             camping: {
-                title: ''
+                title: 'Sur le camping'
             },
             nearby: {
-                title: '',
-                toDo: '',
-                dinnerAndDrinks: '',
+                title: 'Activités à proximité',
+                toDo: 'A faire',
+                dinnerAndDrinks: 'Dîner et boissons',
             },
             activities: {
-                week: '',
-                emptyTitle: '',
+                week: 'Semaine',
+                emptyTitle: 'Aucune activité',
                 emptyText: ''
             },
             myVacation: {
-                emptyTitle: '',
-                emptyText: ''
+                emptyTitle: 'Aucune activité à venir ',
+                emptyText: 'Créez votre propre calendrier d\'activités en appuyant sur le bouton "Coeur" près d\'une activité'
             },
             news: {
-                emptyTitle: ''
+                emptyTitle: 'Pas de nouvelles'
             },
             reception: {
-                title: '',
-                name: '',
-                phone: '',
-                pitch: '',
-                message: '',
-                sendMessage: '',
+                title: 'Contact avec la réception',
+                name: 'Nom',
+                phone: 'Numéro de téléphone',
+                pitch: 'Emplacement ou numéro d\'hébergement',
+                message: 'Message',
+                sendMessage: 'Envoyer message',
                 alert: {
-                    title: '',
-                    text: '',
-                    buttonText: ''
+                    title: 'Je vous remercie',
+                    text: 'Nous vous répondrons dans les plus brefs délais',
+                    buttonText: 'OK'
                 }
             },
             validation: {
-                mandatoryMessage: ''
+                mandatoryMessage: 'Veuillez remplir les champs suivants'
             }
         },
         it: {
             general: {
-                allDay: ''
+                allDay: 'Tutto il giorno'
             },
             formatting: {
                 time: 'HH.mm',
                 date: 'DD/MM/YYYY'
             },
             languages: {
-                de: '',
-                en: '',
-                fr: '',
-                it: '',
-                nl: ''
+                de: 'Tedesco',
+                en: 'Inglese',
+                fr: 'Francese',
+                it: 'Italiano',
+                nl: 'Olandese'
             },
             errors: {
                 offline: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'Nessuna connessione internet',
+                    message: 'Si prega di attivare la connessione internet per continuare',
+                    buttonText: 'OK'
                 },
                 inactiveCamping: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'Per favore scegli un altro campeggio',
+                    message: 'Questo campeggio non fornisce ancora un servizio mobile attraverso il Camping Comfort',
+                    buttonText: 'OK'
                 },
                 other: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'Qualcosa è andato storto',
+                    message: 'Per favore riprovaci più tardi',
+                    buttonText: 'OK'
                 }
             },
             settings: {
-                title: '',
-                subtitle: '',
-                campingPlaceholder: '',
-                buttonText: ''
+                title: 'Impostazioni',
+                subtitle: 'Seleziona il tuo campeggio per continuare',
+                campingPlaceholder: 'Seleziona il tuo campeggio',
+                buttonText: 'Salvare'
             },
             tabs: {
-                home: '',
-                camping: '',
-                nearby: '',
-                activities: '',
-                reception: ''
+                home: 'Home',
+                camping: 'Campeggio',
+                nearby: 'Nelle vicinanze',
+                activities: 'Attività',
+                reception: 'Ricezione'
             },
             home: {
-                map: '',
-                myVacation: '',
-                news: ''
+                map: 'Mappa',
+                myVacation: 'La mia vacanza',
+                news: 'Ultime notizie'
             },
             wifi: {
-                title: '',
-                copy: '',
+                title: 'Connessione al WiFi',
+                copy: 'Ricevuto',
                 alert: {
-                    title: '',
-                    message: '',
-                    buttonText: ''
+                    title: 'Password WiFi copiata',
+                    message: 'È possibile incollare la password quando il dispositivo chiede di inserirla durante la configurazione WiFi',
+                    buttonText: 'OK'
                 }
             },
             detail: {
-                readMore: '',
-                forMoreInformation: '',
-                today: '',
-                tomorrow: '',
-                yesterday: '',
-                location: '',
-                age: '',
-                price: '',
-                route: '',
-                liked: '',
-                isAutoTranslated: ''
+                readMore: 'Per saperne di più',
+                forMoreInformation: 'Per ulteriori informazioni',
+                today: 'Oggi',
+                tomorrow: 'Domani',
+                yesterday: 'Ieri',
+                location: 'Posizione',
+                age: 'Età',
+                price: 'Prezzo',
+                route: 'Percorso',
+                liked: 'L\'evento viene aggiunto a "La mia vacanza"',
+                isAutoTranslated: 'Tutto il testo di questa pagina viene tradotto automaticamente. Tieni presente che le traduzioni automatiche possono contenere errori.'
+
             },
             comingSoon: {
-                comingSoon: ''
+                comingSoon: 'Prossimamente in arrivo'
             },
             camping: {
-                title: ''
+                title: 'In campeggio'
             },
             nearby: {
-                title: '',
-                toDo: '',
-                dinnerAndDrinks: '',
+                title: 'Attività nelle vicinanze',
+                toDo: 'Da fare',
+                dinnerAndDrinks: 'Cena e bevande',
             },
             activities: {
-                week: '',
-                emptyTitle: '',
+                week: 'Settimana',
+                emptyTitle: 'Nessuna attività',
                 emptyText: ''
             },
             myVacation: {
-                emptyTitle: '',
-                emptyText: ''
+                emptyTitle: 'Nessuna attività imminente',
+                emptyText: 'Crea il tuo calendario delle attivita premendo il pulsante a forma di cuore vicino a un\'attivita'
             },
             news: {
-                emptyTitle: ''
+                emptyTitle: 'Nessuna notizia'
             },
             reception: {
-                title: '',
-                name: '',
-                phone: '',
-                pitch: '',
-                message: '',
-                sendMessage: '',
+                title: 'Contatto con la reception',
+                name: 'Nome',
+                phone: 'Numero di telefono',
+                pitch: 'Piazzola o alloggio',
+                message: 'Messaggio',
+                sendMessage: 'Invia messaggio',
                 alert: {
-                    title: '',
-                    text: '',
-                    buttonText: ''
+                    title: 'Grazie',
+                    text: 'Vi risponderemo a breve',
+                    buttonText: 'OK'
                 }
             },
             validation: {
-                mandatoryMessage: ''
+                mandatoryMessage: 'Si prega di inserire i seguenti campi'
             }
         }
     }

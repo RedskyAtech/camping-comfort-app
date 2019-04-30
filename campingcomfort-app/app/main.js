@@ -65,6 +65,20 @@ const i18n = new VueI18n({
     messages: t
 });
 
+const firebase = require("nativescript-plugin-firebase");
+firebase.init({
+    iOSEmulatorFlush: true,
+    showNotifications: true,
+    showNotificationsWhenInForeground: true
+}).then(
+    () => {
+        console.log("firebase.init done");
+    },
+    error => {
+        console.log(`firebase.init error: ${error}`);
+    }
+);
+
 // Autocomplete
 import RadAutoCompletePlugin from 'nativescript-ui-autocomplete/vue'
 Vue.use(RadAutoCompletePlugin);

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "196072603337",
+    "firebase_url": "https://camping-comfort.firebaseio.com",
+    "project_id": "camping-comfort",
+    "storage_bucket": "camping-comfort.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196072603337:android:eedde23a75ebb7cc",
+        "android_client_info": {
+          "package_name": "app.campingcomfort.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196072603337-48aovnjqmkrvuvgm580tibuagms6t7am.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAKGALKuOz9NxnPVAsxtc8cLfOuaWHNCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196072603337-48aovnjqmkrvuvgm580tibuagms6t7am.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "196072603337-dd12hip1d9pikpqdtklicuhajqn80jo7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.campingcomfort.app",
+                "app_store_id": "1451759221"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -57,6 +57,7 @@
     import Loader from '../elements/Loader'
     import Connection from '../mixins/Connection'
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http"
+    const firebase = require("nativescript-plugin-firebase");
 
     export default {
         data() {
@@ -89,6 +90,9 @@
         created: function(){
             let self = this;
 
+            // Subscribe to a Firebase topic
+            this.subscribeToTopic();
+
             // Log the app activity
             EventBus.$on('log', function(data) {
                 self.log(data.type, data.data);
@@ -112,6 +116,32 @@
             });
         },
         methods: {
+            subscribeToTopic: function() {
+                let self = this;
+                let campingId = this.getNumberFromStore('campingId');
+                let lang = this.getStringFromStore('language');
+                let topic = "camping_"+campingId+"_"+lang;
+
+                // Subscribe to a Firebase topic
+                firebase.subscribeToTopic(topic).then(function() {
+                    console.log("Firebase subscribed to topic "+topic);
+                });
+
+                // Go to the news item after clicking the push notification
+                firebase.addOnMessageReceivedCallback(
+                    function(message) {
+                        if(message.data.id) {
+                            self.navigate(
+                                1,
+                                'detail',
+                                false, {
+                                    type: 'news_item',
+                                    id: message.data.id
+                                });
+                        }
+                    }
+                );
+            },
             log: function(type, data) {
                 if(this.hasInternetConnection()) {
 

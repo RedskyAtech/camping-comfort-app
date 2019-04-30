@@ -3,9 +3,16 @@
 android {
   defaultConfig {  
     generatedDensities = []
+    multiDexEnabled true
     applicationId = "app.campingcomfort.app"
   }
   aaptOptions {  
     additionalParameters "--no-version-vectors"  
-  }  
+  }
+  project.ext {
+      googlePlayServicesVersion = "+"
+  }
+  dexOptions {
+      javaMaxHeapSize "4g"
+  }
 } 
