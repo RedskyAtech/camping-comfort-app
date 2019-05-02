@@ -69,7 +69,7 @@ const firebase = require("nativescript-plugin-firebase");
 firebase.init({
     iOSEmulatorFlush: true,
     showNotifications: true,
-    showNotificationsWhenInForeground: true
+    showNotificationsWhenInForeground: false
 }).then(
     () => {
         console.log("firebase.init done");
