@@ -25,7 +25,7 @@ TNSFontIcon.paths = {
     'fa': './assets/css/all.css'
 };
 TNSFontIcon.loadCss();
-Vue.filter('fonticon', fonticon);
+Vue.filter('fonticon', fonticon);//
 
 // Keyboard IOS
 Vue.registerElement("PreviousNextView", () => require("nativescript-iqkeyboardmanager"). PreviousNextView)

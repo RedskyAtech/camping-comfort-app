@@ -99,20 +99,25 @@
             });
 
             // Listen to navigation requests
-            EventBus.$on('navigate', function(data){
+            EventBus.$on('navigate', function(data) {
                 self.log('navigate', data);
                 self.navigate(data.tab, data.page, data.switchTab, data.props);
             });
 
             // Listen to open-modal requests
-            EventBus.$on('openModal', function(data){
+            EventBus.$on('openModal', function(data) {
                 self.log('navigate', data);
                 self.openModal(data.page, data.props);
             });
 
             // Listen to go back navigation requests
-            EventBus.$on('back', function(){
+            EventBus.$on('back', function() {
                 self.back();
+            });
+
+            // Update a topic subscription
+            EventBus.$on('updateSubscription', function() {
+                self.subscribeToTopic();
             });
         },
         methods: {
@@ -122,9 +127,20 @@
                 let lang = this.getStringFromStore('language');
                 let topic = "camping_"+campingId+"_"+lang;
 
+                // Unsubscribe a previous subscription
+                if(self.keyExistsInStore('subscription')) {
+                    let oldTopic = self.getStringFromStore('subscription');
+                    firebase.unsubscribeFromTopic(oldTopic).then(function() {
+                        console.log("Firebase unsubscribed from topic " + oldTopic);//
+                    });
+                }
+
                 // Subscribe to a Firebase topic
                 firebase.subscribeToTopic(topic).then(function() {
                     console.log("Firebase subscribed to topic "+topic);
+
+                    // Store the subscription so it can be unsubscribed.
+                    self.storeString('subscription', topic);
                 });
 
                 // Go to the news item after clicking the push notification

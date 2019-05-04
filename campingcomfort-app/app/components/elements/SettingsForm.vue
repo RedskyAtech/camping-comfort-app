@@ -115,6 +115,12 @@
             },
             save(){
 
+                // Get the old subscription
+                let subscription;
+                if(this.keyExistsInStore('subscription')) {
+                    subscription = this.getStringFromStore('subscription');
+                }
+
                 // Empty all storage data
                 this.removeAllKeysFromStore();
 
@@ -127,6 +133,14 @@
 
                 // Change the vue.js locale
                 this.$i18n.locale = this.language;
+
+                // Save the old subscription to the storage (because it was deleted before)
+                if(subscription) {
+                    this.storeString('subscription', subscription);
+                }
+
+                // Update the subscription
+                EventBus.$emit('updateSubscription');
 
                 // Update the My Vacation list
                 EventBus.$emit('updateMyVacation');
