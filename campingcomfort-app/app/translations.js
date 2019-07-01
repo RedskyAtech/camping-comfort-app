@@ -80,8 +80,9 @@ export function translations() {
             },
             nearby: {
                 title: 'Nearby activities',
-                toDo: 'To do',
-                dinnerAndDrinks: 'Dinner & Drinks',
+                arts_entertainment: 'Day trip',
+                food_beverage: 'Food & Drinks',
+                shopping_retail: 'Shopping',
             },
             activities: {
                 week: 'Week',
@@ -192,8 +193,9 @@ export function translations() {
             },
             nearby: {
                 title: 'In de buurt',
-                toDo: 'Te doen',
-                dinnerAndDrinks: 'Eten & Drinken',
+                arts_entertainment: 'Erop uit',
+                food_beverage: 'Eten & Drinken',
+                shopping_retail: 'Winkelen',
             },
             activities: {
                 week: 'Week',
@@ -304,8 +306,9 @@ export function translations() {
             },
             nearby: {
                 title: 'Aktivitäten in der Nähe',
-                toDo: 'Zu tun',
-                dinnerAndDrinks: 'Abendessen & Getränke',
+                arts_entertainment: 'Ausflug',
+                food_beverage: 'Speisen und Getränke',
+                shopping_retail: 'Shoppen'
             },
             activities: {
                 week: 'Woche',
@@ -416,8 +419,9 @@ export function translations() {
             },
             nearby: {
                 title: 'Activités à proximité',
-                toDo: 'A faire',
-                dinnerAndDrinks: 'Dîner et boissons',
+                arts_entertainment: 'Excursion',
+                food_beverage: 'Manger & Boire',
+                shopping_retail: 'Shoppen'
             },
             activities: {
                 week: 'Semaine',

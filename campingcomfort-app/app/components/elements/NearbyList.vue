@@ -3,7 +3,7 @@
         <v-template>
             <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
                 <GridLayout rows="75" columns="75,*">
-                    <WebImage col="0" :src="item.image"></WebImage>
+                    <WebImage col="0" :src="item.image || '~/assets/images/placeholder.gif'"></WebImage>
                     <StackLayout col="1" orientation="horizontal" class="item-label">
                         <StackLayout verticalAlignment="center">
                             <Label class="item-title" :text="item.title"></Label>
@@ -33,6 +33,9 @@
                 listItems: []
             }
         },
+        props: {
+            type: String
+        },
         created: function(){
             this.loadData();
         },
@@ -54,7 +57,8 @@
                     // Get the live data
                     let loadingId = Date.now();
                     EventBus.$emit('startLoading', loadingId);
-                    getJSON("https://www.campingcomfort.app/api/" + campingId + "/nearby-activities/" + lang).then((r) => {
+                    let url = "https://www.campingcomfort.app/api/" + campingId + "/nearby-activities/" + lang + "/" + self.type;
+                    getJSON(url).then((r) => {
                         if(r.nearbyActivities){
                             self.listItems = r.nearbyActivities;
                             self.storeObject('nearbyActivities', self.listItems);
