@@ -40,7 +40,7 @@ Vue.registerElement('CardView', () => require('nativescript-cardview').CardView)
 Vue.registerElement('gradient', () => require('nativescript-gradient').Gradient);
 
 // Moment
-const moment = require('moment')
+const moment = require('moment');
 require('moment/locale/en-gb');
 require('moment/locale/nl');
 require('moment/locale/fr');
@@ -65,6 +65,7 @@ const i18n = new VueI18n({
     messages: t
 });
 
+// Firebase
 const firebase = require("nativescript-plugin-firebase");
 firebase.init({
     iOSEmulatorFlush: true,
@@ -78,6 +79,10 @@ firebase.init({
         console.log(`firebase.init error: ${error}`);
     }
 );
+
+// Star rating
+import StarRating from 'nativescript-vue-star-rating';
+Vue.use(StarRating);
 
 // Autocomplete
 import RadAutoCompletePlugin from 'nativescript-ui-autocomplete/vue'

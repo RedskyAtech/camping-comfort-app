@@ -7,7 +7,12 @@
                     <StackLayout col="1" orientation="horizontal" class="item-label">
                         <StackLayout verticalAlignment="center">
                             <Label class="item-title" :text="item.title"></Label>
-                            <Label class="item-subtitle" :text="item.subtitle"></Label>
+                            <FlexboxLayout>
+                                <Label class="item-subtitle" :text="localizeNumber(item.distance) + ' km'"></Label>
+                                <StackLayout class="rating-container" verticalAlignment="center">
+                                    <StarRating size="25" fillColor="#0a7cf7" outlineColor="#0a7cf7" emptyColor="#d2d2d2" :value="roundRating(item.rating)" />
+                                </StackLayout>
+                            </FlexboxLayout>
                         </StackLayout>
                     </StackLayout>
                 </GridLayout>
@@ -21,12 +26,14 @@
     import EventBus from '../helpers/EventBus'
     import Connection from '../mixins/Connection'
     import LocalStorage from '../mixins/LocalStorage'
+    import Numbers from '../mixins/Numbers'
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
 
     export default {
         mixins: [
             Connection,
-            LocalStorage
+            LocalStorage,
+            Numbers
         ],
         data() {
             return {
@@ -136,6 +143,10 @@
                         }
                     });
                 }
+            },
+            roundRating(rating) {
+                let rounded = Math.round(parseFloat(rating));
+                return rounded;
             }
         }
     }
@@ -170,5 +181,10 @@
     .item-subtitle {
         font-size: 12;
         opacity: 0.6;
+    }
+
+    /* Rating */
+    .rating-container {
+        padding-left: 15;
     }
 </style>
