@@ -24,6 +24,10 @@
                         <Label col="1" :text="humanizeDate(item.date, $t('formatting.date'))" verticalAlignment="center"></Label>
                     </GridLayout>
                     <StackLayout row="2" class="content">
+                        <FlexboxLayout flexWrap="wrap" v-if="item.tags !== undefined" class="tags">
+                            <Label class="tag primary" :text="$t('nearby.'+item.category)"></Label>
+                            <Label class="tag" :text="tag.translation" v-for="tag in item.tags" v-bind:data="item.tags" v-bind:key="tag.tag"></Label>
+                        </FlexboxLayout>
                         <Label class="title" :text="item.title" textWrap="true"></Label>
                         <GridLayout columns="*" :rows="textHeight">
                             <Stacklayout col="0" row="0">
@@ -32,6 +36,11 @@
                             <StackLayout v-if="collapsed" col="0" row="0" class="gradient"></StackLayout>
                             <StackLayout v-if="collapsed" col="0" row="1">
                                 <Label class="read-more-link" :text="'+ '+$t('detail.readMore')" @tap="readMore"></Label>
+                            </StackLayout>
+                        </GridLayout>
+                        <GridLayout columns="auto,*" class="website" v-if="item.website !== undefined">
+                            <StackLayout class="btn" col="0" @tap="toWebsite">
+                                <Label :text="$t('detail.toWebsite')" verticalAlignment="center"></Label>
                             </StackLayout>
                         </GridLayout>
                         <StackLayout class="info-block" v-if="item.location !== undefined">
@@ -45,7 +54,7 @@
                             </GridLayout>
                         </StackLayout>
                         <StackLayout class="address-block" v-if="item.place !== undefined">
-                            <Label class="address-title" :text="$t('detail.forMoreInformation')"></Label>
+                            <Label class="address-title" :text="$t('detail.forMoreInformation')+' ('+item.distance+' km)'"></Label>
                             <Label class="address-text" :text="item.street+' '+item.house_number"></Label>
                             <Label class="address-text" :text="item.postal_code+' '+item.place"></Label>
                         </StackLayout>
@@ -81,6 +90,7 @@
     import Likes from '../mixins/Likes'
     import Dates from '../mixins/Dates'
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
+    import * as utils from "tns-core-modules/utils/utils";
 
     export default {
         props: {
@@ -331,12 +341,23 @@
             toRoute: function(){
                 let self = this;
                 if(self.hasInternetConnection()) {
-                    EventBus.$emit('openModal', {
-                        page: 'route',
-                        props: {
-                            url: 'https://www.google.com/maps/dir//' + encodeURI(self.item.street) + '+' + encodeURI(self.item.house_number) + ',+' + encodeURI(self.item.postal_code) + '+' + encodeURI(self.item.place)
-                        }
-                    });
+                    let url = 'https://www.google.com/maps/dir//' + encodeURI(self.item.street) + '+' + encodeURI(self.item.house_number) + ',+' + encodeURI(self.item.postal_code) + '+' + encodeURI(self.item.place);
+                    utils.openUrl(url);
+                }
+                else {
+                    setTimeout(function(){
+                        TNSFancyAlert.showError(
+                            self.$t('errors.offline.title'),
+                            self.$t('errors.offline.message'),
+                            self.$t('errors.offline.buttonText')
+                        );
+                    }, 500);
+                }
+            },
+            toWebsite: function() {
+                let self = this;
+                if(self.hasInternetConnection()) {
+                    utils.openUrl(this.item.website);
                 }
                 else {
                     setTimeout(function(){
@@ -473,12 +494,39 @@
 
     /* Addres block */
     .address-block {
-        margin-top: 25;
+        margin-top: 20;
     }
     .address-title {
         font-weight: 700;
     }
     .btn {
         margin-top: 12.5;
+    }
+
+    /* Website */
+    .website {
+        border-bottom-width: 1;
+        border-color: #e5e5e5;
+        padding-bottom: 25;
+    }
+
+    /* Tags */
+    .tags {
+        margin-bottom: 15;
+    }
+    .tag {
+        border-width: 1;
+        border-radius: 100%;
+        background-color: #8f99ac;
+        border-color: #8f99ac;
+        margin: 0 4 4 0;
+        padding: 4 8;
+        font-weight: 500;
+        color: #ffffff;
+        font-size: 11;
+    }
+    .tag.primary {
+        background-color: #0a7cf7;
+        border-color: #0a7cf7;
     }
 </style>

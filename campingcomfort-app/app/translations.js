@@ -61,7 +61,7 @@ export function translations() {
             },
             detail: {
                 readMore: 'Read more',
-                forMoreInformation: 'For more information',
+                forMoreInformation: 'Address',
                 today: 'Today',
                 tomorrow: 'Tomorrow',
                 yesterday: 'Yesterday',
@@ -70,7 +70,8 @@ export function translations() {
                 price: 'Price',
                 route: 'Route',
                 liked: 'The event is added to "My vacation"',
-                isAutoTranslated: 'All text on this page is automatically translated. Please keep in mind that automatic translations can contain errors.'
+                isAutoTranslated: 'All text on this page is automatically translated. Please keep in mind that automatic translations can contain errors.',
+                toWebsite: 'To website'
             },
             comingSoon: {
                 comingSoon: 'Coming soon'
@@ -174,7 +175,7 @@ export function translations() {
             },
             detail: {
                 readMore: 'Lees meer',
-                forMoreInformation: 'Voor meer informatie',
+                forMoreInformation: 'Adres',
                 today: 'Vandaag',
                 tomorrow: 'Morgen',
                 yesterday: 'Gisteren',
@@ -183,7 +184,8 @@ export function translations() {
                 price: 'Kosten',
                 route: 'Route',
                 liked: 'De activiteit is toegevoegd aan "Mijn vakantie"',
-                isAutoTranslated: 'Alle tekst op deze pagina is automatisch vertaald. Houd er daarom rekening mee dat deze fouten kan bevatten.'
+                isAutoTranslated: 'Alle tekst op deze pagina is automatisch vertaald. Houd er daarom rekening mee dat deze fouten kan bevatten.',
+                toWebsite: 'Naar website'
             },
             comingSoon: {
                 comingSoon: 'Binnenkort'
@@ -287,7 +289,7 @@ export function translations() {
             },
             detail: {
                 readMore: 'Lesen Sie mehr dazu',
-                forMoreInformation: 'Für weitere Informationen',
+                forMoreInformation: 'Adresse',
                 today: 'Heute',
                 tomorrow: 'Morgen',
                 yesterday: 'Gestern',
@@ -296,7 +298,8 @@ export function translations() {
                 price: 'Preis',
                 route: 'Route',
                 liked: 'Das Ereignis wird zu "Mein Urlaub" hinzugefügt',
-                isAutoTranslated: 'Alle Texte auf dieser Seite werden automatisch übersetzt. Bitte beachten Sie, dass automatische Übersetzungen Fehler enthalten können'
+                isAutoTranslated: 'Alle Texte auf dieser Seite werden automatisch übersetzt. Bitte beachten Sie, dass automatische Übersetzungen Fehler enthalten können',
+                toWebsite: 'Zur website'
             },
             comingSoon: {
                 comingSoon: 'Demnächst verfügbar'
@@ -400,7 +403,7 @@ export function translations() {
             },
             detail: {
                 readMore: 'En savoir plus',
-                forMoreInformation: 'Pour plus d\'informations',
+                forMoreInformation: 'Adresse',
                 today: 'Aujourd\'hui',
                 tomorrow: 'Demain',
                 yesterday: 'Hier',
@@ -409,7 +412,8 @@ export function translations() {
                 price: 'Prix',
                 route: 'Itinéraire',
                 liked: 'L\'événement est ajouté à "Mes vacances"',
-                isAutoTranslated: 'Tout le texte de cette page est traduit automatiquement. N\'oubliez pas que les traductions automatiques peuvent contenir des erreurs'
+                isAutoTranslated: 'Tout le texte de cette page est traduit automatiquement. N\'oubliez pas que les traductions automatiques peuvent contenir des erreurs',
+                toWebsite: 'Au site web'
             },
             comingSoon: {
                 comingSoon: 'Prochainement à venir'
@@ -513,7 +517,7 @@ export function translations() {
             },
             detail: {
                 readMore: 'Per saperne di più',
-                forMoreInformation: 'Per ulteriori informazioni',
+                forMoreInformation: 'Indirizzo',
                 today: 'Oggi',
                 tomorrow: 'Domani',
                 yesterday: 'Ieri',
@@ -522,7 +526,8 @@ export function translations() {
                 price: 'Prezzo',
                 route: 'Percorso',
                 liked: 'L\'evento viene aggiunto a "La mia vacanza"',
-                isAutoTranslated: 'Tutto il testo di questa pagina viene tradotto automaticamente. Tieni presente che le traduzioni automatiche possono contenere errori.'
+                isAutoTranslated: 'Tutto il testo di questa pagina viene tradotto automaticamente. Tieni presente che le traduzioni automatiche possono contenere errori.',
+                toWebsite: 'Al sito web'
 
             },
             comingSoon: {
