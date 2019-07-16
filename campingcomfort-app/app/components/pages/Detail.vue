@@ -43,26 +43,26 @@
                                 <Label :text="$t('detail.toWebsite')" verticalAlignment="center"></Label>
                             </StackLayout>
                         </GridLayout>
-                        <StackLayout class="info-block" v-if="item.opened_mon !== null || item.opened_tue !== null || item.opened_wed !== null || item.opened_thu !== null || item.opened_fri !== null || item.opened_sat !== null || item.opened_sun !== null">
+                        <StackLayout class="info-block" v-if="item.opened_mon || item.opened_tue || item.opened_wed || item.opened_thu || item.opened_fri || item.opened_sat || item.opened_sun">
                             <Label class="info-title" :text="$t('detail.openingHours')"></Label>
                             <GridLayout rows="auto,auto,auto,auto,auto,auto,auto" columns="auto,auto">
                                 <Label row="0" col="0" class="left" :text="$t('detail.monday')+':'"></Label>
-                                <Label row="0" col="1" :text="((item.opened_mon === '00:00:00' && item.closed_mon === null) ? $t('detail.allDay') : (item.opened_mon !== null ? item.opened_mon.substring(0, 5) + (item.closed_mon !== null ? ' - ' + item.closed_mon.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="0" col="1" :text="((item.opened_mon === '00:00:00' && !item.closed_mon) ? $t('detail.allDay') : (item.opened_mon ? item.opened_mon.substring(0, 5) + (item.closed_mon ? ' - ' + item.closed_mon.substring(0, 5) : '') : $t('detail.closed')))"></Label>
                                 <Label row="1" col="0" class="left" :text="$t('detail.tuesday')+':'"></Label>
-                                <Label row="1" col="1" :text="((item.opened_tue === '00:00:00' && item.closed_tue === null) ? $t('detail.allDay') : (item.opened_tue !== null ? item.opened_tue.substring(0, 5) + (item.closed_tue !== null ? ' - ' + item.closed_tue.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="1" col="1" :text="((item.opened_tue === '00:00:00' && !item.closed_tue) ? $t('detail.allDay') : (item.opened_tue ? item.opened_tue.substring(0, 5) + (item.closed_tue ? ' - ' + item.closed_tue.substring(0, 5) : '') : $t('detail.closed')))"></Label>
                                 <Label row="2" col="0" class="left" :text="$t('detail.wednesday')+':'"></Label>
-                                <Label row="2" col="1" :text="((item.opened_wed === '00:00:00' && item.closed_wed === null) ? $t('detail.allDay') : (item.opened_wed !== null ? item.opened_wed.substring(0, 5) + (item.closed_wed !== null ? ' - ' + item.closed_wed.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="2" col="1" :text="((item.opened_wed === '00:00:00' && !item.closed_wed) ? $t('detail.allDay') : (item.opened_wed ? item.opened_wed.substring(0, 5) + (item.closed_wed ? ' - ' + item.closed_wed.substring(0, 5) : '') : $t('detail.closed')))"></Label>
                                 <Label row="3" col="0" class="left" :text="$t('detail.thursday')+':'"></Label>
-                                <Label row="3" col="1" :text="((item.opened_thu === '00:00:00' && item.closed_thu === null) ? $t('detail.allDay') : (item.opened_thu !== null ? item.opened_thu.substring(0, 5) + (item.closed_thu !== null ? ' - ' + item.closed_thu.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="3" col="1" :text="((item.opened_thu === '00:00:00' && !item.closed_thu) ? $t('detail.allDay') : (item.opened_thu ? item.opened_thu.substring(0, 5) + (item.closed_thu ? ' - ' + item.closed_thu.substring(0, 5) : '') : $t('detail.closed')))"></Label>
                                 <Label row="4" col="0" class="left" :text="$t('detail.friday')+':'"></Label>
-                                <Label row="4" col="1" :text="((item.opened_fri === '00:00:00' && item.closed_fri === null) ? $t('detail.allDay') : (item.opened_fri !== null ? item.opened_fri.substring(0, 5) + (item.closed_fri !== null ? ' - ' + item.closed_fri.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="4" col="1" :text="((item.opened_fri === '00:00:00' && !item.closed_fri) ? $t('detail.allDay') : (item.opened_fri ? item.opened_fri.substring(0, 5) + (item.closed_fri ? ' - ' + item.closed_fri.substring(0, 5) : '') : $t('detail.closed')))"></Label>
                                 <Label row="5" col="0" class="left" :text="$t('detail.saturday')+':'"></Label>
-                                <Label row="5" col="1" :text="((item.opened_sat === '00:00:00' && item.closed_sat === null) ? $t('detail.allDay') : (item.opened_sat !== null ? item.opened_sat.substring(0, 5) + (item.closed_sat !== null ? ' - ' + item.closed_sat.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="5" col="1" :text="((item.opened_sat === '00:00:00' && !item.closed_sat) ? $t('detail.allDay') : (item.opened_sat ? item.opened_sat.substring(0, 5) + (item.closed_sat ? ' - ' + item.closed_sat.substring(0, 5) : '') : $t('detail.closed')))"></Label>
                                 <Label row="6" col="0" class="left" :text="$t('detail.sunday')+':'"></Label>
-                                <Label row="6" col="1" :text="((item.opened_sun === '00:00:00' && item.closed_sun === null) ? $t('detail.allDay') : (item.opened_sun !== null ? item.opened_sun.substring(0, 5) + (item.closed_sun !== null ? ' - ' + item.closed_sun.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="6" col="1" :text="((item.opened_sun === '00:00:00' && !item.closed_sun) ? $t('detail.allDay') : (item.opened_sun ? item.opened_sun.substring(0, 5) + (item.closed_sun ? ' - ' + item.closed_sun.substring(0, 5) : '') : $t('detail.closed')))"></Label>
                             </GridLayout>
                         </StackLayout>
-                        <StackLayout v-else class="hr"></StackLayout>
+                        <StackLayout class="hr"></StackLayout>
                         <StackLayout class="info-block" v-if="item.location !== undefined">
                             <GridLayout rows="auto,auto,auto" columns="auto,auto">
                                 <Label row="0" col="0" class="left" :text="$t('detail.location')+':'"></Label>
