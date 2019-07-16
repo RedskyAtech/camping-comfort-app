@@ -62,6 +62,7 @@
                                 <Label row="6" col="1" :text="((item.opened_sun === '00:00:00' && item.closed_sun === null) ? $t('detail.allDay') : (item.opened_sun !== null ? item.opened_sun.substring(0, 5) + (item.closed_sun !== null ? ' - ' + item.closed_sun.substring(0, 5) : '') : $t('detail.closed')))"></Label>
                             </GridLayout>
                         </StackLayout>
+                        <StackLayout v-else class="hr"></StackLayout>
                         <StackLayout class="info-block" v-if="item.location !== undefined">
                             <GridLayout rows="auto,auto,auto" columns="auto,auto">
                                 <Label row="0" col="0" class="left" :text="$t('detail.location')+':'"></Label>
@@ -546,5 +547,12 @@
     .tag.primary {
         background-color: #0a7cf7;
         border-color: #0a7cf7;
+    }
+
+    /* HR */
+    .hr {
+        border-top-width: 1;
+        border-color: #e5e5e5;
+        margin-top: 25;
     }
 </style>
