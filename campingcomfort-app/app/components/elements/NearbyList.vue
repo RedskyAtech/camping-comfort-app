@@ -9,9 +9,9 @@
                             <Label class="item-title" :text="item.title"></Label>
                             <FlexboxLayout>
                                 <Label class="item-subtitle" :text="localizeNumber(item.distance) + ' km'"></Label>
-                                <StackLayout class="rating-container" verticalAlignment="center">
+                                <!--<StackLayout class="rating-container" verticalAlignment="center">
                                     <StarRating size="25" fillColor="#0a7cf7" outlineColor="#0a7cf7" emptyColor="#d2d2d2" :value="roundRating(item.rating)" />
-                                </StackLayout>
+                                </StackLayout>-->
                             </FlexboxLayout>
                         </StackLayout>
                     </StackLayout>

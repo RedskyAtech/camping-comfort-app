@@ -71,7 +71,8 @@ export function translations() {
                 route: 'Route',
                 liked: 'The event is added to "My vacation"',
                 isAutoTranslated: 'All text on this page is automatically translated. Please keep in mind that automatic translations can contain errors.',
-                toWebsite: 'To website'
+                toWebsite: 'To website',
+                openingHours: 'Opening hours'
             },
             comingSoon: {
                 comingSoon: 'Coming soon'
@@ -185,7 +186,17 @@ export function translations() {
                 route: 'Route',
                 liked: 'De activiteit is toegevoegd aan "Mijn vakantie"',
                 isAutoTranslated: 'Alle tekst op deze pagina is automatisch vertaald. Houd er daarom rekening mee dat deze fouten kan bevatten.',
-                toWebsite: 'Naar website'
+                toWebsite: 'Naar website',
+                openingHours: 'Openingstijden',
+                monday: 'Maandag',
+                tuesday: 'Dinsdag',
+                wednesday: 'Woensdag',
+                thursday: 'Donderdag',
+                friday: 'Vrijdag',
+                saturday: 'Zaterdag',
+                sunday: 'Zondag',
+                closed: 'Gesloten',
+                allDay: 'Hele dag geopend'
             },
             comingSoon: {
                 comingSoon: 'Binnenkort'
@@ -299,7 +310,8 @@ export function translations() {
                 route: 'Route',
                 liked: 'Das Ereignis wird zu "Mein Urlaub" hinzugefügt',
                 isAutoTranslated: 'Alle Texte auf dieser Seite werden automatisch übersetzt. Bitte beachten Sie, dass automatische Übersetzungen Fehler enthalten können',
-                toWebsite: 'Zur website'
+                toWebsite: 'Zur website',
+                openingHours: 'Öffnungszeiten'
             },
             comingSoon: {
                 comingSoon: 'Demnächst verfügbar'
@@ -413,7 +425,8 @@ export function translations() {
                 route: 'Itinéraire',
                 liked: 'L\'événement est ajouté à "Mes vacances"',
                 isAutoTranslated: 'Tout le texte de cette page est traduit automatiquement. N\'oubliez pas que les traductions automatiques peuvent contenir des erreurs',
-                toWebsite: 'Au site web'
+                toWebsite: 'Au site web',
+                openingHours: 'Horaires d\'ouverture'
             },
             comingSoon: {
                 comingSoon: 'Prochainement à venir'
@@ -527,7 +540,8 @@ export function translations() {
                 route: 'Percorso',
                 liked: 'L\'evento viene aggiunto a "La mia vacanza"',
                 isAutoTranslated: 'Tutto il testo di questa pagina viene tradotto automaticamente. Tieni presente che le traduzioni automatiche possono contenere errori.',
-                toWebsite: 'Al sito web'
+                toWebsite: 'Al sito web',
+                openingHours: 'Orari di apertura'
 
             },
             comingSoon: {

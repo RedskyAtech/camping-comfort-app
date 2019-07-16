@@ -43,6 +43,25 @@
                                 <Label :text="$t('detail.toWebsite')" verticalAlignment="center"></Label>
                             </StackLayout>
                         </GridLayout>
+                        <StackLayout class="info-block" v-if="item.opened_mon !== null || item.opened_tue !== null || item.opened_wed !== null || item.opened_thu !== null || item.opened_fri !== null || item.opened_sat !== null || item.opened_sun !== null">
+                            <Label class="info-title" :text="$t('detail.openingHours')"></Label>
+                            <GridLayout rows="auto,auto,auto,auto,auto,auto,auto" columns="auto,auto">
+                                <Label row="0" col="0" class="left" :text="$t('detail.monday')+':'"></Label>
+                                <Label row="0" col="1" :text="((item.opened_mon === '00:00:00' && item.closed_mon === null) ? $t('detail.allDay') : (item.opened_mon !== null ? item.opened_mon.substring(0, 5) + (item.closed_mon !== null ? ' - ' + item.closed_mon.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="1" col="0" class="left" :text="$t('detail.tuesday')+':'"></Label>
+                                <Label row="1" col="1" :text="((item.opened_tue === '00:00:00' && item.closed_tue === null) ? $t('detail.allDay') : (item.opened_tue !== null ? item.opened_tue.substring(0, 5) + (item.closed_tue !== null ? ' - ' + item.closed_tue.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="2" col="0" class="left" :text="$t('detail.wednesday')+':'"></Label>
+                                <Label row="2" col="1" :text="((item.opened_wed === '00:00:00' && item.closed_wed === null) ? $t('detail.allDay') : (item.opened_wed !== null ? item.opened_wed.substring(0, 5) + (item.closed_wed !== null ? ' - ' + item.closed_wed.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="3" col="0" class="left" :text="$t('detail.thursday')+':'"></Label>
+                                <Label row="3" col="1" :text="((item.opened_thu === '00:00:00' && item.closed_thu === null) ? $t('detail.allDay') : (item.opened_thu !== null ? item.opened_thu.substring(0, 5) + (item.closed_thu !== null ? ' - ' + item.closed_thu.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="4" col="0" class="left" :text="$t('detail.friday')+':'"></Label>
+                                <Label row="4" col="1" :text="((item.opened_fri === '00:00:00' && item.closed_fri === null) ? $t('detail.allDay') : (item.opened_fri !== null ? item.opened_fri.substring(0, 5) + (item.closed_fri !== null ? ' - ' + item.closed_fri.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="5" col="0" class="left" :text="$t('detail.saturday')+':'"></Label>
+                                <Label row="5" col="1" :text="((item.opened_sat === '00:00:00' && item.closed_sat === null) ? $t('detail.allDay') : (item.opened_sat !== null ? item.opened_sat.substring(0, 5) + (item.closed_sat !== null ? ' - ' + item.closed_sat.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                                <Label row="6" col="0" class="left" :text="$t('detail.sunday')+':'"></Label>
+                                <Label row="6" col="1" :text="((item.opened_sun === '00:00:00' && item.closed_sun === null) ? $t('detail.allDay') : (item.opened_sun !== null ? item.opened_sun.substring(0, 5) + (item.closed_sun !== null ? ' - ' + item.closed_sun.substring(0, 5) : '') : $t('detail.closed')))"></Label>
+                            </GridLayout>
+                        </StackLayout>
                         <StackLayout class="info-block" v-if="item.location !== undefined">
                             <GridLayout rows="auto,auto,auto" columns="auto,auto">
                                 <Label row="0" col="0" class="left" :text="$t('detail.location')+':'"></Label>
@@ -487,6 +506,11 @@
         background-color: rgba(0,112,218,0.1);
         font-size: 14;
     }
+    .info-block .info-title {
+        font-size: 16;
+        font-weight: 700;
+        padding-bottom: 5;
+    }
     .info-block .left {
         padding-right: 25;
         font-weight: 700;
@@ -498,16 +522,10 @@
     }
     .address-title {
         font-weight: 700;
+        padding-bottom: 5;
     }
     .btn {
         margin-top: 12.5;
-    }
-
-    /* Website */
-    .website {
-        border-bottom-width: 1;
-        border-color: #e5e5e5;
-        padding-bottom: 25;
     }
 
     /* Tags */
