@@ -72,7 +72,16 @@ export function translations() {
                 liked: 'The event is added to "My vacation"',
                 isAutoTranslated: 'All text on this page is automatically translated. Please keep in mind that automatic translations can contain errors.',
                 toWebsite: 'To website',
-                openingHours: 'Opening hours'
+                openingHours: 'Opening hours',
+                monday: 'Monday',
+                tuesday: 'Tuesday',
+                wednesday: 'Wednesday',
+                thursday: 'Thursday',
+                friday: 'Friday',
+                saturday: 'Saturday',
+                sunday: 'Sunday',
+                closed: 'Closed',
+                allDay: 'Opened all day'
             },
             comingSoon: {
                 comingSoon: 'Coming soon'
@@ -311,7 +320,16 @@ export function translations() {
                 liked: 'Das Ereignis wird zu "Mein Urlaub" hinzugefügt',
                 isAutoTranslated: 'Alle Texte auf dieser Seite werden automatisch übersetzt. Bitte beachten Sie, dass automatische Übersetzungen Fehler enthalten können',
                 toWebsite: 'Zur website',
-                openingHours: 'Öffnungszeiten'
+                openingHours: 'Öffnungszeiten',
+                monday: 'Montag',
+                tuesday: 'Dienstag',
+                wednesday: 'Mittwoch',
+                thursday: 'Donnerstag',
+                friday: 'Freitag',
+                saturday: 'Samstag',
+                sunday: 'Sonntag',
+                closed: 'Geschlossen',
+                allDay: 'Ganztägig geöffnet'
             },
             comingSoon: {
                 comingSoon: 'Demnächst verfügbar'
@@ -426,7 +444,16 @@ export function translations() {
                 liked: 'L\'événement est ajouté à "Mes vacances"',
                 isAutoTranslated: 'Tout le texte de cette page est traduit automatiquement. N\'oubliez pas que les traductions automatiques peuvent contenir des erreurs',
                 toWebsite: 'Au site web',
-                openingHours: 'Horaires d\'ouverture'
+                openingHours: 'Horaires d\'ouverture',
+                monday: 'Lundi',
+                tuesday: 'Mardi',
+                wednesday: 'Mercredi',
+                thursday: 'Jeudi',
+                friday: 'Vendredi',
+                saturday: 'Samedi',
+                sunday: 'Dimanche',
+                closed: 'Fermé',
+                allDay: 'Ouvert toute la journée'
             },
             comingSoon: {
                 comingSoon: 'Prochainement à venir'
@@ -541,8 +568,16 @@ export function translations() {
                 liked: 'L\'evento viene aggiunto a "La mia vacanza"',
                 isAutoTranslated: 'Tutto il testo di questa pagina viene tradotto automaticamente. Tieni presente che le traduzioni automatiche possono contenere errori.',
                 toWebsite: 'Al sito web',
-                openingHours: 'Orari di apertura'
-
+                openingHours: 'Orari di apertura',
+                monday: 'Lunedi',
+                tuesday: 'Martedì',
+                wednesday: 'Mercoledì',
+                thursday: 'Giovedi',
+                friday: 'Venerdì',
+                saturday: 'Sabato',
+                sunday: 'Domenica',
+                closed: 'Chiuso',
+                allDay: 'Aperto tutto il giorno',
             },
             comingSoon: {
                 comingSoon: 'Prossimamente in arrivo'
@@ -552,8 +587,9 @@ export function translations() {
             },
             nearby: {
                 title: 'Attività nelle vicinanze',
-                toDo: 'Da fare',
-                dinnerAndDrinks: 'Cena e bevande',
+                arts_entertainment: 'In giro',
+                food_beverage: 'Alimenti e bevande',
+                shopping_retail: 'Negozio',
             },
             activities: {
                 week: 'Settimana',

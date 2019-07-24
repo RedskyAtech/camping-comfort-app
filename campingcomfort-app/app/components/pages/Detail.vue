@@ -38,7 +38,7 @@
                                 <Label class="read-more-link" :text="'+ '+$t('detail.readMore')" @tap="readMore"></Label>
                             </StackLayout>
                         </GridLayout>
-                        <GridLayout columns="auto,*" class="website" v-if="item.website !== undefined">
+                        <GridLayout columns="auto,*" class="website" v-if="item.website">
                             <StackLayout class="btn" col="0" @tap="toWebsite">
                                 <Label :text="$t('detail.toWebsite')" verticalAlignment="center"></Label>
                             </StackLayout>
