@@ -434,10 +434,10 @@
 
     /* Hero */
     Page.xxs .hero-grid {
-        height: 185;
+        height: 232;
     }
     Page.xs .hero-grid {
-        height: 210;
+        height: 232;
     }
     Page.sm .hero-grid {
         height: 232;
