@@ -172,13 +172,16 @@
                         content: data
                     }).then((response) => {
 
+                        // Subscribe to a firebase topic
+                        let result = response.content.toJSON();
+                        EventBus.$emit('updateSubscription', { type: 'receptionMessage', id: result.id })
+
                         // Log the submit activity
                         EventBus.$emit('log', {
                             type: 'reception_submit',
                             data: {}
                         });
 
-//                        result = response.content.toJSON();
                         EventBus.$emit('stopLoading', loadingId);
 
                         // Reset the values

@@ -116,9 +116,9 @@
             save(){
 
                 // Get the old subscription
-                let subscription;
-                if(this.keyExistsInStore('subscription')) {
-                    subscription = this.getStringFromStore('subscription');
+                let newsTopic;
+                if(this.keyExistsInStore('news_topic')) {
+                    newsTopic = this.getStringFromStore('news_topic');
                 }
 
                 // Empty all storage data
@@ -135,12 +135,12 @@
                 this.$i18n.locale = this.language;
 
                 // Save the old subscription to the storage (because it was deleted before)
-                if(subscription) {
-                    this.storeString('subscription', subscription);
+                if(newsTopic) {
+                    this.storeString('news_topic', newsTopic);
                 }
 
                 // Update the subscription
-                EventBus.$emit('updateSubscription');
+                EventBus.$emit('updateSubscription', { type: 'news' });
 
                 // Update the My Vacation list
                 EventBus.$emit('updateMyVacation');

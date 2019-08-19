@@ -24,6 +24,9 @@
                     clearHistory: true,
                     transition: {
                         name: 'fade',
+                    },
+                    props: {
+                        initialize: true,
                     }
                 });
             }

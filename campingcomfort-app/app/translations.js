@@ -40,7 +40,7 @@ export function translations() {
             },
             tabs: {
                 home: 'Home',
-                camping: 'Camping',
+                camping: 'Facilities',
                 nearby: 'Nearby',
                 activities: 'Activities',
                 reception: 'Reception',
@@ -87,7 +87,7 @@ export function translations() {
                 comingSoon: 'Coming soon'
             },
             camping: {
-                title: 'On the camping'
+                title: 'Facilities'
             },
             nearby: {
                 title: 'Nearby activities',
@@ -164,7 +164,7 @@ export function translations() {
             },
             tabs: {
                 home: 'Home',
-                camping: 'Camping',
+                camping: 'Faciliteiten',
                 nearby: 'Omgeving',
                 activities: 'Activiteiten',
                 reception: 'Receptie'
@@ -211,7 +211,7 @@ export function translations() {
                 comingSoon: 'Binnenkort'
             },
             camping: {
-                title: 'Op de camping'
+                title: 'Faciliteiten'
             },
             nearby: {
                 title: 'In de buurt',
@@ -288,7 +288,7 @@ export function translations() {
             },
             tabs: {
                 home: 'Home',
-                camping: 'Camping',
+                camping: 'Einrichtungen',
                 nearby: 'In der Nähe',
                 activities: 'Aktivitäten',
                 reception: 'Empfang'
@@ -335,7 +335,7 @@ export function translations() {
                 comingSoon: 'Demnächst verfügbar'
             },
             camping: {
-                title: 'Auf Campingplatz'
+                title: 'Einrichtungen'
             },
             nearby: {
                 title: 'Aktivitäten in der Nähe',
@@ -412,7 +412,7 @@ export function translations() {
             },
             tabs: {
                 home: 'Home',
-                camping: 'Camping',
+                camping: 'Installations',
                 nearby: 'A proximité',
                 activities: 'Activités',
                 reception: 'Réception'
@@ -459,7 +459,7 @@ export function translations() {
                 comingSoon: 'Prochainement à venir'
             },
             camping: {
-                title: 'Sur le camping'
+                title: 'Installations'
             },
             nearby: {
                 title: 'Activités à proximité',
@@ -536,7 +536,7 @@ export function translations() {
             },
             tabs: {
                 home: 'Home',
-                camping: 'Campeggio',
+                camping: 'Strutture',
                 nearby: 'Nelle vicinanze',
                 activities: 'Attività',
                 reception: 'Ricezione'
@@ -583,7 +583,7 @@ export function translations() {
                 comingSoon: 'Prossimamente in arrivo'
             },
             camping: {
-                title: 'In campeggio'
+                title: 'Strutture'
             },
             nearby: {
                 title: 'Attività nelle vicinanze',

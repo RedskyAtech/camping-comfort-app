@@ -53,6 +53,7 @@ Vue.use(require('vue-moment'), {
 // Web Image Cache
 Vue.registerElement('WebImage', () => require("nativescript-web-image-cache").WebImage);
 
+
 // Localize
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n);

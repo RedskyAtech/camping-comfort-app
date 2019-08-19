@@ -10,15 +10,15 @@
                 <StackLayout row="1" col="0" class="tabbar">
                     <GridLayout rows="*" columns="*,*,*,*,*">
                         <StackLayout verticalAlignment="middle" row="0" col="0" class="tab" :class="[{'active': activeTab === 1}]" @tap="toHome">
-                            <Label class="tab-icon fas">{{ 'fa-home' | fonticon }}</Label>
+                            <Label class="tab-icon fas">{{ 'fa-heart' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.home')"></Label>
                         </StackLayout>
                         <StackLayout verticalAlignment="middle" row="0" col="1" class="tab" :class="[{'active': activeTab === 2}]" @tap="toCamping">
-                            <Label class="tab-icon fas">{{ 'fa-campground' | fonticon }}</Label>
+                            <Label class="tab-icon fas">{{ 'fa-map' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.camping')"></Label>
                         </StackLayout>
                         <StackLayout verticalAlignment="middle" row="0" col="2" class="tab" :class="[{'active': activeTab === 3}]" @tap="toNearby">
-                            <Label class="tab-icon fas">{{ 'fa-map-marker-alt' | fonticon }}</Label>
+                            <Label class="tab-icon fas">{{ 'fa-map-signs' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.nearby')"></Label>
                         </StackLayout>
                         <StackLayout verticalAlignment="middle" row="0" col="3" class="tab" :class="[{'active': activeTab === 4}]" @tap="toEvents">
@@ -26,7 +26,7 @@
                             <Label class="tab-label" :text="$t('tabs.activities')"></Label>
                         </StackLayout>
                         <StackLayout verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="toReception">
-                            <Label class="tab-icon far">{{ 'fa-comment' | fonticon }}</Label>
+                            <Label class="tab-icon fas">{{ 'fa-comment' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.reception')"></Label>
                         </StackLayout>
                     </GridLayout>
@@ -60,6 +60,12 @@
     const firebase = require("nativescript-plugin-firebase");
 
     export default {
+        props: {
+            initialize: {
+                type: Boolean,
+                default: false
+            },
+        },
         data() {
             return {
                 activeTab: 1
@@ -90,9 +96,6 @@
         created: function(){
             let self = this;
 
-            // Subscribe to a Firebase topic
-            this.subscribeToTopic();
-
             // Log the app activity
             EventBus.$on('log', function(data) {
                 self.log(data.type, data.data);
@@ -116,23 +119,52 @@
             });
 
             // Update a topic subscription
-            EventBus.$on('updateSubscription', function() {
-                self.subscribeToTopic();
+            EventBus.$on('updateSubscription', function(data) {
+                self.subscribeToTopic(data);
             });
+
+            // Update a topic subscription when coming from the splash page
+            if(this.initialize === true) {
+                self.subscribeToTopic({ type: 'news' });
+            }
         },
         methods: {
-            subscribeToTopic: function() {
+
+            /**
+             * Subscribe to a topic
+             *
+             * The "data" parameter is an object and needs at least a "type" key.
+             *
+             * @param data
+             */
+            subscribeToTopic: function(data) {
                 let self = this;
                 let campingId = this.getNumberFromStore('campingId');
                 let lang = this.getStringFromStore('language');
-                let topic = "camping_"+campingId+"_"+lang;
+                let topic = '';
+                let topicStoreKey = '';
+                let unsubscribePrevious = false;
+
+                // Subscribe to camping news
+                if(data.type === 'news') {
+                    topic = "camping_"+campingId+"_news_"+lang;
+                    topicStoreKey = 'news_topic';
+                    unsubscribePrevious = true;
+                }
+
+                // Subscribe to a reception message
+                if(data.type === 'receptionMessage') {
+                    topic = "reception_message_"+data.id;
+                }
 
                 // Unsubscribe a previous subscription
-                if(self.keyExistsInStore('subscription')) {
-                    let oldTopic = self.getStringFromStore('subscription');
-                    firebase.unsubscribeFromTopic(oldTopic).then(function() {
-                        console.log("Firebase unsubscribed from topic " + oldTopic);//
-                    });
+                if(unsubscribePrevious === true) {
+                    if(self.keyExistsInStore(topicStoreKey)) {
+                        let oldTopic = self.getStringFromStore(topicStoreKey);
+                        firebase.unsubscribeFromTopic(oldTopic).then(function() {
+                            console.log("Firebase unsubscribed from topic " + oldTopic);//
+                        });
+                    }
                 }
 
                 // Subscribe to a Firebase topic
@@ -140,7 +172,9 @@
                     console.log("Firebase subscribed to topic "+topic);
 
                     // Store the subscription so it can be unsubscribed.
-                    self.storeString('subscription', topic);
+                    if(topicStoreKey !== '') {
+                        self.storeString(topicStoreKey, topic);
+                    }
                 });
 
                 // Go to the news item after clicking the push notification
