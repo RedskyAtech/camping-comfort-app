@@ -2,9 +2,9 @@
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="*" columns="*">
             <ScrollView row="0" col="0">
-                <GridLayout rows="auto,auto,auto" columns="*">
-                    <GridLayout row="0" rows="*" class="hero-grid" verticalAlignment="top">
-                        <WebImage v-if="item.image" row="0" :src="item.image" class="hero-image"></WebImage>
+                <GridLayout :rows="item.image !== '' && item.image !== undefined ? 'auto,auto,auto' : 'auto,auto'" columns="*">
+                    <GridLayout v-if="item.image !== '' && item.image !== undefined" row="0" rows="*" class="hero-grid" verticalAlignment="top">
+                        <WebImage row="0" :src="item.image" class="hero-image"></WebImage>
                     </GridLayout>
                     <GridLayout row="1" rows="auto" columns="auto,auto" class="timeframe" v-if="item.start_time !== undefined">
                         <Label col="0" class="clock far" verticalAlignment="center">{{ 'fa-clock' | fonticon }}</Label>
@@ -453,9 +453,6 @@
     }
     .hero-image {
         stretch: aspectFill;
-    }
-    .ios .hero-image {
-        margin-top: -40;
     }
     .timeframe {
         padding: 12.5 25;
