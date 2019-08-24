@@ -58,7 +58,7 @@
 
     /* Title */
     .title-container {
-        background-color: #f8f8f8;
+        background-color: #ffffff;
         text-align: center;
         font-weight: 700;
         padding: 12.5;

@@ -81,7 +81,8 @@ export function translations() {
                 saturday: 'Saturday',
                 sunday: 'Sunday',
                 closed: 'Closed',
-                allDay: 'Opened all day'
+                allDay: 'Opened all day',
+                whatOtherPeopleSay: 'What other people say'
             },
             comingSoon: {
                 comingSoon: 'Coming soon'
@@ -205,7 +206,8 @@ export function translations() {
                 saturday: 'Zaterdag',
                 sunday: 'Zondag',
                 closed: 'Gesloten',
-                allDay: 'Hele dag geopend'
+                allDay: 'Hele dag geopend',
+                whatOtherPeopleSay: 'Wat anderen zeggen'
             },
             comingSoon: {
                 comingSoon: 'Binnenkort'
@@ -329,7 +331,8 @@ export function translations() {
                 saturday: 'Samstag',
                 sunday: 'Sonntag',
                 closed: 'Geschlossen',
-                allDay: 'Ganztägig geöffnet'
+                allDay: 'Ganztägig geöffnet',
+                whatOtherPeopleSay: 'Was andere sagen'
             },
             comingSoon: {
                 comingSoon: 'Demnächst verfügbar'
@@ -453,7 +456,8 @@ export function translations() {
                 saturday: 'Samedi',
                 sunday: 'Dimanche',
                 closed: 'Fermé',
-                allDay: 'Ouvert toute la journée'
+                allDay: 'Ouvert toute la journée',
+                whatOtherPeopleSay: 'Que disent les autres'
             },
             comingSoon: {
                 comingSoon: 'Prochainement à venir'
@@ -578,6 +582,7 @@ export function translations() {
                 sunday: 'Domenica',
                 closed: 'Chiuso',
                 allDay: 'Aperto tutto il giorno',
+                whatOtherPeopleSay: 'Cosa dicono gli altri'
             },
             comingSoon: {
                 comingSoon: 'Prossimamente in arrivo'

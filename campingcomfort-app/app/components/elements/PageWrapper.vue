@@ -40,7 +40,7 @@
 
     /* Background */
     .background {
-        background-color: #f5f5f8;
+        background-color: #ffffff;
     }
 
     /* Buttons */
@@ -50,7 +50,7 @@
         orientation: horizontal;
     }
     .btn-container .button.back-btn {
-        border-color: #f5f5f8;
+        border-color: #ffffff;
         padding-left: 20;
     }
 

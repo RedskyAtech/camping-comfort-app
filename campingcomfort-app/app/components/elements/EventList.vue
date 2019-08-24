@@ -2,8 +2,8 @@
     <GridLayout rows="*">
         <ListView row="0" for="item in listItems" @itemLoading="onItemLoading">
             <v-template>
-                <CardView class="cardStyle" :class="[{ 'first': $index === 0 }]" radius="10" @tap="toDetail(item.id)">
-                    <GridLayout rows="75" columns="75,*">
+                <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
+                    <GridLayout rows="65" columns="87,*">
                         <WebImage col="0" :src="item.image"></WebImage>
                         <StackLayout col="1" orientation="horizontal" class="event-label">
                             <StackLayout verticalAlignment="center">
@@ -22,7 +22,7 @@
                             </StackLayout>
                         </StackLayout>
                     </GridLayout>
-                </CardView>
+                </StackLayout>
             </v-template>
         </ListView>
         <ResultPlaceHolder v-if="listItems.length === 0" row="0" iconLabelClass="fas" iconClass="fa-calendar-alt" :title="$t('activities.emptyTitle')" :text="$t('activities.emptyText')"></ResultPlaceHolder>
@@ -168,22 +168,20 @@
 <style scoped>
 
     /* List view */
-    .cardStyle {
-        background-color: #fff;
+    .row {
         margin: 0 12.5 12.5 12.5;
     }
-    .cardStyle.first {
+    .row.first {
         margin-top: 12.5;
     }
     ListView {
-        background-color: #f5f5f8;
+        background-color: #ffffff;
         separator-color: transparent;
     }
 
     /* Image */
-    .cardStyle WebImage {
-        border-top-left-radius: 10;
-        border-bottom-left-radius: 10;
+    .row WebImage {
+        border-radius: 5;
         stretch: aspectFill;
     }
 

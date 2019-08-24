@@ -32,6 +32,19 @@
                         <GridLayout columns="*" :rows="textHeight">
                             <Stacklayout col="0" row="0">
                                 <Label class="text" textWrap="true" :text="item.text"></Label>
+                                <Label class="text subtitle" textWrap="true" :text="$t('detail.whatOtherPeopleSay')+':'"></Label>
+                                <StackLayout class="review-container">
+                                    <StackLayout horizontalAlignment="left"><StarRating :value="4" size="35" fillColor="#0070DA" emptyColor="#7FB7EC" outlineColor="#F8F8F8" /></StackLayout>
+                                    <Label class="review" textWrap="true" text='"fdghgfhfgh fgh gfh gfh f hgf h fg h fg hfg fdghgfhfgh"'></Label>
+                                </StackLayout>
+                                <StackLayout class="review-container">
+                                    <StackLayout horizontalAlignment="left"><StarRating :value="3" size="35" fillColor="#0070DA" emptyColor="#7FB7EC" outlineColor="#F8F8F8" /></StackLayout>
+                                    <Label class="review" textWrap="true" text='"fdghgfhfgh fgh gfh gfh f hgf h fg h fg hfg fdghgfhfgh"'></Label>
+                                </StackLayout>
+                                <StackLayout class="review-container last">
+                                    <StackLayout horizontalAlignment="left"><StarRating :value="2" size="35" fillColor="#0070DA" emptyColor="#7FB7EC" outlineColor="#F8F8F8" /></StackLayout>
+                                    <Label class="review" textWrap="true" text='"fdghgfhfgh fgh gfh gfh f hgf h fg h fg hfg fdghgfhfgh"'></Label>
+                                </StackLayout>
                             </Stacklayout>
                             <StackLayout v-if="collapsed" col="0" row="0" class="gradient"></StackLayout>
                             <StackLayout v-if="collapsed" col="0" row="1">
@@ -479,6 +492,21 @@
         opacity: 0.5;
         line-height: 5;
     }
+    .text.subtitle {
+        padding-top: 15;
+        font-weight: 700;
+        padding-bottom: 15;
+    }
+    .review-container {
+        padding-bottom: 15;
+    }
+    .review-container.last {
+        padding-bottom: 5;
+    }
+    .review {
+        margin-top: 5;
+        opacity: 0.5;
+    }
     .disclaimer {
         padding-top: 25;
         font-size: 10;
@@ -488,7 +516,7 @@
 
     /* Read more */
     .gradient {
-        background: linear-gradient(to bottom, rgba(248,248,248,0), rgba(248,248,248,0.1), #f8f8f8);
+        background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.1), #ffffff);
     }
     .read-more-link {
         color: #0070da;

@@ -368,7 +368,7 @@
 
     /* Tabbar */
     .tabbar {
-        background-color: #f8f8f8;
+        background-color: #ffffff;
         border-top-width: 1;
         border-color: #e5e5e5;
         color: #8f99ac;

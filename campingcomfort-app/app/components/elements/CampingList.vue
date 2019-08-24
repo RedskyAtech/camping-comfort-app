@@ -11,8 +11,8 @@
                         <Label class="btn-text" :text="$t('home.map')" verticalAlignment="center"></Label>
                     </StackLayout>
                 </StackLayout>
-                <CardView class="cardStyle" radius="10" @tap="toDetail(item.id)">
-                    <GridLayout rows="75" columns="75,*">
+                <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
+                    <GridLayout rows="65" columns="87,*">
                         <WebImage col="0" :src="item.image"></WebImage>
                         <StackLayout col="1" orientation="horizontal" class="event-label">
                             <StackLayout verticalAlignment="center">
@@ -20,12 +20,12 @@
                             </StackLayout>
                         </StackLayout>
                     </GridLayout>
-                </CardView>
+                </StackLayout>
             </StackLayout>
         </v-template>
         <v-template else>
-            <CardView class="cardStyle" radius="10" @tap="toDetail(item.id)">
-                <GridLayout rows="75" columns="75,*">
+            <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
+                <GridLayout rows="65" columns="87,*">
                     <WebImage col="0" :src="item.image" stretch="aspectFill"></WebImage>
                     <StackLayout col="1" orientation="horizontal" class="event-label">
                         <StackLayout verticalAlignment="center">
@@ -33,7 +33,7 @@
                         </StackLayout>
                     </StackLayout>
                 </GridLayout>
-            </CardView>
+            </StackLayout>
         </v-template>
     </ListView>
 </template>
@@ -249,19 +249,20 @@
     }
 
     /* List view */
-    .cardStyle {
-        background-color: #fff;
+    .row {
         margin: 0 12.5 12.5 12.5;
     }
+    .row.first {
+        margin-top: 12.5;
+    }
     ListView {
-        background-color: #f5f5f8;
+        background-color: #ffffff;
         separator-color: transparent;
     }
 
     /* Image */
-    .cardStyle WebImage {
-        border-top-left-radius: 10;
-        border-bottom-left-radius: 10;
+    .row WebImage {
+        border-radius: 5;
         stretch: aspectFill;
     }
 
