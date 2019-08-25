@@ -20,7 +20,7 @@
     }
     .fab.transparent {
         color: #fff;
-        border-radius: 100%;
+        border-radius: 120;
         border-color: #fff;
         border-width: 1;
     }
@@ -37,7 +37,7 @@
         computed: {
             fabRadius: function() {
                 if(this.$isAndroid) {
-                    return 30;
+                    return 120;
                 }
                 else {
                     return 30;

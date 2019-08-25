@@ -188,6 +188,7 @@
     /* Label */
     .event-label {
         padding: 0 12.5;
+        font-weight: 400;
     }
     .event-time {
         font-size: 12;

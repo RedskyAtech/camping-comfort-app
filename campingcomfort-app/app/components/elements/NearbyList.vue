@@ -1,21 +1,23 @@
 <template>
     <ListView for="item in listItems" @itemLoading="onItemLoading">
         <v-template>
-            <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
-                <GridLayout rows="65" columns="87,*">
-                    <WebImage col="0" :src="item.image || '~/assets/images/placeholder.gif'"></WebImage>
-                    <StackLayout col="1" orientation="horizontal" class="item-label">
-                        <StackLayout verticalAlignment="center">
-                            <Label class="item-title" :text="item.title"></Label>
-                            <FlexboxLayout>
-                                <Label class="item-subtitle" :text="localizeNumber(item.distance) + ' km'"></Label>
-                                <!--<StackLayout class="rating-container" verticalAlignment="center">
-                                    <StarRating size="25" fillColor="#0a7cf7" outlineColor="#0a7cf7" emptyColor="#d2d2d2" :value="roundRating(item.rating)" />
-                                </StackLayout>-->
-                            </FlexboxLayout>
+            <StackLayout>
+                <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
+                    <GridLayout rows="65" columns="87,*">
+                        <WebImage col="0" :src="item.image || '~/assets/images/placeholder.gif'"></WebImage>
+                        <StackLayout col="1" orientation="horizontal" class="item-label">
+                            <StackLayout verticalAlignment="center">
+                                <Label class="item-title" :text="item.title"></Label>
+                                <FlexboxLayout>
+                                    <Label class="item-subtitle" :text="localizeNumber(item.distance) + ' km'"></Label>
+                                    <!--<StackLayout class="rating-container" verticalAlignment="center">
+                                        <StarRating size="25" fillColor="#0a7cf7" outlineColor="#0a7cf7" emptyColor="#d2d2d2" :value="roundRating(item.rating)" />
+                                    </StackLayout>-->
+                                </FlexboxLayout>
+                            </StackLayout>
                         </StackLayout>
-                    </StackLayout>
-                </GridLayout>
+                    </GridLayout>
+                </StackLayout>
             </StackLayout>
         </v-template>
     </ListView>
@@ -174,6 +176,7 @@
 
     /* Label */
     .item-label {
+        font-weight: 400;
         padding: 0 12.5;
     }
     .item-subtitle {

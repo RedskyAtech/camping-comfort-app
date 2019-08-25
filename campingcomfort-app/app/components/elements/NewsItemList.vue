@@ -2,21 +2,23 @@
     <GridLayout rows="*">
         <ListView row="0" for="item in listItems" @itemLoading="onItemLoading">
             <v-template>
-                <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
-                    <GridLayout rows="65" columns="87,*">
-                        <WebImage col="0" :src="item.image"></WebImage>
-                        <StackLayout col="1" orientation="horizontal" class="event-label">
-                            <StackLayout verticalAlignment="center">
-                                <Label class="event-title" :text="item.title" textWrap="true"></Label>
-                                <StackLayout class="event-time" orientation="horizontal">
-                                    <Label class="clock far">{{ 'fa-calendar-alt' | fonticon }}</Label>
-                                    <StackLayout orientation="horizontal">
-                                        <Label :text="humanizeDate(item.date, $t('formatting.date'))"></Label>
+                <StackLayout>
+                    <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
+                        <GridLayout rows="65" columns="87,*">
+                            <WebImage row="0" :src="item.image" borderRadius="5"></WebImage>
+                            <StackLayout col="1" orientation="horizontal" class="event-label">
+                                <StackLayout verticalAlignment="center">
+                                    <Label class="event-title" :text="item.title" textWrap="true"></Label>
+                                    <StackLayout class="event-time" orientation="horizontal">
+                                        <Label class="clock far">{{ 'fa-calendar-alt' | fonticon }}</Label>
+                                        <StackLayout orientation="horizontal">
+                                            <Label :text="humanizeDate(item.date, $t('formatting.date'))"></Label>
+                                        </StackLayout>
                                     </StackLayout>
                                 </StackLayout>
                             </StackLayout>
-                        </StackLayout>
-                    </GridLayout>
+                        </GridLayout>
+                    </StackLayout>
                 </StackLayout>
             </v-template>
         </ListView>
@@ -159,10 +161,10 @@
 
     /* List view */
     .row {
-        margin: 0 12.5 12.5 12.5;
+        padding: 0 12.5 12.5 12.5;
     }
     .row.first {
-        margin-top: 12.5;
+        padding-top: 12.5;
     }
     ListView {
         background-color: #ffffff;
@@ -171,13 +173,14 @@
 
     /* Image */
     .row WebImage {
-        border-radius: 5;
         stretch: aspectFill;
+        border-radius: 5;
     }
 
     /* Label */
     .event-label {
-        padding: 15 12.5;
+        padding: 0 12.5;
+        font-weight: 400;
     }
     .event-time {
         font-size: 12;

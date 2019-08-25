@@ -32,18 +32,12 @@
                         <GridLayout columns="*" :rows="textHeight">
                             <Stacklayout col="0" row="0">
                                 <Label class="text" textWrap="true" :text="item.text"></Label>
-                                <Label class="text subtitle" textWrap="true" :text="$t('detail.whatOtherPeopleSay')+':'"></Label>
-                                <StackLayout class="review-container">
-                                    <StackLayout horizontalAlignment="left"><StarRating :value="4" size="35" fillColor="#0070DA" emptyColor="#7FB7EC" outlineColor="#F8F8F8" /></StackLayout>
-                                    <Label class="review" textWrap="true" text='"fdghgfhfgh fgh gfh gfh f hgf h fg h fg hfg fdghgfhfgh"'></Label>
-                                </StackLayout>
-                                <StackLayout class="review-container">
-                                    <StackLayout horizontalAlignment="left"><StarRating :value="3" size="35" fillColor="#0070DA" emptyColor="#7FB7EC" outlineColor="#F8F8F8" /></StackLayout>
-                                    <Label class="review" textWrap="true" text='"fdghgfhfgh fgh gfh gfh f hgf h fg h fg hfg fdghgfhfgh"'></Label>
-                                </StackLayout>
-                                <StackLayout class="review-container last">
-                                    <StackLayout horizontalAlignment="left"><StarRating :value="2" size="35" fillColor="#0070DA" emptyColor="#7FB7EC" outlineColor="#F8F8F8" /></StackLayout>
-                                    <Label class="review" textWrap="true" text='"fdghgfhfgh fgh gfh gfh f hgf h fg h fg hfg fdghgfhfgh"'></Label>
+                                <StackLayout v-if="item.reviews && item.reviews.length > 0">
+                                    <Label class="text subtitle" textWrap="true" :text="$t('detail.whatOtherPeopleSay')+':'"></Label>
+                                    <StackLayout class="review-container" :class="[{ 'last': index === (item.reviews.length-1) }]" v-for="(review, index) in item.reviews" v-bind:data="review" v-bind:key="review.id">
+                                        <StackLayout horizontalAlignment="left"><StarRating :value="review.rating" :size="starSize" fillColor="#0070DA" emptyColor="#7FB7EC" outlineColor="#FFFFFF" /></StackLayout>
+                                        <Label class="review" textWrap="true" :text="review.text"></Label>
+                                    </StackLayout>
                                 </StackLayout>
                             </Stacklayout>
                             <StackLayout v-if="collapsed" col="0" row="0" class="gradient"></StackLayout>
@@ -153,6 +147,14 @@
                 }
                 else {
                     return 30;
+                }
+            },
+            starSize: function() {
+                if(this.$isAndroid) {
+                    return 40;
+                }
+                else {
+                    return 25;
                 }
             }
         },
