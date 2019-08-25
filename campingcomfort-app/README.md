@@ -30,3 +30,8 @@ Comment the following line in /node_modules/nativescript-image-swipe/image-swipe
 ```
 tns build android --bundle --key-store-path ./campingcomfort.keystore --key-store-password Iloum2007$ --key-store-alias=CampingComfort --key-store-alias-password Iloum2007$ --release
 ```
+
+## Build an Android release with Android App Bundle
+```
+tns build android --bundle --key-store-path ./campingcomfort.keystore --key-store-password Iloum2007$ --key-store-alias=CampingComfort --key-store-alias-password Iloum2007$ --release --aab --copy-to platforms/android/app/build/outputs/aab/app-release.aab
+```
