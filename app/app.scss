@@ -1,0 +1,44 @@
+//@import '~nativescript-theme-core/css/core.light.css';
+
+/* Font Awesome */
+.far {
+    font-family: Font Awesome 5 Free, fa-regular-400;
+    font-weight: 400;
+}
+.fab {
+    font-family: Font Awesome 5 Brands, fa-brands-400;
+    font-weight: 400;
+}
+.fas {
+    font-family: Font Awesome 5 Free, fa-solid-900;
+    font-weight: 900;
+}
+
+/* Page */
+Page {
+    background-color: #ffffff;
+    font-family: 'Avenir';
+    font-weight: 400;
+    color: #191919;
+    font-size: 16;
+}
+
+/* Buttons */
+.btn {
+    orientation: horizontal;
+    background-color: transparent;
+    border-width: 1;
+    border-radius: 100%;
+    border-color: #191919;
+    margin: 0;
+    padding: 10 20;
+    font-weight: 500;
+    color: #191919;
+    font-size: 14;
+}
+.btn-icon {
+    font-size: 16;
+}
+.btn-text {
+    padding-left: 10;
+}
