@@ -1,7 +1,9 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="*" columns="*">
-            <ImageSwipe row="0" col="0" :items="items" imageUrlProperty="url" pageNumber="1"></ImageSwipe>
+            <GridLayout row="0" col="0">
+                <ImageSwipe :items="items" imageUrlProperty="url" pageNumber="1"></ImageSwipe>
+            </GridLayout>
             <Fab verticalAlignment="bottom" borderColor="#e5e5e5"><GridLayout rows="*" columns="*" @tap="closeModal"><StackLayout row="0" col="0" verticalAlignment="center"><Label class="btn-icon fas">{{ 'fa-times' | fonticon }}</Label></StackLayout></GridLayout></Fab>
         </GridLayout>
     </Page>

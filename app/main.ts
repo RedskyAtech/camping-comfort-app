@@ -49,6 +49,9 @@ const firebase = require("nativescript-plugin-firebase");
 import StarRating from 'nativescript-vue-star-rating';
 Vue.use(StarRating);
 
+// Nativescript Image Swipe
+Vue.registerElement("ImageSwipe", () => require("nativescript-image-swipe/image-swipe").ImageSwipe)
+
 // QR scanner
 Vue.registerElement('BarcodeScanner', () => require('nativescript-barcodescanner').BarcodeScannerView)
 
