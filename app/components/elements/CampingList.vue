@@ -9,7 +9,7 @@
                     <StackLayout class="btn shopping-btn" @tap="toShopping">
                         <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-shopping-basket' | fonticon }}</Label>
                     </StackLayout>
-                    <StackLayout class="btn map-btn" @tap="toMap" v-if="plan">
+                    <StackLayout class="btn map-btn" @tap="toMap" v-if="map && hasInternetConnection()">
                         <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
                         <Label class="btn-text" :text="$t('home.map')" verticalAlignment="center"></Label>
                     </StackLayout>
@@ -53,7 +53,7 @@
     export default {
         data() {
             return {
-                plan: '',
+                map: '',
                 listItems: []
             }
         },
@@ -77,33 +77,33 @@
                 if(this.hasInternetConnection()){
 
                     // Show the cached version first to prevent flickering
-                    if(self.keyExistsInStore('plan')) {
-                        self.plan = self.getStringFromStore('plan');
+                    if(self.keyExistsInStore('map')) {
+                        self.map = self.getStringFromStore('map');
                     }
 
                     // Get the live data
                     getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign and store the map
-                        if(result.appContent.plan){
-                            self.plan = result.appContent.plan;
-                            self.storeString('plan', self.plan);
+                        if(result.appContent.map){
+                            self.map = result.appContent.map;
+                            self.storeString('map', self.map);
                         }
                         else {
-                            self.plan = '';
-                            self.removeKeyFromStore('plan');
+                            self.map = '';
+                            self.removeKeyFromStore('map');
                         }
                     }, error => {
-                        self.plan = '';
-                        self.removeKeyFromStore('plan');
+                        self.map = '';
+                        self.removeKeyFromStore('map');
                     });
                 }
                 else {
-                    if(self.keyExistsInStore('plan')){
-                        self.plan = self.getStringFromStore('plan');
+                    if(self.keyExistsInStore('map')){
+                        self.map = self.getStringFromStore('map');
                     }
                     else {
-                        self.plan = '';
+                        self.map = '';
 
                         setTimeout(function(){
                             TNSFancyAlert.showError(

@@ -16,7 +16,7 @@
                                         <StackLayout class="btn shopping-btn" @tap="toShopping">
                                             <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-shopping-basket' | fonticon }}</Label>
                                         </StackLayout>
-                                        <StackLayout class="btn map-btn" @tap="toMap" v-if="settings.plan">
+                                        <StackLayout class="btn map-btn" @tap="toMap" v-if="settings.map && hasInternetConnection()">
                                             <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
                                             <Label class="btn-text" :text="$t('home.map')" verticalAlignment="center"></Label>
                                         </StackLayout>

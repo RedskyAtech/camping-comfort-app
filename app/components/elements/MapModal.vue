@@ -1,9 +1,7 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <GridLayout rows="*" columns="*">
-            <GridLayout row="0" col="0">
-                <ImageSwipe :items="items" imageUrlProperty="url" pageNumber="1"></ImageSwipe>
-            </GridLayout>
+        <GridLayout rows="*" columns="*" width="100%" height="100%">
+            <WebView row="0" col="0" :src="map"></WebView>
             <Fab verticalAlignment="bottom" borderColor="#e5e5e5"><GridLayout rows="*" columns="*" @tap="closeModal"><StackLayout row="0" col="0" verticalAlignment="center"><Label class="btn-icon fas">{{ 'fa-times' | fonticon }}</Label></StackLayout></GridLayout></Fab>
         </GridLayout>
     </Page>
@@ -30,7 +28,7 @@
         },
         data: function(){
             return {
-                items: []
+                'map':''
             }
         },
         mounted: function(){
@@ -46,34 +44,34 @@
                 if(this.hasInternetConnection()){
 
                     // Show the cached version first to prevent flickering
-                    if(self.keyExistsInStore('plan')) {
-                        self.items = [{url: self.getStringFromStore('plan')}];
+                    if(self.keyExistsInStore('map')) {
+                        self.map = self.getStringFromStore('map');
                     }
 
                     // Get the live data
                     http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign the data
-                        if(result.appContent.plan){
-                            self.items = [{url: result.appContent.plan}];
-                            self.storeString('plan', self.plan);
+                        if(result.appContent.map){
+                            self.map = result.appContent.map;
+                            self.storeString('map', self.map);
                         }
 
                         // No data found, remove from storage
                         else {
-                            self.items = [];
-                            self.removeKeyFromStore('plan');
+                            self.map = '';
+                            self.removeKeyFromStore('map');
                         }
                     }, error => {
-                        self.items = [];
-                        self.removeKeyFromStore('plan');
+                        self.map = '';
+                        self.removeKeyFromStore('map');
                     });
                 }
                 else {
 
                     // Get the map from storage
-                    if(self.keyExistsInStore('plan')){
-                        self.items = [{url: self.getStringFromStore('plan')}];
+                    if(self.keyExistsInStore('map')){
+                        self.map = self.getStringFromStore('map');
                     }
 
                     // Offline with no storage data
