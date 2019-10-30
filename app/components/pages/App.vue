@@ -246,6 +246,18 @@
                             });
                         });
                     }
+                    else {
+
+                        // Subscribe to a Firebase topic
+                        firebase.subscribeToTopic(topic).then(function() {
+                            console.log("Firebase subscribed to topic "+topic);
+
+                            // Store the subscription so it can be unsubscribed.
+                            if(topicStoreKey !== '') {
+                                self.storeString(topicStoreKey, topic);
+                            }
+                        });
+                    }
 
                     // Only allow one of camping or guest messaging
                     if(topicStoreKey === 'guest_messaging_topic') {
