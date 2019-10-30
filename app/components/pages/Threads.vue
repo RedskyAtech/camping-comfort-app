@@ -41,10 +41,19 @@
             HeaderMixin
         ],
         beforeDestroy: function() {
-            EventBus.$off('modalClosed');
+
+            // Destroy any listeners in the event bus
+            console.log('Listeners removed: Threads');
+            EventBus.$off('threadChanged');
         },
         mounted: function() {
             let self = this;
+
+            // Update the thread list when a thread changed
+            EventBus.$on('threadChanged', function() {
+                self.init();
+            });
+
             self.init();
         },
         methods: {

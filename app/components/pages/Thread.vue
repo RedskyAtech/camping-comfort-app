@@ -197,6 +197,9 @@
                                 EventBus.$emit('stopLoading', loadingId);
                             }
 
+                            // Update the thread list
+                            EventBus.$emit('threadChanged');
+
                         }, error => {
 
                             self.messages = [];
