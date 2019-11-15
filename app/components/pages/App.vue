@@ -50,6 +50,7 @@
     import Detail from '../pages/Detail'
     import Threads from '../pages/Threads'
     import Thread from '../pages/Thread'
+    import Shop from '../pages/Shop'
     import MapModal from '../elements/MapModal'
     import WifiModal from '../elements/WifiModal'
     import RouteModal from '../elements/RouteModal'
@@ -418,6 +419,9 @@
                 }
                 if(page === 'thread'){
                     Component = Thread;
+                }
+                if(page === 'shop'){
+                    Component = Shop;
                 }
                 this.$showModal(Component, {
                     fullscreen: true,

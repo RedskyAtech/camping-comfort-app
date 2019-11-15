@@ -6,7 +6,7 @@
                     <StackLayout class="btn wifi-btn" @tap="toWifi">
                         <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
                     </StackLayout>
-                    <StackLayout class="btn shopping-btn" @tap="toShopping">
+                    <StackLayout class="btn shopping-btn" @tap="toShop">
                         <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-shopping-basket' | fonticon }}</Label>
                     </StackLayout>
                     <StackLayout class="btn map-btn" @tap="toMap" v-if="map && hasInternetConnection()">
@@ -182,13 +182,10 @@
                     page: 'wifi'
                 });
             },
-            toShopping: function(){
-                let self = this;
-                TNSFancyAlert.showInfo(
-                    self.$t('shopping.alert.title'),
-                    self.$t('shopping.alert.message'),
-                    self.$t('shopping.alert.buttonText')
-                );
+            toShop: function(){
+                EventBus.$emit('openModal', {
+                    page: 'shop'
+                });
             },
             toMap: function(){
                 let self = this;

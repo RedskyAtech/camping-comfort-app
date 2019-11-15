@@ -8,19 +8,24 @@
 
     export default {
         methods: {
-
             /**
              * Localize a number
              *
              * @param number
              * @param returnFormat
+             * @param isPrice
              * @returns {*}
              */
-            localizeNumber(number, returnFormat) {
+            localizeNumber(number, returnFormat, isPrice) {
 
-                // Default format
+                // Default returnFormat
                 if(returnFormat === undefined) {
                     returnFormat = '0.0';
+                }
+
+                // Default isPrice
+                if(isPrice === undefined) {
+                    isPrice = false;
                 }
 
                 // Get the current language
@@ -44,8 +49,27 @@
                 // Switch the numeral locale
                 numeral.locale(langLocale);
 
-                // Return the localized number
-                return numeral(parseFloat(number)).format(returnFormat);
+                // Create the localized number
+                let returnVal = numeral(parseFloat(number)).format(returnFormat);
+
+                // Add an optional currency symbol
+                if(isPrice) {
+                    if(lang === 'nl') {
+                        returnVal = '€ '+returnVal;
+                    }
+                    if(lang === 'de') {
+                        returnVal = '€ '+returnVal;
+                    }
+                    if(lang === 'it') {
+                        returnVal = '€ '+returnVal;
+                    }
+                    if(lang === 'fr') {
+                        returnVal = returnVal+' €';
+                    }
+                }
+
+                // Return
+                return returnVal;
             }
         }
     }

@@ -312,6 +312,9 @@ export function translations() {
                 name: 'Naam',
                 location: 'Accommodatie/Plaats',
                 continue: 'Doorgaan'
+            },
+            shop: {
+                title: 'Broodjes bestellen'
             }
         },
         de: {
