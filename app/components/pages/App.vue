@@ -378,6 +378,8 @@
                         // Create the data object
                         let content = JSON.stringify({
                             uuid: platform.device.uuid,
+                            name: this.keyExistsInStore('guestName') ? this.getStringFromStore('guestName') : '',
+                            location: this.keyExistsInStore('guestLocation') ? this.getStringFromStore('guestLocation') : '',
                             page: data.page,
                             type: data.props.type !== undefined ? data.props.type : '',
                             id: data.props.id !== undefined ? data.props.id : ''
@@ -398,6 +400,8 @@
                         // Create the data object
                         let content = JSON.stringify({
                             uuid: platform.device.uuid,
+                            name: this.keyExistsInStore('guestName') ? this.getStringFromStore('guestName') : '',
+                            location: this.keyExistsInStore('guestLocation') ? this.getStringFromStore('guestLocation') : '',
                             id: data.id
                         });
 
