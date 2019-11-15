@@ -30,7 +30,7 @@
                                     </StackLayout>
                                 </StackLayout>
                                 <StackLayout row="1" col="0" colSpan="2" class="hero-title-container" horizontalAlignment="center" verticalAlignment="center">
-                                    <Label :text="heroTitle" class="hero-title" textWrap="true"></Label>
+                                    <Label v-if="settings.show_home_name" :text="heroTitle" class="hero-title" textWrap="true"></Label>
                                 </StackLayout>
                             </GridLayout>
                         </GridLayout>
