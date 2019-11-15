@@ -89,71 +89,21 @@
             'MyVacationList': MyVacationList,
             'NewsItemList': NewsItemList
         },
-        mounted: function(){
-            let self = this;
+        mounted: function() {
 
-            // Initialize
-            self.init();
+            // The camping name is stored when a camping is selected
+            this.heroTitle = this.getStringFromStore('campingName');
+
+            // Set the settings object to a local variable for this component
+            if(this.keyExistsInStore('settings')) {
+                this.settings = this.getObjectFromStore('settings');
+            }
         },
         methods: {
-            init: function(){
-                let self = this;
 
-                // The camping name is stored when a camping is selected
-                this.heroTitle = this.getStringFromStore('campingName');
-
-                // Get the data from the api (internet) or local storage (offline)
-                let campingId = this.getNumberFromStore('campingId');
-                let lang = this.getStringFromStore('language');
-                if(this.hasInternetConnection()){
-
-                    // Show the cached version first to prevent flickering
-                    if(self.keyExistsInStore('settings')) {
-                        self.settings = self.getObjectFromStore('settings');
-                    }
-
-                    // Get the live data
-                    let loadingId = Date.now();
-                    EventBus.$emit('startLoading', loadingId);
-                    http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
-
-                        // Assign and store the hero image
-                        if(result.appContent){
-                            self.settings = result.appContent;
-                            self.storeObject('settings', self.settings);
-                        }
-                        else {
-                            self.settings = {};
-                            self.removeKeyFromStore('settings');
-                        }
-
-                        // Hide the loader
-                        EventBus.$emit('stopLoading', loadingId);
-                    }, error => {
-                        self.settings = {};
-                        self.removeKeyFromStore('settings');
-
-                        // Hide the loader
-                        EventBus.$emit('stopLoading', loadingId);
-                    });
-                }
-                else {
-                    if(self.keyExistsInStore('settings')) {
-                        self.settings = self.getObjectFromStore('settings');
-                    }
-                    else {
-                        setTimeout(function() {
-                            TNSFancyAlert.showError(
-                                self.$t('errors.offline.title'),
-                                self.$t('errors.offline.message'),
-                                self.$t('errors.offline.buttonText')
-                            ).then(() => {
-                                // Close the app
-                            });
-                        }, 500);
-                    }
-                }
-            },
+            /**
+             * Activate a tab
+             */
             activateTab: function(tab){
                 this.activeTab = tab;
             },

@@ -8,7 +8,7 @@
                     </Frame>
                 </StackLayout>
                 <StackLayout row="1" col="0" class="tabbar" v-if="!hideTabs">
-                    <GridLayout rows="*" columns="*,*,*,*,*">
+                    <GridLayout rows="*" :columns="settings.enable_messaging ? '*,*,*,*,*' : '*,*,*,*'">
                         <StackLayout verticalAlignment="middle" row="0" col="0" class="tab" :class="[{'active': activeTab === 1}]" @tap="toHome">
                             <Label class="tab-icon fas">{{ 'fa-heart' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.home')"></Label>
@@ -25,7 +25,7 @@
                             <Label class="tab-icon fas">{{ 'fa-calendar-alt' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.activities')"></Label>
                         </StackLayout>
-                        <StackLayout verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="toReception">
+                        <StackLayout v-if="settings.enable_messaging" verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="toReception">
                             <Label class="tab-icon fas">{{ 'fa-comments' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.reception')"></Label>
                         </StackLayout>
@@ -60,12 +60,14 @@
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http"
     import * as firebase from 'nativescript-plugin-firebase';
     import { isAndroid, isIOS, device, screen } from "tns-core-modules/platform";
+    import * as http from 'http'
 
     export default {
         data() {
             return {
                 activeTab: 1,
-                hideTabs: false
+                hideTabs: false,
+                settings: {}
             }
         },
         mixins: [
@@ -130,66 +132,137 @@
             });
 
             // Initialize firebase
-            firebase.init({
-                showNotifications: true,
-                showNotificationsWhenInForeground: false,
+            self.initializeFirebase();
 
-                onPushTokenReceivedCallback: function(token) {
-                    console.log('[Firebase] onPushTokenReceivedCallback:', { token });
-                },
-
-                onMessageReceivedCallback: function(message) {
-                    console.log('[Firebase] onMessageReceivedCallback:', { message });
-
-                    // Redirect to the App page
-                    if(message.data.type === 'news_item') {
-
-                        // Navigate
-                        EventBus.$emit('navigate', {
-                            tab: 1,
-                            page: 'detail',
-                            clearHistory: false,
-                            props: {
-                                type: 'news_item',
-                                id: parseFloat(message.data.id)
-                            }
-                        });
-                    }
-                    if(message.data.type === 'message') {
-
-                        console.log('message received');
-
-                        // Emit an event that a new message is received
-                        EventBus.$emit('messageReceived');
-
-                        // Open the modal
-                        EventBus.$emit('openModal', {
-                            page: 'thread',
-                            props: {
-                                id: parseFloat(message.data.id)
-                            }
-                        });
-                    }
-                }
-            })
-            .then(() => {
-                console.log('[Firebase] Initialized');
-
-                // Update the subscription and redirect to the App page
-                self.subscribeToTopic({ type: 'news' });
-
-                if(self.keyExistsInStore('userId')) {
-                    self.subscribeToTopic({ type: 'camping_messaging' });
-                }
-                else {
-                    self.subscribeToTopic({ type: 'guest_messaging' });
-                }
-            })
-            .catch(error => {
-                console.log('[Firebase] Initialize', { error });
-            });
+            // Load the app settings
+            self.loadAppSettings();
         },
         methods: {
+
+            /**
+             * Load the app settings
+             */
+            loadAppSettings: function() {
+                let self = this;
+
+                // Get the data from the api (internet) or local storage (offline)
+                let campingId = this.getNumberFromStore('campingId');
+                let lang = this.getStringFromStore('language');
+                if(this.hasInternetConnection()){
+
+                    // Set the settings object from storage to prevent flickering
+                    if(self.keyExistsInStore('settings')) {
+                        self.settings = self.getObjectFromStore('settings');
+                    }
+
+                    // Get the live data
+                    let loadingId = Date.now();
+                    EventBus.$emit('startLoading', loadingId);
+                    http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
+
+                        // Assign and store the hero image
+                        if(result.appContent){
+                            self.settings = result.appContent;
+                            self.storeObject('settings', result.appContent);
+                        }
+                        else {
+                            self.settings = {};
+                            self.removeKeyFromStore('settings');
+                        }
+
+                        // Hide the loader
+                        EventBus.$emit('stopLoading', loadingId);
+                    }, error => {
+                        self.settings = {};
+                        self.removeKeyFromStore('settings');
+
+                        // Hide the loader
+                        EventBus.$emit('stopLoading', loadingId);
+                    });
+                }
+                else {
+                    if(self.keyExistsInStore('settings')) {
+                        self.settings = self.getObjectFromStore('settings');
+                    }
+                    else {
+                        setTimeout(function() {
+                            TNSFancyAlert.showError(
+                                self.$t('errors.offline.title'),
+                                self.$t('errors.offline.message'),
+                                self.$t('errors.offline.buttonText')
+                            ).then(() => {
+                                // Close the app
+                            });
+                        }, 500);
+                    }
+                }
+            },
+
+            /**
+             * Initialize firebase
+             */
+            initializeFirebase() {
+                let self = this;
+
+                firebase.init({
+                    showNotifications: true,
+                    showNotificationsWhenInForeground: false,
+
+                    onPushTokenReceivedCallback: function(token) {
+                        console.log('[Firebase] onPushTokenReceivedCallback:', { token });
+                    },
+
+                    onMessageReceivedCallback: function(message) {
+                        console.log('[Firebase] onMessageReceivedCallback:', { message });
+
+                        // Redirect to the App page
+                        if(message.data.type === 'news_item') {
+
+                            // Navigate
+                            EventBus.$emit('navigate', {
+                                tab: 1,
+                                page: 'detail',
+                                clearHistory: false,
+                                props: {
+                                    type: 'news_item',
+                                    id: parseFloat(message.data.id)
+                                }
+                            });
+                        }
+                        if(message.data.type === 'message') {
+
+                            console.log('message received');
+
+                            // Emit an event that a new message is received
+                            EventBus.$emit('messageReceived');
+
+                            // Open the modal
+                            EventBus.$emit('openModal', {
+                                page: 'thread',
+                                props: {
+                                    id: parseFloat(message.data.id)
+                                }
+                            });
+                        }
+                    }
+                })
+                .then(() => {
+                    console.log('[Firebase] Initialized');
+
+                    // Update the subscription and redirect to the App page
+                    self.subscribeToTopic({ type: 'news' });
+
+                    if(self.keyExistsInStore('userId')) {
+                        self.subscribeToTopic({ type: 'camping_messaging' });
+                    }
+                    else {
+                        self.subscribeToTopic({ type: 'guest_messaging' });
+                    }
+                })
+                .catch(error => {
+                    console.log('[Firebase] Initialize', { error });
+                });
+            },
 
             /**
              * Subscribe to a topic
