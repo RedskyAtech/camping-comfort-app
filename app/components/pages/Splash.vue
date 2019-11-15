@@ -8,7 +8,7 @@
                             <StackLayout v-if="!scanFinished">
                                 <Image class="icon" src="~/assets/images/qr.png"></Image>
                                 <Label class="intro-text" textWrap="true" :text="$t('splash.introText')"></Label>
-                                <StackLayout class="button scan-button" verticalAlignment="center" @tap="start">
+                                <StackLayout class="button scan-button" verticalAlignment="center" @tap="scan">
                                     <Label :text="$t('splash.continue')"></Label>
                                 </StackLayout>
                             </StackLayout>
@@ -59,13 +59,10 @@
         ],
         data: function() {
             return {
-                scanResult: {
-                    campingId: 32805,
-                    campingName: 'Camping Comfort'
-                },
+                scanResult: {},
                 scanFinished: false,
-                guestName: 'Hans',
-                guestLocation: '13'
+                guestName: '',
+                guestLocation: ''
             }
         },
         mounted: function() {
