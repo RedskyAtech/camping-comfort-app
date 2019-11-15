@@ -155,6 +155,9 @@ export function translations() {
                 name: 'Name',
                 location: 'Accommodation/Pitch',
                 continue: 'Continue'
+            },
+            shop: {
+                title: 'Order sandwiches'
             }
         },
         nl: {
@@ -465,6 +468,9 @@ export function translations() {
                 name: 'Name',
                 location: 'Unterkunft / Stellplatz',
                 continue: 'Weiter'
+            },
+            shop: {
+                title: 'Brötchen bestellen'
             }
         },
         fr: {
@@ -622,6 +628,9 @@ export function translations() {
                 name: 'Nom',
                 location: 'Logement / Emplacement',
                 continue: 'Continuer'
+            },
+            shop: {
+                title: 'Commander des sandwichs'
             }
         },
         it: {
@@ -779,6 +788,9 @@ export function translations() {
                 name: 'Nome',
                 location: 'Alloggio/Piazzola',
                 continue: 'Proseguire'
+            },
+            shop: {
+                title: 'Ordinare panini'
             }
         }
     }
