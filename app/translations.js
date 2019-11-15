@@ -216,13 +216,6 @@ export function translations() {
                     buttonText: 'OK'
                 }
             },
-            shopping: {
-                alert: {
-                    title: 'Broodjes bestellen',
-                    message: 'Deze optie zal op 1 december beschikbaar zijn.',
-                    buttonText: 'OK'
-                }
-            },
             detail: {
                 readMore: 'Lees meer',
                 forMoreInformation: 'Adres',

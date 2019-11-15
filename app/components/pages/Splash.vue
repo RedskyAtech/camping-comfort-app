@@ -60,7 +60,7 @@
         data: function() {
             return {
                 scanResult: {
-                    campingId: 9665,
+                    campingId: 32805,
                     campingName: 'Camping Comfort'
                 },
                 scanFinished: false,
