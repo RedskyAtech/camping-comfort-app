@@ -158,6 +158,7 @@
                     // Get the live data
                     let loadingId = Date.now();
                     EventBus.$emit('startLoading', loadingId);
+                    console.log("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang);
                     http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign and store the hero image

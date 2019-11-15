@@ -3,13 +3,13 @@
         <v-template if="$index === 0">
             <StackLayout>
                 <StackLayout class="btn-container" horizontalAlignment="left">
-                    <StackLayout class="btn wifi-btn" @tap="toWifi">
+                    <StackLayout class="btn wifi-btn" @tap="toWifi" v-if="settings.enable_wifi && settings.wifi_code">
                         <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
                     </StackLayout>
-                    <StackLayout class="btn shopping-btn" @tap="toShop">
+                    <StackLayout class="btn shopping-btn" @tap="toShop" v-if="settings.enable_shop">
                         <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-shopping-basket' | fonticon }}</Label>
                     </StackLayout>
-                    <StackLayout class="btn map-btn" @tap="toMap" v-if="map && hasInternetConnection()">
+                    <StackLayout class="btn map-btn" @tap="toMap" v-if="settings.enable_map && map && hasInternetConnection()">
                         <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
                         <Label class="btn-text" :text="$t('home.map')" verticalAlignment="center"></Label>
                     </StackLayout>
@@ -54,7 +54,8 @@
         data() {
             return {
                 map: '',
-                listItems: []
+                listItems: [],
+                settings: {}
             }
         },
         mixins: [
@@ -64,6 +65,13 @@
         created: function(){
             this.loadMapData();
             this.loadListData();
+        },
+        mounted: function() {
+
+            // Set the settings object to a local variable for this component
+            if(this.keyExistsInStore('settings')) {
+                this.settings = this.getObjectFromStore('settings');
+            }
         },
         methods: {
 

@@ -10,13 +10,13 @@
                             <GridLayout row="0" rows="auto,*" columns="*,auto">
                                 <StackLayout row="0" col="0">
                                     <StackLayout class="btn-container">
-                                        <StackLayout class="btn wifi-btn" @tap="toWifi" v-if="settings.wifi_code">
+                                        <StackLayout class="btn wifi-btn" @tap="toWifi" v-if="settings.enable_wifi && settings.wifi_code">
                                             <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
                                         </StackLayout>
-                                        <StackLayout class="btn shopping-btn" @tap="toShop">
+                                        <StackLayout class="btn shopping-btn" @tap="toShop" v-if="settings.enable_shop">
                                             <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-shopping-basket' | fonticon }}</Label>
                                         </StackLayout>
-                                        <StackLayout class="btn map-btn" @tap="toMap" v-if="settings.map && hasInternetConnection()">
+                                        <StackLayout class="btn map-btn" @tap="toMap" v-if="settings.enable_map && settings.map && hasInternetConnection()">
                                             <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
                                             <Label class="btn-text" :text="$t('home.map')" verticalAlignment="center"></Label>
                                         </StackLayout>
