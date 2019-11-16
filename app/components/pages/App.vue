@@ -4,7 +4,7 @@
             <GridLayout row="0" col="0" rows="*, auto" columns="*">
                 <StackLayout row="0" col="0">
                     <Frame id="mainContent">
-                        <Home/>
+                        <Empty/>
                     </Frame>
                 </StackLayout>
                 <StackLayout row="1" col="0" class="tabbar" v-if="!hideTabs">
@@ -43,6 +43,7 @@
     import Responsive from '../mixins/Responsive'
     import EventBus from '../helpers/EventBus'
     import Splash from '../pages/Splash'
+    import Empty from '../pages/Empty'
     import Home from '../pages/Home'
     import Camping from '../pages/Camping'
     import Nearby from '../pages/Nearby'
@@ -80,6 +81,7 @@
 
             // Pages
             Splash: Splash,
+            Empty: Empty,
             Home: Home,
             Camping: Camping,
             Nearby: Nearby,
@@ -134,7 +136,7 @@
             // Initialize firebase
             self.initializeFirebase();
 
-            // Load the app settings
+            // Load the app settings and load the home page in the frame
             self.loadAppSettings();
         },
         methods: {
@@ -158,7 +160,6 @@
                     // Get the live data
                     let loadingId = Date.now();
                     EventBus.$emit('startLoading', loadingId);
-                    console.log("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang);
                     http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign and store the hero image
@@ -173,17 +174,36 @@
 
                         // Hide the loader
                         EventBus.$emit('stopLoading', loadingId);
+
+                        // Go to home page
+                        self.toHome();
                     }, error => {
                         self.settings = {};
                         self.removeKeyFromStore('settings');
 
                         // Hide the loader
                         EventBus.$emit('stopLoading', loadingId);
+
+                        // Show the error
+                        setTimeout(function() {
+                            TNSFancyAlert.showError(
+                                self.$t('errors.other.title'),
+                                self.$t('errors.other.message'),
+                                self.$t('errors.other.buttonText')
+                            ).then(() => {
+                                // Close the app
+                            });
+                        }, 500);
                     });
                 }
                 else {
                     if(self.keyExistsInStore('settings')) {
                         self.settings = self.getObjectFromStore('settings');
+
+                        // Go to home page
+                        setTimeout(function() {
+                            self.toHome();
+                        }, 1500); // I don't know what the script is waiting for but for now, this is needed.
                     }
                     else {
                         setTimeout(function() {

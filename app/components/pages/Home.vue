@@ -89,7 +89,7 @@
             'MyVacationList': MyVacationList,
             'NewsItemList': NewsItemList
         },
-        mounted: function() {
+        created: function() {
 
             // The camping name is stored when a camping is selected
             this.heroTitle = this.getStringFromStore('campingName');
