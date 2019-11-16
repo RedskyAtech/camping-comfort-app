@@ -5,7 +5,7 @@
                 <ShopList row="0" v-on:order-updated="updateOrder"></ShopList>
                 <StackLayout row="1" class="submit">
                     <GridLayout columns="*,auto">
-                        <Label col="0" text="Bestellen"></Label>
+                        <Label col="0" :text="$t('shop.order')"></Label>
                         <Label col="1" :text="totalFormatted"></Label>
                     </GridLayout>
                 </StackLayout>

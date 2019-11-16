@@ -157,7 +157,8 @@ export function translations() {
                 continue: 'Continue'
             },
             shop: {
-                title: 'Order sandwiches'
+                title: 'Order sandwiches',
+                order: 'Place order'
             }
         },
         nl: {
@@ -310,7 +311,8 @@ export function translations() {
                 continue: 'Doorgaan'
             },
             shop: {
-                title: 'Broodjes bestellen'
+                title: 'Broodjes bestellen',
+                order: 'Plaats bestelling'
             }
         },
         de: {
@@ -470,7 +472,8 @@ export function translations() {
                 continue: 'Weiter'
             },
             shop: {
-                title: 'Brötchen bestellen'
+                title: 'Brötchen bestellen',
+                order: 'Bestellung aufgeben'
             }
         },
         fr: {
@@ -630,7 +633,8 @@ export function translations() {
                 continue: 'Continuer'
             },
             shop: {
-                title: 'Commander des sandwichs'
+                title: 'Commander des sandwichs',
+                order: 'Passer la commande'
             }
         },
         it: {
@@ -790,7 +794,8 @@ export function translations() {
                 continue: 'Proseguire'
             },
             shop: {
-                title: 'Ordinare panini'
+                title: 'Ordinare panini',
+                order: 'Ordine del posto'
             }
         }
     }
