@@ -4,7 +4,7 @@
             <v-template>
                 <StackLayout>
                     <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
-                        <GridLayout :rows="pageClass === 'lg' || pageClass === 'xl' ? 97 : 65" :columns="pageClass === 'lg' || pageClass === 'xl' ? '130,*' : '87,*'">
+                        <GridLayout :height="pageClass === 'lg' || pageClass === 'xl' ? 97 : 65" :rows="pageClass === 'lg' || pageClass === 'xl' ? 97 : 65" :columns="pageClass === 'lg' || pageClass === 'xl' ? '130,*' : '87,*'">
                             <Image row="0" :src="item.image" borderRadius="5"></Image>
                             <StackLayout col="1" orientation="horizontal" class="event-label">
                                 <StackLayout verticalAlignment="center">

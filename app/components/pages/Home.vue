@@ -6,7 +6,8 @@
                     <GridLayout rows="auto,*">
                         <GridLayout rows="*" row="0" class="hero-grid">
                             <Image row="0" :src="settings.home_image" class="hero-image"></Image>
-                            <StackLayout row="0" class="hero-overlay"></StackLayout>
+                            <StackLayout row="0" class="hero-overlay-small" v-if="settings.show_home_name"></StackLayout>
+                            <StackLayout row="0" class="hero-overlay" v-if="!settings.show_home_name"></StackLayout>
                             <GridLayout row="0" rows="auto,*" columns="*,auto">
                                 <StackLayout row="0" col="0">
                                     <StackLayout class="btn-container">
@@ -173,7 +174,7 @@
         height: 430;
     }
     Page.xl .hero-grid {
-        height: 430;
+        height: 470;
     }
     .hero-image {
         stretch: aspectFill;
@@ -181,6 +182,11 @@
     .hero-overlay {
         background-color: #000;
         opacity: 0.35;
+    }
+    .hero-overlay {
+        background-color: #000;
+        opacity: 0.35;
+        background: linear-gradient(to bottom, black, transparent);
     }
     .hero-title-container {
         text-align: center;
