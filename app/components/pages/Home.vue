@@ -170,10 +170,10 @@
         height: 270;
     }
     Page.lg .hero-grid {
-        height: 432;
+        height: 430;
     }
     Page.xl .hero-grid {
-        height: 576;
+        height: 430;
     }
     .hero-image {
         stretch: aspectFill;

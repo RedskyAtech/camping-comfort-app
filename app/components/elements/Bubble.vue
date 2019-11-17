@@ -1,6 +1,6 @@
 <template>
     <GridLayout class="bubble me" rows="auto" columns="*,12" v-if="type === 'me'">
-        <StackLayout col="0" class="bubble-inner">
+        <StackLayout col="0" class="bubble-inner" :class="pageClass === 'lg' || pageClass === 'xl' ? 'lg' : ''">
             <GridLayout columns="*,auto">
                 <StackLayout col="0">
                     <slot></slot>
@@ -16,7 +16,7 @@
         <StackLayout col="0" class="arrow">
             <Image src="~/assets/images/bubble-he.png" width="12" height="12"></Image>
         </StackLayout>
-        <StackLayout col="1" class="bubble-inner">
+        <StackLayout col="1" class="bubble-inner" :class="pageClass === 'lg' || pageClass === 'xl' ? 'lg' : ''">
             <GridLayout rows="auto,auto" columns="*,auto">
                 <Label row="0" col="0" class="name" :text="name"></Label>
                 <Label row="0" col="1" class="time" :text="time" horizontalAlignment="right"></Label>
@@ -30,6 +30,7 @@
 
 <script>
     import LocalStorage from '../mixins/LocalStorage'
+    import Responsive from '../mixins/Responsive'
 
     export default {
         props: {
@@ -44,7 +45,8 @@
             }
         },
         mixins: [
-            LocalStorage
+            LocalStorage,
+            Responsive
         ],
     }
 </script>
@@ -64,6 +66,12 @@
         margin-right: 35;
         padding: 12.5;
         border-radius: 0 10 10 10;
+    }
+    .bubble.me .bubble-inner.lg {
+        margin-left: 300;
+    }
+    .bubble.he .bubble-inner.lg {
+        margin-right: 300;
     }
     .name,.time {
         opacity: 0.6;

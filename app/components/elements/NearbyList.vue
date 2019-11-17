@@ -3,7 +3,7 @@
         <v-template>
             <StackLayout>
                 <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
-                    <GridLayout rows="65" columns="87,*">
+                    <GridLayout :rows="pageClass === 'lg' || pageClass === 'xl' ? 97 : 65" :columns="pageClass === 'lg' || pageClass === 'xl' ? '130,*' : '87,*'">
                         <Image col="0" :src="item.image || '~/assets/images/placeholder.gif'"></Image>
                         <StackLayout col="1" orientation="horizontal" class="item-label">
                             <StackLayout verticalAlignment="center">
@@ -30,12 +30,14 @@
     import LocalStorage from '../mixins/LocalStorage'
     import Numbers from '../mixins/Numbers'
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
+    import Responsive from '../mixins/Responsive'
 
     export default {
         mixins: [
             Connection,
             LocalStorage,
-            Numbers
+            Numbers,
+            Responsive
         ],
         data() {
             return {

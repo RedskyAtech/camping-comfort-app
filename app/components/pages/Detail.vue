@@ -525,10 +525,10 @@
         height: 270;
     }
     Page.lg .hero {
-        height: 432;
+        height: 430;
     }
     Page.xl .hero {
-        height: 576;
+        height: 430;
     }
     .hero {
         stretch: aspectFill;
