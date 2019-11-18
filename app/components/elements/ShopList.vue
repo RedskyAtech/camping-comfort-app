@@ -4,7 +4,7 @@
             <StackLayout>
                 <StackLayout class="intro">
                     <Label class="title" textWrap="true" text="Nog heel even geduld..."></Label>
-                    <Label textWrap="true" text="De bakkerij bakt voor u dagelijks verse broodjes. Bestellen van broodjes voor de volgende ochtend kan tot 21:00 uur op de avond ervoor. De heerlijke verse broodjes kunt u ’s ochtends vanaf 9.00 uur afhalen bij de receptie. Alleen Pinnen."></Label>
+                    <Label textWrap="true" text="De functie om broodjes te bestellen zal vanaf 1 december beschikbaar zijn."></Label>
                 </StackLayout>
                 <ShopListItem :index="$index" :item="item" v-on:amount-updated="updateOrder"></ShopListItem>
             </StackLayout>

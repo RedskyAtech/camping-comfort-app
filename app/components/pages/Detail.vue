@@ -24,6 +24,12 @@
                         <Label col="1" :text="humanizeDate(item.date, $t('formatting.date'))" verticalAlignment="center"></Label>
                     </GridLayout>
                     <StackLayout class="content">
+                        <FlexboxLayout flexWrap="wrap" v-if="item.type === 'camping'" class="tags">
+                            <Label class="tag activity-camping" :text="$t('activities.onTheCampsite')"></Label>
+                        </FlexboxLayout>
+                        <FlexboxLayout flexWrap="wrap" v-if="item.type === 'nearby'" class="tags">
+                            <Label class="tag activity-nearby" :text="$t('activities.nearby')"></Label>
+                        </FlexboxLayout>
                         <FlexboxLayout flexWrap="wrap" v-if="item.tags !== undefined" class="tags">
                             <Label class="tag primary" :text="$t('nearby.'+item.category)"></Label>
                             <Label class="tag" :text="tag.translation" v-for="tag in item.tags" v-bind:data="item.tags" v-bind:key="tag.tag"></Label>
@@ -70,22 +76,22 @@
                             </GridLayout>
                         </StackLayout>
                         <StackLayout class="hr"></StackLayout>
-                        <StackLayout class="info-block" v-if="item.location !== undefined">
+                        <StackLayout class="info-block" v-if="item.location || item.age || item.price">
                             <GridLayout rows="auto,auto,auto" columns="auto,auto">
-                                <Label row="0" col="0" class="left" :text="$t('detail.location')+':'"></Label>
-                                <Label row="0" col="1" :text="item.location"></Label>
-                                <Label row="1" col="0" class="left" :text="$t('detail.age')+':'"></Label>
-                                <Label row="1" col="1" :text="item.age"></Label>
-                                <Label row="2" col="0" class="left" :text="$t('detail.price')+':'"></Label>
-                                <Label row="2" col="1" :text="item.price"></Label>
+                                <Label v-if="item.location" row="0" col="0" class="left" :text="$t('detail.location')+':'"></Label>
+                                <Label v-if="item.location" row="0" col="1" :text="item.location"></Label>
+                                <Label v-if="item.age" row="1" col="0" class="left" :text="$t('detail.age')+':'"></Label>
+                                <Label v-if="item.age" row="1" col="1" :text="item.age"></Label>
+                                <Label v-if="item.price" row="2" col="0" class="left" :text="$t('detail.price')+':'"></Label>
+                                <Label v-if="item.price" row="2" col="1" :text="item.price"></Label>
                             </GridLayout>
                         </StackLayout>
-                        <StackLayout class="address-block" v-if="item.place !== undefined">
-                            <Label class="address-title" :text="$t('detail.forMoreInformation')+' ('+item.distance+' km)'"></Label>
-                            <Label class="address-text" :text="item.street+' '+item.house_number"></Label>
-                            <Label class="address-text" :text="item.postal_code+' '+item.place"></Label>
+                        <StackLayout class="address-block" v-if="item.place">
+                            <Label class="address-title" :text="$t('detail.forMoreInformation') + ((item.distance || item.distance === 0.0) && item.distance < 100 ? ' ('+item.distance+' km)' : '')"></Label>
+                            <Label v-if="item.street" class="address-text" :text="item.street+' '+item.house_number"></Label>
+                            <Label v-if="item.place" class="address-text" :text="(item.postal_code ? item.postal_code + ' ' : '') + item.place"></Label>
                         </StackLayout>
-                        <GridLayout columns="auto,*" v-if="item.place !== undefined">
+                        <GridLayout columns="auto,*" v-if="item.place">
                             <StackLayout class="btn" col="0" @tap="toRoute">
                                 <Label :text="$t('detail.route')" verticalAlignment="center"></Label>
                             </StackLayout>
@@ -461,7 +467,12 @@
             toWebsite: function() {
                 let self = this;
                 if(self.hasInternetConnection()) {
-                    utils.openUrl(this.item.website);
+                    console.log(this.item.website);
+                    let url = this.item.website;
+                    if(url.substr(0,4) !== 'http'){
+                        url = 'https://'+url;
+                    }
+                    utils.openUrl(url);
                 }
                 else {
                     TNSFancyAlert.showError(
@@ -638,6 +649,14 @@
     .tag.primary {
         background-color: #0a7cf7;
         border-color: #0a7cf7;
+    }
+    .tag.activity-camping {
+        background-color: #009fe3;
+        border-color: #009fe3;
+    }
+    .tag.activity-nearby {
+        background-color: #9ac331;
+        border-color: #9ac331;
     }
 
     /* HR */

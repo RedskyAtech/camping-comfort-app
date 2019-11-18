@@ -266,4 +266,17 @@
     .event-title {
         padding-top: 5;
     }
+
+    /* Tag */
+    .tag {
+        border-width: 1;
+        border-radius: 100%;
+        background-color: #8f99ac;
+        border-color: #8f99ac;
+        margin: 0 4 15 0;
+        padding: 4 8;
+        font-weight: 500;
+        color: #ffffff;
+        font-size: 11;
+    }
 </style>

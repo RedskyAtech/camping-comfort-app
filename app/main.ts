@@ -58,6 +58,9 @@ Vue.registerElement('BarcodeScanner', () => require('nativescript-barcodescanner
 // Prints Vue logs when --env.production is *NOT* set while building
 Vue.config.silent = (TNS_ENV === 'production')
 
+// Set the environment mode
+Vue.prototype.$mode = TNS_ENV === 'production' ? 'production' : 'development';
+
 // Skip the splash page if a camping ID has already been stored
 if(appSettings.getNumber('campingId') !== undefined){
     new Vue({

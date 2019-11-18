@@ -106,7 +106,9 @@ export function translations() {
             activities: {
                 week: 'Week',
                 emptyTitle: 'No activities',
-                emptyText: ''
+                emptyText: '',
+                onTheCampsite: 'On the campsite',
+                nearby: 'Nearby'
             },
             myVacation: {
                 emptyTitle: 'No upcoming activities',
@@ -260,7 +262,9 @@ export function translations() {
             activities: {
                 week: 'Week',
                 emptyTitle: 'Geen activiteiten',
-                emptyText: ''
+                emptyText: '',
+                onTheCampsite: 'Op de camping',
+                nearby: 'In de buurt'
             },
             myVacation: {
                 emptyTitle: 'Geen aankomende activiteiten',
@@ -421,7 +425,9 @@ export function translations() {
             activities: {
                 week: 'Woche',
                 emptyTitle: 'Keine Aktivitäten',
-                emptyText: ''
+                emptyText: '',
+                onTheCampsite: 'Auf dem Campingplatz',
+                nearby: 'In der Nähe'
             },
             myVacation: {
                 emptyTitle: 'Keine anstehenden Aktivitäten',
@@ -582,7 +588,9 @@ export function translations() {
             activities: {
                 week: 'Semaine',
                 emptyTitle: 'Aucune activité',
-                emptyText: ''
+                emptyText: '',
+                onTheCampsite: 'Sur le camping',
+                nearby: 'Proche'
             },
             myVacation: {
                 emptyTitle: 'Aucune activité à venir ',
@@ -743,7 +751,9 @@ export function translations() {
             activities: {
                 week: 'Settimana',
                 emptyTitle: 'Nessuna attività',
-                emptyText: ''
+                emptyText: '',
+                onTheCampsite: 'Sul campeggio',
+                nearby: 'Nelle vicinanze'
             },
             myVacation: {
                 emptyTitle: 'Nessuna attività imminente',

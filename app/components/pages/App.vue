@@ -386,7 +386,9 @@
                 }
             },
             log: function(type, data) {
-                if(this.hasInternetConnection()) {
+
+                // Only log with an active internet connection, and not logged in as camping
+                if(this.hasInternetConnection() && !this.keyExistsInStore('userId')) {
 
                     let campingId = this.getNumberFromStore('campingId');
                     if (type === 'navigate') {

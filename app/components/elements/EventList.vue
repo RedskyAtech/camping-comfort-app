@@ -1,10 +1,10 @@
 <template>
-    <GridLayout rows="*">
-        <ListView row="0" for="item in listItems" @itemLoading="onItemLoading">
+    <GridLayout rows="*,auto">
+        <ListView row="0" for="item in listItems" @itemLoading="onItemLoading" :key="listViewKey">
             <v-template>
                 <StackLayout>
-                    <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
-                        <GridLayout :height="pageClass === 'lg' || pageClass === 'xl' ? 97 : 65" :rows="pageClass === 'lg' || pageClass === 'xl' ? 97 : 65" :columns="pageClass === 'lg' || pageClass === 'xl' ? '130,*' : '87,*'">
+                    <StackLayout v-if="filters[item.type] === true" class="row" @tap="toDetail(item.id)">
+                        <GridLayout :height="pageClass === 'lg' || pageClass === 'xl' ? 97 : 65" :rows="pageClass === 'lg' || pageClass === 'xl' ? 97 : 65" :columns="pageClass === 'lg' || pageClass === 'xl' ? '130,*,auto' : '87,*,auto'">
                             <Image col="0" :src="item.image"></Image>
                             <StackLayout col="1" orientation="horizontal" class="event-label">
                                 <StackLayout verticalAlignment="center">
@@ -22,12 +22,20 @@
                                     <Label class="event-title" :text="item.title"></Label>
                                 </StackLayout>
                             </StackLayout>
+                            <StackLayout col="2" verticalAlignment="center">
+                                <Label v-if="item.type === 'camping'" class="type-icon camping fas">{{ 'fa-circle' | fonticon }}</Label>
+                                <Label v-if="item.type === 'nearby'" class="type-icon nearby fas">{{ 'fa-circle' | fonticon }}</Label>
+                            </StackLayout>
                         </GridLayout>
                     </StackLayout>
                 </StackLayout>
             </v-template>
         </ListView>
         <ResultPlaceHolder v-if="listItems.length === 0" row="0" iconLabelClass="fas" iconClass="fa-calendar-alt" :title="$t('activities.emptyTitle')" :text="$t('activities.emptyText')"></ResultPlaceHolder>
+        <StackLayout row="1" orientation="horizontal" horizontalAlignment="center">
+            <Label class="tag camping" :class="filters.camping ? 'active' : ''" :text="$t('activities.onTheCampsite')" @tap="toggleFilter('camping')"></Label>
+            <Label class="tag nearby" :class="filters.nearby ? 'active' : ''" :text="$t('activities.nearby')" @tap="toggleFilter('nearby')"></Label>
+        </StackLayout>
     </GridLayout>
 </template>
 
@@ -46,7 +54,12 @@
         },
         data() {
             return {
-                listItems: []
+                listItems: [],
+                listViewKey: 0,
+                filters: {
+                    camping: true,
+                    nearby: true
+                }
             }
         },
         props: {
@@ -162,6 +175,31 @@
                         }
                     });
                 }
+            },
+
+            // Toggle the tag filter
+            toggleFilter: function(type) {
+                if(type === 'camping') {
+                    if(this.filters.camping === true) {
+                        this.filters.camping = true;
+                        this.filters.nearby = false;
+                    }
+                    else {
+                        this.filters.camping = true;
+                    }
+                }
+                if(type === 'nearby') {
+                    if(this.filters.nearby === true) {
+                        this.filters.nearby = true;
+                        this.filters.camping = false;
+                    }
+                    else {
+                        this.filters.nearby = true;
+                    }
+                }
+
+                // Force re-rendering the list
+                this.listViewKey++;
             }
         }
     }
@@ -171,14 +209,12 @@
 
     /* List view */
     .row {
-        margin: 0 12.5 12.5 12.5;
-    }
-    .row.first {
-        margin-top: 12.5;
+        margin: 12.5 12.5 0 12.5;
     }
     ListView {
         background-color: #ffffff;
         separator-color: transparent;
+        margin-bottom: 12.5;
     }
 
     /* Image */
@@ -201,5 +237,37 @@
     }
     .event-title {
         padding-top: 5;
+    }
+
+    /* Type icon */
+    .type-icon {
+        font-size: 8;
+    }
+    .type-icon.camping {
+        color: #009fe3;
+    }
+    .type-icon.nearby {
+        color: #9ac331;
+    }
+
+    /* Tag */
+    .tag {
+        border-width: 1;
+        border-radius: 100%;
+        background-color: #8f99ac;
+        border-color: #8f99ac;
+        margin: 0 4 15 0;
+        padding: 4 8;
+        font-weight: 500;
+        color: #ffffff;
+        font-size: 11;
+    }
+    .tag.camping.active {
+        background-color: #009fe3;
+        border-color: #009fe3;
+    }
+    .tag.nearby.active {
+        background-color: #9ac331;
+        border-color: #9ac331;
     }
 </style>

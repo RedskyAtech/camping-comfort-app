@@ -6,8 +6,8 @@
                     <GridLayout rows="auto,*">
                         <GridLayout rows="*" row="0" class="hero-grid">
                             <Image row="0" :src="settings.home_image" class="hero-image"></Image>
-                            <StackLayout row="0" class="hero-overlay-small" v-if="settings.show_home_name"></StackLayout>
-                            <StackLayout row="0" class="hero-overlay" v-if="!settings.show_home_name"></StackLayout>
+                            <StackLayout row="0" class="hero-overlay-small" v-if="!settings.show_home_name"></StackLayout>
+                            <StackLayout row="0" class="hero-overlay" v-if="settings.show_home_name"></StackLayout>
                             <GridLayout row="0" rows="auto,*" columns="*,auto">
                                 <StackLayout row="0" col="0">
                                     <StackLayout class="btn-container">
@@ -181,11 +181,12 @@
     }
     .hero-overlay {
         background-color: #000;
-        opacity: 0.35;
+        opacity: 0.6;
+        background: linear-gradient(to bottom, black, transparent);
     }
-    .hero-overlay {
+    .hero-overlay-small {
         background-color: #000;
-        opacity: 0.35;
+        opacity: 0.45;
         background: linear-gradient(to bottom, black, transparent);
     }
     .hero-title-container {

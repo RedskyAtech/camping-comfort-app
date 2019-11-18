@@ -8,7 +8,7 @@
                             <StackLayout v-if="!scanFinished">
                                 <Image class="icon" src="~/assets/images/qr.png"></Image>
                                 <Label class="intro-text" textWrap="true" :text="$t('splash.introText')"></Label>
-                                <StackLayout class="button scan-button" verticalAlignment="center" @tap="scan">
+                                <StackLayout class="button scan-button" verticalAlignment="center" @tap="go">
                                     <Label :text="$t('splash.continue')"></Label>
                                 </StackLayout>
                             </StackLayout>
@@ -59,14 +59,16 @@
         ],
         data: function() {
             return {
-                scanResult: {},
+                scanResult: this.$mode === 'production' ? {} : { campingId: 32805, campingName: 'Camping Comfort' },
                 scanFinished: false,
-                guestName: '',
-                guestLocation: ''
+                guestName: this.$mode === 'production' ? '' : 'Hans',
+                guestLocation: this.$mode === 'production' ? '' : '13',
             }
         },
         mounted: function() {
             let self = this;
+
+            console.log(self.$mode);
 
             if(!this.hasInternetConnection()) {
                 setTimeout(function() {
@@ -147,6 +149,14 @@
                 // Re-store the guest messaging topic
                 if(guestMessagingTopic) {
                     self.storeString('guest_messaging_topic', guestMessagingTopic);
+                }
+            },
+            go: function() {
+                if(this.$mode === 'production') {
+                    this.scan();
+                }
+                else {
+                    this.start();
                 }
             },
             scan: function() {
