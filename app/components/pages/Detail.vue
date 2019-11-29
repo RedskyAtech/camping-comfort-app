@@ -88,7 +88,7 @@
                         </StackLayout>
                         <StackLayout class="address-block" v-if="item.place">
                             <Label class="address-title" :text="$t('detail.forMoreInformation') + ((item.distance || item.distance === 0.0) && item.distance < 100 ? ' ('+item.distance+' km)' : '')"></Label>
-                            <Label v-if="item.street" class="address-text" :text="item.street+' '+item.house_number"></Label>
+                            <Label v-if="item.street" class="address-text" :text="item.street + ' ' + (item.house_number ? item.house_number : '')"></Label>
                             <Label v-if="item.place" class="address-text" :text="(item.postal_code ? item.postal_code + ' ' : '') + item.place"></Label>
                         </StackLayout>
                         <GridLayout columns="auto,*" v-if="item.place">
