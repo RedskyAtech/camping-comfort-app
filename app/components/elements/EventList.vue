@@ -63,7 +63,8 @@
             }
         },
         props: {
-            date: ''
+            date: '',
+            updateKey: null
         },
         mixins: [
             Connection,
@@ -75,6 +76,9 @@
             self.loadData(this.date);
         },
         watch: {
+            updateKey: function() {
+                this.loadData(this.date);
+            },
             date: function(val) {
                 this.loadData(val);
             }

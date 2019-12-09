@@ -50,7 +50,7 @@
                                 </GridLayout>
                                 <ScrollView row="1">
                                     <GridLayout rows="*" columns="*" height="100%">
-                                        <MyVacationList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]"></MyVacationList>
+                                        <MyVacationList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]" :innerPageClass="pageClass"></MyVacationList>
                                         <NewsItemList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 2}]"></NewsItemList>
                                     </GridLayout>
                                 </ScrollView>

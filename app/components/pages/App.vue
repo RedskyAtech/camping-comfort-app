@@ -227,7 +227,7 @@
 
                 firebase.init({
                     showNotifications: true,
-                    showNotificationsWhenInForeground: false,
+                    showNotificationsWhenInForeground: true,
 
                     onPushTokenReceivedCallback: function(token) {
                         console.log('[Firebase] onPushTokenReceivedCallback:', { token });

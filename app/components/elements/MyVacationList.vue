@@ -4,7 +4,7 @@
             <v-template>
                 <StackLayout>
                     <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
-                        <GridLayout :height="pageClass === 'lg' || pageClass === 'xl' ? 97 : 65" :rows="pageClass === 'lg' || pageClass === 'xl' ? 97 : 65" :columns="pageClass === 'lg' || pageClass === 'xl' ? '130,*' : '87,*'">
+                        <GridLayout :height="innerPageClass === 'lg' || innerPageClass === 'xl' ? 97 : 65" :rows="innerPageClass === 'lg' || innerPageClass === 'xl' ? 97 : 65" :columns="innerPageClass === 'lg' || innerPageClass === 'xl' ? '130,*' : '87,*'">
                             <Image col="0" :src="item.image"></Image>
                             <StackLayout col="1" orientation="horizontal" class="event-label">
                                 <StackLayout verticalAlignment="center">
@@ -45,6 +45,9 @@
     export default {
         components: {
             ResultPlaceHolder
+        },
+        props: {
+            innerPageClass: ''
         },
         data() {
             return {
@@ -132,7 +135,7 @@
              * @returns {string}
              */
             startDateTime: function(startDate, startTime) {
-                return this.humanizeDate(startDate, 'dddd')+' '+this.$moment('2000-01-01 '+startTime).format(this.$t('formatting.time'));
+                return this.humanizeDate(startDate, this.$t('formatting.humanizedDate'))+' '+this.$moment('2000-01-01 '+startTime).format(this.$t('formatting.time'));
             },
 
             // Get the data

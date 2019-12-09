@@ -1,9 +1,17 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <GridLayout rows="auto,auto,*" columns="*">
-            <StackLayout row="0" class="title-container">
-                <Label :text="title"></Label>
-            </StackLayout>
+            <GridLayout row="0" rows="60" columns="*,*,*" class="title-container">
+                <GridLayout row="0" col="0" height="100%" @tap="previousWeek">
+                    <Label class="icon-left fas" verticalAlignment="center">{{ 'fa-caret-left' | fonticon }}</Label>
+                </GridLayout>
+                <GridLayout row="0" col="1" height="100%">
+                    <Label class="title" :text="title" verticalAlignment="center"></Label>
+                </GridLayout>
+                <GridLayout row="0" col="2" height="100%" @tap="nextWeek">
+                    <Label class="icon-right fas" verticalAlignment="center">{{ 'fa-caret-right' | fonticon }}</Label>
+                </GridLayout>
+            </GridLayout>
             <GridLayout row="1" rows="auto,auto" columns="*,*,*,*,*,*,*" class="week">
                 <GridLayout row="0" col="0" rows="30" columns="*" @tap="activateDay(1)" class="day" :class="[{'active': activeDay === 1}]"><Label :text="day1.format('dd')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
                 <GridLayout row="1" col="0" rows="30" columns="*" @tap="activateDay(1)" class="date" :class="[{'active': activeDay === 1}]"><Label :text="day1.format('D')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
@@ -20,7 +28,7 @@
                 <GridLayout row="0" col="6" rows="30" columns="*" @tap="activateDay(7)" class="day" :class="[{'active': activeDay === 7}]"><Label :text="day7.format('dd')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
                 <GridLayout row="1" col="6" rows="30" columns="*" @tap="activateDay(7)" class="date" :class="[{'active': activeDay === 7}]"><Label :text="day7.format('D')" horizontalAlignment="center" verticalAlignment="center"></Label></GridLayout>
             </GridLayout>
-            <EventList row="2" :date="activeDate"></EventList>
+            <EventList row="2" :date="activeDate" :updateKey="updateKey"></EventList>
         </GridLayout>
     </Page>
 </template>
@@ -33,6 +41,7 @@
     export default {
         data() {
             return {
+                updateKey: 0,
                 activeDay: 1,
                 activeDate: '',
                 day1: '',
@@ -41,12 +50,8 @@
                 day4: '',
                 day5: '',
                 day6: '',
-                day7: ''
-            }
-        },
-        computed: {
-            title: function() {
-                return this.$t('activities.week')+' '+this.day1.isoWeek()
+                day7: '',
+                title: ''
             }
         },
         watch: {
@@ -80,12 +85,50 @@
             this.day6.locale(lang);
             this.day7.locale(lang);
 
-            // Set the active date
-            this.activeDate = this['day'+this.activeDay];
+            // Update the view
+            this.updateView();
         },
         methods: {
             activateDay(day){
                 this.activeDay = day;
+            },
+            updateView() {
+
+                // Set the active date
+                this.activeDate = this['day'+this.activeDay];
+
+                // Trigger an update of the event list
+                this.updateKey++;
+
+                // Force an update for the computed props
+                this.$forceUpdate();
+
+                // Update the title
+                this.title = this.$t('activities.week')+' '+this.day1.isoWeek();
+            },
+            previousWeek() {
+                this.day1.subtract(1, 'weeks');
+                this.day2.subtract(1, 'weeks');
+                this.day3.subtract(1, 'weeks');
+                this.day4.subtract(1, 'weeks');
+                this.day5.subtract(1, 'weeks');
+                this.day6.subtract(1, 'weeks');
+                this.day7.subtract(1, 'weeks');
+
+                // Update the data
+                this.updateView();
+            },
+            nextWeek() {
+                this.day1.add(1, 'weeks');
+                this.day2.add(1, 'weeks');
+                this.day3.add(1, 'weeks');
+                this.day4.add(1, 'weeks');
+                this.day5.add(1, 'weeks');
+                this.day6.add(1, 'weeks');
+                this.day7.add(1, 'weeks');
+
+                // Update the data
+                this.updateView();
             }
         }
     }
@@ -99,7 +142,6 @@
         color: #fff;
         text-align: center;
         font-weight: 700;
-        padding: 12.5 12.5 6.75 12.5;
     }
 
     /* Weekday selector */

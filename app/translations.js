@@ -6,7 +6,8 @@ export function translations() {
             },
             formatting: {
                 time: 'h.mm a',
-                date: 'YYYY-MM-DD'
+                date: 'YYYY-MM-DD',
+                humanizedDate: 'ddd MMM D'
             },
             languages: {
                 nl: 'Dutch',
@@ -169,7 +170,8 @@ export function translations() {
             },
             formatting: {
                 time: 'HH:mm',
-                date: 'DD-MM-YYYY'
+                date: 'DD-MM-YYYY',
+                humanizedDate: 'ddd D MMM'
             },
             languages: {
                 de: 'Duits',
@@ -325,7 +327,8 @@ export function translations() {
             },
             formatting: {
                 time: 'HH.mm',
-                date: 'DD.MM.YYYY'
+                date: 'DD.MM.YYYY',
+                humanizedDate: 'ddd D MMM'
             },
             languages: {
                 de: 'Französisch',
@@ -488,7 +491,8 @@ export function translations() {
             },
             formatting: {
                 time: 'HH [h] mm',
-                date: 'DD/MM/YYYY'
+                date: 'DD/MM/YYYY',
+                humanizedDate: 'ddd D MMM'
             },
             languages: {
                 de: 'Allemand',
@@ -651,7 +655,8 @@ export function translations() {
             },
             formatting: {
                 time: 'HH.mm',
-                date: 'DD/MM/YYYY'
+                date: 'DD/MM/YYYY',
+                humanizedDate: 'ddd D MMM'
             },
             languages: {
                 de: 'Tedesco',
