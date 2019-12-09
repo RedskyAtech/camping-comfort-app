@@ -31,7 +31,7 @@
                 </StackLayout>
             </v-template>
         </ListView>
-        <ResultPlaceHolder v-if="listItems.length === 0" row="0" iconLabelClass="fas" iconClass="fa-calendar-alt" :title="$t('activities.emptyTitle')" :text="$t('activities.emptyText')"></ResultPlaceHolder>
+        <ResultPlaceHolder v-if="listItems.length === 0" row="0" icon-label-class="fas" icon-class="fa-calendar-alt" :title="$t('activities.emptyTitle')" :text="$t('activities.emptyText')"></ResultPlaceHolder>
         <StackLayout row="1" orientation="horizontal" horizontalAlignment="center">
             <Label class="tag camping" :class="filters.camping ? 'active' : ''" :text="$t('activities.onTheCampsite')" @tap="toggleFilter('camping')"></Label>
             <Label class="tag nearby" :class="filters.nearby ? 'active' : ''" :text="$t('activities.nearby')" @tap="toggleFilter('nearby')"></Label>

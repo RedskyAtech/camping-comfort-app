@@ -156,7 +156,7 @@ export function translations() {
                 welcomeTo: 'Welcome to',
                 name: 'Name',
                 location: 'Accommodation/Pitch',
-                continue: 'Continue'
+                'continue': 'Continue'
             },
             shop: {
                 title: 'Order sandwiches',
@@ -312,7 +312,7 @@ export function translations() {
                 welcomeTo: 'Welkom bij',
                 name: 'Naam',
                 location: 'Accommodatie/Plaats',
-                continue: 'Doorgaan'
+                'continue': 'Doorgaan'
             },
             shop: {
                 title: 'Broodjes bestellen',
@@ -475,7 +475,7 @@ export function translations() {
                 welcomeTo: 'Willkommen zu',
                 name: 'Name',
                 location: 'Unterkunft / Stellplatz',
-                continue: 'Weiter'
+                'continue': 'Weiter'
             },
             shop: {
                 title: 'Brötchen bestellen',
@@ -638,7 +638,7 @@ export function translations() {
                 welcomeTo: 'Bienvenue à',
                 name: 'Nom',
                 location: 'Logement / Emplacement',
-                continue: 'Continuer'
+                'continue': 'Continuer'
             },
             shop: {
                 title: 'Commander des sandwichs',
@@ -801,7 +801,7 @@ export function translations() {
                 welcomeTo: 'Benvenuto a',
                 name: 'Nome',
                 location: 'Alloggio/Piazzola',
-                continue: 'Proseguire'
+                'continue': 'Proseguire'
             },
             shop: {
                 title: 'Ordinare panini',

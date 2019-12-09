@@ -22,7 +22,7 @@
                 </StackLayout>
             </v-template>
         </ListView>
-        <ResultPlaceHolder row="0" v-if="listItems.length === 0" iconLabelClass="far" iconClass="fa-newspaper" :title="$t('news.emptyTitle')"></ResultPlaceHolder>
+        <ResultPlaceHolder row="0" v-if="listItems.length === 0" icon-label-class="far" icon-class="fa-newspaper" :title="$t('news.emptyTitle')"></ResultPlaceHolder>
     </GridLayout>
 </template>
 

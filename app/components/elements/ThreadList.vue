@@ -27,7 +27,7 @@
                 </StackLayout>
             </v-template>
         </ListView>
-        <ResultPlaceHolder v-if="threads.length === 0" row="0" iconLabelClass="far" iconClass="fa-comments" :title="$t('threads.emptyTitle')" :text="keyExistsInStore('userId') ? $t('threads.emptyText_camping') : $t('threads.emptyText_guest')"></ResultPlaceHolder>
+        <ResultPlaceHolder v-if="threads.length === 0" row="0" icon-label-class="far" icon-class="fa-comments" :title="$t('threads.emptyTitle')" :text="keyExistsInStore('userId') ? $t('threads.emptyText_camping') : $t('threads.emptyText_guest')"></ResultPlaceHolder>
     </GridLayout>
 </template>
 

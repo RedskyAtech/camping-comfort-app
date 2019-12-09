@@ -43,6 +43,13 @@
                 default: false
             },
 
+            // Emit a back event instead of triggering the usual back or close modal event
+            // Useful when something custom needs to happen when tapping the back button
+            emitBack: {
+                type: Boolean,
+                default: false
+            },
+
             // Set to true if this page is opened in a modal
             inModal: {
                 type: Boolean,
@@ -119,11 +126,16 @@
                 }
             },
             goBack: function(){
-                if(this.inModal) {
-                    this.$modal.close();
+                if(this.emitBack) {
+                    this.$emit('back');
                 }
                 else {
-                    EventBus.$emit('back');
+                    if(this.inModal) {
+                        this.$modal.close();
+                    }
+                    else {
+                        EventBus.$emit('back');
+                    }
                 }
             }
         }

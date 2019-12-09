@@ -9,7 +9,7 @@
                         </Bubble>
                     </StackLayout>
                     <GridLayout height="100%" rows="*" v-else>
-                        <ResultPlaceHolder row="0" iconLabelClass="far" iconClass="fa-comments" :title="$t('thread.emptyThreadTitle')" :text="$t('thread.emptyThreadText')"></ResultPlaceHolder>
+                        <ResultPlaceHolder row="0" icon-label-class="far" icon-class="fa-comments" :title="$t('thread.emptyThreadTitle')" :text="$t('thread.emptyThreadText')"></ResultPlaceHolder>
                     </GridLayout>
                 </ScrollView>
                 <StackLayout row="1" class="form">
