@@ -1,9 +1,10 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <GridLayout rows="*" columns="*" width="100%" height="100%">
-            <WebView row="0" col="0" :src="map"></WebView>
-            <Fab verticalAlignment="bottom" borderColor="#e5e5e5"><GridLayout rows="*" columns="*" @tap="closeModal"><StackLayout row="0" col="0" verticalAlignment="center"><Label class="btn-icon fas">{{ 'fa-times' | fonticon }}</Label></StackLayout></GridLayout></Fab>
-        </GridLayout>
+        <Header :hasHero="false" :title="$t('home.map')" :showHeader="true" :showBackBtn="true" :inModal="true">
+            <GridLayout rows="*" columns="*" width="100%" height="100%">
+                <WebView row="0" col="0" :src="map"></WebView>
+            </GridLayout>
+        </Header>
     </Page>
 </template>
 
@@ -16,6 +17,8 @@
     import Fab from '../elements/Fab'
     import LocalStorage from '../mixins/LocalStorage'
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
+    import Header from '../elements/Header'
+    import HeaderMixin from '../mixins/HeaderMixin'
 
     export default {
         mixins: [
@@ -24,8 +27,15 @@
             LocalStorage
         ],
         components: {
-            Fab: Fab
+            Fab: Fab,
+            Header: Header
         },
+        mixins: [
+            Responsive,
+            Connection,
+            LocalStorage,
+            HeaderMixin,
+        ],
         data: function(){
             return {
                 'map':''
@@ -85,9 +95,6 @@
                         }, 500);
                     }
                 }
-            },
-            closeModal: function(){
-                this.$modal.close();
             }
         }
     }
