@@ -4,7 +4,7 @@
             <GridLayout rows="*,auto,auto" height="100%">
                 <ScrollView ref="scrollView" row="0">
                     <StackLayout class="content" :class="[{ 'visible': scrolledDown}]" v-if="messages.length > 0">
-                        <Bubble v-for="message in messages" :type="(keyExistsInStore('userId') && message.is_message_from_camping === 1) || (!keyExistsInStore('userId') && message.is_message_from_camping === 0) ? 'me' : 'he'" :time="humanizeDate(message.updated_at, 'dddd', true)" v-bind:data="message" v-bind:key="message.id" :name="keyExistsInStore('userId') ? thread.name + ' ('+thread.location+')' : getStringFromStore('campingName')">
+                        <Bubble v-for="message in messages" :type="(keyExistsInStore('userId') && message.is_message_from_camping === 1) || (!keyExistsInStore('userId') && message.is_message_from_camping === 0) ? 'me' : 'he'" :time="humanizeDate(message.updated_at)" v-bind:data="message" v-bind:key="message.id" :name="keyExistsInStore('userId') ? thread.name + ' ('+thread.location+')' : getStringFromStore('campingName')">
                             <Label textWrap="true" :text="message.message"></Label>
                         </Bubble>
                     </StackLayout>

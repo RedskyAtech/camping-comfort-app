@@ -9,19 +9,18 @@
                     <GridLayout rows="auto" columns="auto,auto" class="timeframe" v-if="item.start_time !== undefined">
                         <Label col="0" class="clock far" verticalAlignment="center">{{ 'fa-clock' | fonticon }}</Label>
                         <StackLayout col="1" orientation="horizontal" verticalAlignment="center" v-if="item.is_all_day === false">
-                            <Label :text="humanizeDate(item.start_date, $t('formatting.humanizedDate'))+' '" class="day"></Label>
-                            <Label :text="'2000-01-01 '+item.start_time | moment($t('formatting.time'))"></Label>
+                            <Label :text="humanizeDate(item.start_date +' '+item.start_time)+' '" class="day"></Label>
                             <Label text=" - "></Label>
                             <Label :text="'2000-01-01 '+item.end_time | moment($t('formatting.time'))"></Label>
                         </StackLayout>
                         <StackLayout col="1" orientation="horizontal" verticalAlignment="center" v-else>
-                            <Label :text="humanizeDate(item.start_date, $t('formatting.humanizedDate'))+' '" class="day"></Label>
+                            <Label :text="humanizeDate(item.start_date, false)+' '" class="day"></Label>
                             <Label :text="'- '+$t('general.allDay')"></Label>
                         </StackLayout>
                     </GridLayout>
                     <GridLayout rows="auto" columns="auto,auto" class="timeframe" v-if="item.date !== undefined">
                         <Label col="0" class="clock far" verticalAlignment="center">{{ 'fa-calendar-alt' | fonticon }}</Label>
-                        <Label col="1" :text="humanizeDate(item.date, $t('formatting.date'))" verticalAlignment="center"></Label>
+                        <Label col="1" :text="humanizeDate(item.date)" verticalAlignment="center"></Label>
                     </GridLayout>
                     <StackLayout class="content">
                         <FlexboxLayout flexWrap="wrap" v-if="item.type === 'camping'" class="tags">
@@ -556,9 +555,6 @@
     }
     .content {
         padding: 25;
-    }
-    .day {
-        text-transform: capitalize;
     }
     .title {
         font-size: 18;

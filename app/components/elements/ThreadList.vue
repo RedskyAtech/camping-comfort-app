@@ -4,7 +4,7 @@
             <v-template>
                 <StackLayout>
                     <StackLayout class="row" :class="[{ 'first': $index === 0, 'unread': thread.amountUnread > 0 }]" @tap="toDetail(thread.id)">
-                        <GridLayout rows="65" columns="2*,*">
+                        <GridLayout rows="65" columns="*,*">
                             <StackLayout col="0" orientation="horizontal" class="label">
                                 <StackLayout verticalAlignment="center">
                                     <Label class="title" :text="keyExistsInStore('userId') ? thread.name + ' ('+thread.location+')' : getStringFromStore('campingName')"></Label>
@@ -15,7 +15,7 @@
                             </StackLayout>
                             <StackLayout col="1" orientation="horizontal" class="time-container">
                                 <StackLayout verticalAlignment="center" width="100%">
-                                    <Label class="time" :text="humanizeDate(thread.lastMessage.created_at, 'dddd', true)" horizontalAlignment="right"></Label>
+                                    <Label class="time" :text="humanizeDate(thread.lastMessage.created_at)" horizontalAlignment="right"></Label>
                                     <FlexboxLayout horizontalAlignment="right">
                                         <Label v-if="thread.amountUnread > 0" class="badge" :text="thread.amountUnread+' '+$t('threads.new')"></Label>
                                         <Label v-else class="subtitle" text=" "></Label>

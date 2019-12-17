@@ -162,6 +162,9 @@ export function translations() {
             shop: {
                 title: 'Order sandwiches',
                 order: 'Place order'
+            },
+            dates: {
+                at: 'at'
             }
         },
         nl: {
@@ -319,6 +322,9 @@ export function translations() {
             shop: {
                 title: 'Broodjes bestellen',
                 order: 'Plaats bestelling'
+            },
+            dates: {
+                at: 'om'
             }
         },
         de: {
@@ -483,6 +489,9 @@ export function translations() {
             shop: {
                 title: 'Brötchen bestellen',
                 order: 'Bestellung aufgeben'
+            },
+            dates: {
+                at: 'um'
             }
         },
         fr: {
@@ -647,6 +656,9 @@ export function translations() {
             shop: {
                 title: 'Commander des sandwichs',
                 order: 'Passer la commande'
+            },
+            dates: {
+                at: 'à'
             }
         },
         it: {
@@ -811,6 +823,9 @@ export function translations() {
             shop: {
                 title: 'Ordinare panini',
                 order: 'Ordine del posto'
+            },
+            dates: {
+                at: 'alle'
             }
         }
     }

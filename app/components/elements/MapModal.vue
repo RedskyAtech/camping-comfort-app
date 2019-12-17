@@ -14,20 +14,13 @@
     import EventBus from '../helpers/EventBus'
     import Responsive from '../mixins/Responsive'
     import Connection from '../mixins/Connection'
-    import Fab from '../elements/Fab'
     import LocalStorage from '../mixins/LocalStorage'
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
     import Header from '../elements/Header'
     import HeaderMixin from '../mixins/HeaderMixin'
 
     export default {
-        mixins: [
-            Responsive,
-            Connection,
-            LocalStorage
-        ],
         components: {
-            Fab: Fab,
             Header: Header
         },
         mixins: [

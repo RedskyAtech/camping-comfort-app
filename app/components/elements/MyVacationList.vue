@@ -117,10 +117,10 @@
 
                 let str = '';
                 if(startDate <= today) {
-                    str += this.humanizeDate(today.format('YYYY-MM-DD'), this.$t('formatting.date'));
+                    str += this.humanizeDate(today.format('YYYY-MM-DD'), false);
                 }
                 else {
-                    str += this.humanizeDate(startDate.format('YYYY-MM-DD'), this.$t('formatting.date'));
+                    str += this.humanizeDate(startDate.format('YYYY-MM-DD'), false);
                 }
                 str += ' - '+this.$t('general.allDay');
 
@@ -135,7 +135,7 @@
              * @returns {string}
              */
             startDateTime: function(startDate, startTime) {
-                return this.humanizeDate(startDate, this.$t('formatting.humanizedDate'))+' '+this.$moment('2000-01-01 '+startTime).format(this.$t('formatting.time'));
+                return this.humanizeDate(startDate+' '+startTime);
             },
 
             // Get the data
@@ -151,11 +151,31 @@
                         self.listItems = self.getObjectFromStore('campingActivities');
                     }
 
-                    // Get the live data
+                    // Get the likes
+                    let likes = this.getLikes();
+                    let likeIds = [];
+                    for (let [id, value] of Object.entries(likes)) {
+                        likeIds.push(parseInt(id));
+                    }
+
+                    // Get the data
+                    let data = JSON.stringify({
+                        likes: likeIds
+                    });
                     let loadingId = Date.now();
                     EventBus.$emit('startLoading', loadingId);
                     let url = "https://www.campingcomfort.app/api/"+campingId+"/camping-activities/1111-11-11/"+lang;
-                    getJSON(url).then((r) => {
+                    request({
+                        url: url,
+                        method: "POST",
+                        headers: {"Content-Type": "application/json"},
+                        content: data
+                    }).then((response) => {
+
+                        // Convert the response to JSON
+                        let r = response.content.toJSON();
+
+                        // Handle the response
                         if(r.campingActivities){
                             self.listItems = r.campingActivities;
                             self.storeObject('campingActivities', self.listItems);

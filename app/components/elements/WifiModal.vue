@@ -1,20 +1,21 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <GridLayout rows="*" columns="*" class="page">
-            <ScrollView row="0" col="0">
-                <StackLayout class="content" verticalAlignment="top">
-                    <Label class="title" :text="$t('wifi.title')"></Label>
-                    <Label class="text" :text="item.wifi_text" textWrap="true"></Label>
-                    <StackLayout class="btn-container" v-if="item.wifi_code">
-                        <StackLayout class="btn copy-btn" @tap="copyToClipboard">
-                            <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-clipboard' | fonticon }}</Label>
-                            <Label class="btn-text" :text="$t('wifi.copy')" verticalAlignment="center"></Label>
+        <Header :hasHero="false" :title="$t('wifi.title')" :showHeader="true" :showBackBtn="true" :inModal="true">
+            <GridLayout rows="*" columns="*" class="page">
+                <ScrollView row="0" col="0">
+                    <StackLayout class="content" verticalAlignment="top">
+                        <Label class="title" :text="$t('wifi.title')"></Label>
+                        <Label class="text" :text="item.wifi_text" textWrap="true"></Label>
+                        <StackLayout class="btn-container" v-if="item.wifi_code">
+                            <StackLayout class="btn copy-btn" @tap="copyToClipboard">
+                                <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-clipboard' | fonticon }}</Label>
+                                <Label class="btn-text" :text="$t('wifi.copy')" verticalAlignment="center"></Label>
+                            </StackLayout>
                         </StackLayout>
                     </StackLayout>
-                </StackLayout>
-            </ScrollView>
-            <Fab verticalAlignment="bottom" backgroundColor="#123c64" borderColor="#fff" color="#fff"><GridLayout rows="*" columns="*" @tap="closeModal"><StackLayout row="0" col="0" verticalAlignment="center"><Label row="0" col="0" class="btn-icon fas" verticalAlignment="center">{{ 'fa-times' | fonticon }}</Label></StackLayout></GridLayout></Fab>
-        </GridLayout>
+                </ScrollView>
+            </GridLayout>
+        </Header>
     </Page>
 </template>
 
@@ -24,7 +25,8 @@
     import EventBus from '../helpers/EventBus'
     import Connection from '../mixins/Connection'
     import Responsive from '../mixins/Responsive'
-    import Fab from '../elements/Fab'
+    import Header from '../elements/Header'
+    import HeaderMixin from '../mixins/HeaderMixin'
     import LocalStorage from '../mixins/LocalStorage'
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
 
@@ -32,10 +34,11 @@
         mixins: [
             Responsive,
             Connection,
-            LocalStorage
+            LocalStorage,
+            HeaderMixin
         ],
         components: {
-            Fab: Fab
+            Header: Header
         },
         data: function() {
             return {
@@ -116,12 +119,11 @@
 </script>
 
 <style scoped>
-    Page, .page {
-        background: #123c64;
+    Page {
+        background: #fff;
     }
     .content {
-        color: #fff;
-        padding: 25 12.5;
+        padding: 25;
     }
     .title {
         font-size: 18;
@@ -129,18 +131,14 @@
         padding-bottom: 10;
     }
     .text {
-        opacity: 0.75;
         line-height: 5;
     }
     .btn-container {
         padding-top: 20;
         orientation: horizontal;
     }
-    .copy-btn {
-        border-color: #fff;
-    }
-    .copy-btn .btn-icon,
-    .copy-btn .btn-text {
+    /*.btn {
         color: #fff;
-    }
+        border-color: #fff;
+    }*/
 </style>

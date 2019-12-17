@@ -60,8 +60,9 @@
     import Connection from '../mixins/Connection'
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http"
     import * as firebase from 'nativescript-plugin-firebase';
-    import { isAndroid, isIOS, device, screen } from "tns-core-modules/platform";
+    import { isAndroid, isIOS, device, screen } from "tns-core-modules/platform"
     import * as http from 'http'
+    import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert"
 
     export default {
         data() {

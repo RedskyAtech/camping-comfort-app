@@ -248,7 +248,7 @@
         font-size: 8;
     }
     .type-icon.camping {
-        color: #009fe3;
+        color: #004d9a;
     }
     .type-icon.nearby {
         color: #9ac331;
@@ -267,8 +267,8 @@
         font-size: 11;
     }
     .tag.camping.active {
-        background-color: #009fe3;
-        border-color: #009fe3;
+        background-color: #004d9a;
+        border-color: #004d9a;
     }
     .tag.nearby.active {
         background-color: #9ac331;

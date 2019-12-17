@@ -4,7 +4,7 @@
             <StackLayout>
                 <StackLayout class="intro">
                     <Label class="title" textWrap="true" text="Nog heel even geduld..."></Label>
-                    <Label textWrap="true" text="De functie om broodjes te bestellen zal vanaf 1 december beschikbaar zijn."></Label>
+                    <Label textWrap="true" text="De functie om broodjes te bestellen zal binnenkort beschikbaar zijn."></Label>
                 </StackLayout>
                 <ShopListItem :index="$index" :item="item" v-on:amount-updated="updateOrder"></ShopListItem>
             </StackLayout>

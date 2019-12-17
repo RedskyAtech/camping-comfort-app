@@ -1,35 +1,72 @@
 <script>
     export default {
         methods: {
-            humanizeDate(date, returnFormat, returnTimeOfToday = false) {
-                let today = this.$moment();
-                today.hour(0);
-                today.minute(0);
-                today.second(0);
-                today.millisecond(0);
-                let dateMoment = this.$moment(date);
-                let diffDays = dateMoment.diff(today, 'days');
+            humanizeDate(date, showTime=true) {
 
                 // Set the locale
+                let moment = this.$moment(date);
                 let lang = this.getStringFromStore('language');
-                dateMoment.locale(lang);
-                if(diffDays === 0){
-                    if(returnTimeOfToday) {
-                        return dateMoment.format(this.$t('formatting.time'));
+                moment.locale(lang);
+
+                let str = '';
+
+                // Get the current day and day number
+                let now = this.$moment().hour(0).minute(0).second(0).millisecond(0);
+                let currentDayNumber = parseInt(now.format('d')); // Sunday = 0
+
+                // Calculate the difference in days compared to today
+                let diffDays = moment.diff(now, 'days'); // Today = 0, yesterday = -1
+
+                // Yesterday
+                if(diffDays === -1) {
+                    str = this.$t('detail.yesterday');
+                    if(showTime) {
+                        str += ' '+this.$t('dates.at')+' '+moment.format(this.$t('formatting.time'));
                     }
-                    else {
-                        return this.$t('detail.today');
+                }
+
+                // Today
+                else if(diffDays === 0) {
+                    str = this.$t('detail.today');
+                    if(showTime) {
+                        str += ' '+this.$t('dates.at')+' '+moment.format(this.$t('formatting.time'));
                     }
                 }
-                else if(diffDays === 1){
-                    return this.$t('detail.tomorrow');
+
+                // Tomorrow
+                else if(diffDays === 1) {
+                    str = this.$t('detail.tomorrow');
+                    if(showTime) {
+                        str += ' '+this.$t('dates.at')+' '+moment.format(this.$t('formatting.time'));
+                    }
                 }
-                else if(diffDays === -1){
-                    return this.$t('detail.yesterday');
+
+                // Until last week
+                else if((currentDayNumber + diffDays) <= 0) {
+                    str = moment.format(this.$t('formatting.humanizedDate'));
+                    if(showTime) {
+                        str += ' '+this.$t('dates.at')+' '+moment.format(this.$t('formatting.time'));
+                    }
                 }
-                else {
-                    return dateMoment.format(returnFormat);
+
+                // This week
+                else if((currentDayNumber + diffDays) > 0 && (currentDayNumber + diffDays) <= 7) {
+                    str = moment.format('dddd');
+                    if(showTime) {
+                        str += ' '+this.$t('dates.at')+' '+moment.format(this.$t('formatting.time'));
+                    }
                 }
+
+                // From next week
+                else if((currentDayNumber + diffDays) > 6) {
+                    str = moment.format(this.$t('formatting.humanizedDate'));
+                    if(showTime) {
+                        str += ' '+this.$t('dates.at')+' '+moment.format(this.$t('formatting.time'));
+                    }
+                }
+
+                // Return the formatted string
+                return str;
             }
         }
     }

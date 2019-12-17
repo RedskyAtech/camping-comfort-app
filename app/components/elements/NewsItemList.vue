@@ -12,7 +12,7 @@
                                     <StackLayout class="event-time" orientation="horizontal">
                                         <Label class="clock far">{{ 'fa-calendar-alt' | fonticon }}</Label>
                                         <StackLayout orientation="horizontal">
-                                            <Label :text="humanizeDate(item.date, $t('formatting.date'))"></Label>
+                                            <Label :text="humanizeDate(item.date, false)"></Label>
                                         </StackLayout>
                                     </StackLayout>
                                 </StackLayout>
