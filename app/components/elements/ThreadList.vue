@@ -7,9 +7,9 @@
                         <GridLayout rows="65" columns="*,*">
                             <StackLayout col="0" orientation="horizontal" class="label">
                                 <StackLayout verticalAlignment="center">
-                                    <Label class="title" :text="keyExistsInStore('userId') ? thread.name + ' ('+thread.location+')' : getStringFromStore('campingName')"></Label>
+                                    <Label class="title" :text="keyExistsInStore('userId') ? thread.name + ' ('+thread.location+')' : getStringFromStore('campingName')" textWrap="false"></Label>
                                     <FlexboxLayout>
-                                        <Label class="subtitle" :text="thread.lastMessage.message"></Label>
+                                        <Label class="subtitle" :text="thread.lastMessage.message" textWrap="false"></Label>
                                     </FlexboxLayout>
                                 </StackLayout>
                             </StackLayout>

@@ -8,7 +8,7 @@
                             <Image row="0" :src="item.image" borderRadius="5"></Image>
                             <StackLayout col="1" orientation="horizontal" class="event-label">
                                 <StackLayout verticalAlignment="center">
-                                    <Label class="event-title" :text="item.title" textWrap="true"></Label>
+                                    <Label class="event-title" :text="item.title" textWrap="false"></Label>
                                     <StackLayout class="event-time" orientation="horizontal">
                                         <Label class="clock far">{{ 'fa-calendar-alt' | fonticon }}</Label>
                                         <StackLayout orientation="horizontal">

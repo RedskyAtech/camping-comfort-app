@@ -7,7 +7,7 @@
                         <Image col="0" :src="item.image || '~/assets/images/placeholder.gif'"></Image>
                         <StackLayout col="1" orientation="horizontal" class="item-label">
                             <StackLayout verticalAlignment="center">
-                                <Label class="item-title" :text="item.title"></Label>
+                                <Label class="item-title" :text="item.title" textWrap="false"></Label>
                                 <FlexboxLayout>
                                     <Label class="item-subtitle" :text="localizeNumber(item.distance) + ' km'"></Label>
                                     <!--<StackLayout class="rating-container" verticalAlignment="center">

@@ -19,7 +19,7 @@
                                             <Label :text="$t('general.allDay')"></Label>
                                         </StackLayout>
                                     </StackLayout>
-                                    <Label class="event-title" :text="item.title"></Label>
+                                    <Label class="event-title" :text="item.title" textWrap="false"></Label>
                                 </StackLayout>
                             </StackLayout>
                             <StackLayout col="2" verticalAlignment="center">

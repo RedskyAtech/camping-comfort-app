@@ -19,7 +19,7 @@
                         <Image col="0" :src="item.image"></Image>
                         <StackLayout col="1" orientation="horizontal" class="event-label">
                             <StackLayout verticalAlignment="center">
-                                <Label class="event-title" :text="item.title"></Label>
+                                <Label class="event-title" :text="item.title" textWrap="true"></Label>
                             </StackLayout>
                         </StackLayout>
                     </GridLayout>
