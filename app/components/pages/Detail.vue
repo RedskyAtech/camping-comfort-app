@@ -36,16 +36,14 @@
                         <Label class="title" :text="item.title" textWrap="true"></Label>
                         <GridLayout columns="*" :rows="textHeight">
                             <Stacklayout col="0" row="0">
-                                <GridLayout>
-                                    <WebView @loadStarted="webViewLoadStarted" @loadFinished="webViewLoadFinished" v-if="item.text" class="html-text" :src="contentWrapper" ref="contentWebView"></WebView>
-                                </GridLayout>
-                                <Stacklayout v-if="item.reviews && item.reviews.length > 0">
+                                <Label class="text" textWrap="true" :text="item.text"></Label>
+                                <StackLayout v-if="item.reviews && item.reviews.length > 0">
                                     <Label class="text subtitle" textWrap="true" :text="$t('detail.whatOtherPeopleSay')+':'"></Label>
                                     <StackLayout class="review-container" :class="[{ 'last': index === (item.reviews.length-1) }]" v-for="(review, index) in item.reviews" v-bind:data="review" v-bind:key="review.id">
                                         <StackLayout horizontalAlignment="left"><StarRating :value="review.rating" :size="starSize" fillColor="#0070DA" emptyColor="#7FB7EC" outlineColor="#FFFFFF" /></StackLayout>
                                         <Label class="review" textWrap="true" :text="review.text"></Label>
                                     </StackLayout>
-                                </Stacklayout>
+                                </StackLayout>
                             </Stacklayout>
                             <StackLayout v-if="collapsed" col="0" row="0" class="gradient"></StackLayout>
                             <StackLayout v-if="collapsed" col="0" row="1">
@@ -126,7 +124,6 @@
     import * as utils from "tns-core-modules/utils/utils"
     import Header from '../elements/Header'
     import HeaderMixin from '../mixins/HeaderMixin'
-    import { isAndroid, isIOS } from "tns-core-modules/platform";
 
     export default {
         props: {
@@ -138,31 +135,10 @@
                 collapsed: true,
                 item: {},
                 isLikable: false,
-                liked: false,
-                scriptAddedToWebView: false
+                liked: false
             }
         },
         computed: {
-            contentWrapper: function() {
-                return `<html>
-                    <head>
-                        <meta name="viewport" content="width=device-width, user-scalable=no">
-                        <style>
-                            html, body {
-                                margin: 0;
-                                padding: 0;
-                                font-family: 'HelveticaNeue', 'Roboto', 'sans-serif';
-                                line-height: 25px;
-                                overflow: hidden;
-                                font-size: 16px;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        ${this.item.text}
-                    </body>
-                </html>`;
-            },
             textHeight: function(){
                 if(this.collapsed){
                     return '83,auto';
@@ -207,27 +183,6 @@
             this.loadData();
         },
         methods: {
-
-            // Add the content height as a hash to the WebView URL
-            webViewLoadStarted: function() {
-                if(isIOS && !this.scriptAddedToWebView) {
-                    let wv = this.$refs.contentWebView.nativeView;
-                    wv.src += '<scr'+'ipt>var body = document.body, html = document.documentElement; var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight ); window.location = "#"+height;</scr'+'ipt>'
-                    this.scriptAddedToWebView = true;
-                }
-            },
-
-            // Get the content height from the hash of the WebView URL and set the height to the WebView to prevent scrolling
-            webViewLoadFinished: function(args) {
-                if(isIOS && this.scriptAddedToWebView) {
-                    let wv = this.$refs.contentWebView.nativeView;
-                    let patt = /.*#([0-9]*)/gm;
-                    let height = patt.exec(args.url);
-                    if(height && height[1]) {
-                        wv.height=height[1];
-                    }
-                }
-            },
 
             // Get the data
             loadData: function(){
@@ -305,7 +260,7 @@
                         // Get the live data
                         let loadingId = Date.now();
                         EventBus.$emit('startLoading', loadingId);
-                        getJSON("https://www.campingcomfort.app/api/"+campingId+"/camping-facilities/"+lang+"/"+self.id).then((r) => {
+                        getJSON("https://test.campingcomfort.app/api/"+campingId+"/camping-facilities/"+lang+"/"+self.id).then((r) => {
                             if(r.campingFacility) {
                                 self.item = r.campingFacility;
                                 self.storeObject('campingFacility_'+self.id, self.item);
@@ -605,10 +560,9 @@
         font-weight: 700;
         padding-bottom: 10;
     }
-    .html-text {
+    .text {
         opacity: 0.5;
-        padding: 0;
-        margin: 0;
+        line-height: 5;
     }
     .text.subtitle {
         padding-top: 15;
