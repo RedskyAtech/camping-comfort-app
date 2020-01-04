@@ -76,10 +76,10 @@
                     // Define the URL for camping users or for guests
                     let url;
                     if(self.keyExistsInStore('userId')) {
-                        url = "https://www.campingcomfort.app/api/"+campingId+"/threads";
+                        url = "https://test.campingcomfort.app/api/"+campingId+"/threads";
                     }
                     else {
-                        url = "https://www.campingcomfort.app/api/"+campingId+"/threads/"+platform.device.uuid
+                        url = "https://test.campingcomfort.app/api/"+campingId+"/threads/"+platform.device.uuid
                     }
 
                     http.getJSON(url).then(result => {

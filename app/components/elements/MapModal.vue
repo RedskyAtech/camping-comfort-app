@@ -52,7 +52,7 @@
                     }
 
                     // Get the live data
-                    http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
+                    http.getJSON("https://test.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign the data
                         if(result.appContent.map){

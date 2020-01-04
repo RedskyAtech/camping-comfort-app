@@ -150,10 +150,10 @@
                         // Define the URL for camping users or for guests
                         let url;
                         if(self.keyExistsInStore('userId')) {
-                            url = "https://www.campingcomfort.app/api/" + campingId + "/threads/" + self.computedId + "/messages";
+                            url = "https://test.campingcomfort.app/api/" + campingId + "/threads/" + self.computedId + "/messages";
                         }
                         else {
-                            url = "https://www.campingcomfort.app/api/" + campingId + "/threads/" + self.computedId + "/" + uuid + "/messages"
+                            url = "https://test.campingcomfort.app/api/" + campingId + "/threads/" + self.computedId + "/" + uuid + "/messages"
                         }
 
                         http.getJSON(url).then(result => {
@@ -303,7 +303,7 @@
                         let loadingId = Date.now();
                         EventBus.$emit('startLoading', loadingId);
 
-                        let url = "https://www.campingcomfort.app/api/" + campingId + "/threads/messages"
+                        let url = "https://test.campingcomfort.app/api/" + campingId + "/threads/messages"
                         request({
                             url: url,
                             method: "POST",

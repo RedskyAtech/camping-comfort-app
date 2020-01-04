@@ -161,7 +161,7 @@
                     // Get the live data
                     let loadingId = Date.now();
                     EventBus.$emit('startLoading', loadingId);
-                    http.getJSON("https://www.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
+                    http.getJSON("https://test.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
 
                         // Assign and store the hero image
                         if(result.appContent){
@@ -411,7 +411,7 @@
 
                         // Create the request
                         request({
-                            url: "https://www.campingcomfort.app/api/" + campingId + "/log/navigate",
+                            url: "https://test.campingcomfort.app/api/" + campingId + "/log/navigate",
                             method: "POST",
                             headers: {"Content-Type": "application/json"},
                             content: content
@@ -431,7 +431,7 @@
 
                         // Create the request
                         request({
-                            url: "https://www.campingcomfort.app/api/" + campingId + "/log/like",
+                            url: "https://test.campingcomfort.app/api/" + campingId + "/log/like",
                             method: "POST",
                             headers: {"Content-Type": "application/json"},
                             content: content
