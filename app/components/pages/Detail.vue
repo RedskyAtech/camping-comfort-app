@@ -20,7 +20,7 @@
                     </GridLayout>
                     <GridLayout rows="auto" columns="auto,auto" class="timeframe" v-if="item.date !== undefined">
                         <Label col="0" class="clock far" verticalAlignment="center">{{ 'fa-calendar-alt' | fonticon }}</Label>
-                        <Label col="1" :text="humanizeDate(item.date)" verticalAlignment="center"></Label>
+                        <Label col="1" :text="humanizeDate(item.date, false)" verticalAlignment="center"></Label>
                     </GridLayout>
                     <StackLayout class="content">
                         <FlexboxLayout flexWrap="wrap" v-if="item.type === 'camping'" class="tags">
@@ -205,7 +205,8 @@
                         // Get the live data
                         let loadingId = Date.now();
                         EventBus.$emit('startLoading', loadingId);
-                        getJSON(self.$apiBaseUrl + "/" + campingId + "/news-items/" + lang + "/" + self.id + "?v=" + self.$apiVersion).then((r) => {
+                        let url = self.$apiBaseUrl + "/" + campingId + "/news-items/" + lang + "/" + self.id + "?v=" + self.$apiVersion;
+                        getJSON(url).then((r) => {
                             if(r.newsItem) {
                                 self.item = r.newsItem;
                                 self.storeObject('newsItem_'+self.id, self.item);
