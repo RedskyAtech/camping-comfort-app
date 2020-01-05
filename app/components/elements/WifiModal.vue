@@ -5,7 +5,7 @@
                 <ScrollView row="0" col="0">
                     <StackLayout class="content" verticalAlignment="top">
                         <Label class="title" :text="$t('wifi.title')"></Label>
-                        <Label class="text" :text="item.wifi_text" textWrap="true"></Label>
+                        <StackLayout ref="richTextContainer" class="text"></StackLayout>
                         <StackLayout class="btn-container" v-if="item.wifi_code">
                             <StackLayout class="btn copy-btn" @tap="copyToClipboard">
                                 <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-clipboard' | fonticon }}</Label>
@@ -29,13 +29,15 @@
     import HeaderMixin from '../mixins/HeaderMixin'
     import LocalStorage from '../mixins/LocalStorage'
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
+    import RichText from '../mixins/RichText'
 
     export default {
         mixins: [
             Responsive,
             Connection,
             LocalStorage,
-            HeaderMixin
+            HeaderMixin,
+            RichText
         ],
         components: {
             Header: Header
@@ -60,15 +62,21 @@
                     // Show the cached version first to prevent flickering
                     if(self.keyExistsInStore('settings')) {
                         self.item = self.getObjectFromStore('settings');
+
+                        // Add the text to the page
+                        self.addRichText('wifi_text_array');
                     }
 
                     // Get the live data
-                    http.getJSON("https://test.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
+                    http.getJSON(self.$apiBaseUrl + "/" + campingId + "/content/" + lang + "?v=" + self.$apiVersion).then(result => {
 
                         // Assign the data
                         if(result.appContent){
                             self.item = result.appContent;
                             self.storeObject('settings', self.item);
+
+                            // Add the text to the page
+                            self.addRichText('wifi_text_array');
                         }
 
                         // No data found, remove from storage
@@ -86,6 +94,9 @@
                     // Get the settings from storage
                     if(self.keyExistsInStore('settings')){
                         self.item = self.getObjectFromStore('settings');
+
+                        // Add the text to the page
+                        self.addRichText('wifi_text_array');
                     }
 
                     // Offline with no storage data
@@ -131,6 +142,7 @@
         padding-bottom: 10;
     }
     .text {
+        opacity: 0.5;
         line-height: 5;
     }
     .btn-container {

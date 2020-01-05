@@ -160,11 +160,12 @@
 
                     // Get the data
                     let data = JSON.stringify({
-                        likes: likeIds
+                        likes: likeIds,
+                        v: self.$apiVersion
                     });
                     let loadingId = Date.now();
                     EventBus.$emit('startLoading', loadingId);
-                    let url = "https://test.campingcomfort.app/api/"+campingId+"/camping-activities/1111-11-11/"+lang;
+                    let url = self.$apiBaseUrl + "/" + campingId + "/camping-activities/1111-11-11/" + lang;
                     request({
                         url: url,
                         method: "POST",

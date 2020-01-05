@@ -123,7 +123,7 @@
                     // Get the live data
                     let loadingId = Date.now();
                     EventBus.$emit('startLoading', loadingId);
-                    getJSON("https://test.campingcomfort.app/api/" + campingId + "/camping-facilities/" + lang).then((r) => {
+                    getJSON(self.$apiBaseUrl + "/" + campingId + "/camping-facilities/" + lang + "?v=" + self.$apiVersion).then((r) => {
                         if(r.campingFacilities){
                             self.listItems = r.campingFacilities;
                             self.storeObject('campingFacilities', self.listItems);

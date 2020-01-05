@@ -180,11 +180,12 @@
                     presentInRootViewController: true // iOS-only; If you're sure you're not presenting the (non embedded) scanner in a modal, or are experiencing issues with fi. the navigationbar, set this to 'true' and see if it works better for your app (default false).
                 }).then((result) => {
                         request({
-                            url: "https://test.campingcomfort.app/api/login",
+                            url: self.$apiBaseUrl + "/login",
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             content: JSON.stringify({
-                                key: result.text
+                                key: result.text,
+                                v: self.$apiVersion
                             })
                         }).then((response) => {
                             self.scanResult = response.content.toJSON();

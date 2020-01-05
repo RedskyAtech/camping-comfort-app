@@ -36,7 +36,7 @@
                         <Label class="title" :text="item.title" textWrap="true"></Label>
                         <GridLayout columns="*" :rows="textHeight">
                             <Stacklayout col="0" row="0">
-                                <StackLayout ref="textContent" class="text"></StackLayout>
+                                <StackLayout ref="richTextContainer" class="text"></StackLayout>
                                 <StackLayout v-if="item.reviews && item.reviews.length > 0">
                                     <Label class="text subtitle" textWrap="true" :text="$t('detail.whatOtherPeopleSay')+':'"></Label>
                                     <StackLayout class="review-container" :class="[{ 'last': index === (item.reviews.length-1) }]" v-for="(review, index) in item.reviews" v-bind:data="review" v-bind:key="review.id">
@@ -124,11 +124,7 @@
     import * as utils from "tns-core-modules/utils/utils"
     import Header from '../elements/Header'
     import HeaderMixin from '../mixins/HeaderMixin'
-    import { Label } from 'tns-core-modules/ui/label'
-    import { FormattedString } from 'tns-core-modules/text/formatted-string'
-    import { Span } from 'tns-core-modules/text/span'
-    import { TextField } from "tns-core-modules/ui/text-field";
-    import { StackLayout } from "tns-core-modules/ui/layouts/stack-layout"
+    import RichText from '../mixins/RichText'
 
     export default {
         props: {
@@ -175,7 +171,8 @@
             Connection,
             Likes,
             Dates,
-            HeaderMixin
+            HeaderMixin,
+            RichText
         ],
         components: {
             Fab: Fab,
@@ -188,180 +185,6 @@
             this.loadData();
         },
         methods: {
-
-            addText: function() {
-                let self = this;
-                let wrapper = this.$refs.textContent.nativeView;
-
-                // Empty the wrapper first
-                wrapper.removeChildren();
-
-                // Check if the model has a text_array key
-                if(self.item.text_array !== undefined) {
-                    this.iterateTextComponents(self.item.text_array._children, wrapper, 0);
-                }
-            },
-
-            iterateTextComponents: function(obj, wrapper) {
-                Object.keys(obj).forEach(key=>{
-
-                    // <p>
-                    if(obj[key]['_type'] === 'p') {
-
-                        // Iterate the children
-                        if(obj[key]['_children']) {
-
-                            // Add a StackLayout with some bottom padding
-                            let stackLayout = new StackLayout();
-                            stackLayout.style = 'padding-bottom: 5';
-                            wrapper.addChild(stackLayout);
-
-                            // Iterate the children
-                            this.iterateTextComponents(obj[key]['_children'], stackLayout);
-                        }
-                    }
-
-                    // <ul> / <ol>
-                    if(obj[key]['_type'] === 'ul' || obj[key]['_type'] === 'ol') {
-                        this.iterateTextComponents(obj[key]['_children'], wrapper);
-                    }
-
-                    // <li>
-                    if(obj[key]['_type'] === 'li') {
-
-                        // Iterate the children
-                        if(obj[key]['_children']) {
-
-                            // Add a StackLayout with some bottom padding
-                            let stackLayout = new StackLayout();
-                            stackLayout.style = 'padding-bottom: 5';
-                            wrapper.addChild(stackLayout);
-
-                            // Iterate the children
-                            this.iterateTextComponents(obj[key]['_children'], stackLayout);
-                        }
-                    }
-
-                    // <span>
-                    if(obj[key]['_type'] === 'span') {
-
-                        // Add a Label
-                        let label = new Label();
-                        if(obj[key]['_attributes']['style']) {
-                            label.style = obj[key]['_attributes']['style'];
-                        }
-                        wrapper.addChild(label);
-
-                        // Iterate the children
-                        if(obj[key]['_children']) {
-                            this.iterateTextComponents(obj[key]['_children'], label);
-                        }
-                    }
-
-                    // An <em> tag has a wrapper to which some styling is applied
-                    if(obj[key]['_type'] === 'em') {
-
-                        // Add a label if the wrapper isn't a label
-                        if(wrapper.typeName !== 'Label'){
-                            let label = new Label();
-                            label.textWrap = true;
-                            label.style = 'font-style: italic';
-                            wrapper.addChild(label);
-
-                            // Iterate the children
-                            if(obj[key]['_children']) {
-                                this.iterateTextComponents(obj[key]['_children'], label);
-                            }
-                        }
-                        else {
-                            wrapper.style = 'font-style: italic';
-
-                            // Iterate the children
-                            if(obj[key]['_children']) {
-                                this.iterateTextComponents(obj[key]['_children'], wrapper);
-                            }
-                        }
-                    }
-
-                    // <strong>
-                    if(obj[key]['_type'] === 'strong') {
-
-                        // Add a label if the wrapper isn't a label
-                        if(wrapper.typeName !== 'Label'){
-                            let label = new Label();
-                            label.textWrap = true;
-                            label.style = 'font-weight: bold';
-                            wrapper.addChild(label);
-
-                            // Iterate the children
-                            if(obj[key]['_children']) {
-                                this.iterateTextComponents(obj[key]['_children'], label);
-                            }
-                        }
-                        else {
-                            wrapper.style = 'font-weight: bold';
-
-                            // Iterate the children
-                            if(obj[key]['_children']) {
-                                this.iterateTextComponents(obj[key]['_children'], wrapper);
-                            }
-                        }
-                    }
-
-                    // An <em> tag has a wrapper to which some styling is applied
-                    if(obj[key]['_type'] === 'a') {
-
-                        // Create a label
-                        let label = new Label();
-                        label.textWrap = true;
-
-                        // Create a formatted string for the label
-                        let formattedString = new FormattedString();
-
-                        // Add a span for the formatted string
-                        let span = new Span();
-                        span.color = '#0070da';
-                        span.style = 'text-decoration: underline';
-                        Object.keys(obj[key]['_children']).forEach(key2=>{
-                            if(obj[key]['_children'][key2]['_type'] === '_text') {
-                                span.text = obj[key]['_children'][key2]['_content'];
-                            }
-                        });
-
-                        // Add the span to the formatted string
-                        formattedString.spans.push(span);
-
-                        // Add the formatted string to the label
-                        label.formattedText = formattedString;
-
-                        // Add an onTap event
-                        label.on("tap", function() {
-                            let url = obj[key]['_attributes']['href'];
-                            if(url.substr(0,4) !== 'http'){
-                                url = 'https://'+url;
-                            }
-                            utils.openUrl(url);
-                        }, this);
-
-                        wrapper.addChild(label);
-                    }
-
-                    // Create a wrapping label and add text
-                    if(obj[key]['_type'] === '_text') {
-
-                        // Add a label if the wrapper isn't a label or span
-                        if(wrapper.typeName !== 'Label' && wrapper.typeName !== 'Span'){
-                            let label = new Label();
-                            label.textWrap = true;
-                            label.text = obj[key]['_content'] === '\n' ? ' ' : obj[key]['_content'];
-                            wrapper.addChild(label);
-                        }
-                        else {
-                            wrapper.text = obj[key]['_content'] === '\n' ? ' ' : obj[key]['_content'];
-                        }
-                    }
-                });
-            },
 
             // Get the data
             loadData: function(){
@@ -376,19 +199,19 @@
                             self.item = self.getObjectFromStore('newsItem_'+self.id);
 
                             // Add the text to the page
-                            self.addText();
+                            self.addRichText('text_array');
                         }
 
                         // Get the live data
                         let loadingId = Date.now();
                         EventBus.$emit('startLoading', loadingId);
-                        getJSON("https://test.campingcomfort.app/api/"+campingId+"/news-items/"+lang+"/"+self.id).then((r) => {
+                        getJSON(self.$apiBaseUrl + "/" + campingId + "/news-items/" + lang + "/" + self.id + "?v=" + self.$apiVersion).then((r) => {
                             if(r.newsItem) {
                                 self.item = r.newsItem;
                                 self.storeObject('newsItem_'+self.id, self.item);
 
                                 // Add the text to the page
-                                self.addText();
+                                self.addRichText('text_array');
                             }
                             else {
                                 self.item = {};
@@ -416,7 +239,7 @@
                             self.item = self.getObjectFromStore('newsItem_'+self.id);
 
                             // Add the text to the page
-                            self.addText();
+                            self.addRichText('text_array');
 
                             // Show the header
                             self.showHeader = true;
@@ -445,19 +268,21 @@
                             self.item = self.getObjectFromStore('campingFacility_'+self.id);
 
                             // Add the text to the page
-                            self.addText();
+                            self.addRichText('text_array');
                         }
 
                         // Get the live data
                         let loadingId = Date.now();
                         EventBus.$emit('startLoading', loadingId);
-                        getJSON("https://test.campingcomfort.app/api/"+campingId+"/camping-facilities/"+lang+"/"+self.id).then((r) => {
+                        let url = self.$apiBaseUrl + "/" + campingId + "/camping-facilities/" + lang + "/" + self.id + "?v=" + self.$apiVersion;
+                        console.log(url);
+                        getJSON(url).then((r) => {
                             if(r.campingFacility) {
                                 self.item = r.campingFacility;
                                 self.storeObject('campingFacility_'+self.id, self.item);
 
                                 // Add the text to the page
-                                self.addText();
+                                self.addRichText('text_array');
                             }
                             else {
                                 self.item = {};
@@ -485,7 +310,7 @@
                             self.item = self.getObjectFromStore('campingFacility_'+self.id);
 
                             // Add the text to the page
-                            self.addText();
+                            self.addRichText('text_array');
 
                             // Show the header
                             self.showHeader = true;
@@ -515,7 +340,7 @@
                             self.isLikable = true;
 
                             // Add the text to the page
-                            self.addText();
+                            self.addRichText('text_array');
                         }
 
                         // Set liked from storage
@@ -524,7 +349,7 @@
                         // Get the live data
                         let loadingId = Date.now();
                         EventBus.$emit('startLoading', loadingId);
-                        getJSON("https://test.campingcomfort.app/api/" + campingId + "/camping-activities/" + lang + "/" + self.id).then((r) => {
+                        getJSON(self.$apiBaseUrl + "/" + campingId + "/camping-activities/" + lang + "/" + self.id + "?v=" + self.$apiVersion).then((r) => {
                             if(r.campingActivity) {
                                 self.item = r.campingActivity;
                                 self.isLikable = true;
@@ -532,7 +357,7 @@
                                 self.storeBoolean('isLikable_'+self.id, true);
 
                                 // Add the text to the page
-                                self.addText();
+                                self.addRichText('text_array');
                             }
                             else {
                                 self.item = {};
@@ -566,7 +391,7 @@
                             self.liked = self.isLiked(self.id);
 
                             // Add the text to the page
-                            self.addText();
+                            self.addRichText('text_array');
 
                             // Show the header
                             self.showHeader = true;
@@ -595,19 +420,19 @@
                             self.item = self.getObjectFromStore('nearbyActivity_'+self.id);
 
                             // Add the text to the page
-                            self.addText();
+                            self.addRichText('text_array');
                         }
 
                         // Get the live data
                         let loadingId = Date.now();
                         EventBus.$emit('startLoading', loadingId);
-                        getJSON("https://test.campingcomfort.app/api/" + campingId + "/nearby-activities/" + lang + "/" + self.id).then((r) => {
+                        getJSON(self.$apiBaseUrl + "/" + campingId + "/nearby-activities/" + lang + "/" + self.id + "?v=" + self.$apiVersion).then((r) => {
                             if(r.nearbyActivity) {
                                 self.item = r.nearbyActivity;
                                 self.storeObject('nearbyActivity_'+self.id, self.item);
 
                                 // Add the text to the page
-                                self.addText();
+                                self.addRichText('text_array');
                             }
                             else {
                                 self.item = {};
@@ -635,7 +460,7 @@
                             self.item = self.getObjectFromStore('nearbyActivity_'+self.id);
 
                             // Add the text to the page
-                            self.addText();
+                            self.addRichText('text_array');
 
                             // Show the header
                             self.showHeader = true;

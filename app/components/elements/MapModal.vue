@@ -52,7 +52,7 @@
                     }
 
                     // Get the live data
-                    http.getJSON("https://test.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
+                    http.getJSON(self.$apiBaseUrl + "/" + campingId + "/content/" + lang + "?v=" + self.$apiVersion).then(result => {
 
                         // Assign the data
                         if(result.appContent.map){

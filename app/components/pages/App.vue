@@ -161,7 +161,7 @@
                     // Get the live data
                     let loadingId = Date.now();
                     EventBus.$emit('startLoading', loadingId);
-                    http.getJSON("https://test.campingcomfort.app/api/"+campingId+"/content/"+lang).then(result => {
+                    http.getJSON(self.$apiBaseUrl + "/" + campingId + "/content/" + lang + "?v=" + self.$apiVersion).then(result => {
 
                         // Assign and store the hero image
                         if(result.appContent){
@@ -388,6 +388,8 @@
             },
             log: function(type, data) {
 
+                let self = this;
+
                 // Only log with an active internet connection, and not logged in as camping
                 if(this.hasInternetConnection() && !this.keyExistsInStore('userId')) {
 
@@ -406,12 +408,13 @@
                             location: this.keyExistsInStore('guestLocation') ? this.getStringFromStore('guestLocation') : '',
                             page: data.page,
                             type: data.props.type !== undefined ? data.props.type : '',
-                            id: data.props.id !== undefined ? data.props.id : ''
+                            id: data.props.id !== undefined ? data.props.id : '',
+                            v: self.$apiVersion
                         });
 
                         // Create the request
                         request({
-                            url: "https://test.campingcomfort.app/api/" + campingId + "/log/navigate",
+                            url: self.$apiBaseUrl + "/" + campingId + "/log/navigate",
                             method: "POST",
                             headers: {"Content-Type": "application/json"},
                             content: content
@@ -426,12 +429,13 @@
                             uuid: platform.device.uuid,
                             name: this.keyExistsInStore('guestName') ? this.getStringFromStore('guestName') : '',
                             location: this.keyExistsInStore('guestLocation') ? this.getStringFromStore('guestLocation') : '',
-                            id: data.id
+                            id: data.id,
+                            v: self.$apiVersion
                         });
 
                         // Create the request
                         request({
-                            url: "https://test.campingcomfort.app/api/" + campingId + "/log/like",
+                            url: self.$apiBaseUrl + "/" + campingId + "/log/like",
                             method: "POST",
                             headers: {"Content-Type": "application/json"},
                             content: content

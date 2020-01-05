@@ -68,7 +68,7 @@
                     // Get the live data
                     let loadingId = Date.now();
                     EventBus.$emit('startLoading', loadingId);
-                    let url = "https://test.campingcomfort.app/api/" + campingId + "/nearby-activities/" + lang + "/" + self.type;
+                    let url = self.$apiBaseUrl + "/" + campingId + "/nearby-activities/" + lang + "/" + self.type + "?v=" + self.$apiVersion;
                     getJSON(url).then((r) => {
                         if(r.nearbyActivities){
                             self.listItems = r.nearbyActivities;

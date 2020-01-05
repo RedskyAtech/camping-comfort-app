@@ -59,7 +59,13 @@ Vue.registerElement('BarcodeScanner', () => require('nativescript-barcodescanner
 Vue.config.silent = (TNS_ENV === 'production')
 
 // Set the environment mode
-Vue.prototype.$mode = TNS_ENV === 'production' ? 'production' : 'development';
+Vue.prototype.$mode = TNS_ENV === 'production' ? 'production' : 'development'
+
+// Set the API version to use
+Vue.prototype.$apiVersion = 2
+
+// Set the API base URL
+Vue.prototype.$apiBaseUrl = TNS_ENV === 'production' ? 'https://www.campingcomfort.app/api' : 'https://test.campingcomfort.app/api'
 
 // Skip the splash page if a camping ID has already been stored
 if(appSettings.getNumber('campingId') !== undefined){
