@@ -24,7 +24,7 @@
                                     </StackLayout>
                                 </StackLayout>
                                 <StackLayout row="0" col="1">
-                                    <StackLayout class="quick-links-container">
+                                    <StackLayout class="quick-links-container" v-if="$mode === 'development'">
                                         <GridLayout columns="auto,auto">
                                             <Label class="quick-link fas" col="1" @tap="toSettings">{{ 'fa-cog' | fonticon }}</Label>
                                         </GridLayout>

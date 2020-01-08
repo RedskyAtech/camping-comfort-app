@@ -68,8 +68,6 @@
         mounted: function() {
             let self = this;
 
-            console.log(self.$mode);
-
             if(!this.hasInternetConnection()) {
                 setTimeout(function() {
                     TNSFancyAlert.showError(
