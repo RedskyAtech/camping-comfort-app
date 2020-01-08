@@ -3,7 +3,7 @@
         <v-template if="$index === 0">
             <StackLayout>
                 <StackLayout class="btn-container" horizontalAlignment="left">
-                    <StackLayout class="btn wifi-btn" @tap="toWifi" v-if="settings.enable_wifi && settings.wifi_code">
+                    <StackLayout class="btn wifi-btn" @tap="toWifi" v-if="settings.enable_wifi">
                         <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
                     </StackLayout>
                     <StackLayout class="btn shopping-btn" @tap="toShop" v-if="settings.enable_shop">

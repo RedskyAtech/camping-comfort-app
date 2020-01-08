@@ -11,7 +11,7 @@
                             <GridLayout row="0" rows="auto,*" columns="*,auto">
                                 <StackLayout row="0" col="0">
                                     <StackLayout class="btn-container">
-                                        <StackLayout class="btn wifi-btn" @tap="toWifi" v-if="settings.enable_wifi && settings.wifi_code">
+                                        <StackLayout class="btn wifi-btn" @tap="toWifi" v-if="settings.enable_wifi">
                                             <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
                                         </StackLayout>
                                         <StackLayout class="btn shopping-btn" @tap="toShop" v-if="settings.enable_shop">
