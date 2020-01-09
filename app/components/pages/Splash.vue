@@ -23,7 +23,7 @@
                                     <TextField v-model="guestName" :hint="$t('splash.name')" class="input" ref="inputName" editable="true" returnKeyType="done" />
                                     <TextField v-model="guestLocation" :hint="$t('splash.location')" class="input" ref="inputLocation"editable="true" returnKeyType="done" />
                                 </StackLayout>
-                                <StackLayout class="button" verticalAlignment="center" @tap="start(guestName, guestLocation)">
+                                <StackLayout class="button" verticalAlignment="center" @tap="start()">
                                     <Label text="Start"></Label>
                                 </StackLayout>
                             </StackLayout>
@@ -59,7 +59,7 @@
         ],
         data: function() {
             return {
-                scanResult: this.$mode === 'production' ? {} : { campingId: 32805, campingName: 'Camping Comfort' },
+                scanResult: this.$mode === 'production' ? {} : { campingId: 1422, campingName: 'Camping Comfort' },
                 scanFinished: false,
                 guestName: this.$mode === 'production' ? '' : 'Hans',
                 guestLocation: this.$mode === 'production' ? '' : '13',
