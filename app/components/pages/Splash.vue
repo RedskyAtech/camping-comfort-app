@@ -1,38 +1,22 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <GridLayout rows="*,auto" height="100%">
+        <GridLayout rows="*" height="100%">
             <GridLayout row="0" rows="*,auto" columns="*">
                 <StackLayout row="0" col="0" verticalAlignment="center" class="fields-container">
                     <GridLayout rows="auto,auto,auto,auto">
                         <StackLayout row="0" class="intro">
-                            <StackLayout v-if="!scanFinished">
-                                <Image class="icon" src="~/assets/images/qr.png"></Image>
+                            <StackLayout>
+                                <Image class="icon" src="~/assets/images/logo_white.png"></Image>
                                 <Label class="intro-text" textWrap="true" :text="$t('splash.introText')"></Label>
-                                <StackLayout class="button scan-button" verticalAlignment="center" @tap="go">
+                                <StackLayout class="button scan-button" verticalAlignment="center" @tap="scan">
                                     <Label :text="$t('splash.continue')"></Label>
-                                </StackLayout>
-                            </StackLayout>
-                            <StackLayout :class="[{'collapsed': !scanFinished}]">
-                                <StackLayout>
-                                    <Label class="intro-text" textWrap="true" :text="$t('splash.welcomeTo')"></Label>
-                                </StackLayout>
-                                <StackLayout>
-                                    <Label class="intro-title" textWrap="true" :text="scanResult.campingName"></Label>
-                                </StackLayout>
-                                <StackLayout class="input-fields" :class="[{'collapsed': scanResult.userId !== undefined}]">
-                                    <TextField v-model="guestName" :hint="$t('splash.name')" class="input" ref="inputName" editable="true" returnKeyType="done" />
-                                    <TextField v-model="guestLocation" :hint="$t('splash.location')" class="input" ref="inputLocation"editable="true" returnKeyType="done" />
-                                </StackLayout>
-                                <StackLayout class="button" verticalAlignment="center" @tap="start()">
-                                    <Label text="Start"></Label>
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
                     </GridLayout>
                 </StackLayout>
-                <Label row="1" col="0" horizontalAlignment="center" verticalAlignment="center" class="copyright" text="© 2019 Camping Comfort"></Label>
+                <Label row="1" col="0" horizontalAlignment="center" verticalAlignment="center" class="copyright" text="© 2020 Camping Comfort"></Label>
             </GridLayout>
-            <StackLayout row="1" ref="keyboardHeight"></StackLayout>
         </GridLayout>
     </Page>
 </template>
@@ -50,6 +34,7 @@
     import * as appSettings from "tns-core-modules/application-settings";
     import * as application from "tns-core-modules/application";
     import { isAndroid, isIOS, device, screen } from "tns-core-modules/platform";
+    import ListPicker from 'tns-core-modules/ui/list-picker'
 
     export default {
         mixins: [
@@ -57,13 +42,8 @@
             LocalStorage,
             Connection
         ],
-        data: function() {
-            return {
-                scanResult: this.$mode === 'production' ? {} : { campingId: 1422, campingName: 'Camping Comfort' },
-                scanFinished: false,
-                guestName: this.$mode === 'production' ? '' : 'Hans',
-                guestLocation: this.$mode === 'production' ? '' : '13',
-            }
+        components: {
+            ListPicker
         },
         mounted: function() {
             let self = this;
@@ -79,26 +59,8 @@
                     });
                 }, 500);
             }
-            else {
-                this.listenToKeyboardHeight();
-            }
         },
         methods: {
-
-            // Listen to a changing keyboard height, and change the spacer height to push the text input up
-            listenToKeyboardHeight: function() {
-                let self = this;
-                if(isIOS) {
-                    application.ios.addNotificationObserver(UIKeyboardWillChangeFrameNotification, function (notification) {
-                        let hght = notification.userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey).CGRectValue.size.height;
-                        let keyboardHeightEl = self.$refs.keyboardHeight;
-                        if(keyboardHeightEl !== undefined) {
-                            let keyboardHeightNv = keyboardHeightEl.nativeView;
-                            keyboardHeightNv.height = hght;
-                        }
-                    });
-                }
-            },
             resetSettings: function() {
                 let self = this;
 
@@ -108,7 +70,7 @@
                     language = self.getStringFromStore('language');
                 }
 
-                // Keep the news topic (because it will be unsubscribed before subscribing)
+                // Keep the news topic
                 let newsTopic;
                 if(self.keyExistsInStore('news_topic')) {
                     newsTopic = self.getStringFromStore('news_topic');
@@ -149,14 +111,6 @@
                     self.storeString('guest_messaging_topic', guestMessagingTopic);
                 }
             },
-            go: function() {
-                if(this.$mode === 'production') {
-                    this.scan();
-                }
-                else {
-                    this.start();
-                }
-            },
             scan: function() {
                 let self = this;
                 let barcodescanner = new BarcodeScanner();
@@ -177,6 +131,7 @@
                     openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
                     presentInRootViewController: true // iOS-only; If you're sure you're not presenting the (non embedded) scanner in a modal, or are experiencing issues with fi. the navigationbar, set this to 'true' and see if it works better for your app (default false).
                 }).then((result) => {
+
                         request({
                             url: self.$apiBaseUrl + "/login",
                             method: "POST",
@@ -186,8 +141,69 @@
                                 v: self.$apiVersion
                             })
                         }).then((response) => {
-                            self.scanResult = response.content.toJSON();
-                            self.scanFinished = true;
+                            let result = response.content.toJSON();
+
+                            // Reset the settings first
+                            self.resetSettings();
+
+                            // Store all user groups
+                            if(result.userGroups) {
+                                self.storeUserGroups(result.userGroups);
+                            }
+
+                            // Logged in as administrator
+                            if(result.userId) {
+
+                                // Ask the user for the group to login to
+                                if(result.userGroups) {
+
+                                    // Create a local object for reference
+                                    // This one has the name as the key
+                                    let options = {};
+                                    result.userGroups.forEach(function (item, key) {
+                                        options[item.name] = item.id;
+                                    });
+                                    let userGroups = options;
+
+                                    // Create an action list
+                                    options = [];
+                                    result.userGroups.forEach(function (item, key) {
+                                        options.push(item.name);
+                                    });
+
+                                    // Show the action list
+                                    action(self.$t('splash.userGroupTitle'), self.$t('splash.cancel'), options)
+                                    .then(selection => {
+
+                                        // Store the group selection, camping and user data
+                                        self.storeSettings(result.campingId, result.campingName, result.userId, {id: userGroups[selection], name: selection});
+
+                                        // Redirect to the App page
+                                        self.redirect();
+                                    });
+                                }
+
+                                // The camping doesn't have any user groups
+                                else {
+
+                                    // Store the camping and user data
+                                    self.storeSettings(result.campingId, result.campingName, result.userId);
+
+                                    // Redirect to the App page
+                                    self.redirect();
+                                }
+                            }
+
+                            // Logged in as camping
+                            else {
+
+                                // Store the camping
+                                self.storeSettings(result.campingId, result.campingName);
+
+                                // Redirect to the App page
+                                self.redirect();
+                            }
+
                         }, (e) => {
                             console.log("Error: ");
                             console.log(e);
@@ -198,42 +214,21 @@
                     }
                 );
             },
-            start: function() {
+            storeUserGroups: function(userGroups) {
+                this.storeObject('userGroups', userGroups);
+            },
+            storeSettings: function(campingId, campingName, userId=null, userGroup=null) {
                 let self = this;
 
-                // Hide the keyboard
-                self.$refs.inputName.nativeView.dismissSoftInput();
-                self.$refs.inputLocation.nativeView.dismissSoftInput();
-                self.$refs.keyboardHeight.nativeView.height = 0;
-
-                // Validate the mandatory fields
-                if(self.scanResult.userId === undefined && (self.guestName === '' || self.guestLocation === '')) {
-                    TNSFancyAlert.showError(
-                        self.$t('splash.alert.title'),
-                        self.$t('splash.alert.message'),
-                        self.$t('splash.alert.buttonText')
-                    );
+                // Store the data
+                self.storeNumber('campingId', parseInt(campingId));
+                self.storeString('campingName', campingName);
+                if(userId) {
+                    self.storeNumber('userId', parseInt(userId));
                 }
-                else {
-
-                    // Reset the settings first
-                    self.resetSettings();
-
-                    // Store the name and location
-                    if(self.scanResult.userId === undefined) {
-                        self.storeString('guestName', self.guestName);
-                        self.storeString('guestLocation', self.guestLocation);
-                    }
-
-                    // Store the selected camping and optional camping user
-                    self.storeNumber('campingId', parseInt(self.scanResult.campingId));
-                    self.storeString('campingName', self.scanResult.campingName);
-                    if(self.scanResult.userId !== undefined) {
-                        self.storeNumber('userId', parseInt(self.scanResult.userId));
-                    }
-
-                    // Redirect to the App page
-                    self.redirect();
+                if(userGroup) {
+                    self.storeNumber('userGroupId', parseInt(userGroup.id));
+                    self.storeString('userGroupName', userGroup.name);
                 }
             },
             redirect() {
@@ -250,7 +245,7 @@
 
 <style scoped>
     Page {
-        background: #123c64;
+        background: #009fe3;
     }
     .intro {
         color: #fff;
@@ -264,9 +259,9 @@
         padding-bottom: 25;
     }
     .icon {
-        width: 90;
-        height: 90;
-        margin-bottom: 50;
+        width: 200;
+        height: 79;
+        margin-bottom: 75;
     }
     .input {
         border-width: 1;
@@ -282,15 +277,19 @@
         background: rgba(255,255,255,0.1);
     }
     .button {
-        color: #123c64;
+        color: #009fe3;
         border-color: #fff;
         background-color: #fff;
         border-width: 1;
         height: 40;
         border-radius: 20;
     }
+    .button Label {
+        color: #009fe3;
+    }
     .button.scan-button {
         margin-top: 25;
+        color: #009fe3;
     }
     Page.lg .button,
     Page.xl .button{

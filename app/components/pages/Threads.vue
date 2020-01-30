@@ -131,13 +131,63 @@
                     }
                 }
             },
-            toConversation: function(id) {
-                EventBus.$emit('openModal', {
-                    page: 'thread',
-                    props: {
-                        id: id
-                    }
-                });
+            toConversation: function(id=null) {
+                let self = this;
+
+                // Check if this is a guest and the camping has user groups
+                if(!self.keyExistsInStore('userId') && self.keyExistsInStore('userGroups')) {
+
+                    // Create a local object for reference
+                    // This one has the name as the key
+                    let storedUserGroups = self.getObjectFromStore('userGroups');
+                    let options = {};
+                    storedUserGroups.forEach(function (item, key) {
+                        options[item.name] = item.id;
+                    });
+                    let userGroups = options;
+
+                    // Create an action list
+                    options = [];
+                    storedUserGroups.forEach(function (item, key) {
+                        options.push(item.name);
+                    });
+
+                    // Show the action list
+                    action(self.$t('threads.userGroupTitle'), self.$t('splash.cancel'), options)
+                    .then(selection => {
+                        if(selection !== self.$t('splash.cancel')) {
+
+                            // Check if the guest name is set
+                            /*if(!self.keyExistsInStore('guestName')) {
+
+                                // Open the WhoAmI modal
+                                EventBus.$emit('openModal', {
+                                    page: 'whoAmI'
+                                });
+                            }
+                            else {*/
+
+                                // Open the thread modal
+                                EventBus.$emit('openModal', {
+                                    page: 'thread',
+                                    props: {
+                                        id: id,
+                                        userGroupId: userGroups[selection]
+                                    }
+                                });
+//                            }
+                        }
+                    });
+                }
+                else {
+                    console.log('no groups');
+                    EventBus.$emit('openModal', {
+                        page: 'thread',
+                        props: {
+                            id: id
+                        }
+                    });
+                }
             }
         }
     }

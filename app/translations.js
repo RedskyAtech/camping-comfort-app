@@ -120,11 +120,12 @@ export function translations() {
             },
             threads: {
                 title_camping: 'Contact with your guests',
-                title_guest: 'Contact with the reception',
+                title_guest: 'Conversations',
                 new: 'new',
                 emptyTitle: 'No conversations',
                 emptyText_camping: 'New conversations will appear automatically.',
                 emptyText_guest: 'Start a new conversation by pressing the button below',
+                userGroupTitle: 'Please select'
             },
             thread: {
                 typeAMessage: 'Type a message',
@@ -148,16 +149,10 @@ export function translations() {
                 mandatoryMessage: 'Please enter the following fields:'
             },
             splash: {
-                alert: {
-                    title: 'Error',
-                    message: 'Please fill in the fields',
-                    buttonText: 'OK'
-                },
                 introText: 'Please scan the QR-code that you received from your camping.',
-                welcomeTo: 'Welcome to',
-                name: 'Name',
-                location: 'Accommodation/Pitch',
-                'continue': 'Continue'
+                'continue': 'Continue',
+                'userGroupTitle': 'Please select your user group',
+                'cancel': 'Cancel'
             },
             shop: {
                 title: 'Order sandwiches',
@@ -280,11 +275,12 @@ export function translations() {
             },
             threads: {
                 title_camping: 'Contact met uw gasten',
-                title_guest: 'Contact met de receptie',
+                title_guest: 'Gesprekken',
                 new: 'nieuw',
                 emptyTitle: 'Geen gesprekken',
                 emptyText_camping: 'Nieuwe gesprekken zullen hier automatisch verschijnen.',
                 emptyText_guest: 'Start een nieuw gesprek door op de knop hieronder te drukken.',
+                userGroupTitle: 'Maak een keuze'
             },
             thread: {
                 typeAMessage: 'Type een bericht',
@@ -308,16 +304,10 @@ export function translations() {
                 mandatoryMessage: 'Vul a.u.b. de volgende velden in:'
             },
             splash: {
-                alert: {
-                    title: 'Fout',
-                    message: 'Vul a.u.b. de velden in',
-                    buttonText: 'OK'
-                },
                 introText: 'Scan de QR-code die je van je camping hebt ontvangen.',
-                welcomeTo: 'Welkom bij',
-                name: 'Naam',
-                location: 'Accommodatie/Plaats',
-                'continue': 'Doorgaan'
+                cancel: 'Annuleren',
+                'continue': 'Doorgaan',
+                userGroupTitle: 'Selecteer uw gebruikersgroep'
             },
             shop: {
                 title: 'Broodjes bestellen',
@@ -447,11 +437,12 @@ export function translations() {
             },
             threads: {
                 title_camping: 'Kontakt mit Ihren Gästen',
-                title_guest: 'Kontaktieren Sie die Rezeption',
+                title_guest: 'Gespräche',
                 new: 'neue',
                 emptyTitle: 'Keine Gespräche',
                 emptyText_camping: 'Neue Konversationen werden automatisch angezeigt.',
                 emptyText_guest: 'Starten Sie ein neues Gespräch, indem Sie auf die Schaltfläche unten klicken.',
+                userGroupTitle: 'Bitte auswählen'
             },
             thread: {
                 typeAMessage: 'Geben Sie eine Nachricht ein',
@@ -475,16 +466,10 @@ export function translations() {
                 mandatoryMessage: 'Bitte geben Sie die folgenden Felder ein'
             },
             splash: {
-                alert: {
-                    title: 'Error',
-                    message: 'Bitte füllen Sie die Felder aus',
-                    buttonText: 'OK'
-                },
                 introText: 'Bitte scannen Sie den QR-Code, den Sie von Ihrem Campingplatz erhalten haben.',
-                welcomeTo: 'Willkommen zu',
-                name: 'Name',
-                location: 'Unterkunft / Stellplatz',
-                'continue': 'Weiter'
+                'continue': 'Weiter',
+                'userGroupTitle': 'Bitte wählen Sie Ihre Benutzergruppe',
+                'cancel': 'Abbrechen'
             },
             shop: {
                 title: 'Brötchen bestellen',
@@ -614,11 +599,12 @@ export function translations() {
             },
             threads: {
                 title_camping: 'Contact avec vos invités',
-                title_guest: 'Contacter la réception',
+                title_guest: 'Conversations',
                 new: 'nouveau',
                 emptyTitle: 'Pas de conversation',
                 emptyText_camping: 'Les nouvelles conversations apparaîtront automatiquement.',
-                emptyText_guest: 'Commencez une nouvelle conversation en appuyant sur le bouton ci-dessous.'
+                emptyText_guest: 'Commencez une nouvelle conversation en appuyant sur le bouton ci-dessous.',
+                userGroupTitle: 'Veuillez sélectionner'
             },
             thread: {
                 typeAMessage: 'Tapez un message',
@@ -642,16 +628,10 @@ export function translations() {
                 mandatoryMessage: 'Veuillez remplir les champs suivants'
             },
             splash: {
-                alert: {
-                    title: 'Erreur',
-                    message: 'S\'il vous plaît remplir les champs',
-                    buttonText: 'OK'
-                },
                 introText: 'Veuillez scanner le code QR que vous avez reçu de votre camping.',
-                welcomeTo: 'Bienvenue à',
-                name: 'Nom',
-                location: 'Logement / Emplacement',
-                'continue': 'Continuer'
+                'continue': 'Continuer',
+                'userGroupTitle': 'Sélectionnez votre groupe d\'utilisateurs',
+                'cancel': 'Annuler'
             },
             shop: {
                 title: 'Commander des sandwichs',
@@ -781,11 +761,12 @@ export function translations() {
             },
             threads: {
                 title_camping: 'Contatta con i tuoi ospiti',
-                title_guest: 'Contatta la reception',
+                title_guest: 'Conversazioni',
                 new: 'nuovo',
                 emptyTitle: 'Nessuna conversazione',
                 emptyText_camping: 'Le nuove conversazioni appariranno automaticamente.',
-                emptyText_guest: 'Inizia una nuova conversazione premendo il pulsante in basso.'
+                emptyText_guest: 'Inizia una nuova conversazione premendo il pulsante in basso.',
+                userGroupTitle: 'Si prega di selezionare'
             },
             thread: {
                 typeAMessage: 'Scrivi un messaggio',
@@ -809,16 +790,10 @@ export function translations() {
                 mandatoryMessage: 'Si prega di inserire i seguenti campi'
             },
             splash: {
-                alert: {
-                    title: 'Errore',
-                    message: 'Si prega di compilare i campi',
-                    buttonText: 'OK'
-                },
                 introText: 'Effettua la scansione del codice QR che hai ricevuto dal tuo campeggio.',
-                welcomeTo: 'Benvenuto a',
-                name: 'Nome',
-                location: 'Alloggio/Piazzola',
-                'continue': 'Proseguire'
+                'continue': 'Proseguire',
+                'userGroupTitle': 'Seleziona il tuo gruppo di utenti',
+                'cancel': 'Annullare'
             },
             shop: {
                 title: 'Ordinare panini',

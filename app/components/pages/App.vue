@@ -55,6 +55,7 @@
     import MapModal from '../elements/MapModal'
     import WifiModal from '../elements/WifiModal'
     import RouteModal from '../elements/RouteModal'
+    import WhoAmIModal from '../elements/WhoAmIModal'
     import LocalStorage from '../mixins/LocalStorage'
     import Loader from '../elements/Loader'
     import Connection from '../mixins/Connection'
@@ -93,6 +94,7 @@
             MapModal: MapModal,
             WifiModal: WifiModal,
             RouteModal: RouteModal,
+            WhoAmIModal: RouteModal,
             Loader: Loader
         },
         beforeDestroy: function() {
@@ -527,6 +529,9 @@
                 }
                 if(page === 'shop'){
                     Component = Shop;
+                }
+                if(page === 'whoAmI'){
+                    Component = WhoAmIModal;
                 }
                 this.$showModal(Component, {
                     fullscreen: true,

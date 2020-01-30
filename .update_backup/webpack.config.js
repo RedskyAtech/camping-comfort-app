@@ -47,31 +47,14 @@ module.exports = env => {
         hiddenSourceMap, // --env.hiddenSourceMap
         unitTesting, // --env.unitTesting
         verbose, // --env.verbose
-        snapshotInDocker, // --env.snapshotInDocker
-        skipSnapshotTools, // --env.skipSnapshotTools
-        compileSnapshot // --env.compileSnapshot
     } = env;
 
-    const useLibs = compileSnapshot;
     const isAnySourceMapEnabled = !!sourceMap || !!hiddenSourceMap;
     const externals = nsWebpack.getConvertedExternals(env.externals);
 
     const mode = production ? "production" : "development"
 
     const appFullPath = resolve(projectRoot, appPath);
-    const hasRootLevelScopedModules = nsWebpack.hasRootLevelScopedModules({ projectDir: projectRoot });
-    let coreModulesPackageName = "tns-core-modules";
-    const alias = {
-        '~': appFullPath,
-        '@': appFullPath,
-        'vue': 'nativescript-vue'
-    };
-
-    if (hasRootLevelScopedModules) {
-        coreModulesPackageName = "@nativescript/core";
-        alias["tns-core-modules"] = coreModulesPackageName;
-    }
-
     const appResourcesFullPath = resolve(projectRoot, appResourcesPath);
 
     const entryModule = nsWebpack.getEntryModule(appFullPath, platform);
@@ -119,12 +102,16 @@ module.exports = env => {
             extensions: [".vue", ".ts", ".js", ".scss", ".css"],
             // Resolve {N} system modules from tns-core-modules
             modules: [
-                resolve(__dirname, `node_modules/${coreModulesPackageName}`),
+                resolve(__dirname, "node_modules/tns-core-modules"),
                 resolve(__dirname, "node_modules"),
-                `node_modules/${coreModulesPackageName}`,
+                "node_modules/tns-core-modules",
                 "node_modules",
             ],
-            alias,
+            alias: {
+                '~': appFullPath,
+                '@': appFullPath,
+                'vue': 'nativescript-vue'
+            },
             // resolve symlinks to symlinked modules
             symlinks: true,
         },
@@ -143,7 +130,6 @@ module.exports = env => {
         devtool: hiddenSourceMap ? "hidden-source-map" : (sourceMap ? "inline-source-map" : "none"),
         optimization: {
             runtimeChunk: "single",
-            noEmitOnErrors: true,
             splitChunks: {
                 cacheGroups: {
                     vendor: {
@@ -205,29 +191,7 @@ module.exports = env => {
                 ].filter(loader => Boolean(loader)),
             },
             {
-                test: /[\/|\\]app\.css$/,
-                use: [
-                    'nativescript-dev-webpack/style-hot-loader',
-                    {
-                        loader: "nativescript-dev-webpack/css2json-loader",
-                        options: { useForImports: true }
-                    },
-                ],
-            },
-            {
-                test: /[\/|\\]app\.scss$/,
-                use: [
-                    'nativescript-dev-webpack/style-hot-loader',
-                    {
-                        loader: "nativescript-dev-webpack/css2json-loader",
-                        options: { useForImports: true }
-                    },
-                    'sass-loader',
-                ],
-            },
-            {
                 test: /\.css$/,
-                exclude: /[\/|\\]app\.css$/,
                 use: [
                     'nativescript-dev-webpack/style-hot-loader',
                     'nativescript-dev-webpack/apply-css-loader.js',
@@ -236,12 +200,11 @@ module.exports = env => {
             },
             {
                 test: /\.scss$/,
-                exclude: /[\/|\\]app\.scss$/,
                 use: [
                     'nativescript-dev-webpack/style-hot-loader',
                     'nativescript-dev-webpack/apply-css-loader.js',
                     { loader: "css-loader", options: { url: false } },
-                    'sass-loader',
+                    "sass-loader",
                 ],
             },
             {
@@ -333,9 +296,6 @@ module.exports = env => {
             ],
             projectRoot,
             webpackConfig: config,
-            snapshotInDocker,
-            skipSnapshotTools,
-            useLibs
         }));
     }
 

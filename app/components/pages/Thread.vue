@@ -48,6 +48,9 @@
         props: {
             id: {
                 type: Number
+            },
+            userGroupId: {
+                type: Number
             }
         },
         data() {
@@ -65,11 +68,36 @@
         },
         computed: {
             threadTitle: function() {
+
+                let self = this;
+
+                // Logged in as camping
                 if(this.keyExistsInStore('userId') && this.thread.name && this.thread.location) {
                     return this.thread.name + ' ('+this.thread.location+')';
                 }
+
+                // Logged in as guest
                 else if(!this.keyExistsInStore('userId')){
-                    return this.getStringFromStore('campingName');
+
+                    // Conversation with a user group
+                    if(this.userGroupId) {
+
+                        // Get the name of the user group id
+                        let storedUserGroups = self.getObjectFromStore('userGroups');
+                        let userGroupName = '';
+                        storedUserGroups.forEach(function (item, key) {
+                            if(item.id === self.userGroupId) {
+                                userGroupName = item.name;
+                            }
+                        });
+                        return userGroupName;
+                    }
+
+                    // Conversation with the camping (no user group)
+                    else {
+                        return this.getStringFromStore('campingName');
+                    }
+
                 }
                 else {
                     return '';
