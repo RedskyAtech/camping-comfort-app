@@ -1,10 +1,11 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <Header :hasHero="item.image !== undefined && item.image !== ''" :title="item.title" :showHeader="showHeader" :showBackBtn="true">
+        <Header :hasHero="item.image !== undefined && item.image !== ''" :title="item.title" :showHeader="showHeader" :showBackBtn="true" :inModal="true">
             <GridLayout>
                 <StackLayout row="0">
                     <GridLayout rows="auto" v-if="item.image !== '' && item.image !== undefined">
-                        <Image :src="item.image" class="hero" ref="hero"></Image>
+                        <Image :src="item.image" class="hero" ref="hero" :height="heroHeight"></Image>
+                        <StackLayout row="0" class="hero-overlay"></StackLayout>
                     </GridLayout>
                     <GridLayout rows="auto" columns="auto,auto" class="timeframe" v-if="item.start_time !== undefined">
                         <Label col="0" class="clock far" verticalAlignment="center">{{ 'fa-clock' | fonticon }}</Label>
@@ -24,7 +25,7 @@
                     </GridLayout>
                     <StackLayout class="content">
                         <FlexboxLayout flexWrap="wrap" v-if="item.type === 'camping'" class="tags">
-                            <Label class="tag activity-camping" :text="$t('activities.onTheCampsite')"></Label>
+                            <Label class="tag activity-camping" :text="$t('activities.onTheCampsite_'+appType)"></Label>
                         </FlexboxLayout>
                         <FlexboxLayout flexWrap="wrap" v-if="item.type === 'nearby'" class="tags">
                             <Label class="tag activity-nearby" :text="$t('activities.nearby')"></Label>
@@ -98,7 +99,7 @@
                         <Label class="disclaimer" v-if="item.is_auto_translated === 1" textWrap="true" :text="$t('detail.isAutoTranslated')"></Label>
                     </StackLayout>
                 </StackLayout>
-                <AbsoluteLayout class="like-container" row="0" horizontalAlignment="right">
+                <AbsoluteLayout class="like-container" row="0" horizontalAlignment="right" :paddingTop="(heroHeight-30)">
                     <Fab bg="#fff" color="#f010be" border-color="#e5e5e5" horizontalAlignment="right" verticalAlignment="top" class="like" v-if="isLikable" v-on:tapped="toggleLike(id)">
                         <GridLayout rows="*" columns="*">
                             <Label row="0" col="0" class="like-icon far" verticalAlignment="center" v-if="!liked">{{ 'fa-heart' | fonticon }}</Label>
@@ -140,6 +141,10 @@
             }
         },
         computed: {
+            heroHeight: function() {
+                let h = this.screenWidth * 0.566;
+                return h;
+            },
             textHeight: function(){
                 if(this.collapsed){
                     return '83,auto';
@@ -148,20 +153,24 @@
                     return 'auto';
                 }
             },
-            fabRadius: function() {
-                if(this.$isAndroid) {
-                    return 30;
-                }
-                else {
-                    return 30;
-                }
-            },
             starSize: function() {
                 if(this.$isAndroid) {
                     return 40;
                 }
                 else {
                     return 25;
+                }
+            },
+
+            // Get the type from the storage
+            appType: function() {
+                let self = this;
+                if(self.keyExistsInStore('settings')) {
+                    let settings = self.getObjectFromStore('settings');
+                    return settings.type;
+                }
+                else {
+                    return '';
                 }
             }
         },
@@ -529,22 +538,8 @@
 
     /* Like */
     Page.xxs .like-container {
-        padding-top: 202;
-    }
-    Page.xs .like-container {
-        padding-top: 202;
-    }
-    Page.sm .like-container {
-        padding-top: 202;
-    }
-    Page.md .like-container {
-        padding-top: 240;
-    }
-    Page.lg .like-container {
-        padding-top: 402;
-    }
-    Page.xl .like-container {
-        padding-top: 546;
+        z-index: 10;
+        padding: 0 6.25 0 0;
     }
     .like-container {
         z-index: 10;
@@ -562,26 +557,13 @@
     }
 
     /* Hero */
-    Page.xxs .hero {
-        height: 232;
-    }
-    Page.xs .hero {
-        height: 232;
-    }
-    Page.sm .hero {
-        height: 232;
-    }
-    Page.md .hero {
-        height: 270;
-    }
-    Page.lg .hero {
-        height: 430;
-    }
-    Page.xl .hero {
-        height: 430;
-    }
     .hero {
         stretch: aspectFill;
+    }
+    .hero-overlay {
+        background-color: #000;
+        opacity: 0.25;
+        background: linear-gradient(to bottom, black, transparent);
     }
     .timeframe {
         padding: 12.5 25;

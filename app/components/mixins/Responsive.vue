@@ -3,6 +3,9 @@
 
     export default {
         computed: {
+            screenWidth: function() {
+                return platform.screen.mainScreen.widthDIPs;
+            },
             pageClass: function () {
                 let w = platform.screen.mainScreen.widthDIPs;
 
@@ -26,14 +29,19 @@
                     return 'md';
                 }
 
-                // Tablet
+                // Large phone
                 if (w >= 480 && w < 768) {
                     return 'lg';
                 }
 
-                // Large tablet
-                if (w >= 768) {
+                // Small tablet tablet
+                if (w >= 768 && w < 1536) {
                     return 'xl';
+                }
+
+                // Small tablet tablet
+                if (w >= 1536) {
+                    return 'xxl';
                 }
             }
         }

@@ -1,6 +1,6 @@
 <template>
     <GridLayout rows="*">
-        <ListView row="0" for="item in listItems" @itemLoading="onItemLoading">
+        <RadListView row="0" for="item in listItems" @itemLoading="onItemLoading">
             <v-template>
                 <StackLayout>
                     <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
@@ -21,7 +21,7 @@
                     </StackLayout>
                 </StackLayout>
             </v-template>
-        </ListView>
+        </RadListView>
         <ResultPlaceHolder row="0" v-if="listItems.length === 0" icon-label-class="far" icon-class="fa-newspaper" :title="$t('news.emptyTitle')"></ResultPlaceHolder>
     </GridLayout>
 </template>
@@ -150,8 +150,7 @@
                  * @param id
                  */
                 function navigate(id){
-                    EventBus.$emit('navigate', {
-                        tab: 1,
+                    EventBus.$emit('openModal', {
                         page: 'detail',
                         props: {
                             type: 'news_item',

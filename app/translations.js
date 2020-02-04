@@ -41,15 +41,17 @@ export function translations() {
             },
             tabs: {
                 home: 'Home',
-                camping: 'Facilities',
+                camping_camping: 'Campsite',
+                camping_park: 'Park',
+                camping_resort: 'Resort',
                 nearby: 'Nearby',
                 activities: 'Activities',
-                reception: 'Reception',
+                reception: 'Messages',
             },
             home: {
                 map: 'Map',
                 myVacation: 'My vacation',
-                news: 'Latest news'
+                news: 'News'
             },
             wifi: {
                 title: 'Connecting to WiFi',
@@ -95,9 +97,6 @@ export function translations() {
             comingSoon: {
                 comingSoon: 'Coming soon'
             },
-            camping: {
-                title: 'Facilities'
-            },
             nearby: {
                 title: 'Nearby activities',
                 arts_entertainment: 'Day trip',
@@ -108,7 +107,9 @@ export function translations() {
                 week: 'Week',
                 emptyTitle: 'No activities',
                 emptyText: '',
-                onTheCampsite: 'On the campsite',
+                onTheCampsite_camping: 'On the campsite',
+                onTheCampsite_park: 'On the park',
+                onTheCampsite_resort: 'On the resort',
                 nearby: 'Nearby'
             },
             myVacation: {
@@ -149,7 +150,7 @@ export function translations() {
                 mandatoryMessage: 'Please enter the following fields:'
             },
             splash: {
-                introText: 'Please scan the QR-code that you received from your camping.',
+                introText: 'Please scan your QR-code.',
                 'continue': 'Continue',
                 'userGroupTitle': 'Please select your user group',
                 'cancel': 'Cancel'
@@ -203,15 +204,17 @@ export function translations() {
             },
             tabs: {
                 home: 'Home',
-                camping: 'Faciliteiten',
+                camping_camping: 'Camping',
+                camping_park: 'Park',
+                camping_resort: 'Resort',
                 nearby: 'Omgeving',
                 activities: 'Activiteiten',
-                reception: 'Receptie'
+                reception: 'Berichten'
             },
             home: {
                 map: 'Plattegrond',
                 myVacation: 'Mijn vakantie',
-                news: 'Laatste nieuws'
+                news: 'Nieuws'
             },
             wifi: {
                 title: 'Verbinden met WiFi',
@@ -250,11 +253,8 @@ export function translations() {
             comingSoon: {
                 comingSoon: 'Binnenkort'
             },
-            camping: {
-                title: 'Faciliteiten'
-            },
             nearby: {
-                title: 'In de buurt',
+                title: 'Omgeving',
                 arts_entertainment: 'Erop uit',
                 food_beverage: 'Eten & Drinken',
                 shopping_retail: 'Winkelen',
@@ -263,7 +263,9 @@ export function translations() {
                 week: 'Week',
                 emptyTitle: 'Geen activiteiten',
                 emptyText: '',
-                onTheCampsite: 'Op de camping',
+                onTheCampsite_camping: 'Op de camping',
+                onTheCampsite_park: 'Op het park',
+                onTheCampsite_resort: 'Op het resort',
                 nearby: 'In de buurt'
             },
             myVacation: {
@@ -287,24 +289,11 @@ export function translations() {
                 emptyThreadTitle: 'Begin een nieuw gesprek',
                 emptyThreadText: 'Houd er a.u.b. rekening mee dat het enige tijd kan duren voor de camping reageert.'
             },
-            reception: {
-                title: 'Contact met de receptie',
-                name: 'Naam',
-                phone: 'Telefoonnummer',
-                pitch: 'Campingplaats of accommodatie #',
-                message: 'Bericht',
-                sendMessage: 'Verstuur bericht',
-                alert: {
-                    title: 'Dank u wel',
-                    text: 'Wij nemen zo spoedig mogelijk contact met je op.',
-                    buttonText: 'OK'
-                }
-            },
             validation: {
                 mandatoryMessage: 'Vul a.u.b. de volgende velden in:'
             },
             splash: {
-                introText: 'Scan de QR-code die je van je camping hebt ontvangen.',
+                introText: 'Scan nu uw QR-code.',
                 cancel: 'Annuleren',
                 'continue': 'Doorgaan',
                 userGroupTitle: 'Selecteer uw gebruikersgroep'
@@ -358,15 +347,17 @@ export function translations() {
             },
             tabs: {
                 home: 'Home',
-                camping: 'Einrichtungen',
+                camping_camping: 'Campingplatz',
+                camping_park: 'Park',
+                camping_resort: 'Resort',
                 nearby: 'In der Nähe',
                 activities: 'Aktivitäten',
-                reception: 'Empfang'
+                reception: 'Nachrichten'
             },
             home: {
                 map: 'Karte',
                 myVacation: 'Mein Urlaub',
-                news: 'Aktuelle Nachrichten'
+                news: 'Nachrichten'
             },
             wifi: {
                 title: 'Verbindung mit WiFi',
@@ -412,9 +403,6 @@ export function translations() {
             comingSoon: {
                 comingSoon: 'Demnächst verfügbar'
             },
-            camping: {
-                title: 'Einrichtungen'
-            },
             nearby: {
                 title: 'Aktivitäten in der Nähe',
                 arts_entertainment: 'Ausflug',
@@ -425,7 +413,9 @@ export function translations() {
                 week: 'Woche',
                 emptyTitle: 'Keine Aktivitäten',
                 emptyText: '',
-                onTheCampsite: 'Auf dem Campingplatz',
+                onTheCampsite_camping: 'Auf dem Campingplatz',
+                onTheCampsite_park: 'Im Park',
+                onTheCampsite_resort: 'Im Resort',
                 nearby: 'In der Nähe'
             },
             myVacation: {
@@ -449,24 +439,11 @@ export function translations() {
                 emptyThreadTitle: 'Starte eine neue Unterhaltung',
                 emptyThreadText: 'Bitte beachten Sie, dass es einige Zeit dauern kann, bis der Campingplatz antwortet.'
             },
-            reception: {
-                title: 'Kontakt mit dem Empfang',
-                name: 'Name',
-                phone: 'Telefonnummer',
-                pitch: 'Stellplatz oder Unterkunft #',
-                message: 'Nachricht',
-                sendMessage: 'Nachricht senden',
-                alert: {
-                    title: 'Danke',
-                    text: 'Wir werden uns in Kürze bei Ihnen melden',
-                    buttonText: 'OK'
-                }
-            },
             validation: {
                 mandatoryMessage: 'Bitte geben Sie die folgenden Felder ein'
             },
             splash: {
-                introText: 'Bitte scannen Sie den QR-Code, den Sie von Ihrem Campingplatz erhalten haben.',
+                introText: 'Bitte scannen Sie jetzt Ihren QR-Code.',
                 'continue': 'Weiter',
                 'userGroupTitle': 'Bitte wählen Sie Ihre Benutzergruppe',
                 'cancel': 'Abbrechen'
@@ -520,15 +497,17 @@ export function translations() {
             },
             tabs: {
                 home: 'Home',
-                camping: 'Installations',
+                camping_camping: 'Camping',
+                camping_park: 'Parc',
+                camping_resort: 'Resort',
                 nearby: 'A proximité',
                 activities: 'Activités',
-                reception: 'Réception'
+                reception: 'Messages'
             },
             home: {
                 map: 'Carte',
                 myVacation: 'Mes vacances',
-                news: 'Dernières nouvelles'
+                news: 'Nouvelles'
             },
             wifi: {
                 title: 'Connexion au WiFi',
@@ -574,9 +553,6 @@ export function translations() {
             comingSoon: {
                 comingSoon: 'Prochainement à venir'
             },
-            camping: {
-                title: 'Installations'
-            },
             nearby: {
                 title: 'Activités à proximité',
                 arts_entertainment: 'Excursion',
@@ -587,7 +563,9 @@ export function translations() {
                 week: 'Semaine',
                 emptyTitle: 'Aucune activité',
                 emptyText: '',
-                onTheCampsite: 'Sur le camping',
+                onTheCampsite_camping: 'Au camping',
+                onTheCampsite_park: 'Au le parc',
+                onTheCampsite_resort: 'Au le resort',
                 nearby: 'Proche'
             },
             myVacation: {
@@ -611,24 +589,11 @@ export function translations() {
                 emptyThreadTitle: 'Commencer une nouvelle conversation',
                 emptyThreadText: 'Veuillez noter que le camping peut prendre un peu de temps pour réagir.'
             },
-            reception: {
-                title: 'Contact avec la réception',
-                name: 'Nom',
-                phone: 'Numéro de téléphone',
-                pitch: 'Emplacement ou numéro d\'hébergement',
-                message: 'Message',
-                sendMessage: 'Envoyer message',
-                alert: {
-                    title: 'Je vous remercie',
-                    text: 'Nous vous répondrons dans les plus brefs délais',
-                    buttonText: 'OK'
-                }
-            },
             validation: {
                 mandatoryMessage: 'Veuillez remplir les champs suivants'
             },
             splash: {
-                introText: 'Veuillez scanner le code QR que vous avez reçu de votre camping.',
+                introText: 'Veuillez scanner votre code QR maintenant.',
                 'continue': 'Continuer',
                 'userGroupTitle': 'Sélectionnez votre groupe d\'utilisateurs',
                 'cancel': 'Annuler'
@@ -682,15 +647,17 @@ export function translations() {
             },
             tabs: {
                 home: 'Home',
-                camping: 'Strutture',
+                camping_camping: 'Camping',
+                camping_park: 'Parco vacanze',
+                camping_resort: 'Resort',
                 nearby: 'Nelle vicinanze',
                 activities: 'Attività',
-                reception: 'Ricezione'
+                reception: 'Messaggi'
             },
             home: {
                 map: 'Mappa',
                 myVacation: 'La mia vacanza',
-                news: 'Ultime notizie'
+                news: 'Notizie'
             },
             wifi: {
                 title: 'Connessione al WiFi',
@@ -736,9 +703,6 @@ export function translations() {
             comingSoon: {
                 comingSoon: 'Prossimamente in arrivo'
             },
-            camping: {
-                title: 'Strutture'
-            },
             nearby: {
                 title: 'Attività nelle vicinanze',
                 arts_entertainment: 'In giro',
@@ -749,7 +713,9 @@ export function translations() {
                 week: 'Settimana',
                 emptyTitle: 'Nessuna attività',
                 emptyText: '',
-                onTheCampsite: 'Sul campeggio',
+                onTheCampsite_camping: 'Sul campeggio',
+                onTheCampsite_park: 'Al parco vacanze',
+                onTheCampsite_resort: 'Al resort',
                 nearby: 'Nelle vicinanze'
             },
             myVacation: {
@@ -773,24 +739,11 @@ export function translations() {
                 emptyThreadTitle: 'Inizia una nuova conversazione',
                 emptyThreadText: 'Si prega di notare che potrebbe essere necessario del tempo prima che il campeggio risponda.'
             },
-            reception: {
-                title: 'Contatto con la reception',
-                name: 'Nome',
-                phone: 'Numero di telefono',
-                pitch: 'Piazzola o alloggio',
-                message: 'Messaggio',
-                sendMessage: 'Invia messaggio',
-                alert: {
-                    title: 'Grazie',
-                    text: 'Vi risponderemo a breve',
-                    buttonText: 'OK'
-                }
-            },
             validation: {
                 mandatoryMessage: 'Si prega di inserire i seguenti campi'
             },
             splash: {
-                introText: 'Effettua la scansione del codice QR che hai ricevuto dal tuo campeggio.',
+                introText: 'Scansiona il tuo codice QR adesso.',
                 'continue': 'Proseguire',
                 'userGroupTitle': 'Seleziona il tuo gruppo di utenti',
                 'cancel': 'Annullare'

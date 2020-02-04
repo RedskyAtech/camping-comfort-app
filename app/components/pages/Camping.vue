@@ -1,16 +1,15 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <GridLayout rows="auto,*" columns="*">
-            <StackLayout row="0" class="title-container">
-                <Label :text="$t('camping.title')"></Label>
-            </StackLayout>
-            <CampingList row="1"></CampingList>
-        </GridLayout>
-    </Page>
+    <GridLayout rows="auto,*" columns="*">
+        <StackLayout row="0" class="title-container">
+            <Label :text="$t('tabs.camping_'+type)"></Label>
+        </StackLayout>
+        <CampingList row="1"></CampingList>
+    </GridLayout>
 </template>
 
 <script>
     import Responsive from '../mixins/Responsive'
+    import LocalStorage from '../mixins/LocalStorage'
     import CampingList from '../elements/CampingList'
 
     export default {
@@ -19,10 +18,25 @@
             }
         },
         mixins: [
-            Responsive
+            Responsive,
+            LocalStorage
         ],
         components: {
             'CampingList': CampingList
+        },
+        computed: {
+
+            // Get the type from the storage
+            type: function() {
+                let self = this;
+                if(self.keyExistsInStore('settings')) {
+                    let settings = self.getObjectFromStore('settings');
+                    return settings.type;
+                }
+                else {
+                    return '';
+                }
+            }
         }
     }
 </script>

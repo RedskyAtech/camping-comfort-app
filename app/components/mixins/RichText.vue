@@ -209,7 +209,6 @@
                             label.textWrap = true;
                             label.text = ' ';
                             wrapper.addChild(label);
-                            console.log('br added');
                         }
                     }
 

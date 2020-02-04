@@ -1,5 +1,5 @@
 <template>
-    <ListView for="item in listItems" @itemLoading="onItemLoading">
+    <RadListView for="item in listItems" @itemLoading="onItemLoading">
         <v-template>
             <StackLayout>
                 <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
@@ -20,7 +20,7 @@
                 </StackLayout>
             </StackLayout>
         </v-template>
-    </ListView>
+    </RadListView>
 </template>
 
 <script>
@@ -136,8 +136,7 @@
                  * @param id
                  */
                 function navigate(id){
-                    EventBus.$emit('navigate', {
-                        tab: 3,
+                    EventBus.$emit('openModal', {
                         page: 'detail',
                         props: {
                             type: 'nearby_activity',

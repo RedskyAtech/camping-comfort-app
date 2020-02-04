@@ -1,13 +1,10 @@
 <template>
-    <ListView for="item in listItems" @itemLoading="onItemLoading">
+    <RadListView for="item in listItems" @itemLoading="onItemLoading">
         <v-template if="$index === 0">
             <StackLayout>
                 <StackLayout class="btn-container" horizontalAlignment="left">
                     <StackLayout class="btn wifi-btn" @tap="toWifi" v-if="settings.enable_wifi">
                         <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
-                    </StackLayout>
-                    <StackLayout class="btn shopping-btn" @tap="toShop" v-if="settings.enable_shop">
-                        <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-shopping-basket' | fonticon }}</Label>
                     </StackLayout>
                     <StackLayout class="btn map-btn" @tap="toMap" v-if="settings.enable_map && map && hasInternetConnection()">
                         <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
@@ -40,7 +37,7 @@
                 </StackLayout>
             </StackLayout>
         </v-template>
-    </ListView>
+    </RadListView>
 </template>
 
 <script>
@@ -142,7 +139,9 @@
                     // Get the live data
                     let loadingId = Date.now();
                     EventBus.$emit('startLoading', loadingId);
-                    getJSON(self.$apiBaseUrl + "/" + campingId + "/camping-facilities/" + lang + "?v=" + self.$apiVersion).then((r) => {
+                    let url = self.$apiBaseUrl + "/" + campingId + "/camping-facilities/" + lang + "?v=" + self.$apiVersion;
+                    console.log(url);
+                    getJSON(url).then((r) => {
                         if(r.campingFacilities){
                             self.listItems = r.campingFacilities;
                             self.storeObject('campingFacilities', self.listItems);
@@ -236,8 +235,7 @@
                  * @param id
                  */
                 function navigate(id){
-                    EventBus.$emit('navigate', {
-                        tab: 2,
+                    EventBus.$emit('openModal', {
                         page: 'detail',
                         props: {
                             type: 'camping_facility',

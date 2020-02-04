@@ -1,6 +1,6 @@
 <template>
     <GridLayout rows="*,auto">
-        <ListView row="0" for="item in listItems" @itemLoading="onItemLoading" :key="listViewKey">
+        <RadListView row="0" for="item in listItems" @itemLoading="onItemLoading" :key="listViewKey">
             <v-template>
                 <StackLayout>
                     <StackLayout v-if="filters[item.type] === true" class="row" @tap="toDetail(item.id)">
@@ -30,10 +30,10 @@
                     </StackLayout>
                 </StackLayout>
             </v-template>
-        </ListView>
+        </RadListView>
         <ResultPlaceHolder v-if="listItems.length === 0" row="0" icon-label-class="fas" icon-class="fa-calendar-alt" :title="$t('activities.emptyTitle')" :text="$t('activities.emptyText')"></ResultPlaceHolder>
         <StackLayout row="1" orientation="horizontal" horizontalAlignment="center">
-            <Label class="tag camping" :class="filters.camping ? 'active' : ''" :text="$t('activities.onTheCampsite')" @tap="toggleFilter('camping')"></Label>
+            <Label class="tag camping" :class="filters.camping ? 'active' : ''" :text="$t('activities.onTheCampsite_'+type)" @tap="toggleFilter('camping')"></Label>
             <Label class="tag nearby" :class="filters.nearby ? 'active' : ''" :text="$t('activities.nearby')" @tap="toggleFilter('nearby')"></Label>
         </StackLayout>
     </GridLayout>
@@ -59,6 +59,20 @@
                 filters: {
                     camping: true,
                     nearby: true
+                }
+            }
+        },
+        computed: {
+
+            // Get the type from the storage
+            type: function() {
+                let self = this;
+                if(self.keyExistsInStore('settings')) {
+                    let settings = self.getObjectFromStore('settings');
+                    return settings.type;
+                }
+                else {
+                    return '';
                 }
             }
         },
@@ -170,8 +184,7 @@
                  * @param id
                  */
                 function navigate(id){
-                    EventBus.$emit('navigate', {
-                        tab: 4,
+                    EventBus.$emit('openModal', {
                         page: 'detail',
                         props: {
                             type: 'camping_activity',

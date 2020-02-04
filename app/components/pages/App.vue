@@ -3,29 +3,31 @@
         <GridLayout rows="*" columns="*">
             <GridLayout row="0" col="0" rows="*, auto" columns="*">
                 <StackLayout row="0" col="0">
-                    <Frame id="mainContent">
-                        <Empty/>
-                    </Frame>
+                    <Home v-if="activeTab === 1"></Home>
+                    <Camping v-if="activeTab === 2"></Camping>
+                    <Nearby v-if="activeTab === 3"></Nearby>
+                    <Events v-if="activeTab === 4"></Events>
+                    <Threads v-if="activeTab === 5"></Threads>
                 </StackLayout>
-                <StackLayout row="1" col="0" class="tabbar" v-if="!hideTabs">
+                <StackLayout row="1" col="0" class="tabbar">
                     <GridLayout rows="*" :columns="settings.enable_messaging ? '*,*,*,*,*' : '*,*,*,*'">
-                        <StackLayout verticalAlignment="middle" row="0" col="0" class="tab" :class="[{'active': activeTab === 1}]" @tap="toHome">
+                        <StackLayout verticalAlignment="middle" row="0" col="0" class="tab" :class="[{'active': activeTab === 1}]" @tap="activeTab=1">
                             <Label class="tab-icon fas">{{ 'fa-heart' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.home')"></Label>
                         </StackLayout>
-                        <StackLayout verticalAlignment="middle" row="0" col="1" class="tab" :class="[{'active': activeTab === 2}]" @tap="toCamping">
-                            <Label class="tab-icon fas">{{ 'fa-campground' | fonticon }}</Label>
-                            <Label class="tab-label" :text="$t('tabs.camping')"></Label>
-                        </StackLayout>
-                        <StackLayout verticalAlignment="middle" row="0" col="2" class="tab" :class="[{'active': activeTab === 3}]" @tap="toNearby">
+                        <StackLayout verticalAlignment="middle" row="0" col="1" class="tab" :class="[{'active': activeTab === 2}]" @tap="activeTab=2">
                             <Label class="tab-icon fas">{{ 'fa-map-signs' | fonticon }}</Label>
+                            <Label class="tab-label" :text="$t('tabs.camping_'+settings.type)"></Label>
+                        </StackLayout>
+                        <StackLayout verticalAlignment="middle" row="0" col="2" class="tab" :class="[{'active': activeTab === 3}]" @tap="activeTab=3">
+                            <Label class="tab-icon fas">{{ 'fa-landmark' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.nearby')"></Label>
                         </StackLayout>
-                        <StackLayout verticalAlignment="middle" row="0" col="3" class="tab" :class="[{'active': activeTab === 4}]" @tap="toEvents">
+                        <StackLayout verticalAlignment="middle" row="0" col="3" class="tab" :class="[{'active': activeTab === 4}]" @tap="activeTab=4">
                             <Label class="tab-icon fas">{{ 'fa-calendar-alt' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.activities')"></Label>
                         </StackLayout>
-                        <StackLayout v-if="settings.enable_messaging" verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="toReception">
+                        <StackLayout v-if="settings.enable_messaging" verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="activeTab=5">
                             <Label class="tab-icon fas">{{ 'fa-comments' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.reception')"></Label>
                         </StackLayout>
@@ -48,14 +50,14 @@
     import Camping from '../pages/Camping'
     import Nearby from '../pages/Nearby'
     import Events from '../pages/Events'
-    import Detail from '../pages/Detail'
     import Threads from '../pages/Threads'
     import Thread from '../pages/Thread'
     import Shop from '../pages/Shop'
-    import MapModal from '../elements/MapModal'
-    import WifiModal from '../elements/WifiModal'
-    import RouteModal from '../elements/RouteModal'
-    import WhoAmIModal from '../elements/WhoAmIModal'
+    import Detail from '../modals/Detail'
+    import Map from '../modals/Map'
+    import Wifi from '../modals/Wifi'
+    import Route from '../modals/Route'
+    import WhoAmI from '../modals/WhoAmI'
     import LocalStorage from '../mixins/LocalStorage'
     import Loader from '../elements/Loader'
     import Connection from '../mixins/Connection'
@@ -68,8 +70,7 @@
     export default {
         data() {
             return {
-                activeTab: 1,
-                hideTabs: false,
+                activeTab: null,
                 settings: {}
             }
         },
@@ -91,10 +92,10 @@
             Detail: Detail,
             Threads: Threads,
             Thread: Thread,
-            MapModal: MapModal,
-            WifiModal: WifiModal,
-            RouteModal: RouteModal,
-            WhoAmIModal: RouteModal,
+            Map: Map,
+            Wifi: Wifi,
+            Route: Route,
+            WhoAmI: Route,
             Loader: Loader
         },
         beforeDestroy: function() {
@@ -179,7 +180,7 @@
                         EventBus.$emit('stopLoading', loadingId);
 
                         // Go to home page
-                        self.toHome();
+                        self.activeTab = 1;
                     }, error => {
                         self.settings = {};
                         self.removeKeyFromStore('settings');
@@ -205,7 +206,7 @@
 
                         // Go to home page
                         setTimeout(function() {
-                            self.toHome();
+                            self.activeTab = 1;
                         }, 1500); // I don't know what the script is waiting for but for now, this is needed.
                     }
                     else {
@@ -447,82 +448,19 @@
                     }
                 }
             },
-            navigate: function(tab, page, clearHistory=false, props={}, fullFrame=false){
-
-                // Set the right tab
-                this.activeTab = tab;
-
-                // Navigate to the page
+            openModal: function(page, props={}){
                 let Component;
-                if(page === 'splash'){
-                    Component = Splash;
-                }
-                if(page === 'home'){
-                    Component = Home;
-                }
-                if(page === 'camping'){
-                    Component = Camping;
-                }
-                if(page === 'nearby'){
-                    Component = Nearby;
-                }
-                if(page === 'events'){
-                    Component = Events;
-                }
                 if(page === 'detail'){
                     Component = Detail;
                 }
-                if(page === 'threads'){
-                    Component = Threads;
-                }
-                if(page === 'thread'){
-                    Component = Thread;
-                }
-                if(clearHistory === true && fullFrame === false){
-                    this.$navigateTo(Component, {
-                        frame: 'mainContent',
-                        clearHistory: true,
-                        animated: false,
-                        props: props
-                    });
-                }
-                else if(clearHistory === false && fullFrame === false) {
-                    this.$navigateTo(Component, {
-                        frame: 'mainContent',
-                        props: props
-                    });
-                }
-                else if(clearHistory === true && fullFrame === true){
-                    this.$navigateTo(Component, {
-                        clearHistory: true,
-                        animated: true,
-                        transition: {
-                            name: 'fade'
-                        },
-                        props: props
-                    });
-                }
-                else if(clearHistory === false && fullFrame === true) {
-                    this.$navigateTo(Component, {
-                        clearHistory: false,
-                        animated: true,
-                        transition: {
-                            name: 'fade'
-                        },
-                        props: props
-                    });
-                }
-            },
-            openModal: function(page, props={}){
-                let Component;
                 if(page === 'map'){
-                    Component = MapModal;
+                    Component = Map;
                 }
                 if(page === 'wifi'){
-                    Component = WifiModal;
+                    Component = Wifi;
                 }
                 if(page === 'route'){
-                    Component = RouteModal;
+                    Component = Route;
                 }
                 if(page === 'thread'){
                     Component = Thread;
@@ -531,59 +469,16 @@
                     Component = Shop;
                 }
                 if(page === 'whoAmI'){
-                    Component = WhoAmIModal;
+                    Component = WhoAmI;
                 }
                 this.$showModal(Component, {
                     fullscreen: true,
-                    props: props
+                    props: props,
+                    animated: true
                 });
             },
             back: function(){
-                if(!this.$navigateBack({
-                    frame: 'mainContent'
-                })) {
-
-                    // Go to home
-                    console.log('not back');
-                }
-//                this.$navigateBack({
-//                    frame: 'mainContent'
-//                });
-            },
-            toHome: function(){
-                EventBus.$emit('navigate', {
-                    tab: 1,
-                    page: 'home',
-                    clearHistory: true
-                });
-            },
-            toCamping: function(){
-                EventBus.$emit('navigate', {
-                    tab: 2,
-                    page: 'camping',
-                    clearHistory: true
-                });
-            },
-            toNearby: function(){
-                EventBus.$emit('navigate', {
-                    tab: 3,
-                    page: 'nearby',
-                    clearHistory: true
-                });
-            },
-            toEvents: function(){
-                EventBus.$emit('navigate', {
-                    tab: 4,
-                    page: 'events',
-                    clearHistory: true
-                });
-            },
-            toReception: function(){
-                EventBus.$emit('navigate', {
-                    tab: 5,
-                    page: 'threads',
-                    clearHistory: true
-                });
+                this.$navigateBack();
             }
         }
     }
@@ -606,6 +501,7 @@
         color: #0070da;
     }
     .tab-icon {
+        font-size: 16;
     }
     Page.xxs .tab-label,
     Page.xs .tab-label {

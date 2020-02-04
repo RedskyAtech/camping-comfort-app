@@ -1,6 +1,6 @@
 <template>
     <GridLayout rows="*">
-        <ListView row="0" for="thread in threads" @itemLoading="onItemLoading" class="list-view">
+        <RadListView row="0" for="thread in threads" @itemLoading="onItemLoading" class="list-view">
             <v-template>
                 <StackLayout>
                     <StackLayout class="row" :class="[{ 'first': $index === 0, 'unread': thread.amountUnread > 0 }]" @tap="toDetail(thread.id)">
@@ -26,7 +26,7 @@
                     </StackLayout>
                 </StackLayout>
             </v-template>
-        </ListView>
+        </RadListView>
         <ResultPlaceHolder v-if="threads.length === 0" row="0" icon-label-class="far" icon-class="fa-comments" :title="$t('threads.emptyTitle')" :text="keyExistsInStore('userId') ? $t('threads.emptyText_camping') : $t('threads.emptyText_guest')"></ResultPlaceHolder>
     </GridLayout>
 </template>

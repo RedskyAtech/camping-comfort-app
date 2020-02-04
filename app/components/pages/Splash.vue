@@ -113,106 +113,124 @@
             },
             scan: function() {
                 let self = this;
-                let barcodescanner = new BarcodeScanner();
 
-                barcodescanner.scan({
-                    formats: "QR_CODE",
-                    cancelLabel: "Close", // iOS only, default 'Close'
-                    cancelLabelBackgroundColor: "#333333", // iOS only, default '#000000' (black)
-                    message: "Place a barcode inside the viewfinder rectangle to scan it.", // Android only, default is 'Place a barcode inside the viewfinder rectangle to scan it.'
-                    showFlipCameraButton: false,   // default false
-                    preferFrontCamera: false,     // default false
-                    showTorchButton: true,        // default false
-                    beepOnScan: true,             // Play or Suppress beep on scan (default true)
-                    torchOn: false,               // launch with the flashlight on (default false)
-                    closeCallback: () => { console.log("Scanner closed")}, // invoked when the scanner was closed (success or abort)
-                    resultDisplayDuration: 0,   // Android only, default 1500 (ms), set to 0 to disable echoing the scanned text
-                    orientation: 'portrait',     // Android only, default undefined (sensor-driven orientation), other options: portrait|landscape
-                    openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
-                    presentInRootViewController: true // iOS-only; If you're sure you're not presenting the (non embedded) scanner in a modal, or are experiencing issues with fi. the navigationbar, set this to 'true' and see if it works better for your app (default false).
-                }).then((result) => {
+                if(self.$mode === 'development') {
 
-                        request({
-                            url: self.$apiBaseUrl + "/login",
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            content: JSON.stringify({
-                                key: result.text,
-                                v: self.$apiVersion
-                            })
-                        }).then((response) => {
-                            let result = response.content.toJSON();
+                    // Set the data and redirect
+                    self.processScanResult({text: 'c_7094_123_$2y$10$SCzxtXaCDw4HmDMyT4WEaeYoe5TBDvzCnp2GmDTsaBF75aa5ufH8i'});
+                }
+                else {
 
-                            // Reset the settings first
-                            self.resetSettings();
+                    // Scan the QR code
+                    let barcodescanner = new BarcodeScanner();
+                    barcodescanner.scan({
+                        formats: "QR_CODE",
+                        cancelLabel: "Close", // iOS only, default 'Close'
+                        cancelLabelBackgroundColor: "#333333", // iOS only, default '#000000' (black)
+                        message: "Place a barcode inside the viewfinder rectangle to scan it.", // Android only, default is 'Place a barcode inside the viewfinder rectangle to scan it.'
+                        showFlipCameraButton: false,   // default false
+                        preferFrontCamera: false,     // default false
+                        showTorchButton: true,        // default false
+                        beepOnScan: true,             // Play or Suppress beep on scan (default true)
+                        torchOn: false,               // launch with the flashlight on (default false)
+                        closeCallback: () => { console.log("Scanner closed")}, // invoked when the scanner was closed (success or abort)
+                        resultDisplayDuration: 0,   // Android only, default 1500 (ms), set to 0 to disable echoing the scanned text
+                        orientation: 'portrait',     // Android only, default undefined (sensor-driven orientation), other options: portrait|landscape
+                        openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
+                        presentInRootViewController: true // iOS-only; If you're sure you're not presenting the (non embedded) scanner in a modal, or are experiencing issues with fi. the navigationbar, set this to 'true' and see if it works better for your app (default false).
+                    }).then((result) => {
+                            self.processScanResult(result);
+                        }, (errorMessage) => {
+                            console.log("No scan. " + errorMessage);
+                        }
+                    );
+                }
+            },
 
-                            // Store all user groups
-                            if(result.userGroups) {
-                                self.storeUserGroups(result.userGroups);
-                            }
+            /**
+             * Process the scan result
+             *
+             * @param result
+             */
+            processScanResult(result) {
+                let self = this;
+                let url = self.$apiBaseUrl + "/login";
+                request({
+                    url: url,
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    content: JSON.stringify({
+                        key: result.text,
+                        v: self.$apiVersion
+                    })
+                }).then((response) => {
+                    let result = response.content.toJSON();
 
-                            // Logged in as administrator
-                            if(result.userId) {
+                    // Reset the settings first
+                    self.resetSettings();
 
-                                // Ask the user for the group to login to
-                                if(result.userGroups) {
+                    // Store all user groups
+                    if(result.userGroups) {
+                        self.storeUserGroups(result.userGroups);
+                    }
 
-                                    // Create a local object for reference
-                                    // This one has the name as the key
-                                    let options = {};
-                                    result.userGroups.forEach(function (item, key) {
-                                        options[item.name] = item.id;
-                                    });
-                                    let userGroups = options;
+                    // Logged in as administrator
+                    if(result.userId) {
 
-                                    // Create an action list
-                                    options = [];
-                                    result.userGroups.forEach(function (item, key) {
-                                        options.push(item.name);
-                                    });
+                        // Ask the user for the group to login to
+                        if(result.userGroups) {
 
-                                    // Show the action list
-                                    action(self.$t('splash.userGroupTitle'), self.$t('splash.cancel'), options)
-                                    .then(selection => {
+                            // Create a local object for reference
+                            // This one has the name as the key
+                            let options = {};
+                            result.userGroups.forEach(function (item, key) {
+                                options[item.name] = item.id;
+                            });
+                            let userGroups = options;
 
-                                        // Store the group selection, camping and user data
-                                        self.storeSettings(result.campingId, result.campingName, result.userId, {id: userGroups[selection], name: selection});
+                            // Create an action list
+                            options = [];
+                            result.userGroups.forEach(function (item, key) {
+                                options.push(item.name);
+                            });
 
-                                        // Redirect to the App page
-                                        self.redirect();
-                                    });
-                                }
+                            // Show the action list
+                            action(self.$t('splash.userGroupTitle'), self.$t('splash.cancel'), options)
+                            .then(selection => {
 
-                                // The camping doesn't have any user groups
-                                else {
-
-                                    // Store the camping and user data
-                                    self.storeSettings(result.campingId, result.campingName, result.userId);
-
-                                    // Redirect to the App page
-                                    self.redirect();
-                                }
-                            }
-
-                            // Logged in as camping
-                            else {
-
-                                // Store the camping
-                                self.storeSettings(result.campingId, result.campingName);
+                                // Store the group selection, camping and user data
+                                self.storeSettings(result.campingId, result.campingName, result.userId, {id: userGroups[selection], name: selection});
 
                                 // Redirect to the App page
                                 self.redirect();
-                            }
+                            });
+                        }
 
-                        }, (e) => {
-                            console.log("Error: ");
-                            console.log(e);
-                        });
+                        // The camping doesn't have any user groups
+                        else {
 
-                    }, (errorMessage) => {
-                        console.log("No scan. " + errorMessage);
+                            // Store the camping and user data
+                            self.storeSettings(result.campingId, result.campingName, result.userId);
+
+                            // Redirect to the App page
+                            self.redirect();
+                        }
                     }
-                );
+
+                    // Logged in as camping
+                    else {
+
+                        // Store the camping
+                        self.storeSettings(result.campingId, result.campingName);
+
+                        // Redirect to the App page
+                        self.redirect();
+                    }
+
+                }, (e) => {
+                    console.log("Error: ");
+                    console.log(e);
+                });
             },
             storeUserGroups: function(userGroups) {
                 this.storeObject('userGroups', userGroups);
@@ -292,7 +310,8 @@
         color: #009fe3;
     }
     Page.lg .button,
-    Page.xl .button{
+    Page.xl .button,
+    Page.xxl .button{
         width: 350;
     }
     .copyright {

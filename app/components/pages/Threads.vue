@@ -1,12 +1,10 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <Header :hasHero="false" :title="keyExistsInStore('userId') ? $t('threads.title_camping') : $t('threads.title_guest')" :showHeader="true" :showBackBtn="false">
-            <GridLayout rows="*" height="100%">
-                <ThreadList row="0" :threads="threads"></ThreadList>
-                <Fab v-if="!keyExistsInStore('userId')" row="0" backgroundColor="#7ea818" borderColor="#7ea818" color="#fff" verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="toConversation()"><StackLayout row="0" col="0" verticalAlignment="center"><Label row="0" col="0" class="btn-icon far" verticalAlignment="center">{{ 'fa-comment' | fonticon }}</Label></StackLayout></GridLayout></Fab>
-            </GridLayout>
-        </Header>
-    </Page>
+    <Header :hasHero="false" :title="keyExistsInStore('userId') ? $t('threads.title_camping') : $t('threads.title_guest')" :showHeader="true" :showBackBtn="false">
+        <GridLayout rows="*" height="100%">
+            <ThreadList row="0" :threads="threads"></ThreadList>
+            <Fab v-if="!keyExistsInStore('userId')" row="0" backgroundColor="#7ea818" borderColor="#7ea818" color="#fff" verticalAlignment="bottom"><GridLayout rows="*" columns="*" @tap="toConversation()"><StackLayout row="0" col="0" verticalAlignment="center"><Label row="0" col="0" class="btn-icon far" verticalAlignment="center">{{ 'fa-comment' | fonticon }}</Label></StackLayout></GridLayout></Fab>
+        </GridLayout>
+    </Header>
 </template>
 
 <script>

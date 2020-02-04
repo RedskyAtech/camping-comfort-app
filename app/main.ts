@@ -34,6 +34,10 @@ Vue.use(require('vue-moment'), {
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n);
 
+// RadListView
+import RadListView from 'nativescript-ui-listview/vue';
+Vue.use(RadListView);
+
 // Translations
 import { translations } from './translations';
 let t = translations();
@@ -65,7 +69,7 @@ Vue.prototype.$mode = TNS_ENV === 'production' ? 'production' : 'development'
 Vue.prototype.$apiVersion = 2
 
 // Set the API base URL
-Vue.prototype.$apiBaseUrl = TNS_ENV === 'production' ? 'https://www.campingcomfort.app/api' : 'https://test.campingcomfort.app/api'
+Vue.prototype.$apiBaseUrl = TNS_ENV === 'production' ? 'https://www.campingcomfort.app/api' : 'https://www.campingcomfort.app/api'
 
 // Skip the splash page if a camping ID has already been stored
 if(appSettings.getNumber('campingId') !== undefined){

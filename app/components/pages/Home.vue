@@ -1,66 +1,46 @@
 <template>
-    <Page :class="pageClass" actionBarHidden="true">
-        <GridLayout rows="*" columns="*">
-            <ScrollView row="0" col="0">
-                <StackLayout height="100%">
-                    <GridLayout rows="auto,*">
-                        <GridLayout rows="*" row="0" class="hero-grid">
-                            <Image row="0" :src="settings.home_image" class="hero-image"></Image>
-                            <StackLayout row="0" class="hero-overlay-small" v-if="!settings.show_home_name"></StackLayout>
-                            <StackLayout row="0" class="hero-overlay" v-if="settings.show_home_name"></StackLayout>
-                            <GridLayout row="0" rows="auto,*" columns="*,auto">
-                                <StackLayout row="0" col="0">
-                                    <StackLayout class="btn-container">
-                                        <StackLayout class="btn wifi-btn" @tap="toWifi" v-if="settings.enable_wifi">
-                                            <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-wifi' | fonticon }}</Label>
-                                        </StackLayout>
-                                        <StackLayout class="btn shopping-btn" @tap="toShop" v-if="settings.enable_shop">
-                                            <Label class="btn-icon fas" verticalAlignment="center">{{ 'fa-shopping-basket' | fonticon }}</Label>
-                                        </StackLayout>
-                                        <StackLayout class="btn map-btn" @tap="toMap" v-if="settings.enable_map && settings.map && hasInternetConnection()">
-                                            <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-map' | fonticon }}</Label>
-                                            <Label class="btn-text" :text="$t('home.map')" verticalAlignment="center"></Label>
-                                        </StackLayout>
-                                    </StackLayout>
-                                </StackLayout>
-                                <StackLayout row="0" col="1">
-                                    <StackLayout class="quick-links-container" v-if="$mode === 'development'">
-                                        <GridLayout columns="auto,auto">
-                                            <Label class="quick-link fas" col="1" @tap="toSettings">{{ 'fa-cog' | fonticon }}</Label>
-                                        </GridLayout>
-                                    </StackLayout>
-                                </StackLayout>
-                                <StackLayout row="1" col="0" colSpan="2" class="hero-title-container" horizontalAlignment="center" verticalAlignment="center">
-                                    <Label v-if="settings.show_home_name" :text="heroTitle" class="hero-title" textWrap="true"></Label>
-                                </StackLayout>
-                            </GridLayout>
+    <GridLayout rows="*" columns="*">
+        <ScrollView row="0" col="0">
+            <StackLayout height="100%">
+                <GridLayout rows="auto,*">
+                    <GridLayout rows="*" row="0" :height="heroHeight">
+                        <Image row="0" :src="settings.home_image" class="hero-image"></Image>
+                        <StackLayout row="0" class="hero-overlay" v-if="settings.show_home_name"></StackLayout>
+                        <GridLayout row="0" rows="*">
+                            <StackLayout row="0" class="hero-title-container" horizontalAlignment="center" verticalAlignment="center">
+                                <Label v-if="settings.show_home_name" :text="heroTitle" class="hero-title" textWrap="true"></Label>
+                            </StackLayout>
                         </GridLayout>
-                        <StackLayout row="1">
-                            <GridLayout rows="auto,*">
-                                <GridLayout row="0" columns="*">
-                                    <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>
-                                    <StackLayout col="0" class="tabs-container" orientation="horizontal">
-                                        <StackLayout class="tab" @tap="activateTab(1)" :class="[{'active': activeTab === 1}]">
-                                            <Label class="tab-label" :text="$t('home.myVacation')"></Label>
-                                        </StackLayout>
-                                        <StackLayout class="tab" @tap="activateTab(2)" :class="[{'active': activeTab === 2}]">
-                                            <Label class="tab-label" :text="$t('home.news')"></Label>
-                                        </StackLayout>
+                    </GridLayout>
+                    <StackLayout row="1">
+                        <GridLayout rows="auto,*">
+                            <GridLayout row="0" columns="*">
+                                <StackLayout col="0" class="tabs-bottom-line" verticalAlignment="bottom"></StackLayout>
+                                <GridLayout rows="auto" columns="auto,auto,*" col="0" class="tabs-container" orientation="horizontal">
+                                    <StackLayout col="0" class="tab" @tap="activateTab(1)" :class="[{'active': activeTab === 1}]">
+                                        <Label class="tab-label" :text="$t('home.myVacation')"></Label>
+                                    </StackLayout>
+                                    <StackLayout col="1" class="tab" @tap="activateTab(2)" :class="[{'active': activeTab === 2}]">
+                                        <Label class="tab-label" :text="$t('home.news')"></Label>
+                                    </StackLayout>
+                                    <StackLayout col="2" class="quick-links" orientation="horizontal" horizontalAlignment="right">
+                                        <Label class="quick-link quick-link-wifi fas" verticalAlignment="center" @tap="toWifi">{{ 'fa-wifi' | fonticon }}</Label>
+                                        <Label class="quick-link quick-link-map far" verticalAlignment="center" @tap="toMap">{{ 'fa-map' | fonticon }}</Label>
                                     </StackLayout>
                                 </GridLayout>
-                                <ScrollView row="1">
-                                    <GridLayout rows="*" columns="*" height="100%">
-                                        <MyVacationList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]" :innerPageClass="pageClass"></MyVacationList>
-                                        <NewsItemList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 2}]"></NewsItemList>
-                                    </GridLayout>
-                                </ScrollView>
                             </GridLayout>
-                        </StackLayout>
-                    </GridLayout>
-                </StackLayout>
-            </ScrollView>
-        </GridLayout>
-    </Page>
+                            <ScrollView row="1">
+                                <GridLayout rows="*" columns="*" height="100%">
+                                    <MyVacationList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 1}]" :innerPageClass="pageClass"></MyVacationList>
+                                    <NewsItemList row="0" col="0" class="tab-content" :class="[{'active': activeTab === 2}]"></NewsItemList>
+                                </GridLayout>
+                            </ScrollView>
+                        </GridLayout>
+                    </StackLayout>
+                </GridLayout>
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
 </template>
 
 <script>
@@ -79,6 +59,11 @@
                 activeTab: 1,
                 settings: {},
                 heroTitle: ''
+            }
+        },
+        computed: {
+            heroHeight: function() {
+                return this.screenWidth * 0.566;
             }
         },
         mixins: [
@@ -117,6 +102,9 @@
                     page: 'wifi'
                 });
             },
+            /**
+             * Open the map modal
+             */
             toMap: function(){
                 let self = this;
                 if(self.hasInternetConnection()) {
@@ -138,55 +126,18 @@
                         );
                     }
                 }
-            },
-            toSettings: function(){
-                EventBus.$emit('navigate', {
-                    page: 'splash',
-                    fullFrame: true,
-                    clearHistory: true
-                });
-            },
-            toShop: function(){
-                EventBus.$emit('openModal', {
-                    page: 'shop'
-                });
             }
         }
     }
 </script>
 
 <style scoped>
-
-    /* Hero */
-    Page.xxs .hero-grid {
-        height: 232;
-    }
-    Page.xs .hero-grid {
-        height: 232;
-    }
-    Page.sm .hero-grid {
-        height: 232;
-    }
-    Page.md .hero-grid {
-        height: 270;
-    }
-    Page.lg .hero-grid {
-        height: 430;
-    }
-    Page.xl .hero-grid {
-        height: 470;
-    }
     .hero-image {
         stretch: aspectFill;
     }
     .hero-overlay {
         background-color: #000;
         opacity: 0.6;
-        background: linear-gradient(to bottom, black, transparent);
-    }
-    .hero-overlay-small {
-        background-color: #000;
-        opacity: 0.45;
         background: linear-gradient(to bottom, black, transparent);
     }
     .hero-title-container {
@@ -197,41 +148,6 @@
         color: #fff;
         font-size: 25;
         font-weight: 700;
-    }
-
-    /* Buttons */
-    .btn-container {
-        padding: 12.5 0 0 12.5;
-        orientation: horizontal;
-    }
-    .wifi-btn {
-        color: #fff;
-        border-color: #fff;
-    }
-    .shopping-btn {
-        margin-left: 5;
-        color: #fff;
-        border-color: #fff;
-    }
-    .map-btn {
-        margin-left: 5;
-        color: #fff;
-        border-color: #fff;
-    }
-    Page.xxs .map-btn .btn-text,
-    Page.xs .map-btn .btn-text {
-        visibility: collapsed;
-    }
-
-    /* Quick links */
-    .quick-links-container {
-        padding: 12.5 12.5 0 0;
-        orientation: horizontal;
-        color: #fff;
-    }
-    .quick-link {
-        padding: 10 12.5 10 12.5;
-        font-size: 20;
     }
 
     /* Tabs */
@@ -257,7 +173,24 @@
     .tab-content.active {
         visibility: visible;
     }
-    .temp-tab-content {
-        padding: 12.5;
+
+    /* Quick links */
+    .quick-links {
+        color: #8f99ac;
+    }
+    .quick-link {
+        font-size: 16;
+    }
+    Page.xxs .quick-link-wifi {
+        padding: 10 15 10 15;
+    }
+    Page.xxs .quick-link-map {
+        padding: 10 30 10 15;
+    }
+    .quick-link-wifi {
+        padding: 10 20 10 20;
+    }
+    .quick-link-map {
+        padding: 10 40 10 20;
     }
 </style>

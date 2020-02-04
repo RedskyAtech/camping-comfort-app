@@ -1,6 +1,6 @@
 <template>
     <GridLayout rows="*">
-        <ListView row="0" for="item in filteredListItems" @itemLoading="onItemLoading">
+        <RadListView row="0" for="item in filteredListItems" @itemLoading="onItemLoading">
             <v-template>
                 <StackLayout>
                     <StackLayout class="row" :class="[{ 'first': $index === 0 }]" @tap="toDetail(item.id)">
@@ -27,7 +27,7 @@
                     </StackLayout>
                 </StackLayout>
             </v-template>
-        </ListView>
+        </RadListView>
         <ResultPlaceHolder row="0" v-if="filteredListItems.length === 0" icon-label-class="far" icon-class="fa-heart" :title="$t('myVacation.emptyTitle')" :text="$t('myVacation.emptyText')"></ResultPlaceHolder>
     </GridLayout>
 </template>
@@ -241,8 +241,7 @@
                  * @param id
                  */
                 function navigate(id){
-                    EventBus.$emit('navigate', {
-                        tab: 1,
+                    EventBus.$emit('openModal', {
                         page: 'detail',
                         props: {
                             type: 'camping_activity',

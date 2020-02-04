@@ -1,5 +1,5 @@
 <template>
-    <ListView for="item in listItems" @itemLoading="onItemLoading">
+    <RadListView for="item in listItems" @itemLoading="onItemLoading">
         <v-template if="$index === 0">
             <StackLayout>
                 <StackLayout class="intro">
@@ -14,7 +14,7 @@
                 <ShopListItem :index="$index" :item="item" v-on:amount-updated="updateOrder"></ShopListItem>
             </StackLayout>
         </v-template>
-    </ListView>
+    </RadListView>
 </template>
 
 <script>

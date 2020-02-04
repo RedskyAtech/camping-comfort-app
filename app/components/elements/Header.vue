@@ -5,7 +5,7 @@
         </ScrollView>
         <StackLayout v-if="showHeader" orientation="horizontal" row="0" col="0" class="header-container" :class="headerContainerClass" ref="backBtnContainer">
             <GridLayout columns="70,*,70">
-                <Label row="0" v-if="showBackBtn" class="btn-icon fas back-btn" verticalAlignment="center" @tap="goBack">{{ 'fa-arrow-left' | fonticon }}</Label>
+                <Label row="0" v-if="showBackBtn" class="btn-icon fas back-btn" verticalAlignment="center" @tap="goBack">{{ (inModal ? 'fa-times' : 'fa-arrow-left') | fonticon }}</Label>
                 <Label col="1" :text="title" class="title"></Label>
             </GridLayout>
         </StackLayout>
