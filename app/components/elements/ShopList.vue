@@ -186,7 +186,7 @@
         padding: 12.5 18.75;
         border-width: 1;
         border-color: rgba(0,112,218,0.25);
-        border-radius: 3;
+        border-radius: 6;
         background-color: rgba(0,112,218,0.1);
         font-size: 14;
     }

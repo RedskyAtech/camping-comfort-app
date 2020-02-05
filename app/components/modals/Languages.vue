@@ -98,7 +98,7 @@
         width: 60;
         text-align: center;
         background: #fff;
-        border-radius: 5;
+        border-radius: 6;
         padding: 12.5;
     }
     .result {

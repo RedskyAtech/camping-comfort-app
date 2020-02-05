@@ -110,14 +110,14 @@
                 if(guestMessagingTopic) {
                     self.storeString('guest_messaging_topic', guestMessagingTopic);
                 }
+
             },
             scan: function() {
                 let self = this;
-
                 if(self.$mode === 'development') {
 
                     // Set the data and redirect
-                    self.processScanResult({text: 'c_7094_123_$2y$10$SCzxtXaCDw4HmDMyT4WEaeYoe5TBDvzCnp2GmDTsaBF75aa5ufH8i'});
+                    self.processScanResult({text: 'c_32805_84_$2y$10$i1thehGAJVkEPXxwjZLmnu.T4sN6.iTnz2zxNAxWF/DtnEuyEfSCO'});
                 }
                 else {
 
@@ -169,8 +169,9 @@
                     // Reset the settings first
                     self.resetSettings();
 
+
                     // Store all user groups
-                    if(result.userGroups) {
+                    if(result.userGroups.length > 0) {
                         self.storeUserGroups(result.userGroups);
                     }
 
@@ -178,7 +179,7 @@
                     if(result.userId) {
 
                         // Ask the user for the group to login to
-                        if(result.userGroups) {
+                        if(result.userGroups.length > 0) {
 
                             // Create a local object for reference
                             // This one has the name as the key
@@ -195,20 +196,29 @@
                             });
 
                             // Show the action list
-                            action(self.$t('splash.userGroupTitle'), self.$t('splash.cancel'), options)
-                            .then(selection => {
+                            if(options.length > 0) {
+                                action(self.$t('splash.userGroupTitle'), self.$t('splash.cancel'), options)
+                                .then(selection => {
 
-                                // Store the group selection, camping and user data
-                                self.storeSettings(result.campingId, result.campingName, result.userId, {id: userGroups[selection], name: selection});
+                                    // Store the group selection, camping and user data
+                                    self.storeSettings(result.campingId, result.campingName, result.userId, {id: userGroups[selection], name: selection});
+
+                                    // Redirect to the App page
+                                    self.redirect();
+                                });
+                            }
+                            else {
+
+                                // Store the camping and user data
+                                self.storeSettings(result.campingId, result.campingName, result.userId);
 
                                 // Redirect to the App page
                                 self.redirect();
-                            });
+                            }
                         }
 
                         // The camping doesn't have any user groups
                         else {
-
                             // Store the camping and user data
                             self.storeSettings(result.campingId, result.campingName, result.userId);
 
@@ -263,18 +273,12 @@
 
 <style scoped>
     Page {
-        background: #009fe3;
+        background: linear-gradient(to bottom, #009fe3, rgba(0,159,227,0.7));
     }
     .intro {
         color: #fff;
         text-align: center;
         padding: 25;
-    }
-    .intro-title {
-        font-size: 18;
-        font-weight: 700;
-        padding-top: 12.5;
-        padding-bottom: 25;
     }
     .icon {
         width: 200;
@@ -286,7 +290,7 @@
         border-color: rgba(255,255,255,0.25);
         color: #fff;
         height: 40;
-        border-radius: 5;
+        border-radius: 6;
         margin-bottom: 10;
         placeholder-color: #fff;
         text-align: left;

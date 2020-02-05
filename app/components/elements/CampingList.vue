@@ -140,7 +140,6 @@
                     let loadingId = Date.now();
                     EventBus.$emit('startLoading', loadingId);
                     let url = self.$apiBaseUrl + "/" + campingId + "/camping-facilities/" + lang + "?v=" + self.$apiVersion;
-                    console.log(url);
                     getJSON(url).then((r) => {
                         if(r.campingFacilities){
                             self.listItems = r.campingFacilities;
@@ -286,7 +285,7 @@
 
     /* Image */
     .row Image {
-        border-radius: 5;
+        border-radius: 6;
         stretch: aspectFill;
     }
 

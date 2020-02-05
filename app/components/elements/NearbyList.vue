@@ -10,9 +10,6 @@
                                 <Label class="item-title" :text="item.title" textWrap="false"></Label>
                                 <FlexboxLayout>
                                     <Label class="item-subtitle" :text="localizeNumber(item.distance) + ' km'"></Label>
-                                    <!--<StackLayout class="rating-container" verticalAlignment="center">
-                                        <StarRating size="25" fillColor="#0a7cf7" outlineColor="#0a7cf7" emptyColor="#d2d2d2" :value="roundRating(item.rating)" />
-                                    </StackLayout>-->
                                 </FlexboxLayout>
                             </StackLayout>
                         </StackLayout>
@@ -144,10 +141,6 @@
                         }
                     });
                 }
-            },
-            roundRating(rating) {
-                let rounded = Math.round(parseFloat(rating));
-                return rounded;
             }
         }
     }
@@ -169,7 +162,7 @@
 
     /* Image */
     .row Image {
-        border-radius: 5;
+        border-radius: 6;
         stretch: aspectFill;
     }
 
@@ -181,10 +174,5 @@
     .item-subtitle {
         font-size: 12;
         opacity: 0.6;
-    }
-
-    /* Rating */
-    .rating-container {
-        padding-left: 15;
     }
 </style>

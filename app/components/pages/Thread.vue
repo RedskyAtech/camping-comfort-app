@@ -79,7 +79,7 @@
                 // Logged in as guest
                 else if(!this.keyExistsInStore('userId')){
 
-                    // Conversation with a user group
+                    // New conversation with a user group
                     if(this.userGroupId) {
 
                         // Get the name of the user group id
@@ -93,11 +93,15 @@
                         return userGroupName;
                     }
 
+                    // Existing conversation with a user group
+                    else if(this.thread && this.thread.userGroup) {
+                        return this.thread.userGroup;
+                    }
+
                     // Conversation with the camping (no user group)
                     else {
                         return this.getStringFromStore('campingName');
                     }
-
                 }
                 else {
                     return '';
@@ -322,6 +326,7 @@
                         let data = JSON.stringify({
                             threadId: self.computedId,
                             uuid: platform.device.uuid,
+                            userGroupId: self.userGroupId,
                             isMessageFromCamping: self.keyExistsInStore('userId') ? 1 : 0,
                             name: self.keyExistsInStore('guestName') ? self.getStringFromStore('guestName') : '',
                             location: self.keyExistsInStore('guestLocation') ? self.getStringFromStore('guestLocation') : '',
@@ -345,7 +350,7 @@
 
                             if (result.threadId) {
 
-                                if (self.computedId === undefined) {
+                                if (!self.computedId) {
 
                                     // Set the created thread id
                                     self.createdId = result.threadId;
@@ -362,6 +367,9 @@
 
                                 // Reset the values
                                 self.message = '';
+
+                                // Update the thread list
+                                EventBus.$emit('threadChanged');
 
                                 // Stop the loader
                                 EventBus.$emit('stopLoading', loadingId);
@@ -380,7 +388,6 @@
                                 );
                             }
                         }, (e) => {
-                            console.log(url);
                             console.log(e);
 
                             // Set the isPosting flag

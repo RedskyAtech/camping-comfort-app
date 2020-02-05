@@ -270,7 +270,7 @@
 
     /* Image */
     .row Image {
-        border-radius: 5;
+        border-radius: 6;
         stretch: aspectFill;
     }
 

@@ -285,7 +285,6 @@
                         let loadingId = Date.now();
                         EventBus.$emit('startLoading', loadingId);
                         let url = self.$apiBaseUrl + "/" + campingId + "/camping-facilities/" + lang + "/" + self.id + "?v=" + self.$apiVersion;
-                        console.log(url);
                         getJSON(url).then((r) => {
                             if(r.campingFacility) {
                                 self.item = r.campingFacility;
@@ -623,7 +622,7 @@
         padding: 12.5 18.75;
         border-width: 1;
         border-color: rgba(0,112,218,0.25);
-        border-radius: 3;
+        border-radius: 6;
         background-color: rgba(0,112,218,0.1);
         font-size: 14;
     }

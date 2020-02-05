@@ -38,6 +38,10 @@ Vue.use(VueI18n);
 import RadListView from 'nativescript-ui-listview/vue';
 Vue.use(RadListView);
 
+// RadDataForm
+import RadDataForm from 'nativescript-ui-dataform/vue';
+Vue.use(RadDataForm);
+
 // Translations
 import { translations } from './translations';
 let t = translations();

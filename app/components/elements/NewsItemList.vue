@@ -180,7 +180,7 @@
     /* Image */
     .row Image {
         stretch: aspectFill;
-        border-radius: 5;
+        border-radius: 6;
     }
 
     /* Label */

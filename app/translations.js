@@ -150,7 +150,7 @@ export function translations() {
                 mandatoryMessage: 'Please enter the following fields:'
             },
             splash: {
-                introText: 'Please scan your QR-code.',
+                introText: 'Please scan your QR-code',
                 'continue': 'Continue',
                 'userGroupTitle': 'Please select your user group',
                 'cancel': 'Cancel'
@@ -293,7 +293,7 @@ export function translations() {
                 mandatoryMessage: 'Vul a.u.b. de volgende velden in:'
             },
             splash: {
-                introText: 'Scan nu uw QR-code.',
+                introText: 'Scan nu uw QR-code',
                 cancel: 'Annuleren',
                 'continue': 'Doorgaan',
                 userGroupTitle: 'Selecteer uw gebruikersgroep'
@@ -304,6 +304,12 @@ export function translations() {
             },
             dates: {
                 at: 'om'
+            },
+            identification: {
+                title: 'Vul a.u.b. de volgende gegevens in',
+                text: 'Heeft u nog geen plaats of accommodatie? Laat dit veld dan leeg.',
+                guestName: 'Naam',
+                guestLocation: 'Plaats of accommodatie'
             }
         },
         de: {
@@ -443,7 +449,7 @@ export function translations() {
                 mandatoryMessage: 'Bitte geben Sie die folgenden Felder ein'
             },
             splash: {
-                introText: 'Bitte scannen Sie jetzt Ihren QR-Code.',
+                introText: 'Bitte scannen Sie jetzt Ihren QR-Code',
                 'continue': 'Weiter',
                 'userGroupTitle': 'Bitte wählen Sie Ihre Benutzergruppe',
                 'cancel': 'Abbrechen'
@@ -593,7 +599,7 @@ export function translations() {
                 mandatoryMessage: 'Veuillez remplir les champs suivants'
             },
             splash: {
-                introText: 'Veuillez scanner votre code QR maintenant.',
+                introText: 'Veuillez scanner votre code QR maintenant',
                 'continue': 'Continuer',
                 'userGroupTitle': 'Sélectionnez votre groupe d\'utilisateurs',
                 'cancel': 'Annuler'
@@ -743,7 +749,7 @@ export function translations() {
                 mandatoryMessage: 'Si prega di inserire i seguenti campi'
             },
             splash: {
-                introText: 'Scansiona il tuo codice QR adesso.',
+                introText: 'Scansiona il tuo codice QR adesso',
                 'continue': 'Proseguire',
                 'userGroupTitle': 'Seleziona il tuo gruppo di utenti',
                 'cancel': 'Annullare'

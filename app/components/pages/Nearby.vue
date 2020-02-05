@@ -17,14 +17,9 @@
                 </StackLayout>
             </StackLayout>
         </GridLayout>
-        <NearbyList row="2" class="tab-content" :class="[{'active': activeTab === 1}]" @if="activeTab === 1" type="arts_entertainment"></NearbyList>
-        <NearbyList row="2" class="tab-content" :class="[{'active': activeTab === 2}]" @if="activeTab === 2" type="food_beverage"></NearbyList>
-        <NearbyList row="2" class="tab-content" :class="[{'active': activeTab === 3}]" @if="activeTab === 3" type="shopping_retail"></NearbyList>
-        <!--<StackLayout row="2" class="tab-content" :class="[{'active': activeTab === 2}]">
-            <StackLayout class="temp-tab-content">
-                <Label text="Binnenkort..."></Label>
-            </StackLayout>
-        </StackLayout>-->
+        <NearbyList row="2" class="tab-content" :class="[{'active': activeTab === 1}]" type="arts_entertainment"></NearbyList>
+        <NearbyList row="2" class="tab-content" :class="[{'active': activeTab === 2}]" type="food_beverage"></NearbyList>
+        <NearbyList row="2" class="tab-content" :class="[{'active': activeTab === 3}]" type="shopping_retail"></NearbyList>
     </GridLayout>
 </template>
 
@@ -88,8 +83,5 @@
     }
     .tab-content.active {
         visibility: visible;
-    }
-    .temp-tab-content {
-        padding: 12.5;
     }
 </style>

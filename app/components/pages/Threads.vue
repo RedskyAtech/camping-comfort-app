@@ -23,7 +23,7 @@
 
     export default {
         components: {
-            'ThreadList': ThreadList,
+            ThreadList: ThreadList,
             Fab: Fab,
             Header: Header
         },
@@ -74,7 +74,12 @@
                     // Define the URL for camping users or for guests
                     let url;
                     if(self.keyExistsInStore('userId')) {
-                        url = self.$apiBaseUrl + "/" + campingId+"/threads?v=" + self.$apiVersion;
+                        if(self.keyExistsInStore('userGroupId')) {
+                            url = self.$apiBaseUrl + "/" + campingId+"/threads-by-group/"+self.getNumberFromStore('userGroupId')+"/threads?v=" + self.$apiVersion;
+                        }
+                        else {
+                            url = self.$apiBaseUrl + "/" + campingId+"/threads?v=" + self.$apiVersion;
+                        }
                     }
                     else {
                         url = self.$apiBaseUrl + "/" + campingId+"/threads/"+platform.device.uuid + "?v=" + self.$apiVersion
@@ -86,7 +91,7 @@
                         if(result.threads){
                             self.threads = result.threads;
                             self.storeObject('threads', self.threads);
-                            console.log('threads updated');
+                            console.log('Threads updated');
 
                             // Stop the loader
                             EventBus.$emit('stopLoading', loadingId);
@@ -155,30 +160,18 @@
                     .then(selection => {
                         if(selection !== self.$t('splash.cancel')) {
 
-                            // Check if the guest name is set
-                            /*if(!self.keyExistsInStore('guestName')) {
-
-                                // Open the WhoAmI modal
-                                EventBus.$emit('openModal', {
-                                    page: 'whoAmI'
-                                });
-                            }
-                            else {*/
-
-                                // Open the thread modal
-                                EventBus.$emit('openModal', {
-                                    page: 'thread',
-                                    props: {
-                                        id: id,
-                                        userGroupId: userGroups[selection]
-                                    }
-                                });
-//                            }
+                            // Open the thread modal
+                            EventBus.$emit('openModal', {
+                                page: 'thread',
+                                props: {
+                                    id: id,
+                                    userGroupId: userGroups[selection]
+                                }
+                            });
                         }
                     });
                 }
                 else {
-                    console.log('no groups');
                     EventBus.$emit('openModal', {
                         page: 'thread',
                         props: {

@@ -27,7 +27,7 @@
                             <Label class="tab-icon fas">{{ 'fa-calendar-alt' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.activities')"></Label>
                         </StackLayout>
-                        <StackLayout v-if="settings.enable_messaging" verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="activeTab=5">
+                        <StackLayout v-if="settings.enable_messaging" verticalAlignment="middle" row="0" col="4" class="tab" :class="[{'active': activeTab === 5}]" @tap="checkIdentification">
                             <Label class="tab-icon fas">{{ 'fa-comments' | fonticon }}</Label>
                             <Label class="tab-label" :text="$t('tabs.reception')"></Label>
                         </StackLayout>
@@ -57,7 +57,7 @@
     import Map from '../modals/Map'
     import Wifi from '../modals/Wifi'
     import Route from '../modals/Route'
-    import WhoAmI from '../modals/WhoAmI'
+    import GuestIdentification from '../modals/GuestIdentification'
     import LocalStorage from '../mixins/LocalStorage'
     import Loader from '../elements/Loader'
     import Connection from '../mixins/Connection'
@@ -95,7 +95,6 @@
             Map: Map,
             Wifi: Wifi,
             Route: Route,
-            WhoAmI: Route,
             Loader: Loader
         },
         beforeDestroy: function() {
@@ -106,7 +105,7 @@
             EventBus.$off('navigate');
             EventBus.$off('openModal');
             EventBus.$off('back');
-
+            EventBus.$off('toTab5');
         },
         mounted: function(){
             let self = this;
@@ -137,6 +136,11 @@
                 self.back();
             });
 
+            // Listen to go back navigation requests
+            EventBus.$on('toTab5', function() {
+                self.activeTab = 5;
+            });
+
             // Initialize firebase
             self.initializeFirebase();
 
@@ -144,6 +148,19 @@
             self.loadAppSettings();
         },
         methods: {
+
+            checkIdentification: function() {
+
+                // Go to tab 5 if the guest already entered his name or if the current user is a camping
+                if(this.keyExistsInStore('guestName') || this.keyExistsInStore('userId')) {
+                    this.activeTab = 5;
+                }
+
+                // Open the identification modal
+                else {
+                    this.openModal('guestIdentification');
+                }
+            },
 
             /**
              * Load the app settings
@@ -315,7 +332,16 @@
 
                 // Subscribe to messages for camping users
                 if(data.type === 'camping_messaging') {
-                    topic = "camping_messaging_"+campingId;
+
+                    // Subscribe to the group messaging topic
+                    if(self.keyExistsInStore('userGroupId')) {
+                        topic = "camping_messaging_"+campingId+"_"+self.getNumberFromStore('userGroupId');
+                    }
+
+                    // Subscribe to the general camping messaging topic
+                    else {
+                        topic = "camping_messaging_"+campingId;
+                    }
                     topicStoreKey = 'camping_messaging_topic';
                     unsubscribePrevious = true;
                 }
@@ -389,6 +415,8 @@
                     });
                 }
             },
+
+            // Log an action
             log: function(type, data) {
 
                 let self = this;
@@ -450,6 +478,9 @@
             },
             openModal: function(page, props={}){
                 let Component;
+                if(page === 'guestIdentification'){
+                    Component = GuestIdentification;
+                }
                 if(page === 'detail'){
                     Component = Detail;
                 }
@@ -467,9 +498,6 @@
                 }
                 if(page === 'shop'){
                     Component = Shop;
-                }
-                if(page === 'whoAmI'){
-                    Component = WhoAmI;
                 }
                 this.$showModal(Component, {
                     fullscreen: true,
