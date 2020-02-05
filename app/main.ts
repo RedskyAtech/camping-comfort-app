@@ -3,8 +3,6 @@ import Splash from './components/pages/Splash.vue'
 import App from './components/pages/App.vue'
 import * as appSettings from 'tns-core-modules/application-settings';
 import { isAndroid, isIOS, device } from "tns-core-modules/platform";
-import { connectionType, getConnectionType, startMonitoring, stopMonitoring } from 'tns-core-modules/connectivity';
-let application = require("tns-core-modules/application");
 
 // Set the current platform
 Vue.prototype.$isAndroid = isAndroid;

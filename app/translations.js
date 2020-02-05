@@ -62,13 +62,6 @@ export function translations() {
                     buttonText: 'OK'
                 }
             },
-            shopping: {
-                alert: {
-                    title: 'Order sandwiches',
-                    message: 'This option will be available on December 1.',
-                    buttonText: 'OK'
-                }
-            },
             detail: {
                 readMore: 'Read more',
                 forMoreInformation: 'Address',
@@ -131,20 +124,7 @@ export function translations() {
             thread: {
                 typeAMessage: 'Type a message',
                 emptyThreadTitle: 'Start a new conversation',
-                emptyThreadText: 'Please note that it may take some time for the campsite to respond.'
-            },
-            reception: {
-                title: 'Contact with reception',
-                name: 'Name',
-                phone: 'Phone number',
-                pitch: 'Pitch or accommodation #',
-                message: 'Message',
-                sendMessage: 'Send message',
-                alert: {
-                    title: 'Thank you',
-                    text: 'We will get back to you shortly.',
-                    buttonText: 'OK'
-                }
+                emptyThreadText: 'Please note that it may take some time for the recipient to respond.'
             },
             validation: {
                 mandatoryMessage: 'Please enter the following fields:'
@@ -161,6 +141,12 @@ export function translations() {
             },
             dates: {
                 at: 'at'
+            },
+            identification: {
+                title: 'Please fill in the following fields',
+                text: 'Don\'t know your pitch or accommodation yet? Just leave it blank.',
+                guestName: 'Name',
+                guestLocation: 'Pitch or accommodation'
             }
         },
         nl: {
@@ -287,7 +273,7 @@ export function translations() {
             thread: {
                 typeAMessage: 'Type een bericht',
                 emptyThreadTitle: 'Begin een nieuw gesprek',
-                emptyThreadText: 'Houd er a.u.b. rekening mee dat het enige tijd kan duren voor de camping reageert.'
+                emptyThreadText: 'Houd er a.u.b. rekening mee dat het enige tijd kan duren voor de ontvanger reageert.'
             },
             validation: {
                 mandatoryMessage: 'Vul a.u.b. de volgende velden in:'
@@ -374,13 +360,6 @@ export function translations() {
                     buttonText: 'OK'
                 }
             },
-            shopping: {
-                alert: {
-                    title: 'Sandwiches bestellen',
-                    message: 'Diese Option ist ab dem 1. Dezember verfügbar.',
-                    buttonText: 'OK'
-                }
-            },
             detail: {
                 readMore: 'Lesen Sie mehr dazu',
                 forMoreInformation: 'Adresse',
@@ -443,7 +422,7 @@ export function translations() {
             thread: {
                 typeAMessage: 'Geben Sie eine Nachricht ein',
                 emptyThreadTitle: 'Starte eine neue Unterhaltung',
-                emptyThreadText: 'Bitte beachten Sie, dass es einige Zeit dauern kann, bis der Campingplatz antwortet.'
+                emptyThreadText: 'Bitte beachten Sie, dass es einige Zeit dauern kann, bis der Empfänger antwortet.'
             },
             validation: {
                 mandatoryMessage: 'Bitte geben Sie die folgenden Felder ein'
@@ -460,6 +439,12 @@ export function translations() {
             },
             dates: {
                 at: 'um'
+            },
+            identification: {
+                title: 'Bitte füllen Sie die folgenden Felder aus',
+                text: 'Sie kennen Ihren Stellplatz oder Ihre Unterkunft noch nicht? Lass es einfach leer.',
+                guestName: 'Name',
+                guestLocation: 'Stellplatz oder Unterkunft'
             }
         },
         fr: {
@@ -521,13 +506,6 @@ export function translations() {
                 alert: {
                     title: 'Mot de passe WiFi copié',
                     message: 'Vous pouvez coller le mot de passe lorsque votre appareil vous demande de le saisir lors de la configuration WiFi',
-                    buttonText: 'OK'
-                }
-            },
-            shopping: {
-                alert: {
-                    title: 'Commander des sandwichs',
-                    message: 'Cette option sera disponible le 1er décembre.',
                     buttonText: 'OK'
                 }
             },
@@ -593,7 +571,7 @@ export function translations() {
             thread: {
                 typeAMessage: 'Tapez un message',
                 emptyThreadTitle: 'Commencer une nouvelle conversation',
-                emptyThreadText: 'Veuillez noter que le camping peut prendre un peu de temps pour réagir.'
+                emptyThreadText: 'Gardez à l\'esprit que la réponse du destinataire peut prendre un certain temps.'
             },
             validation: {
                 mandatoryMessage: 'Veuillez remplir les champs suivants'
@@ -610,6 +588,12 @@ export function translations() {
             },
             dates: {
                 at: 'à'
+            },
+            identification: {
+                title: 'Veuillez remplir les champs suivants',
+                text: 'Vous ne connaissez pas encore votre emplacement ou votre hébergement? Laissez-le vide.',
+                guestName: 'Name',
+                guestLocation: 'Emplacement ou hébergement'
             }
         },
         it: {
@@ -671,13 +655,6 @@ export function translations() {
                 alert: {
                     title: 'Password WiFi copiata',
                     message: 'È possibile incollare la password quando il dispositivo chiede di inserirla durante la configurazione WiFi',
-                    buttonText: 'OK'
-                }
-            },
-            shopping: {
-                alert: {
-                    title: 'Ordina i panini',
-                    message: 'Questa opzione sarà disponibile dal 1 ° dicembre.',
                     buttonText: 'OK'
                 }
             },
@@ -743,7 +720,7 @@ export function translations() {
             thread: {
                 typeAMessage: 'Scrivi un messaggio',
                 emptyThreadTitle: 'Inizia una nuova conversazione',
-                emptyThreadText: 'Si prega di notare che potrebbe essere necessario del tempo prima che il campeggio risponda.'
+                emptyThreadText: 'Tieni presente che potrebbe essere necessario del tempo per la risposta del destinatario.'
             },
             validation: {
                 mandatoryMessage: 'Si prega di inserire i seguenti campi'
@@ -760,6 +737,12 @@ export function translations() {
             },
             dates: {
                 at: 'alle'
+            },
+            identification: {
+                title: 'Compila i campi seguenti',
+                text: 'Non conosci ancora il tuo campo o alloggio? Lascialo vuoto.',
+                guestName: 'Name',
+                guestLocation: 'Piazzola o sistemazione'
             }
         }
     }

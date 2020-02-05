@@ -22,7 +22,6 @@
 </template>
 
 <script>
-    import EventBus from '../helpers/EventBus';
     import Responsive from '../mixins/Responsive';
     import App from './App';
     import { BarcodeScanner } from "nativescript-barcodescanner";
@@ -31,10 +30,6 @@
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import {exit} from 'nativescript-exit';
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
-    import * as appSettings from "tns-core-modules/application-settings";
-    import * as application from "tns-core-modules/application";
-    import { isAndroid, isIOS, device, screen } from "tns-core-modules/platform";
-    import ListPicker from 'tns-core-modules/ui/list-picker'
 
     export default {
         mixins: [
@@ -42,9 +37,6 @@
             LocalStorage,
             Connection
         ],
-        components: {
-            ListPicker
-        },
         mounted: function() {
             let self = this;
 
@@ -117,7 +109,7 @@
                 if(self.$mode === 'development') {
 
                     // Set the data and redirect
-                    self.processScanResult({text: 'c_32805_84_$2y$10$i1thehGAJVkEPXxwjZLmnu.T4sN6.iTnz2zxNAxWF/DtnEuyEfSCO'});
+                    self.processScanResult({text: 'c_7094_123_$2y$10$SCzxtXaCDw4HmDMyT4WEaeYoe5TBDvzCnp2GmDTsaBF75aa5ufH8i'});
                 }
                 else {
 
@@ -169,7 +161,6 @@
                     // Reset the settings first
                     self.resetSettings();
 
-
                     // Store all user groups
                     if(result.userGroups.length > 0) {
                         self.storeUserGroups(result.userGroups);
@@ -197,15 +188,19 @@
 
                             // Show the action list
                             if(options.length > 0) {
-                                action(self.$t('splash.userGroupTitle'), self.$t('splash.cancel'), options)
-                                .then(selection => {
 
-                                    // Store the group selection, camping and user data
-                                    self.storeSettings(result.campingId, result.campingName, result.userId, {id: userGroups[selection], name: selection});
+                                // Waiting for the iOS scan modal to close
+                                setTimeout(function() {
+                                    action(self.$t('splash.userGroupTitle'), self.$t('splash.cancel'), options)
+                                    .then(selection => {
 
-                                    // Redirect to the App page
-                                    self.redirect();
-                                });
+                                        // Store the group selection, camping and user data
+                                        self.storeSettings(result.campingId, result.campingName, result.userId, {id: userGroups[selection], name: selection});
+
+                                        // Redirect to the App page
+                                        self.redirect();
+                                    });
+                                }, 750);
                             }
                             else {
 
@@ -227,7 +222,7 @@
                         }
                     }
 
-                    // Logged in as camping
+                    // Logged in as guest
                     else {
 
                         // Store the camping

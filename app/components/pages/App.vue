@@ -44,15 +44,12 @@
     import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
     import EventBus from '../helpers/EventBus'
-    import Splash from '../pages/Splash'
-    import Empty from '../pages/Empty'
     import Home from '../pages/Home'
     import Camping from '../pages/Camping'
     import Nearby from '../pages/Nearby'
     import Events from '../pages/Events'
     import Threads from '../pages/Threads'
-    import Thread from '../pages/Thread'
-    import Shop from '../pages/Shop'
+    import Thread from '../modals/Thread'
     import Detail from '../modals/Detail'
     import Map from '../modals/Map'
     import Wifi from '../modals/Wifi'
@@ -83,8 +80,6 @@
         components: {
 
             // Pages
-            Splash: Splash,
-            Empty: Empty,
             Home: Home,
             Camping: Camping,
             Nearby: Nearby,
@@ -495,9 +490,6 @@
                 }
                 if(page === 'thread'){
                     Component = Thread;
-                }
-                if(page === 'shop'){
-                    Component = Shop;
                 }
                 this.$showModal(Component, {
                     fullscreen: true,

@@ -7,7 +7,8 @@
                         <GridLayout rows="65" columns="*,*">
                             <StackLayout col="0" orientation="horizontal" class="label">
                                 <StackLayout verticalAlignment="center">
-                                    <Label class="title" :text="keyExistsInStore('userId') ? thread.name + ' ('+thread.location+')' : thread.userGroup ? thread.userGroup : getStringFromStore('campingName')" textWrap="false"></Label>
+                                    <Label v-if="keyExistsInStore('userId')" class="title" :text="thread.name + (thread.location ? ' ('+thread.location+')' : '')" textWrap="false"></Label>
+                                    <Label v-if="!keyExistsInStore('userId')" class="title" :text="thread.userGroup ? thread.userGroup : getStringFromStore('campingName')" textWrap="false"></Label>
                                     <FlexboxLayout>
                                         <Label class="subtitle" :text="thread.lastMessage.message" textWrap="false"></Label>
                                     </FlexboxLayout>

@@ -8,15 +8,15 @@
     "id": "app.campingcomfort.app",
     "templateVersion": "v2",
     "tns-ios": {
-      "version": "6.1.0"
+      "version": "6.3.0"
     },
     "tns-android": {
-      "version": "6.1.2"
+      "version": "6.3.1"
     }
   },
   "dependencies": {
     "moment": "^2.24.0",
-    "nativescript-barcodescanner": "^3.3.2",
+    "nativescript-barcodescanner": "^3.4.1",
     "nativescript-clipboard": "^1.2.0",
     "nativescript-exit": "^1.0.1",
     "nativescript-fancyalert": "^3.0.9",
@@ -26,7 +26,7 @@
     "nativescript-toasty": "^2.0.1",
     "nativescript-ui-dataform": "^6.0.0",
     "nativescript-ui-listview": "^8.0.1",
-    "nativescript-vue": "^2.4.0",
+    "nativescript-vue": "^2.5.0-alpha.3",
     "nativescript-vue-star-rating": "0.0.4",
     "numeral": "^2.0.6",
     "tns-core-modules": "^6.3.2",

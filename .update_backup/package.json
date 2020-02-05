@@ -8,7 +8,7 @@
     "id": "app.campingcomfort.app",
     "templateVersion": "v2",
     "tns-ios": {
-      "version": "6.0.1"
+      "version": "6.1.0"
     },
     "tns-android": {
       "version": "6.1.2"
@@ -24,10 +24,12 @@
     "nativescript-image-swipe": "^5.0.1",
     "nativescript-plugin-firebase": "^10.0.0",
     "nativescript-toasty": "^2.0.1",
+    "nativescript-ui-dataform": "^6.0.0",
+    "nativescript-ui-listview": "^8.0.1",
     "nativescript-vue": "^2.4.0",
     "nativescript-vue-star-rating": "0.0.4",
     "numeral": "^2.0.6",
-    "tns-core-modules": "^6.1.2",
+    "tns-core-modules": "^6.3.2",
     "vue-i18n": "^8.14.1",
     "vue-moment": "^4.0.0",
     "vuex": "^3.1.1"

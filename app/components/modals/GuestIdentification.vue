@@ -1,22 +1,27 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
         <Header :hasHero="true" :title="$t('home.map')" :showHeader="true" :showBackBtn="true" :inModal="true" background="#009fe3" color="#fff">
-            <GridLayout rows="*" columns="*" width="100%" height="100%" class="content">
-                <StackLayout verticalAlignment="center">
-                    <StackLayout>
-                        <Label class="intro-title" textWrap="true" :text="$t('identification.title')"></Label>
-                    </StackLayout>
-                    <StackLayout>
-                        <Label class="intro-text" textWrap="true" :text="$t('identification.text')"></Label>
-                    </StackLayout>
-                    <StackLayout class="input-fields">
-                        <TextField v-model="guestName" :hint="$t('identification.guestName')" class="input" ref="inputName" editable="true" returnKeyType="done" />
-                        <TextField v-model="guestLocation" :hint="$t('identification.guestLocation')" class="input" ref="inputLocation"editable="true" returnKeyType="done" />
-                    </StackLayout>
-                    <StackLayout class="button" verticalAlignment="center" @tap="submit">
-                        <Label :text="$t('splash.continue')"></Label>
-                    </StackLayout>
-                </StackLayout>
+            <GridLayout rows="*,auto" height="100%">
+                <ScrollView ref="scrollView" row="0">
+                    <GridLayout rows="*" columns="*" width="100%" height="100%" class="content">
+                        <StackLayout verticalAlignment="center">
+                            <StackLayout>
+                                <Label class="intro-title" textWrap="true" :text="$t('identification.title')"></Label>
+                            </StackLayout>
+                            <StackLayout>
+                                <Label class="intro-text" textWrap="true" :text="$t('identification.text')"></Label>
+                            </StackLayout>
+                            <StackLayout class="input-fields">
+                                <TextField v-model="guestName" :hint="$t('identification.guestName')" class="input" ref="inputName" editable="true" returnKeyType="done" />
+                                <TextField v-model="guestLocation" :hint="$t('identification.guestLocation')" class="input" ref="inputLocation"editable="true" returnKeyType="done" />
+                            </StackLayout>
+                            <StackLayout class="button" verticalAlignment="center" @tap="submit">
+                                <Label :text="$t('splash.continue')"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                </ScrollView>
+                <StackLayout row="1" ref="keyboardHeight"></StackLayout>
             </GridLayout>
         </Header>
     </Page>
@@ -27,6 +32,8 @@
     import LocalStorage from '../mixins/LocalStorage'
     import Responsive from '../mixins/Responsive'
     import Header from '../elements/Header'
+    import * as application from "tns-core-modules/application";
+    import { isAndroid, isIOS } from "tns-core-modules/platform";
 
     export default {
         components: {
@@ -42,7 +49,25 @@
             LocalStorage,
             Responsive
         ],
+        mounted: function() {
+            this.listenToKeyboardHeight();
+        },
         methods: {
+
+            // Listen to a changing keyboard height, and change the spacer height to push the text input up
+            listenToKeyboardHeight: function() {
+                let self = this;
+                if(isIOS) {
+                    application.ios.addNotificationObserver(UIKeyboardWillChangeFrameNotification, function (notification) {
+                        let hght = notification.userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey).CGRectValue.size.height;
+                        let keyboardHeightEl = self.$refs.keyboardHeight;
+                        if(keyboardHeightEl !== undefined) {
+                            let keyboardHeightNv = keyboardHeightEl.nativeView;
+                            keyboardHeightNv.height = hght;
+                        }
+                    });
+                }
+            },
             submit: function() {
 
                 // Store the data

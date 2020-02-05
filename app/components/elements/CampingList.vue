@@ -190,11 +190,6 @@
                     page: 'wifi'
                 });
             },
-            toShop: function(){
-                EventBus.$emit('openModal', {
-                    page: 'shop'
-                });
-            },
             toMap: function(){
                 let self = this;
                 if(self.hasInternetConnection()) {
@@ -259,9 +254,6 @@
     }
     .wifi-btn {
         margin-left: 12.5;
-    }
-    .shopping-btn {
-        margin-left: 5;
     }
     .map-btn {
         margin-left: 5;
