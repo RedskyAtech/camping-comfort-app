@@ -1,6 +1,6 @@
 <template>
     <Page :class="pageClass" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
-        <Header :hasHero="item.image !== undefined && item.image !== ''" :title="item.title" :showHeader="showHeader" :showBackBtn="true" :inModal="true">
+        <Header :hasHero="item.image !== undefined && item.image !== ''" :title="item.title" :showHeader="showHeader" :showBackBtn="true" :inModal="true" :heroHeight="heroHeight">
             <GridLayout>
                 <StackLayout row="0">
                     <GridLayout rows="auto" v-if="item.image !== '' && item.image !== undefined">
@@ -37,7 +37,7 @@
                         <Label class="title" :text="item.title" textWrap="true"></Label>
                         <GridLayout columns="*" :rows="textHeight">
                             <Stacklayout col="0" row="0">
-                                <StackLayout ref="richTextContainer" class="text"></StackLayout>
+                                <HtmlView :html="richText" @layoutChanged="htmlViewLoaded" ref="htmlView"></HtmlView>
                                 <StackLayout v-if="item.reviews && item.reviews.length > 0">
                                     <Label class="text subtitle" textWrap="true" :text="$t('detail.whatOtherPeopleSay')+':'"></Label>
                                     <StackLayout class="review-container" :class="[{ 'last': index === (item.reviews.length-1) }]" v-for="(review, index) in item.reviews" v-bind:data="review" v-bind:key="review.id">
@@ -208,7 +208,7 @@
                             self.item = self.getObjectFromStore('newsItem_'+self.id);
 
                             // Add the text to the page
-                            self.addRichText('text_array');
+                            self.addRichText(self.item.text);
                         }
 
                         // Get the live data
@@ -221,7 +221,7 @@
                                 self.storeObject('newsItem_'+self.id, self.item);
 
                                 // Add the text to the page
-                                self.addRichText('text_array');
+                                self.addRichText(self.item.text);
                             }
                             else {
                                 self.item = {};
@@ -249,7 +249,7 @@
                             self.item = self.getObjectFromStore('newsItem_'+self.id);
 
                             // Add the text to the page
-                            self.addRichText('text_array');
+                            self.addRichText(self.item.text);
 
                             // Show the header
                             self.showHeader = true;
@@ -278,7 +278,7 @@
                             self.item = self.getObjectFromStore('campingFacility_'+self.id);
 
                             // Add the text to the page
-                            self.addRichText('text_array');
+                            self.addRichText(self.item.text);
                         }
 
                         // Get the live data
@@ -286,12 +286,13 @@
                         EventBus.$emit('startLoading', loadingId);
                         let url = self.$apiBaseUrl + "/" + campingId + "/camping-facilities/" + lang + "/" + self.id + "?v=" + self.$apiVersion;
                         getJSON(url).then((r) => {
+
                             if(r.campingFacility) {
                                 self.item = r.campingFacility;
                                 self.storeObject('campingFacility_'+self.id, self.item);
 
                                 // Add the text to the page
-                                self.addRichText('text_array');
+                                self.addRichText(self.item.text);
                             }
                             else {
                                 self.item = {};
@@ -319,7 +320,7 @@
                             self.item = self.getObjectFromStore('campingFacility_'+self.id);
 
                             // Add the text to the page
-                            self.addRichText('text_array');
+                            self.addRichText(self.item.text);
 
                             // Show the header
                             self.showHeader = true;
@@ -349,7 +350,7 @@
                             self.isLikable = true;
 
                             // Add the text to the page
-                            self.addRichText('text_array');
+                            self.addRichText(self.item.text);
                         }
 
                         // Set liked from storage
@@ -366,7 +367,7 @@
                                 self.storeBoolean('isLikable_'+self.id, true);
 
                                 // Add the text to the page
-                                self.addRichText('text_array');
+                                self.addRichText(self.item.text);
                             }
                             else {
                                 self.item = {};
@@ -400,7 +401,7 @@
                             self.liked = self.isLiked(self.id);
 
                             // Add the text to the page
-                            self.addRichText('text_array');
+                            self.addRichText(self.item.text);
 
                             // Show the header
                             self.showHeader = true;
@@ -429,7 +430,7 @@
                             self.item = self.getObjectFromStore('nearbyActivity_'+self.id);
 
                             // Add the text to the page
-                            self.addRichText('text_array');
+                            self.addRichText(self.item.text);
                         }
 
                         // Get the live data
@@ -441,7 +442,7 @@
                                 self.storeObject('nearbyActivity_'+self.id, self.item);
 
                                 // Add the text to the page
-                                self.addRichText('text_array');
+                                self.addRichText(self.item.text);
                             }
                             else {
                                 self.item = {};
@@ -469,7 +470,7 @@
                             self.item = self.getObjectFromStore('nearbyActivity_'+self.id);
 
                             // Add the text to the page
-                            self.addRichText('text_array');
+                            self.addRichText(self.item.text);
 
                             // Show the header
                             self.showHeader = true;

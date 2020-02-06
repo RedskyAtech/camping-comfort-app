@@ -5,7 +5,7 @@
                 <ScrollView row="0" col="0">
                     <StackLayout class="content" verticalAlignment="top">
                         <Label class="title" :text="$t('wifi.title')"></Label>
-                        <StackLayout ref="richTextContainer" class="text"></StackLayout>
+                        <HtmlView :html="richText" @loaded="htmlViewLoaded" ref="htmlView"></HtmlView>
                         <StackLayout class="btn-container" v-if="item.wifi_code">
                             <StackLayout class="btn copy-btn" @tap="copyToClipboard">
                                 <Label class="btn-icon far" verticalAlignment="center">{{ 'fa-clipboard' | fonticon }}</Label>
@@ -64,7 +64,7 @@
                         self.item = self.getObjectFromStore('settings');
 
                         // Add the text to the page
-                        self.addRichText('wifi_text_array');
+                        self.addRichText(self.item.wifi_text);
                     }
 
                     // Get the live data
@@ -76,7 +76,7 @@
                             self.storeObject('settings', self.item);
 
                             // Add the text to the page
-                            self.addRichText('wifi_text_array');
+                            self.addRichText(self.item.wifi_text);
                         }
 
                         // No data found, remove from storage
@@ -96,7 +96,7 @@
                         self.item = self.getObjectFromStore('settings');
 
                         // Add the text to the page
-                        self.addRichText('wifi_text_array');
+                        self.addRichText(self.item.wifi_text);
                     }
 
                     // Offline with no storage data

@@ -20,6 +20,12 @@
     export default {
         props: {
 
+            // The height of the hero
+            heroHeight: {
+                type: Number,
+                default: 0
+            },
+
             // The title in the header
             title: {
                 type: String,
@@ -58,7 +64,6 @@
         },
         data() {
             return {
-                heroHeight: 0,
                 headerContainerClass: ''
             }
         },
@@ -83,28 +88,6 @@
             showHeaderFunc: function() {
                 if(this.hasHero === false) {
                     this.headerContainerClass = 'opaque';
-                }
-                else {
-
-                    // Set the hero height based on the screen size
-                    if(this.pageClass === 'xxs') {
-                        this.heroHeight = 232;
-                    }
-                    if(this.pageClass === 'xs') {
-                        this.heroHeight = 232;
-                    }
-                    if(this.pageClass === 'sm') {
-                        this.heroHeight = 232;
-                    }
-                    if(this.pageClass === 'md') {
-                        this.heroHeight = 270;
-                    }
-                    if(this.pageClass === 'lg') {
-                        this.heroHeight = 432;
-                    }
-                    if(this.pageClass === 'xl') {
-                        this.heroHeight = 576;
-                    }
                 }
             },
             scrolling: function(data) {
