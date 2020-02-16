@@ -17,6 +17,6 @@
     "google_auth": false,
     "admob": false,
     "invites": false,
-    "dynamic_links": false,
+    "dynamic_links": true,
     "ml_kit": false
 }

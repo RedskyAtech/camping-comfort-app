@@ -3,6 +3,7 @@ import Splash from './components/pages/Splash.vue'
 import App from './components/pages/App.vue'
 import * as appSettings from 'tns-core-modules/application-settings';
 import { isAndroid, isIOS, device } from "tns-core-modules/platform";
+import { handleOpenURL } from 'nativescript-urlhandler';
 
 // Set the current platform
 Vue.prototype.$isAndroid = isAndroid;
@@ -77,13 +78,23 @@ Vue.prototype.$apiBaseUrl = TNS_ENV === 'production' ? 'https://www.campingcomfo
 if(appSettings.getNumber('campingId') !== undefined){
     new Vue({
         i18n: i18n,
-        render: h => h('frame', [h(App)])
+        render: h => h('frame', [h(App)]),
+        mounted() {
+            handleOpenURL( (appURL) => {
+                console.log(appURL)
+            });
+        }
     }).$start()
 }
 else {
     new Vue({
         i18n: i18n,
-        render: h => h('frame', [h(Splash)])
+        render: h => h('frame', [h(Splash)]),
+        mounted() {
+            handleOpenURL( (appURL) => {
+                console.log(appURL)
+            });
+        }
     }).$start()
 }
 

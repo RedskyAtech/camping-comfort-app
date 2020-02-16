@@ -58,5 +58,22 @@
 		<true/>
 		<key>NSCameraUsageDescription</key>
 		<string>Camping Comfort requires access to your camera for QR-code scanning.</string>
+		<key>CFBundleURLTypes</key>
+        <array>
+            <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>CFBundleURLName</key>
+                <string>campingcomfort.deeplink.urlscheme</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>app.campingcomfort.app</string>
+                </array>
+            </dict>
+        </array>
+        <key>FirebaseDynamicLinksCustomDomains</key>
+        <array>
+          <string>https://app.campingcomfort.app</string>
+        </array>
 	</dict>
 </plist>
