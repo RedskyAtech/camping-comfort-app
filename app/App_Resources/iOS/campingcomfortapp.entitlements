@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
     <array>
-        <string>https://app.campingcomfort.app</string>
+        <string>applinks:app.campingcomfort.app</string>
     </array>
 </dict>
 </plist>
