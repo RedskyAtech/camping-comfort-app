@@ -30,17 +30,29 @@
     import { request, getFile, getImage, getJSON, getString } from "tns-core-modules/http";
     import {exit} from 'nativescript-exit';
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert";
+    import DeepLink from '../mixins/DeepLink'
 
     export default {
+        name: 'Splash',
         mixins: [
             Responsive,
             LocalStorage,
-            Connection
+            Connection,
+            DeepLink
         ],
+        props: {
+            deepLink: null
+        },
         mounted: function() {
             let self = this;
 
-            if(!this.hasInternetConnection()) {
+            // Process the deep link
+            if(self.deepLink) {
+                self.processScanResult({text: self.deepLink});
+            }
+
+            // Close the app if no internet connection
+            if(!self.hasInternetConnection()) {
                 setTimeout(function() {
                     TNSFancyAlert.showError(
                         self.$t('errors.offline.title'),

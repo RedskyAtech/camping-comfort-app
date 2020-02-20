@@ -1,9 +1,9 @@
 import Vue from 'nativescript-vue'
+import Empty from './components/pages/Empty.vue'
 import Splash from './components/pages/Splash.vue'
 import App from './components/pages/App.vue'
 import * as appSettings from 'tns-core-modules/application-settings';
 import { isAndroid, isIOS, device } from "tns-core-modules/platform";
-import { handleOpenURL } from 'nativescript-urlhandler';
 
 // Set the current platform
 Vue.prototype.$isAndroid = isAndroid;
@@ -74,29 +74,13 @@ Vue.prototype.$apiVersion = 2
 // Set the API base URL
 Vue.prototype.$apiBaseUrl = TNS_ENV === 'production' ? 'https://www.campingcomfort.app/api' : 'https://www.campingcomfort.app/api'
 
-// Skip the splash page if a camping ID has already been stored
-if(appSettings.getNumber('campingId') !== undefined){
-    new Vue({
-        i18n: i18n,
-        render: h => h('frame', [h(App)]),
-        mounted() {
-            handleOpenURL( (appURL) => {
-                console.log(appURL)
-            });
-        }
-    }).$start()
-}
-else {
-    new Vue({
-        i18n: i18n,
-        render: h => h('frame', [h(Splash)]),
-        mounted() {
-            handleOpenURL( (appURL) => {
-                console.log(appURL)
-            });
-        }
-    }).$start()
-}
+// Start the application
+new Vue({
+    i18n: i18n,
+    render: h => h('frame', [
+        h(appSettings.getNumber('campingId') !== undefined ? App : Splash)
+    ])
+}).$start()
 
 /**
  * In array method

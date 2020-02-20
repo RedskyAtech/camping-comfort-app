@@ -63,8 +63,10 @@
     import { isAndroid, isIOS, device, screen } from "tns-core-modules/platform"
     import * as http from 'http'
     import { TNSFancyAlert, TNSFancyAlertButton } from "nativescript-fancyalert"
+    import DeepLink from '../mixins/DeepLink'
 
     export default {
+        name: 'App',
         data() {
             return {
                 activeTab: null,
@@ -75,7 +77,8 @@
             Responsive,
             StatusBar,
             LocalStorage,
-            Connection
+            Connection,
+            DeepLink
         ],
         components: {
 
@@ -241,64 +244,79 @@
             initializeFirebase() {
                 let self = this;
 
-                firebase.init({
-                    showNotifications: true,
-                    showNotificationsWhenInForeground: true,
+                if(!firebase.initialized) {
 
-                    onPushTokenReceivedCallback: function(token) {
-                        console.log('[Firebase] onPushTokenReceivedCallback:', { token });
-                    },
+                    // Initialize Firebase
+                    firebase.init({
+                        showNotifications: true,
+                        showNotificationsWhenInForeground: true,
 
-                    onMessageReceivedCallback: function(message) {
-                        console.log('[Firebase] onMessageReceivedCallback:', { message });
+                        onPushTokenReceivedCallback: function(token) {
+                            console.log('[Firebase] onPushTokenReceivedCallback:', { token });
+                        },
 
-                        // Redirect to the App page
-                        if(message.data.type === 'news_item') {
+                        onMessageReceivedCallback: function(message) {
+                            console.log('[Firebase] onMessageReceivedCallback:', { message });
 
-                            // Navigate
-                            EventBus.$emit('navigate', {
-                                tab: 1,
-                                page: 'detail',
-                                clearHistory: false,
-                                props: {
-                                    type: 'news_item',
-                                    id: parseFloat(message.data.id)
-                                }
-                            });
+                            // Redirect to the App page
+                            if(message.data.type === 'news_item') {
+
+                                // Navigate
+                                EventBus.$emit('navigate', {
+                                    tab: 1,
+                                    page: 'detail',
+                                    clearHistory: false,
+                                    props: {
+                                        type: 'news_item',
+                                        id: parseFloat(message.data.id)
+                                    }
+                                });
+                            }
+                            if(message.data.type === 'message') {
+
+                                console.log('message received');
+
+                                // Emit an event that a new message is received
+                                EventBus.$emit('messageReceived');
+
+                                // Open the modal
+                                EventBus.$emit('openModal', {
+                                    page: 'thread',
+                                    props: {
+                                        id: parseFloat(message.data.id)
+                                    }
+                                });
+                            }
                         }
-                        if(message.data.type === 'message') {
+                    })
+                    .then(() => {
+                        console.log('[Firebase] Initialized');
 
-                            console.log('message received');
+                        // Update the subscription and redirect to the App page
+                        self.updateSubscriptions();
+                    })
+                    .catch(error => {
+                        console.log('[Firebase] Initialize', { error });
+                    });
+                }
+                else {
 
-                            // Emit an event that a new message is received
-                            EventBus.$emit('messageReceived');
+                    // Firebase is already initialized, so manage the subscriptions
+                    self.updateSubscriptions();
+                }
+            },
 
-                            // Open the modal
-                            EventBus.$emit('openModal', {
-                                page: 'thread',
-                                props: {
-                                    id: parseFloat(message.data.id)
-                                }
-                            });
-                        }
-                    }
-                })
-                .then(() => {
-                    console.log('[Firebase] Initialized');
+            // Manage the subscriptions
+            updateSubscriptions: function() {
+                let self = this;
+                self.subscribeToTopic({ type: 'news' });
 
-                    // Update the subscription and redirect to the App page
-                    self.subscribeToTopic({ type: 'news' });
-
-                    if(self.keyExistsInStore('userId')) {
-                        self.subscribeToTopic({ type: 'camping_messaging' });
-                    }
-                    else {
-                        self.subscribeToTopic({ type: 'guest_messaging' });
-                    }
-                })
-                .catch(error => {
-                    console.log('[Firebase] Initialize', { error });
-                });
+                if(self.keyExistsInStore('userId')) {
+                    self.subscribeToTopic({ type: 'camping_messaging' });
+                }
+                else {
+                    self.subscribeToTopic({ type: 'guest_messaging' });
+                }
             },
 
             /**

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "196072603337-vffoeic29mld1jjkj8p72bfcnmp35a3l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.campingcomfort.app",
+            "certificate_hash": "c2ac2d9ce8335bc203aaddeb0be6fe43baed610b"
+          }
+        },
+        {
           "client_id": "196072603337-48aovnjqmkrvuvgm580tibuagms6t7am.apps.googleusercontent.com",
           "client_type": 3
         }
