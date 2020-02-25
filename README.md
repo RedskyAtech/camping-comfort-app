@@ -24,7 +24,7 @@ tns build <platform> --env.production
 
 ## Build an iOS release
 ```
-tns build ios --bundle --env.production --release --for-device --provision 6ea8bbeb-e028-4e38-8da1-7f428710c144
+tns build ios --bundle --env.production --release --for-device --provision 6a499659-bfe4-43fc-a027-0ca1ee66846c
 tns appstore upload info@vandersluis.media Iloum2007$ --ipa platforms/ios/build/Release-iphoneos/campingcomfortapp.ipa --appleApplicationSpecificPassword habo-czir-zodk-nmso
 ```
 

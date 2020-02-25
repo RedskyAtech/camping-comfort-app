@@ -7,6 +7,7 @@
 
             // Detect a deep link and redirect
             handleOpenURL((appURL) => {
+                console.log(appURL);
                 this.redirectToDeepLink('https://'+appURL.path);
             });
         },
