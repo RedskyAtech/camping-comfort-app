@@ -230,7 +230,7 @@
                             }
 
                             // Update the thread list
-                            EventBus.$emit('threadChanged');
+                            EventBus.$emit('updateThreads');
 
                         }, error => {
 
@@ -369,7 +369,7 @@
                                 self.message = '';
 
                                 // Update the thread list
-                                EventBus.$emit('threadChanged');
+                                EventBus.$emit('updateThreads');
 
                                 // Stop the loader
                                 EventBus.$emit('stopLoading', loadingId);

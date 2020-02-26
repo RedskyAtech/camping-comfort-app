@@ -118,7 +118,7 @@
             EventBus.$on('navigate', function(data) {
                 console.log('Listener fired: App->navigate');
                 self.log('navigate', data);
-                self.navigate(data.tab, data.page, data.clearHistory, data.props, data.fullFrame);
+                self.navigate(data.tab, data.page, data.props);
             });
 
             // Listen to open-modal requests
@@ -146,6 +146,29 @@
             self.loadAppSettings();
         },
         methods: {
+            navigate: function(tab, page, props={}){
+
+                // Set the right tab
+                this.activeTab = tab;
+
+                // Navigate to the page
+                if(page === 'detail'){
+
+                    // Open the modal
+                    EventBus.$emit('openModal', {
+                        page: page,
+                        props: props
+                    });
+                }
+                if(page === 'thread'){
+
+                    // Open the modal
+                    EventBus.$emit('openModal', {
+                        page: 'thread',
+                        props: props
+                    });
+                }
+            },
 
             checkIdentification: function() {
 
@@ -249,7 +272,7 @@
                     // Initialize Firebase
                     firebase.init({
                         showNotifications: true,
-                        showNotificationsWhenInForeground: true,
+                        showNotificationsWhenInForeground: false,
 
                         onPushTokenReceivedCallback: function(token) {
                             console.log('[Firebase] onPushTokenReceivedCallback:', { token });
@@ -261,16 +284,17 @@
                             // Redirect to the App page
                             if(message.data.type === 'news_item') {
 
-                                // Navigate
-                                EventBus.$emit('navigate', {
-                                    tab: 1,
-                                    page: 'detail',
-                                    clearHistory: false,
-                                    props: {
-                                        type: 'news_item',
-                                        id: parseFloat(message.data.id)
-                                    }
-                                });
+                                // Navigate if the message is received in the background
+                                if(message.foreground === false) {
+                                    EventBus.$emit('navigate', {
+                                        tab: 1,
+                                        page: 'detail',
+                                        props: {
+                                            type: 'news_item',
+                                            id: parseFloat(message.data.id)
+                                        }
+                                    });
+                                }
                             }
                             if(message.data.type === 'message') {
 
@@ -278,14 +302,18 @@
 
                                 // Emit an event that a new message is received
                                 EventBus.$emit('messageReceived');
+                                EventBus.$emit('updateThreads');
 
-                                // Open the modal
-                                EventBus.$emit('openModal', {
-                                    page: 'thread',
-                                    props: {
-                                        id: parseFloat(message.data.id)
-                                    }
-                                });
+                                // Navigate if the message is received in the background
+                                if(message.foreground === false) {
+                                    EventBus.$emit('navigate', {
+                                        tab: 5,
+                                        page: 'thread',
+                                        props: {
+                                            id: parseFloat(message.data.id)
+                                        }
+                                    });
+                                }
                             }
                         }
                     })

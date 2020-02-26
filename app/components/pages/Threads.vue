@@ -42,13 +42,13 @@
 
             // Destroy any listeners in the event bus
             console.log('Listeners removed: Threads');
-            EventBus.$off('threadChanged');
+            EventBus.$off('updateThreads');
         },
         mounted: function() {
             let self = this;
 
             // Update the thread list when a thread changed
-            EventBus.$on('threadChanged', function() {
+            EventBus.$on('updateThreads', function() {
                 self.init();
             });
 
