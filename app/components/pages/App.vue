@@ -41,6 +41,7 @@
 
 <script>
     import * as platform from "tns-core-modules/platform";
+    import {exit} from 'nativescript-exit';
     import StatusBar from '../mixins/StatusBar'
     import Responsive from '../mixins/Responsive'
     import EventBus from '../helpers/EventBus'
@@ -107,6 +108,19 @@
         },
         mounted: function(){
             let self = this;
+
+            // Close the app if no internet connection
+            if(!self.hasInternetConnection()) {
+                setTimeout(function() {
+                    TNSFancyAlert.showError(
+                        self.$t('errors.offline.title'),
+                        self.$t('errors.offline.message'),
+                        self.$t('errors.offline.buttonText')
+                    ).then(() => {
+                        exit();
+                    });
+                }, 500);
+            }
 
             // Log the app activity
             EventBus.$on('log', function(data) {

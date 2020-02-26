@@ -64,7 +64,7 @@
                 <key>CFBundleTypeRole</key>
                 <string>Editor</string>
                 <key>CFBundleURLName</key>
-                <string>campingcomfort.deeplink.urlscheme</string>
+                <string>www.campingcomfort.app</string>
                 <key>CFBundleURLSchemes</key>
                 <array>
                     <string>app.campingcomfort.app</string>

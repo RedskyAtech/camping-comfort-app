@@ -22,6 +22,7 @@
                 else {
 
                     // Set a timeout to wait until some listeners are removed
+                    // Actually only neccesary when switching logins
                     // App
                     // MyVacationList
                     // NewsItemList
