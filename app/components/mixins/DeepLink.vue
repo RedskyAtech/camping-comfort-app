@@ -5,10 +5,17 @@
     export default {
         mounted() {
 
-            // Detect a deep link and redirect
+            // Handle a Dynamic Link
             handleOpenURL((appURL) => {
                 console.log(appURL);
-                this.redirectToDeepLink('https://'+appURL.path);
+
+                // Detect the deep link
+                if(appURL && appURL.path && appURL.path.includes('www.campingcomfort.app/start')) {
+                    this.redirectToDeepLink('https://'+appURL.path);
+                }
+                else {
+                    console.log('Deep link has the wrong format: '+appURL.path)
+                }
             });
         },
         methods: {
