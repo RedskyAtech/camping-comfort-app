@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "install": "^0.13.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "nativescript-barcodescanner": "^3.4.1",
     "nativescript-clipboard": "^1.2.0",
     "nativescript-exit": "^1.0.1",
